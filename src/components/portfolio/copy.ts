@@ -2,9 +2,9 @@ export const copy = {
   zh: {
     nav: ["精選", "分類", "全部作品"],
     eyebrow: "PRODUCT LAB",
-    headlineA: "我的產品實驗室：",
-    headlineB: "把金融、AI 與自動化的想法",
-    headlineC: "做成真正能用的工具",
+    headlineA: "把點子",
+    headlineB: "變成",
+    headlineC: "實用工具",
     intro:
       "這裡收集了我開發的開源和私有專案。我習慣把每個 repo 當作一個真正的產品來整理：分析它解決了什麼痛點、系統是怎麼串接的，以及實際的產出畫面。",
     primaryAction: "看精選作品",
@@ -37,9 +37,9 @@ export const copy = {
   en: {
     nav: ["Featured", "Categories", "All Work"],
     eyebrow: "PRODUCT LAB",
-    headlineA: "My Product Lab:",
-    headlineB: "Turning finance, AI, and automation",
-    headlineC: "into functional tools",
+    headlineA: "Turning ideas",
+    headlineB: "into",
+    headlineC: "useful tools",
     intro:
       "A product-driven portfolio that translates open-source and private repositories into commercial use cases, showcasing clear problem analysis, system workflows, and real-world outcomes.",
     primaryAction: "View featured",
