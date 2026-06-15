@@ -1,16 +1,16 @@
 # Michael Product Lab
 
-This project curates my public and private GitHub repositories into product cases, moving beyond raw code lists to show real-world utility and business value.
+This project curates my public and private GitHub repositories into product cases. It moves beyond raw code lists to focus on the actual problems these tools solve.
 
-This portfolio helps potential partners, investors, and executives assess my product thinking, business intuition, and system architecture design skills, particularly in Financial Intelligence, AI Automation, and Product Utilities.
+I built this lab to help partners and managers quickly understand how I approach product development and system design, especially in finance, AI, and utility tools.
 
 ---
 
 ## The Problems This Product Lab Solves
 
-In software engineering, technical excellence counts for little if it does not solve real problems. Typical resumes list languages and frameworks, often ignoring the core value proposition.
+Writing code is more than stacking tech. Without real-world utility, technical choices matter little. Resumes often list languages and frameworks, but lack product context.
 
-This project addresses the following issues:
+I created this project to address these gaps:
 - **Translates code into business value**: Every listed project starts with the problem it solves, not just a stack of technologies.
 - **Showcases private repositories securely**: For proprietary work, it highlights the UI flow and system architecture without exposing source code.
 - **Guarantees reliable project presentation**: It uses an automated screenshot pipeline. Even if a project is not publicly hosted or a live demo goes down, the portfolio displays generated previews to ensure constant availability.
@@ -19,7 +19,7 @@ This project addresses the following issues:
 
 ## Product Lines and Key Features
 
-The portfolio organizes projects into six distinct lines, matching the UI categories:
+Projects are divided into six categories, aligning with the product lines on the frontend:
 
 ### 1. Financial Intelligence
 Aggregates and filters market data to reduce search costs and flag risks.
