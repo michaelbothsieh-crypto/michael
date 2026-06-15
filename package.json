@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "projects": "node scripts/project-overrides.mjs",
     "sync:repos": "node scripts/sync-github-repos.mjs",
     "sync:previews": "node scripts/capture-previews.mjs",
     "sync:all": "npm run sync:repos && npm run sync:previews"
