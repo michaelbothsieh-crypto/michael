@@ -68,6 +68,20 @@ export function ProjectModal({ project, views, locale, copy, onClose }: ProjectM
               <p className="mt-3 text-base leading-7 text-zinc-700">{project.problem[locale]}</p>
             </section>
 
+            {project.challenge ? (
+              <section className="mt-8">
+                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.challenge}</h4>
+                <p className="mt-3 text-base leading-7 text-zinc-700">{project.challenge[locale]}</p>
+              </section>
+            ) : null}
+
+            {project.impact ? (
+              <section className="mt-8">
+                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.impact}</h4>
+                <p className="mt-3 text-base leading-7 text-zinc-700">{project.impact[locale]}</p>
+              </section>
+            ) : null}
+
             {project.workflow ? (
               <section className="mt-8">
                 <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.workflow}</h4>

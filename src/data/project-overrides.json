@@ -106,6 +106,14 @@
         "/stock: return stock health, technicals, and industry context",
         "/etf, /activeetf, /rank, /roi, /watchlist: handle ETF, ranking, return, and watchlist workflows"
       ]
+    },
+    "challenge": {
+      "zh": "NotebookLM 官方無公開 API，且 Google 認證 Cookie 通常於 2-4 週內過期。為此，我透過 Base64 還原機制在 GitHub Actions 中還原 auth/cookies 憑證，並開發了自動診斷工具（debug_yt_auth.py）實現憑證健康監控。",
+      "en": "NotebookLM has no public API, and auth cookies expire in 2-4 weeks. I implemented a Base64-based session restoration pipeline in GitHub Actions and built diagnostic tools (debug_yt_auth.py) for proactive credential health monitoring."
+    },
+    "impact": {
+      "zh": "每日自動化整合 KOL 訂閱、Podcast 轉錄和金融大盤數據，幫個人節省 45 分鐘的資訊尋檢與整理時間。",
+      "en": "Saves 45 minutes of daily manual curation by automating daily KOL scanning, podcast transcripts, and financial market briefs."
     }
   },
   "price-altas": {
@@ -131,6 +139,14 @@
         "Exchange-rate handling",
         "Product comparison"
       ]
+    },
+    "challenge": {
+      "zh": "日本価格.com 的 HTML 解析需處理 Shift JIS 特殊編碼以防亂碼，且部分電商網站設有反爬蟲限制。我採用 curl_cffi 模擬 Chrome TLS 指紋避開反爬，並在 FastAPI 後端透過併發限制與快取保護付費 API 用量。",
+      "en": "Scraping Japanese kakaku.com required parsing raw Shift JIS bytes, and retail sites blocked standard headless clients. I used curl_cffi to match Chrome's TLS fingerprint and protected API quotas using Redis cache rules."
+    },
+    "impact": {
+      "zh": "提供流暢的 SSE 串流跨境比價，並支援前端即時中止搜尋，大幅節省頻寬與 API 配額。",
+      "en": "Delivers real-time cross-border pricing via SSE (Server-Sent Events) with request abort support to minimize bandwidth and API costs."
     }
   },
   "fortune-telling": {
@@ -208,6 +224,14 @@
         "Crash-risk alerts",
         "Telegram delivery"
       ]
+    },
+    "challenge": {
+      "zh": "需要盤後同時抓取台股官網、海外多個金融 API 並即時運算風險預警模型。為此，我設計了併發限制與資料清洗模組，確保在大數據量下仍能穩定執行崩盤指標運算。",
+      "en": "Required merging multiple stock APIs, index data, and risk metrics concurrently post-market. I implemented request throttling and robust data parsing pipelines to ensure calculations run reliably on serverless runners."
+    },
+    "impact": {
+      "zh": "每日收盤自動更新風險訊號，並將關鍵的籌碼流向與崩盤指標提前推送至 Telegram 輔助投資決策。",
+      "en": "Provides early indicators of market turning points, automatically pushed daily to Telegram to assist investment decisions."
     }
   },
   "faceless_hunter": {
@@ -260,6 +284,14 @@
         "GitHub Actions",
         "Telegram delivery"
       ]
+    },
+    "challenge": {
+      "zh": "YouTube API 每天的免費 Quota 極度吃緊（10k 限制），且大流量下極易被判定為濫用。我設計了請求快取與排程併發控制，並結合 tools/setup_helper.py 解決了 2-4 週一次的憑證過期問題。",
+      "en": "YouTube's free API Quota is highly constrained, and heavy automation triggers abuse blocks. I designed a caching layout and request throttling, paired with tools/setup_helper.py to manage auth expiration."
+    },
+    "impact": {
+      "zh": "每日自動精選高價值長影片並推送摘要，實現零手動尋片的主動資訊流。",
+      "en": "Enables an active knowledge pipeline by delivering daily YouTube briefs without manual video scouting."
     }
   },
   "north-volley-guide": {
@@ -486,6 +518,14 @@
         "Gemini analysis",
         "Mind maps"
       ]
+    },
+    "challenge": {
+      "zh": "常規語音轉文字在長音檔中極易斷線且耗時，且 AI 輸出的 Mermaid 心智圖語法常因格式錯亂導致前端渲染失敗。我使用 Gemini 超長上下文窗口一次性輸入完整音檔，並設計特殊的 Prompt 規範確保 Mermaid 語法 100% 正確率。",
+      "en": "Long audio files cause timeouts in standard transcription APIs, and AI-generated Mermaid code often suffers from syntax errors that break UI rendering. I leveraged Gemini's large context window and designed robust prompt validation to guarantee 100% syntax compliance."
+    },
+    "impact": {
+      "zh": "「聽完一小時節目只需 30 秒」，能在數分鐘內生成帶有時間戳點擊播放的結構化報告與互動心智圖。",
+      "en": "Turns a 60-minute episode into a 30-second read, rendering interactive mind maps and clickable audio timestamps in minutes."
     }
   },
   "presale-radar": {

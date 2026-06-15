@@ -33,6 +33,8 @@ export const copy = {
     statsPv: "總瀏覽量",
     statsActive: "線上人數",
     views: "預覽次數",
+    challenge: "關鍵突破與技術挑戰",
+    impact: "實質成效與指標",
   },
   en: {
     nav: ["Featured", "Categories", "All Work"],
@@ -69,6 +71,8 @@ export const copy = {
     statsPv: "Total Visits",
     statsActive: "Online Users",
     views: "Views",
+    challenge: "Key Challenge & Breakthrough",
+    impact: "Impact & Metrics",
   },
 } as const;
 

@@ -41,6 +41,8 @@ type ProjectOverride = {
   summary: LocalizedText;
   features: LocalizedList;
   problem?: LocalizedText;
+  challenge?: LocalizedText;
+  impact?: LocalizedText;
   workflow?: LocalizedText;
   commands?: LocalizedList;
   gallery?: string[];
@@ -63,6 +65,8 @@ export type Project = GitHubRepo & {
   summary: LocalizedText;
   features: LocalizedList;
   problem: LocalizedText;
+  challenge?: LocalizedText;
+  impact?: LocalizedText;
   workflow?: LocalizedText;
   commands?: LocalizedList;
   gallery: string[];
@@ -165,6 +169,8 @@ export function getProjects(): Project[] {
         title: override?.title ?? fallbackTitle(repo),
         summary: override?.summary ?? fallbackSummary(repo),
         problem: override?.problem ?? override?.summary ?? fallbackSummary(repo),
+        challenge: override?.challenge,
+        impact: override?.impact,
         workflow: override?.workflow,
         commands: override?.commands,
         features: override?.features ?? {
