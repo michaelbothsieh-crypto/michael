@@ -42,8 +42,7 @@ export function ProjectCard({ project, locale, copy, featured = false, onOpen }:
         <div className="flex flex-1 flex-col gap-5 p-5">
           <div>
             <h3 className="text-xl font-semibold leading-tight text-zinc-950">{project.title[locale]}</h3>
-            <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">{copy.problem}</p>
-            <p className="mt-2 text-sm leading-6 text-zinc-700">{project.problem[locale]}</p>
+            <p className="mt-3 text-sm leading-6 text-zinc-700">{project.problem[locale]}</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {[project.primaryLanguage, ...project.topics].filter(Boolean).slice(0, 4).map((tag) => (
