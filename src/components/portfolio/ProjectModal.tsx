@@ -8,12 +8,13 @@ import { Meta } from "./Meta";
 
 type ProjectModalProps = {
   project: Project | null;
+  views: number;
   locale: Locale;
   copy: PortfolioCopy;
   onClose: () => void;
 };
 
-export function ProjectModal({ project, locale, copy, onClose }: ProjectModalProps) {
+export function ProjectModal({ project, views, locale, copy, onClose }: ProjectModalProps) {
   useEffect(() => {
     if (!project) return;
 
@@ -100,7 +101,7 @@ export function ProjectModal({ project, locale, copy, onClose }: ProjectModalPro
               <Meta label={copy.created} value={formatDate(project.createdAt, locale)} />
               <Meta label={copy.updated} value={formatDate(project.updatedAt, locale)} />
               <Meta label={copy.stack} value={project.primaryLanguage ?? "Mixed"} />
-              <Meta label="Preview" value={project.previewStatus} />
+              <Meta label={copy.views} value={views.toLocaleString()} />
             </div>
             {project.gallery.length > 1 ? (
               <div>

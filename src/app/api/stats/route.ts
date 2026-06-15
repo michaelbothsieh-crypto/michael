@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const { uuid } = await req.json();
+    const { uuid, isNewVisit, projectSlug } = await req.json();
 
     const url = process.env.KV_REST_API_URL;
     const token = process.env.KV_REST_API_TOKEN;
@@ -12,19 +12,41 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         pv: 1342,
         active: 3,
+        projectPvs: {
+          "personal-bot-gateway": 142,
+          "tw-stock-health-dashboard": 98,
+          "price-altas": 57
+        },
         fallback: true
       });
     }
 
     const cleanUuid = (uuid || "anonymous").replace(/[^a-zA-Z0-9-]/g, "");
 
-    // 使用 Upstash/Vercel KV REST Pipeline，一次發送所有指令
-    const commands = [
-      ["INCR", "stats:pv"],
-      ["SET", `stats:active:${cleanUuid}`, "1", "EX", "60"],
-      ["GET", "stats:pv"],
-      ["KEYS", "stats:active:*"]
-    ];
+    const commands: any[][] = [];
+
+    // 1. 只有首次訪問才遞增全站 PV
+    if (isNewVisit) {
+      commands.push(["INCR", "stats:pv"]);
+    }
+
+    // 2. 登錄/更新線上狀態
+    commands.push(["SET", `stats:active:${cleanUuid}`, "1", "EX", "60"]);
+
+    // 3. 若有傳入 projectSlug，遞增該專案的點閱數
+    if (projectSlug) {
+      const cleanSlug = projectSlug.replace(/[^a-zA-Z0-9-]/g, "");
+      commands.push(["HINCRBY", "stats:projects:pv", cleanSlug, "1"]);
+    }
+
+    // 4. 取得總到訪次數
+    commands.push(["GET", "stats:pv"]);
+
+    // 5. 取得線上活躍 keys
+    commands.push(["KEYS", "stats:active:*"]);
+
+    // 6. 取得所有專案的點閱量
+    commands.push(["HGETALL", "stats:projects:pv"]);
 
     const res = await fetch(`${url}/pipeline`, {
       method: "POST",
@@ -41,22 +63,42 @@ export async function POST(req: NextRequest) {
     }
 
     const results = await res.json();
-    // pipeline 返回格式: [{result: 1}, {result: "OK"}, {result: 100}, {result: ["stats:active:xxx"]}]
-    const pv = results[2]?.result ?? 0;
-    const activeKeys = results[3]?.result ?? [];
-    const activeCount = Array.isArray(activeKeys) ? activeKeys.length : 1;
+
+    // 根據發送的指令順序，動態計算解析索引
+    let idx = 0;
+    if (isNewVisit) idx++; // INCR stats:pv
+    idx++; // SET stats:active
+    if (projectSlug) idx++; // HINCRBY stats:projects:pv
+
+    const pv = results[idx]?.result ?? 0;
+    idx++;
+    const activeKeys = results[idx]?.result ?? [];
+    idx++;
+    const rawProjectPvs = results[idx]?.result ?? {};
+
+    const projectPvs: Record<string, number> = {};
+    if (rawProjectPvs && typeof rawProjectPvs === "object") {
+      Object.entries(rawProjectPvs).forEach(([key, val]) => {
+        projectPvs[key] = Number(val);
+      });
+    }
 
     return NextResponse.json({
       pv: Number(pv),
-      active: Math.max(1, activeCount),
+      active: Math.max(1, activeKeys.length),
+      projectPvs,
       fallback: false
     });
   } catch (error) {
     console.error("Stats API error:", error);
-    // 發生錯誤時的平滑降級
     return NextResponse.json({
       pv: 1342,
       active: 3,
+      projectPvs: {
+        "personal-bot-gateway": 142,
+        "tw-stock-health-dashboard": 98,
+        "price-altas": 57
+      },
       fallback: true
     });
   }

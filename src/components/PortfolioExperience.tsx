@@ -21,6 +21,7 @@ export function PortfolioExperience({ projects }: Props) {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [stats, setStats] = useState<{ pv: number; active: number } | null>(null);
+  const [projectPvs, setProjectPvs] = useState<Record<string, number>>({});
   const t = copy[locale];
 
   useEffect(() => {
@@ -30,28 +31,58 @@ export function PortfolioExperience({ projects }: Props) {
       sessionStorage.setItem("portfolio_user_uuid", uuid);
     }
 
-    const updateStats = async () => {
+    const updateStats = async (isNew = false) => {
       try {
         const res = await fetch("/api/stats", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ uuid }),
+          body: JSON.stringify({ uuid, isNewVisit: isNew }),
         });
         if (res.ok) {
           const data = await res.json();
           setStats({ pv: data.pv, active: data.active });
+          if (data.projectPvs) {
+            setProjectPvs(data.projectPvs);
+          }
         }
       } catch (err) {
         console.error("Failed to update stats:", err);
       }
     };
 
-    updateStats();
-    const interval = setInterval(updateStats, 30000);
+    updateStats(true);
+    const interval = setInterval(() => updateStats(false), 30000);
     return () => clearInterval(interval);
   }, []);
+
+  const trackProjectView = async (slug: string) => {
+    let uuid = sessionStorage.getItem("portfolio_user_uuid");
+    try {
+      const res = await fetch("/api/stats", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uuid, isNewVisit: false, projectSlug: slug }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setStats({ pv: data.pv, active: data.active });
+        if (data.projectPvs) {
+          setProjectPvs(data.projectPvs);
+        }
+      }
+    } catch (err) {
+      console.error("Failed to track project view:", err);
+    }
+  };
+
+  const handleOpenProject = (project: Project) => {
+    setSelectedProject(project);
+    trackProjectView(project.slug);
+  };
 
   const featuredProjects = useMemo(() => selectFeaturedProjects(projects), [projects]);
   const filteredProjects = useMemo(() => filterProjectsByCategory(projects, activeCategory), [activeCategory, projects]);
@@ -62,7 +93,7 @@ export function PortfolioExperience({ projects }: Props) {
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f4f7f5] text-zinc-950">
       <PortfolioNav locale={locale} copy={t} onToggleLocale={() => setLocale(locale === "zh" ? "en" : "zh")} />
       <HeroSection projectsCount={projects.length} featuredProjects={featuredProjects} copy={t} />
-      <FeaturedSection projects={featuredProjects} totalProjects={projects.length} locale={locale} copy={t} onOpenProject={setSelectedProject} />
+      <FeaturedSection projects={featuredProjects} totalProjects={projects.length} locale={locale} copy={t} onOpenProject={handleOpenProject} />
       <CategoryStory copy={t} />
       <ProjectGridSection
         activeCategory={activeCategory}
@@ -70,7 +101,7 @@ export function PortfolioExperience({ projects }: Props) {
         locale={locale}
         copy={t}
         onCategoryChange={setActiveCategory}
-        onOpenProject={setSelectedProject}
+        onOpenProject={handleOpenProject}
       />
       <footer className="border-t border-zinc-950/10 px-5 py-12 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
@@ -85,7 +116,7 @@ export function PortfolioExperience({ projects }: Props) {
           </div>
         </div>
       </footer>
-      <ProjectModal project={selectedProject} locale={locale} copy={t} onClose={() => setSelectedProject(null)} />
+      <ProjectModal project={selectedProject} views={selectedProject ? (projectPvs[selectedProject.slug] ?? 0) : 0} locale={locale} copy={t} onClose={() => setSelectedProject(null)} />
     </main>
   );
 }
