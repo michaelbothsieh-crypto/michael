@@ -15,7 +15,6 @@ function isSvg(path: string) {
 
 export function HeroSection({ projectsCount, featuredProjects, copy }: HeroSectionProps) {
   const heroPreview = featuredProjects[0]?.previewPath ?? "/previews/placeholder.svg";
-  const inlinePreview = featuredProjects[1]?.previewPath ?? heroPreview;
 
   return (
     <section id="top" className="relative isolate flex min-h-[92vh] items-end px-5 pb-16 pt-28 sm:px-8 lg:px-12">
@@ -36,11 +35,7 @@ export function HeroSection({ projectsCount, featuredProjects, copy }: HeroSecti
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.34em] text-teal-700">{copy.eyebrow}</p>
           <h1 className="mt-8 max-w-6xl text-[clamp(3rem,6vw,6.8rem)] font-semibold leading-[0.92] tracking-normal text-zinc-950">
-            {copy.headlineA}{" "}
-            <span className="relative inline-block h-10 w-24 overflow-hidden rounded-full align-middle ring-1 ring-zinc-950/15 sm:h-12 sm:w-32">
-              <Image src={inlinePreview} alt="" width={320} height={120} className="h-full w-full object-cover" unoptimized={isSvg(inlinePreview)} loading="eager" />
-            </span>{" "}
-            {copy.headlineB} {copy.headlineC}
+            {copy.headlineA} {copy.headlineB} {copy.headlineC}
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-700">{copy.intro}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
