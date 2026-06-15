@@ -1,91 +1,145 @@
-# Michael Product Lab
+# Michael Product Lab (產品實驗室)
 
-繁體中文 | [English](./README.md)
+本專案將我開發的開源與私有專案整理成產品案例，跳脫單純的程式碼倉庫堆疊，直接呈現其實際應用價值。
 
-這是一個雙語作品集，把 Michael 的 public / private GitHub 專案整理成產品案例，而不是單純列 repo。
+這個產品實驗室能讓潛在合作夥伴、投資人與公司高層快速評估我的產品思維、商業洞察以及系統架構設計能力，特別是在金融決策、AI 自動化和實用工具等領域。
 
-這個專案使用 Next.js、TypeScript、Tailwind CSS、GSAP，以及基於 GitHub CLI 的靜態資料管線。
+---
 
-## 作品集會呈現什麼
+## 為什麼建立這個 Product Lab？
 
-- 所有整理過的 GitHub repo 產品卡
-- 繁中 / 英文切換
-- 產品線分類篩選
-- 精選產品區
-- 建立時間與最後更新時間
-- 可用 demo 的實際截圖
-- 沒有公開 demo 或部署失效時的 fallback preview
-- 以「解決什麼問題」為主的產品文案
-- Telegram 工具會寫出指令輸入後會得到什麼
+在軟體開發中，優秀的技術若無法落地為解決問題的工具，就難以發揮商業價值。一般的技術履歷往往只條列程式語言和框架，而忽略了「產品解決了什麼痛點」。
 
-private repo 會以產品案例展示，但不會在 UI 裡公開原始碼連結。
+本專案為了解決以下問題而設計：
+- **消除技術與商業間的溝通隔閡**：每一個收錄的專案都從「解決了什麼痛點」出發，而非單純堆砌技術名詞。
+- **平衡程式碼隱私與成果呈現**：對於非公開的私有專案，在不洩漏核心原始碼的前提下，依然能呈現功能架構與實際畫面，提供透明的技術實力佐證。
+- **克服部署失效與展示空窗期**：整合自動化截圖管線。即使專案暫時沒有公開部署，或線上版本失效，也能自動產生預覽圖，確保作品集隨時處於可呈現狀態。
 
-## 常用指令
+---
 
-```bash
-npm run dev
-npm run lint
-npm run build
-npm run projects -- list
-npm run sync:repos
-npm run sync:previews
-npm run sync:all
-```
+## 六大產品線與核心功能
 
-`sync:repos` 使用本機的 `gh` 登入狀態，因此需要 GitHub CLI 已經登入，且有權限讀取 Michael 的 repo。
+本實驗室呈現的產品分為六大類，與前端畫面的分類完全對應：
 
-`sync:previews` 使用 Playwright Chromium。repo 有可用 `homepageUrl` 時會截實際畫面；沒有公開首頁或部署失效時，會產生 fallback preview。
+### 1. 金融決策 (Financial Intelligence)
+針對金融市場的繁雜數據，提供即時、自動化的整理與預警，降低資訊收集成本。
 
-截圖腳本也會偵測常見的 404、missing deployment 頁面，避免把壞掉的部署頁當成產品預覽。
+- **台股健康儀表板 (tw-stock-health-dashboard)** [精選]
+  - **解決痛點**：投資人每日需手動收集台股大盤、海外指數與各種風險指標，流程繁瑣且不易早期察覺市場崩盤訊號。
+  - **核心功能**：大盤盤後數據自動整理、海外市場連動分析、市場崩盤風險預警、Telegram 警報即時推送。
+- **台股權證篩選器 (warrant-screener-tw)**
+  - **解決痛點**：權證條款多且繁瑣，一般下單軟體介面不夠直覺，難以快速進行跨標的比較。
+  - **核心功能**：多維度權證數據篩選、跨標的橫向對比、即時部署的篩選工作台。
+- **內部人持股轉讓警報 (insider-watch-bot)**
+  - **解決痛點**：董監事與大股東的股權轉讓申報公告分散在公開資訊觀測站，投資人難以第一時間追蹤籌碼流向。
+  - **核心功能**：公開資訊觀測站 (MOPS) 即時監控、大股東轉讓自動警示、籌碼異動趨勢追蹤。
+- **財經新聞分析 (financial-news-analysis)**
+  - **解決痛點**：每日財經新聞數量龐大，人工閱讀容易受到情緒主觀干擾，難以快速取得客觀情緒指標。
+  - **核心功能**：多管道新聞自動擷取、AI 情緒指標評估、量化投資策略摘要。
+- **SMC Trinity AI (smc-trinity-ai)**
+  - **解決痛點**：金融交易中的「聰明錢概念 (Smart Money Concept)」分析容易受到交易員主觀偏見影響。
+  - **核心功能**：SMC 技術圖表自動分析、多 AI 代理人模擬辯論、交易決策客觀判定。
 
-## 資料檔
+### 2. AI 自動化 (AI Automation)
+將繁雜的日常資訊流與 AI 工具對接，自動化處理繁瑣的工作流程。
 
-- `src/data/repos.generated.json`：由 GitHub metadata 產生。
-- `src/data/preview-manifest.generated.json`：由 preview capture script 產生。
-- `src/data/project-overrides.json`：人工維護的產品文案層，包含分類、雙語文案、功能、精選狀態與排序。
+- **Personal Bot Gateway (personal-bot-gateway)** [精選]
+  - **解決痛點**：每天要追蹤多個意見領袖 (KOL)、播客、新聞與 Threads 資訊，資訊入口零散，難以進行系統化整理。
+  - **核心功能**：Telegram 統一控制中樞、KOL 每日內容掃描與摘要、NotebookLM 深度報告自動對接、個股與 ETF 行情及健檢即時查詢。
+- **LazyTube Assistant (LazyTube-Assistant)** [精選]
+  - **解決痛點**：YouTube 上的高價值影片往往很長，手動觀看與篩選耗費大量時間。
+  - **核心功能**：YouTube API 自動依條件篩選新影片、NotebookLM 自動化內容精華摘要、GitHub Actions 排程自動運行、Telegram 自動推送。
+- **PodScribe (PodScribe)** [精選]
+  - **解決痛點**：收聽 Podcast 後缺乏文字記錄或結構化筆記，難以回顧與儲存為個人知識庫。
+  - **核心功能**：Podcast 語音檔案自動轉錄、Gemini 智慧內容分析、自動生成結構化摘要與心智圖。
+- **Faceless Hunter (faceless_hunter)**
+  - **解決痛點**：短影音創作者難以快速找出哪些「不露臉」的題材在 YouTube Shorts 上有更高的爆紅機率。
+  - **核心功能**：YouTube Shorts 數據自動抓取、爆紅比例演算法分析、潛力不露臉題材挖掘。
 
-`personal-bot-gateway` 的部署網址只是 webhook health page，不是產品首頁，所以作品集使用實際 Telegram 輸出截圖。
+### 3. 工具產品 (Product Utilities)
+解決日常工作與生活中的特定問題，提升效率的實用工具。
 
-## 專案內容 CRUD
+- **設定檔差異檢視器 (Config-Diff-Viewer)**
+  - **解決痛點**：在開發與運維過程中，手動比對多個目錄的設定檔費時，且極易漏掉重要差異。
+  - **核心功能**：雙目錄設定檔比對、差異視覺化介面、設定安全性審查。
+- **Socket Swiss Knife (socket-swiss-knife)**
+  - **解決痛點**：金融機構進行 MTF 協議測試時，缺乏簡單易用、跨平台的 Socket 測試工具。
+  - **核心功能**：多交易商配置管理、定時壓力與連線測試、跨平台桌面圖形介面 (GUI)。
+- **Team Eats (team-eats)**
+  - **解決痛點**：團隊聚餐或團購下午茶時，投票、統計與分帳流程混亂，人工計算繁瑣。
+  - **核心功能**：餐點投票與揪團、消費金額自動統計、費用與付款狀態紀錄。
+- **MSG 轉換器 (msg-converter)**
+  - **解決痛點**：Windows Outlook 的 `.msg` 格式信件在 Mac 系統上無法直接開啟，且排版容易錯亂。
+  - **核心功能**：本機 MSG 檔案快速解析、轉換為 Mac 友善的 HTML 格式、自動提取並保存郵件附件。
+- **二代健保試算工具 (taiwan-nhi-calculator)**
+  - **解決痛點**：台灣二代健保補充保費與眷屬保費計算公式複雜，企業或個人難以快速試算實發薪水。
+  - **核心功能**：補充保費與保費級距自動計算、多元身份與情境模擬、簡潔的表單操作介面。
+- **券商憑證儀表板 (broker-credential-dashboard)**
+  - **解決痛點**：多張券商 API 憑證與連線狀態分散，難以統一管理與監控到期時間。
+  - **核心功能**：API 憑證集中管理、到期日與連線狀態監控、安全內部管理介面。
 
-用本地 CRUD helper 維護產品文案。它只會修改 `src/data/project-overrides.json`，不會碰 generated GitHub metadata，也不會讓 UI component 直接做資料寫入。
+### 4. 企業網站 (Business Sites)
+為合作企業建立的現代化入口網站，展示品牌實力與業務價值。
 
-```bash
-npm run projects -- list
-npm run projects -- get personal-bot-gateway
-npm run projects -- upsert personal-bot-gateway \
-  --category "AI Automation" \
-  --featured true \
-  --sort-weight 120 \
-  --title-zh "Personal Bot Gateway" \
-  --title-en "Personal Bot Gateway" \
-  --summary-zh "我最常用的 Telegram 驅動工作中樞。" \
-  --summary-en "My most-used Telegram-driven operations hub." \
-  --features-zh "Telegram 指令中樞|KOL 每日掃描|NotebookLM 連動" \
-  --features-en "Telegram command hub|Daily KOL scanning|NotebookLM handoff"
-npm run projects -- delete old-project-name
-```
+- **飛皓科技形象網站 (fehow-web)** [精選]
+  - **解決痛點**：電子供應鏈企業需要具備國際公信力的官方網站，以向海外客戶呈現技術與供應實力。
+  - **核心功能**：現代化企業形象設計、Bento Grid 資訊佈局、供應鏈實力圖文敘事。
+- **協興實業 PWA (xiexing-pwa)**
+  - **解決痛點**：傳統重機械租賃與工程服務缺乏線上曝光管道，難以吸引行動裝置用戶。
+  - **核心功能**：工程服務與重機械線上呈現、離線可讀的 PWA 體驗、商務諮詢導流。
+- **黃石健康診所網站 (yellowstone-clinic)**
+  - **解決痛點**：復健與物理治療診所需要清晰的服務介紹，方便病患查詢診所資訊與門診時間。
+  - **核心功能**：物理治療與復健服務介紹、診所交通與營業資訊整理、PWA 行動端支援。
 
-## 架構邊界
+### 5. 資料研究 (Data & Research)
+透過數據爬取與分析，發掘市場機會與潛在風險。
 
-這個 app 會把資料、產品文案和 UI 行為拆開，避免互相干擾。
+- **Price Atlas (price-altas)** [精選]
+  - **解決痛點**：採購人員或個人買家進行跨平台比價時，需要手動查詢不同網站，且容易忽略匯率變動與實質價差。
+  - **核心功能**：跨平台商品價格自動抓取、即時匯率換算、商品價差分析。
+- **POE 價格追蹤器 (poe-price-tracker)**
+  - **解決痛點**：線上遊戲市場交易價格波動劇烈，玩家難以掌握即時物價趨勢以做出最佳交易。
+  - **核心功能**：遊戲物品價格即時監控、歷史價格趨勢統計、網頁版儀表板呈現。
+- **預售屋雷達 (presale-radar)**
+  - **解決痛點**：預售屋市場實價登錄資訊零散，難以快速掌握目前房市的熱門區域與推案動向。
+  - **核心功能**：實價登錄與推案資料整理、區域市場熱度觀察、房市交易雷達圖。
+- **房地產鄰里分析器 (neighbor-profiler)**
+  - **解決痛點**：房屋買賣時，同路段的估值落差可能極大，且隱蔽的周邊嫌惡設施或環境風險不易被發現。
+  - **核心功能**：路段估值落差揭露、鄰里環境數據分析、房地產潛在風險提示。
+- **AIA Training Viewer (AIA-Training-Viewer)**
+  - **解決痛點**：AI 訓練資料集結構與維度繁多，缺乏好用的可視化工具，難以快速檢視與評估訓練成效。
+  - **核心功能**：模型訓練資料集可視化、訓練過程與成效檢視、友善的網頁瀏覽工具。
 
-- `scripts/`：負責資料產生與 preview capture。
-- `src/data/`：存 generated metadata 和人工覆寫的產品文案。
-- `src/lib/projects.ts`：project catalog read model。UI component 只讀正規化後的 `Project`。
-- `src/components/PortfolioExperience.tsx`：只負責頁面狀態，例如語言、分類、選取的 project。
-- `src/components/portfolio/`：只放展示元件與小型 UI 元件。
-- `scripts/project-overrides.mjs`：負責本地 CRUD 操作。
+### 6. 實驗原型 (Experiments)
+前沿技術的快速實驗與概念驗證，探討商用可行性。
 
-之後如果要做線上 CRUD 編輯，create / update / delete 應該放在資料層或 API route 後面。卡片、modal、section 都應該保持 display-only。
+- **天機算命 (fortune-telling)**
+  - **解決痛點**：傳統八字命理排盤複雜，一般人難以理解術語，且缺乏個人化的現代解讀。
+  - **核心功能**：八字命盤自動排盤、Gemini AI 個人化運勢解讀、PWA 行動裝置體驗。
+- **北部排球指南 (north-volley-guide)**
+  - **解決痛點**：北部排球場地與球隊資訊零散，球友難以快速找到合適的打球地點。
+  - **核心功能**：北部排球場地詳細整理、依地區與類型快速查找、行動版網頁瀏覽。
+- **Golf Strategy Prototype (golf-strategy-lk-prototype)**
+  - **解決痛點**：高爾夫球手擊球時需要考量多項變因，缺乏能提供擊球策略與球道規劃的輔助工具。
+  - **核心功能**：球道策略模擬原型、互動式球道規劃介面、快速擊球方案驗證。
+- **手寫數字辨識 (digit_recognition)**
+  - **解決痛點**：驗證機器學習模型在網頁端進行即時影像前處理與預測的流暢度。
+  - **核心功能**：網頁畫布即時繪圖輸入、影像灰階化與尺寸調整前處理、MLP 卷積模型即時辨識。
+- **FastAPI MCP 學習專案 (FastAPI-project)**
+  - **解決痛點**：如何將 FastAPI 與新一代 AI 代理通訊協定 (Model Context Protocol) 進行串接以實現串流對話。
+  - **核心功能**：FastAPI 與 MCP 協定實作、PydanticAI 框架探索、流暢的 AI 串流對話流程。
 
-## 本機開發
+---
 
-```bash
-npm install
-npx playwright install chromium
-npm run sync:all
-npm run dev
-```
+## 產品研發與自動化維運
 
-打開 `http://localhost:3000`。
+除了產品本身，這個實驗室的基礎設施也展示了我的工程自動化能力：
+
+### 1. 自動化預覽管線 (Automated Preview Pipeline)
+- **解決方案**：使用 Playwright 建立自動化擷取腳本，自動偵測各專案的官方網站連結並進行截圖。同時，腳本會自動辨識常見的 404 或失效部署頁面，避免將錯誤畫面作為產品預覽呈現。對於沒有公開首頁的專案，會自動生成預覽圖。
+
+### 2. 靜態資料管線 (Static Data Pipeline)
+- **解決方案**：透過 GitHub CLI 建立靜態資料管線，在建置（build）階段將 GitHub 專案資訊匯出為 JSON，實現零 API 呼叫的靜態網頁生成（SSG），提升網頁載入速度。
+
+### 3. 多維度資料覆寫機制 (Data Overrides)
+- **解決方案**：設計了專案屬性覆寫機制，在不改動 GitHub 原始資料的情況下，補充各專案的分類、中英文產品敘述、痛點分析與精選排序，將程式碼庫提升為產品展示卡。
