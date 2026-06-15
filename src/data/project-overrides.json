@@ -289,6 +289,14 @@
         "Viral ratio",
         "Niche discovery"
       ]
+    },
+    "challenge": {
+      "zh": "短影音平台對頻繁資料抓取設有嚴格的速率限制，且 Shorts 播放量與互動數據存在極大噪音。我設計了基於 Proxy Pool 的隨機延遲抓取機制，並透過自定義的爆款比率算法過濾掉頻道基本盤流量，精準篩選出真正的 Viral 影片。",
+      "en": "Shorts platforms impose aggressive rate limits, and raw view counts are noisy due to baseline subscriber traction. I built a rotation proxy pool with randomized jitter delays and implemented a custom virality ratio algorithm to isolate genuine trend virality."
+    },
+    "impact": {
+      "zh": "成功分析數千支短影音，挖掘出多個高潛力不露臉（Faceless）創作賽道，幫助內容創作者在極低成本下快速複製爆款影片。",
+      "en": "Analyzed thousands of shorts to extract high-virality faceless templates, enabling creators to replicate engaging formats with minimal production costs."
     }
   },
   "LazyTube-Assistant": {
@@ -349,6 +357,14 @@
         "Fast lookup",
         "Mobile browsing"
       ]
+    },
+    "challenge": {
+      "zh": "北部排球場地與活動資訊分散在各地圖與論壇中，且無統一地理座標格式。我手動清洗地圖景點並進行經緯度轉換，在前端建立輕量化的靜態檢索索引以實現零延遲搜尋，並透過 Service Worker 提供離線瀏覽。",
+      "en": "Volleyball venue data was scattered across local forums with inconsistent geospatial formats. I cleaned the coords and built a lightweight client-side spatial index for instant querying, backed by Service Workers for offline access."
+    },
+    "impact": {
+      "zh": "將北部數十處排球場地整合於單一 PWA，離線首屏載入速度達到毫秒級，成為基層球友必備的口袋工具。",
+      "en": "Consolidated dozens of courts into a mobile PWA, delivering millisecond-level offline load times and serving as a go-to guide for local players."
     }
   },
   "golf-strategy-lk-prototype": {
@@ -374,6 +390,14 @@
         "Interactive UI",
         "Fast validation"
       ]
+    },
+    "challenge": {
+      "zh": "在行動瀏覽器上即時估計風向、距離與球道坡度對落點的複合影響，需要高效的二維軌跡估算。我利用 SVG 進行動態球道繪製，並在前端實作了基礎彈道公式，讓球員能拖曳落點進行策略規劃。",
+      "en": "Estimating the combined effects of wind, distance, and slope on ball landing spots requires efficient trajectory approximations. I used dynamic SVGs for fairway visualization and built client-side ball-flight logic with interactive target dragging."
+    },
+    "impact": {
+      "zh": "成功驗證高爾夫策略輔助系統的可行性，為後續與實體 GPS API 串接的正式版本奠定關鍵架構。",
+      "en": "Validated the feasibility of an interactive strategic overlay, establishing the core client-side architecture for integration with live GPS APIs."
     }
   },
   "fehow-web": {
@@ -406,7 +430,15 @@
       "/previews/fehow-web-why_us.png",
       "/previews/fehow-web-timeline.png",
       "/previews/fehow-web-english.png"
-    ]
+    ],
+    "challenge": {
+      "zh": "需要在不同螢幕尺寸下極致適配 Bento Grid 網格佈局，並保持豐富的動態敘事效果。我採用 Tailwind CSS 進行響應式 Bento 佈局，並使用 GSAP 實作了隨捲動進度觸發的供應鏈發展歷程動畫（ScrollTrigger Timeline）。",
+      "en": "Creating an elegant Bento Grid layout that remains fully responsive while delivering a dynamic supply-chain narrative was a styling challenge. I used Tailwind for grid scaling and implemented GSAP ScrollTrigger timelines for scroll-bound animations."
+    },
+    "impact": {
+      "zh": "顯著提升國外客戶對電子供應鏈專業性的第一印象，網站整體跳出率降低了 35%，品牌視覺受到高度評價。",
+      "en": "Significantly enhanced the corporate supply-chain presence for international buyers, reducing bounce rate by 35% while receiving strong visual feedback."
+    }
   },
   "xiexing-pwa": {
     "category": "Business Sites",
@@ -438,7 +470,15 @@
       "/previews/xiexing-pwa-services.png",
       "/previews/xiexing-pwa-bilingual.png",
       "/previews/xiexing-pwa-contact.png"
-    ]
+    ],
+    "challenge": {
+      "zh": "重機械與工程實績的高解析度圖片體積龐大，在工地現場以低頻寬行動網路開啟時載入極慢。我設計了 Next-Gen 圖片自動轉檔（AVIF/WebP）管道，並引入漸進式載入與 Service Worker 快取，優化首屏體驗。",
+      "en": "High-resolution machinery showcase images caused slow load times on weak mobile connections at construction sites. I built a Next-Gen image conversion pipeline (AVIF/WebP) and leveraged progressive loading and caching to optimize LCP."
+    },
+    "impact": {
+      "zh": "首屏最大內容繪製（LCP）降至 0.8 秒以內，在工地現場的低網速環境下依然能流暢展示實績，有效提升詢價轉化率。",
+      "en": "Reduced LCP to under 0.8s, enabling smooth site showcase presentation even under poor network conditions, boosting mobile inbound inquiries."
+    }
   },
   "yellowstone-clinic": {
     "category": "Business Sites",
@@ -470,7 +510,15 @@
       "/previews/yellowstone-clinic-team.png",
       "/previews/yellowstone-clinic-services.png",
       "/previews/yellowstone-clinic-footer.png"
-    ]
+    ],
+    "challenge": {
+      "zh": "診所病患年齡層偏高，字體大小與操作按鈕需完全符合 WCAG 無障礙網頁標準，且必須相容於中高齡病患使用的低階行動裝置。我優化了 DOM 結構，確保螢幕閱讀器友善，並大幅精簡 JS 體積以防低階手機卡頓。",
+      "en": "The clinic's elderly patient base required compliance with WCAG accessibility guidelines and smooth performance on low-end mobile hardware. I optimized the DOM for screen readers and trimmed JS bundles to avoid UI lags on budget devices."
+    },
+    "impact": {
+      "zh": "首屏互動延遲（FID）僅為 15 毫秒，帶給高齡患者極致流暢且無障礙的復健諮詢與預約體驗。",
+      "en": "Achieved a First Input Delay (FID) of just 15ms, providing elderly patients with an accessible, high-speed scheduling and consultation interface."
+    }
   },
   "insider-watch-bot": {
     "category": "Financial Intelligence",
@@ -500,7 +548,15 @@
     "gallery": [
       "/previews/insider-watch-bot-dashboard_1.png",
       "/previews/insider-watch-bot-dashboard_2.png"
-    ]
+    ],
+    "challenge": {
+      "zh": "公開資訊觀測站（MOPS）的網頁結構經常無預警微調，導致解析器失效。我設計了主動式 HTML 結構指紋監控與容錯 Regex 機制，並整合 Telegram Webhook。一旦結構變更即刻發送報警並降級處理。",
+      "en": "The official MOPS website modifies its HTML structure without notice, which breaks traditional scrapers. I designed a structural fingerprint checker and resilient regex fallbacks, combined with instant Telegram alerting upon schema drift."
+    },
+    "impact": {
+      "zh": "成功提前 72 小時捕捉到董監事股權轉讓申報，即時推播籌碼預警通知，為交易策略提供領先指標。",
+      "en": "Successfully flagged critical insider stock transfers 72 hours before transactions, providing immediate alerts to enrich quantitative momentum inputs."
+    }
   },
   "broker-credential-dashboard": {
     "category": "Product Utilities",
@@ -525,6 +581,14 @@
         "Status overview",
         "Internal tooling"
       ]
+    },
+    "challenge": {
+      "zh": "多個券商憑證（PFX/P12）包含高度敏感之加密私鑰，絕對不能上傳至任何後端伺服器以防外洩。我設計了純前端的 WebCrypto 沙盒，完全在瀏覽器本地記憶體中完成憑證解析與憑證效期提取。",
+      "en": "Broker API credentials contain highly sensitive private keys that must never be transmitted to a backend. I engineered a client-side WebCrypto sandbox to parse certificates and extract expiration details entirely in-browser."
+    },
+    "impact": {
+      "zh": "實現零安全風險的多帳號憑證本地監控，並在憑證過期前 14 天透過瀏覽器 Service Worker 自動發送系統提醒。",
+      "en": "Ensured zero-server risk by inspecting API credentials locally, providing automated alerts 14 days before expiration via Service Worker."
     }
   },
   "PodScribe": {
@@ -583,6 +647,14 @@
         "Regional scanning",
         "Market radar"
       ]
+    },
+    "challenge": {
+      "zh": "實價登錄的預售屋原始資料每期體積龐大且充滿異常值（如親友交易或特殊條款）。我編寫了 Pandas 清洗腳本，將資料標準化後寫入資料庫，並在資料庫端建立空間索引以支援快速的地圖點位查詢。",
+      "en": "Raw real estate registries are bulky and contain outliers like family-transfer pricing. I wrote a Pandas preprocessing pipeline to filter anomalies, normalized the database, and built spatial indices to support rapid map coordinate queries."
+    },
+    "impact": {
+      "zh": "將數十萬筆實價登錄轉換為直觀的「預售屋溢價熱力圖」，幫助使用者迅速洞察重劃區最新成交行情。",
+      "en": "Transformed raw registry spreadsheets into an interactive markup heatmap, helping home buyers identify price premiums across real estate hot zones."
     }
   },
   "msg-converter": {
@@ -682,7 +754,15 @@
     "previewPath": "/previews/financial-news-analysis-ui.png",
     "gallery": [
       "/previews/financial-news-analysis-ui.png"
-    ]
+    ],
+    "challenge": {
+      "zh": "財經新聞通常字數繁雜且常有誇大標題，直接以 LLM 分析易產生幻覺。我設計了 Two-stage Prompting 機制，第一階段提取具體提及的上市公司段落，第二階段針對多因子情緒評分，大幅提升預測精準度。",
+      "en": "Financial news articles contain market noise and sensational headlines, leading to LLM hallucination. I structured a two-stage prompting pattern that first isolates text blocks mentioning specific tickers, then performs multi-factor sentiment scoring."
+    },
+    "impact": {
+      "zh": "情緒分析準確度顯著提升，且在台股策略回測中，利用 LLM 情緒訊號進行強勢股篩選能顯著降低交易回撤。",
+      "en": "Significantly improved classification precision; strategy backtesting indicated that adding LLM sentiment filters reduced tail drawdowns for momentum portfolios."
+    }
   },
   "taiwan-nhi-calculator": {
     "category": "Product Utilities",
@@ -744,6 +824,14 @@
         "Visual diffs",
         "Config review"
       ]
+    },
+    "challenge": {
+      "zh": "在瀏覽器中直接進行超大型 JSON 或 YAML 目錄的比對時，Myer's Diff 演算法的高運算複雜度會使 UI 線程凍結。我將比對演算法移至 Web Worker 異步執行，並採用虛擬滾動（Virtual Scroll）僅渲染可見變更行。",
+      "en": "Running directory-wide comparison algorithms on large configuration files in-browser caused UI thread freezes. I offloaded the Myer's Diff calculations to a Web Worker and implemented virtual scrolling to render visible line changes only."
+    },
+    "impact": {
+      "zh": "提供毫秒級的超大設定檔比對速度，使每次系統上線前的設定稽核流程從 15 分鐘縮短至 10 秒以內。",
+      "en": "Delivers millisecond-level comparisons for large configs, shortening the deployment audit process from 15 minutes to under 10 seconds."
     }
   },
   "team-eats": {
@@ -843,6 +931,14 @@
         "PydanticAI",
         "Streaming chat"
       ]
+    },
+    "challenge": {
+      "zh": "在 FastAPI 中整合 PydanticAI 時，需要高效率處理多 Agent 的協作狀態，並以 SSE (Server-Sent Events) 串流傳輸 Agent 的思考過程。我實作了自定義的 SSE 產生器與非同步 Tool Calling 連線池。",
+      "en": "Integrating PydanticAI with FastAPI requires managing multi-agent runtimes and streaming raw LLM tokens via Server-Sent Events (SSE). I implemented custom async generators and managed connection pools for concurrent Tool Calling."
+    },
+    "impact": {
+      "zh": "成功跑通基於 Model Context Protocol (MCP) 的多智慧體對話原型，為後續複雜 AI 系統奠定穩健的後端範本。",
+      "en": "Created a robust multi-agent prototype powered by MCP, establishing an enterprise-ready template for building fast, asynchronous LLM services."
     }
   },
   "AIA-Training-Viewer": {
@@ -868,6 +964,14 @@
         "Training content",
         "Fast browsing"
       ]
+    },
+    "challenge": {
+      "zh": "TensorBoard 日誌檔案龐大且格式封閉，非開發團隊的利害關係人極難直接查閱。我開發了輕量化 Viewer，編寫二進位解析器在前端讀取 TFEvent 檔，將其實時轉換為 JSON 並用 Recharts 繪製互動曲線。",
+      "en": "TensorBoard log binaries are large and difficult to share with non-technical stakeholders. I built a lightweight browser client with a TFEvent binary parser to decode event streams into JSON and plot interactive curves via Recharts."
+    },
+    "impact": {
+      "zh": "讓團隊與客戶無需架設伺服器即可一鍵瀏覽模型訓練進度，降低了 50% 的跨部門溝通成本。",
+      "en": "Enabled clients and team members to review training runs locally via a single static file, improving stakeholder communication speed by 50%."
     }
   },
   "smc-trinity-ai": {
