@@ -63,6 +63,8 @@ export type Project = GitHubRepo & {
   publicSourceUrl: string | null;
 };
 
+export type CategoryFilter = Category | "All";
+
 export const categoryLabels: Record<Category, LocalizedText> = {
   "Financial Intelligence": {
     zh: "金融決策",
@@ -167,4 +169,13 @@ export function getProjects(): Project[] {
       if (b.sortWeight !== a.sortWeight) return b.sortWeight - a.sortWeight;
       return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
+}
+
+export function selectFeaturedProjects(projects: Project[], limit = 5) {
+  return projects.filter((project) => project.featured).slice(0, limit);
+}
+
+export function filterProjectsByCategory(projects: Project[], activeCategory: CategoryFilter) {
+  if (activeCategory === "All") return projects;
+  return projects.filter((project) => project.category === activeCategory);
 }

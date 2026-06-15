@@ -3,224 +3,706 @@
     "category": "Data & Research",
     "featured": false,
     "sortWeight": 72,
-    "title": { "zh": "POE 價格追蹤器", "en": "POE Price Tracker" },
-    "summary": { "zh": "追蹤遊戲市場價格變化，讓交易判斷更快更清楚。", "en": "Tracks game-market price shifts so trading decisions are easier to compare." },
-    "features": { "zh": ["價格監控", "趨勢整理", "部署版儀表板"], "en": ["Price monitoring", "Trend summaries", "Hosted dashboard"] }
+    "title": {
+      "zh": "POE 價格追蹤器",
+      "en": "POE Price Tracker"
+    },
+    "summary": {
+      "zh": "追蹤遊戲市場價格變化，讓交易判斷更快更清楚。",
+      "en": "Tracks game-market price shifts so trading decisions are easier to compare."
+    },
+    "features": {
+      "zh": [
+        "價格監控",
+        "趨勢整理",
+        "部署版儀表板"
+      ],
+      "en": [
+        "Price monitoring",
+        "Trend summaries",
+        "Hosted dashboard"
+      ]
+    }
   },
   "warrant-screener-tw": {
     "category": "Financial Intelligence",
     "featured": false,
     "sortWeight": 88,
-    "title": { "zh": "台股權證篩選器", "en": "Taiwan Warrant Screener" },
-    "summary": { "zh": "把台股權證條件整理成可篩選的工作台。", "en": "Turns Taiwan warrant conditions into a practical screening workspace." },
-    "features": { "zh": ["條件篩選", "標的比較", "即時部署"], "en": ["Condition filters", "Underlying comparison", "Live deployment"] }
+    "title": {
+      "zh": "台股權證篩選器",
+      "en": "Taiwan Warrant Screener"
+    },
+    "summary": {
+      "zh": "把台股權證條件整理成可篩選的工作台。",
+      "en": "Turns Taiwan warrant conditions into a practical screening workspace."
+    },
+    "features": {
+      "zh": [
+        "條件篩選",
+        "標的比較",
+        "即時部署"
+      ],
+      "en": [
+        "Condition filters",
+        "Underlying comparison",
+        "Live deployment"
+      ]
+    }
   },
   "personal-bot-gateway": {
     "category": "AI Automation",
-    "featured": false,
-    "sortWeight": 82,
-    "title": { "zh": "個人機器人閘道", "en": "Personal Bot Gateway" },
-    "summary": { "zh": "把 Telegram、LINE 和個人工具指令接成獨立閘道。", "en": "Connects Telegram, LINE, and personal commands through one independent gateway." },
-    "features": { "zh": ["Telegram/LINE 整合", "指令路由", "服務解耦"], "en": ["Telegram/LINE integration", "Command routing", "Service isolation"] }
+    "featured": true,
+    "sortWeight": 120,
+    "title": {
+      "zh": "Personal Bot Gateway",
+      "en": "Personal Bot Gateway"
+    },
+    "summary": {
+      "zh": "我最常用的 Telegram 驅動工作中樞，整合所有 TG 指令、KOL 每日掃描和 NotebookLM 連動。",
+      "en": "My most-used Telegram-driven operations hub, connecting every TG command with daily KOL scanning and NotebookLM handoff."
+    },
+    "features": {
+      "zh": [
+        "Telegram 指令中樞",
+        "KOL 每日掃描",
+        "NotebookLM 連動",
+        "LINE/TG gateway"
+      ],
+      "en": [
+        "Telegram command hub",
+        "Daily KOL scanning",
+        "NotebookLM handoff",
+        "LINE/TG gateway"
+      ]
+    }
   },
   "price-altas": {
     "category": "Data & Research",
     "featured": true,
     "sortWeight": 96,
-    "title": { "zh": "Price Atlas", "en": "Price Atlas" },
-    "summary": { "zh": "跨平台查價與比價工具，幫產品採購快速看出價格落差。", "en": "A cross-market price intelligence tool for spotting purchase and listing gaps." },
-    "features": { "zh": ["多平台爬價", "匯率換算", "商品比較"], "en": ["Multi-market scraping", "Exchange-rate handling", "Product comparison"] }
+    "title": {
+      "zh": "Price Atlas",
+      "en": "Price Atlas"
+    },
+    "summary": {
+      "zh": "跨平台查價與比價工具，幫產品採購快速看出價格落差。",
+      "en": "A cross-market price intelligence tool for spotting purchase and listing gaps."
+    },
+    "features": {
+      "zh": [
+        "多平台爬價",
+        "匯率換算",
+        "商品比較"
+      ],
+      "en": [
+        "Multi-market scraping",
+        "Exchange-rate handling",
+        "Product comparison"
+      ]
+    }
   },
   "fortune-telling": {
     "category": "Experiments",
     "featured": false,
     "sortWeight": 55,
-    "title": { "zh": "天機算命", "en": "Fortune Telling PWA" },
-    "summary": { "zh": "把八字命理和 Gemini 分析包成可互動的 PWA。", "en": "Combines BaZi astrology and Gemini analysis in an interactive PWA." },
-    "features": { "zh": ["八字分析", "AI 解讀", "PWA 體驗"], "en": ["BaZi analysis", "AI interpretation", "PWA experience"] }
+    "title": {
+      "zh": "天機算命",
+      "en": "Fortune Telling PWA"
+    },
+    "summary": {
+      "zh": "把八字命理和 Gemini 分析包成可互動的 PWA。",
+      "en": "Combines BaZi astrology and Gemini analysis in an interactive PWA."
+    },
+    "features": {
+      "zh": [
+        "八字分析",
+        "AI 解讀",
+        "PWA 體驗"
+      ],
+      "en": [
+        "BaZi analysis",
+        "AI interpretation",
+        "PWA experience"
+      ]
+    }
   },
   "socket-swiss-knife": {
     "category": "Product Utilities",
     "featured": false,
     "sortWeight": 58,
-    "title": { "zh": "Socket Swiss Knife", "en": "Socket Swiss Knife" },
-    "summary": { "zh": "給券商 MTF 協議測試使用的跨平台 GUI 工具。", "en": "A cross-platform GUI utility for broker MTF socket testing." },
-    "features": { "zh": ["券商設定", "定時測試", "桌面 GUI"], "en": ["Broker profiles", "Scheduled tests", "Desktop GUI"] }
+    "title": {
+      "zh": "Socket Swiss Knife",
+      "en": "Socket Swiss Knife"
+    },
+    "summary": {
+      "zh": "給券商 MTF 協議測試使用的跨平台 GUI 工具。",
+      "en": "A cross-platform GUI utility for broker MTF socket testing."
+    },
+    "features": {
+      "zh": [
+        "券商設定",
+        "定時測試",
+        "桌面 GUI"
+      ],
+      "en": [
+        "Broker profiles",
+        "Scheduled tests",
+        "Desktop GUI"
+      ]
+    }
   },
   "tw-stock-health-dashboard": {
     "category": "Financial Intelligence",
     "featured": true,
     "sortWeight": 100,
-    "title": { "zh": "台股健康儀表板", "en": "Taiwan Stock Health Dashboard" },
-    "summary": { "zh": "整合台股、海外連動與風險訊號，做成每日可看的決策儀表板。", "en": "A daily market-health dashboard that combines Taiwan equities, global signals, and risk alerts." },
-    "features": { "zh": ["盤後摘要", "海外連動", "崩盤預警", "Telegram 推播"], "en": ["Daily summaries", "Global linkage", "Crash-risk alerts", "Telegram delivery"] }
+    "title": {
+      "zh": "台股健康儀表板",
+      "en": "Taiwan Stock Health Dashboard"
+    },
+    "summary": {
+      "zh": "整合台股、海外連動與風險訊號，做成每日可看的決策儀表板。",
+      "en": "A daily market-health dashboard that combines Taiwan equities, global signals, and risk alerts."
+    },
+    "features": {
+      "zh": [
+        "盤後摘要",
+        "海外連動",
+        "崩盤預警",
+        "Telegram 推播"
+      ],
+      "en": [
+        "Daily summaries",
+        "Global linkage",
+        "Crash-risk alerts",
+        "Telegram delivery"
+      ]
+    }
   },
   "faceless_hunter": {
     "category": "AI Automation",
     "featured": false,
     "sortWeight": 66,
-    "title": { "zh": "Faceless Hunter", "en": "Faceless Hunter" },
-    "summary": { "zh": "分析 Shorts 爆紅比例，找出不露臉內容的潛力題材。", "en": "Analyzes Shorts viral ratios to uncover faceless content opportunities." },
-    "features": { "zh": ["YouTube 分析", "爆紅比例", "題材探索"], "en": ["YouTube analysis", "Viral ratio", "Niche discovery"] }
+    "title": {
+      "zh": "Faceless Hunter",
+      "en": "Faceless Hunter"
+    },
+    "summary": {
+      "zh": "分析 Shorts 爆紅比例，找出不露臉內容的潛力題材。",
+      "en": "Analyzes Shorts viral ratios to uncover faceless content opportunities."
+    },
+    "features": {
+      "zh": [
+        "YouTube 分析",
+        "爆紅比例",
+        "題材探索"
+      ],
+      "en": [
+        "YouTube analysis",
+        "Viral ratio",
+        "Niche discovery"
+      ]
+    }
   },
   "LazyTube-Assistant": {
     "category": "AI Automation",
     "featured": true,
     "sortWeight": 98,
-    "title": { "zh": "LazyTube Assistant", "en": "LazyTube Assistant" },
-    "summary": { "zh": "自動篩選 YouTube 影片，整理摘要後推播到日常工作流。", "en": "Filters YouTube videos, summarizes useful content, and pushes it into a daily workflow." },
-    "features": { "zh": ["YouTube API", "NotebookLM 摘要", "GitHub Actions", "Telegram 推播"], "en": ["YouTube API", "NotebookLM summaries", "GitHub Actions", "Telegram delivery"] }
+    "title": {
+      "zh": "LazyTube Assistant",
+      "en": "LazyTube Assistant"
+    },
+    "summary": {
+      "zh": "自動篩選 YouTube 影片，整理摘要後推播到日常工作流。",
+      "en": "Filters YouTube videos, summarizes useful content, and pushes it into a daily workflow."
+    },
+    "features": {
+      "zh": [
+        "YouTube API",
+        "NotebookLM 摘要",
+        "GitHub Actions",
+        "Telegram 推播"
+      ],
+      "en": [
+        "YouTube API",
+        "NotebookLM summaries",
+        "GitHub Actions",
+        "Telegram delivery"
+      ]
+    }
   },
   "north-volley-guide": {
     "category": "Experiments",
     "featured": false,
     "sortWeight": 40,
-    "title": { "zh": "北部排球指南", "en": "North Volley Guide" },
-    "summary": { "zh": "把北部排球資訊整理成容易查找的指南。", "en": "Organizes northern Taiwan volleyball information into an easy browsing guide." },
-    "features": { "zh": ["場地整理", "快速查找", "行動瀏覽"], "en": ["Venue notes", "Fast lookup", "Mobile browsing"] }
+    "title": {
+      "zh": "北部排球指南",
+      "en": "North Volley Guide"
+    },
+    "summary": {
+      "zh": "把北部排球資訊整理成容易查找的指南。",
+      "en": "Organizes northern Taiwan volleyball information into an easy browsing guide."
+    },
+    "features": {
+      "zh": [
+        "場地整理",
+        "快速查找",
+        "行動瀏覽"
+      ],
+      "en": [
+        "Venue notes",
+        "Fast lookup",
+        "Mobile browsing"
+      ]
+    }
   },
   "golf-strategy-lk-prototype": {
     "category": "Experiments",
     "featured": false,
     "sortWeight": 39,
-    "title": { "zh": "Golf Strategy Prototype", "en": "Golf Strategy Prototype" },
-    "summary": { "zh": "高爾夫策略輔助工具的早期產品原型。", "en": "An early product prototype for golf strategy assistance." },
-    "features": { "zh": ["策略原型", "互動介面", "快速驗證"], "en": ["Strategy prototype", "Interactive UI", "Fast validation"] }
+    "title": {
+      "zh": "Golf Strategy Prototype",
+      "en": "Golf Strategy Prototype"
+    },
+    "summary": {
+      "zh": "高爾夫策略輔助工具的早期產品原型。",
+      "en": "An early product prototype for golf strategy assistance."
+    },
+    "features": {
+      "zh": [
+        "策略原型",
+        "互動介面",
+        "快速驗證"
+      ],
+      "en": [
+        "Strategy prototype",
+        "Interactive UI",
+        "Fast validation"
+      ]
+    }
   },
   "fehow-web": {
     "category": "Business Sites",
     "featured": true,
     "sortWeight": 94,
-    "title": { "zh": "飛皓科技形象網站", "en": "Fehow Corporate Site" },
-    "summary": { "zh": "為電子供應鏈公司打造的現代企業入口。", "en": "A modern corporate site for an electronics supply-chain business." },
-    "features": { "zh": ["企業形象", "Bento Grid", "供應鏈敘事"], "en": ["Corporate presence", "Bento grid", "Supply-chain narrative"] }
+    "title": {
+      "zh": "飛皓科技形象網站",
+      "en": "Fehow Corporate Site"
+    },
+    "summary": {
+      "zh": "為電子供應鏈公司打造的現代企業入口。",
+      "en": "A modern corporate site for an electronics supply-chain business."
+    },
+    "features": {
+      "zh": [
+        "企業形象",
+        "Bento Grid",
+        "供應鏈敘事"
+      ],
+      "en": [
+        "Corporate presence",
+        "Bento grid",
+        "Supply-chain narrative"
+      ]
+    }
   },
   "xiexing-pwa": {
     "category": "Business Sites",
     "featured": false,
     "sortWeight": 64,
-    "title": { "zh": "協興實業 PWA", "en": "Xiexing PWA" },
-    "summary": { "zh": "重機械租賃與土方工程服務的行動友善網站。", "en": "A mobile-friendly PWA for heavy machinery rental and earthwork services." },
-    "features": { "zh": ["服務展示", "PWA", "商務導流"], "en": ["Service showcase", "PWA", "Business inquiry flow"] }
+    "title": {
+      "zh": "協興實業 PWA",
+      "en": "Xiexing PWA"
+    },
+    "summary": {
+      "zh": "重機械租賃與土方工程服務的行動友善網站。",
+      "en": "A mobile-friendly PWA for heavy machinery rental and earthwork services."
+    },
+    "features": {
+      "zh": [
+        "服務展示",
+        "PWA",
+        "商務導流"
+      ],
+      "en": [
+        "Service showcase",
+        "PWA",
+        "Business inquiry flow"
+      ]
+    }
   },
   "yellowstone-clinic": {
     "category": "Business Sites",
     "featured": false,
     "sortWeight": 63,
-    "title": { "zh": "黃石健康診所網站", "en": "Yellowstone Clinic Site" },
-    "summary": { "zh": "復健與物理治療診所的品牌網站。", "en": "A brand site for a rehabilitation and physical therapy clinic." },
-    "features": { "zh": ["診所資訊", "服務介紹", "PWA"], "en": ["Clinic information", "Service pages", "PWA"] }
+    "title": {
+      "zh": "黃石健康診所網站",
+      "en": "Yellowstone Clinic Site"
+    },
+    "summary": {
+      "zh": "復健與物理治療診所的品牌網站。",
+      "en": "A brand site for a rehabilitation and physical therapy clinic."
+    },
+    "features": {
+      "zh": [
+        "診所資訊",
+        "服務介紹",
+        "PWA"
+      ],
+      "en": [
+        "Clinic information",
+        "Service pages",
+        "PWA"
+      ]
+    }
   },
   "insider-watch-bot": {
     "category": "Financial Intelligence",
     "featured": false,
     "sortWeight": 76,
-    "title": { "zh": "內部人持股轉讓警報", "en": "Insider Watch Bot" },
-    "summary": { "zh": "追蹤 MOPS 轉讓預告，提前整理籌碼異動訊號。", "en": "Tracks MOPS transfer notices and surfaces insider-share movement signals." },
-    "features": { "zh": ["MOPS 監控", "提前警示", "籌碼分析"], "en": ["MOPS monitoring", "Early alerts", "Share-flow analysis"] }
+    "title": {
+      "zh": "內部人持股轉讓警報",
+      "en": "Insider Watch Bot"
+    },
+    "summary": {
+      "zh": "追蹤 MOPS 轉讓預告，提前整理籌碼異動訊號。",
+      "en": "Tracks MOPS transfer notices and surfaces insider-share movement signals."
+    },
+    "features": {
+      "zh": [
+        "MOPS 監控",
+        "提前警示",
+        "籌碼分析"
+      ],
+      "en": [
+        "MOPS monitoring",
+        "Early alerts",
+        "Share-flow analysis"
+      ]
+    }
   },
   "broker-credential-dashboard": {
     "category": "Product Utilities",
     "featured": false,
     "sortWeight": 47,
-    "title": { "zh": "券商憑證儀表板", "en": "Broker Credential Dashboard" },
-    "summary": { "zh": "管理券商連線與憑證資訊的內部儀表板。", "en": "An internal dashboard for broker connection and credential operations." },
-    "features": { "zh": ["憑證管理", "狀態整理", "內部工具"], "en": ["Credential management", "Status overview", "Internal tooling"] }
+    "title": {
+      "zh": "券商憑證儀表板",
+      "en": "Broker Credential Dashboard"
+    },
+    "summary": {
+      "zh": "管理券商連線與憑證資訊的內部儀表板。",
+      "en": "An internal dashboard for broker connection and credential operations."
+    },
+    "features": {
+      "zh": [
+        "憑證管理",
+        "狀態整理",
+        "內部工具"
+      ],
+      "en": [
+        "Credential management",
+        "Status overview",
+        "Internal tooling"
+      ]
+    }
   },
   "PodScribe": {
     "category": "AI Automation",
     "featured": true,
     "sortWeight": 92,
-    "title": { "zh": "PodScribe", "en": "PodScribe" },
-    "summary": { "zh": "把 Podcast 轉成結構化報告和心智圖，讓聽過的內容更好整理。", "en": "Turns podcasts into structured reports and mind maps for easier review." },
-    "features": { "zh": ["Podcast 轉錄", "Gemini 分析", "心智圖"], "en": ["Podcast transcription", "Gemini analysis", "Mind maps"] }
+    "title": {
+      "zh": "PodScribe",
+      "en": "PodScribe"
+    },
+    "summary": {
+      "zh": "把 Podcast 轉成結構化報告和心智圖，讓聽過的內容更好整理。",
+      "en": "Turns podcasts into structured reports and mind maps for easier review."
+    },
+    "features": {
+      "zh": [
+        "Podcast 轉錄",
+        "Gemini 分析",
+        "心智圖"
+      ],
+      "en": [
+        "Podcast transcription",
+        "Gemini analysis",
+        "Mind maps"
+      ]
+    }
   },
   "presale-radar": {
     "category": "Data & Research",
     "featured": false,
     "sortWeight": 68,
-    "title": { "zh": "預售屋雷達", "en": "Presale Radar" },
-    "summary": { "zh": "整理預售屋資料，用資料角度觀察市場熱區。", "en": "Organizes presale housing data to spot market activity patterns." },
-    "features": { "zh": ["資料整理", "區域觀察", "市場雷達"], "en": ["Data cleanup", "Regional scanning", "Market radar"] }
+    "title": {
+      "zh": "預售屋雷達",
+      "en": "Presale Radar"
+    },
+    "summary": {
+      "zh": "整理預售屋資料，用資料角度觀察市場熱區。",
+      "en": "Organizes presale housing data to spot market activity patterns."
+    },
+    "features": {
+      "zh": [
+        "資料整理",
+        "區域觀察",
+        "市場雷達"
+      ],
+      "en": [
+        "Data cleanup",
+        "Regional scanning",
+        "Market radar"
+      ]
+    }
   },
   "msg-converter": {
     "category": "Product Utilities",
     "featured": false,
     "sortWeight": 42,
-    "title": { "zh": "MSG 轉換器", "en": "MSG Converter" },
-    "summary": { "zh": "把 Windows .msg 郵件轉成 Mac 友善的 HTML。", "en": "Converts Windows .msg email files into Mac-friendly HTML." },
-    "features": { "zh": ["MSG 解析", "HTML 輸出", "附件處理"], "en": ["MSG parsing", "HTML export", "Attachment handling"] }
+    "title": {
+      "zh": "MSG 轉換器",
+      "en": "MSG Converter"
+    },
+    "summary": {
+      "zh": "把 Windows .msg 郵件轉成 Mac 友善的 HTML。",
+      "en": "Converts Windows .msg email files into Mac-friendly HTML."
+    },
+    "features": {
+      "zh": [
+        "MSG 解析",
+        "HTML 輸出",
+        "附件處理"
+      ],
+      "en": [
+        "MSG parsing",
+        "HTML export",
+        "Attachment handling"
+      ]
+    }
   },
   "neighbor-profiler": {
     "category": "Data & Research",
     "featured": false,
     "sortWeight": 62,
-    "title": { "zh": "房地產鄰里分析器", "en": "Neighbor Profiler" },
-    "summary": { "zh": "用資料揭露路段估值落差與房地產風險。", "en": "Uses local data to reveal valuation gaps and real-estate risk signals." },
-    "features": { "zh": ["估值落差", "路段分析", "風險提示"], "en": ["Valuation gaps", "Street-level analysis", "Risk signals"] }
+    "title": {
+      "zh": "房地產鄰里分析器",
+      "en": "Neighbor Profiler"
+    },
+    "summary": {
+      "zh": "用資料揭露路段估值落差與房地產風險。",
+      "en": "Uses local data to reveal valuation gaps and real-estate risk signals."
+    },
+    "features": {
+      "zh": [
+        "估值落差",
+        "路段分析",
+        "風險提示"
+      ],
+      "en": [
+        "Valuation gaps",
+        "Street-level analysis",
+        "Risk signals"
+      ]
+    }
   },
   "financial-news-analysis": {
     "category": "Financial Intelligence",
     "featured": false,
     "sortWeight": 54,
-    "title": { "zh": "財經新聞分析", "en": "Financial News Analysis" },
-    "summary": { "zh": "用 AI 分析財經新聞情緒並整理成投資觀察。", "en": "Uses AI to analyze financial-news sentiment and produce market observations." },
-    "features": { "zh": ["新聞擷取", "情緒分析", "策略摘要"], "en": ["News ingestion", "Sentiment analysis", "Strategy notes"] }
+    "title": {
+      "zh": "財經新聞分析",
+      "en": "Financial News Analysis"
+    },
+    "summary": {
+      "zh": "用 AI 分析財經新聞情緒並整理成投資觀察。",
+      "en": "Uses AI to analyze financial-news sentiment and produce market observations."
+    },
+    "features": {
+      "zh": [
+        "新聞擷取",
+        "情緒分析",
+        "策略摘要"
+      ],
+      "en": [
+        "News ingestion",
+        "Sentiment analysis",
+        "Strategy notes"
+      ]
+    }
   },
   "taiwan-nhi-calculator": {
     "category": "Product Utilities",
     "featured": false,
     "sortWeight": 41,
-    "title": { "zh": "二代健保試算工具", "en": "Taiwan NHI Calculator" },
-    "summary": { "zh": "快速試算二代健保補充保費和眷屬負擔。", "en": "Calculates Taiwan NHI supplemental premiums and dependent costs." },
-    "features": { "zh": ["保費試算", "身份情境", "表單工具"], "en": ["Premium calculation", "Role scenarios", "Form utility"] }
+    "title": {
+      "zh": "二代健保試算工具",
+      "en": "Taiwan NHI Calculator"
+    },
+    "summary": {
+      "zh": "快速試算二代健保補充保費和眷屬負擔。",
+      "en": "Calculates Taiwan NHI supplemental premiums and dependent costs."
+    },
+    "features": {
+      "zh": [
+        "保費試算",
+        "身份情境",
+        "表單工具"
+      ],
+      "en": [
+        "Premium calculation",
+        "Role scenarios",
+        "Form utility"
+      ]
+    }
   },
   "Config-Diff-Viewer": {
     "category": "Product Utilities",
     "featured": false,
     "sortWeight": 90,
-    "title": { "zh": "設定檔差異檢視器", "en": "Config Diff Viewer" },
-    "summary": { "zh": "把兩個目錄的設定差異視覺化，減少人工比對時間。", "en": "Visualizes configuration differences across directories to reduce manual comparison." },
-    "features": { "zh": ["目錄比對", "差異視覺化", "設定審查"], "en": ["Directory comparison", "Visual diffs", "Config review"] }
+    "title": {
+      "zh": "設定檔差異檢視器",
+      "en": "Config Diff Viewer"
+    },
+    "summary": {
+      "zh": "把兩個目錄的設定差異視覺化，減少人工比對時間。",
+      "en": "Visualizes configuration differences across directories to reduce manual comparison."
+    },
+    "features": {
+      "zh": [
+        "目錄比對",
+        "差異視覺化",
+        "設定審查"
+      ],
+      "en": [
+        "Directory comparison",
+        "Visual diffs",
+        "Config review"
+      ]
+    }
   },
   "team-eats": {
     "category": "Product Utilities",
     "featured": false,
     "sortWeight": 44,
-    "title": { "zh": "Team Eats", "en": "Team Eats" },
-    "summary": { "zh": "把聚餐、下午茶、投票和費用整理成團隊儀表板。", "en": "Organizes team meals, drink orders, voting, and expense records." },
-    "features": { "zh": ["投票", "揪團統計", "費用紀錄"], "en": ["Voting", "Group stats", "Expense records"] }
+    "title": {
+      "zh": "Team Eats",
+      "en": "Team Eats"
+    },
+    "summary": {
+      "zh": "把聚餐、下午茶、投票和費用整理成團隊儀表板。",
+      "en": "Organizes team meals, drink orders, voting, and expense records."
+    },
+    "features": {
+      "zh": [
+        "投票",
+        "揪團統計",
+        "費用紀錄"
+      ],
+      "en": [
+        "Voting",
+        "Group stats",
+        "Expense records"
+      ]
+    }
   },
   "digit_recognition": {
     "category": "Experiments",
     "featured": false,
     "sortWeight": 35,
-    "title": { "zh": "手寫數字辨識", "en": "Digit Recognition" },
-    "summary": { "zh": "用 FastAPI 和 Scikit-learn 做即時手寫數字辨識。", "en": "A FastAPI and Scikit-learn app for real-time handwritten digit recognition." },
-    "features": { "zh": ["即時繪圖", "影像前處理", "MLP 模型"], "en": ["Canvas input", "Image preprocessing", "MLP model"] }
+    "title": {
+      "zh": "手寫數字辨識",
+      "en": "Digit Recognition"
+    },
+    "summary": {
+      "zh": "用 FastAPI 和 Scikit-learn 做即時手寫數字辨識。",
+      "en": "A FastAPI and Scikit-learn app for real-time handwritten digit recognition."
+    },
+    "features": {
+      "zh": [
+        "即時繪圖",
+        "影像前處理",
+        "MLP 模型"
+      ],
+      "en": [
+        "Canvas input",
+        "Image preprocessing",
+        "MLP model"
+      ]
+    }
   },
   "FastAPI-project": {
     "category": "Experiments",
     "featured": false,
     "sortWeight": 33,
-    "title": { "zh": "FastAPI MCP 學習專案", "en": "FastAPI MCP Lab" },
-    "summary": { "zh": "探索 FastAPI、PydanticAI、MCP 和串流聊天流程。", "en": "Explores FastAPI, PydanticAI, MCP, and streaming chat workflows." },
-    "features": { "zh": ["FastAPI", "PydanticAI", "串流對話"], "en": ["FastAPI", "PydanticAI", "Streaming chat"] }
+    "title": {
+      "zh": "FastAPI MCP 學習專案",
+      "en": "FastAPI MCP Lab"
+    },
+    "summary": {
+      "zh": "探索 FastAPI、PydanticAI、MCP 和串流聊天流程。",
+      "en": "Explores FastAPI, PydanticAI, MCP, and streaming chat workflows."
+    },
+    "features": {
+      "zh": [
+        "FastAPI",
+        "PydanticAI",
+        "串流對話"
+      ],
+      "en": [
+        "FastAPI",
+        "PydanticAI",
+        "Streaming chat"
+      ]
+    }
   },
   "AIA-Training-Viewer": {
     "category": "Data & Research",
     "featured": false,
     "sortWeight": 37,
-    "title": { "zh": "AIA Training Viewer", "en": "AIA Training Viewer" },
-    "summary": { "zh": "把訓練資料整理成可瀏覽的展示工具。", "en": "Turns training material into a browsable viewer." },
-    "features": { "zh": ["資料檢視", "訓練內容", "快速瀏覽"], "en": ["Data viewing", "Training content", "Fast browsing"] }
+    "title": {
+      "zh": "AIA Training Viewer",
+      "en": "AIA Training Viewer"
+    },
+    "summary": {
+      "zh": "把訓練資料整理成可瀏覽的展示工具。",
+      "en": "Turns training material into a browsable viewer."
+    },
+    "features": {
+      "zh": [
+        "資料檢視",
+        "訓練內容",
+        "快速瀏覽"
+      ],
+      "en": [
+        "Data viewing",
+        "Training content",
+        "Fast browsing"
+      ]
+    }
   },
   "smc-trinity-ai": {
     "category": "Financial Intelligence",
     "featured": false,
     "sortWeight": 52,
-    "title": { "zh": "SMC Trinity AI", "en": "SMC Trinity AI" },
-    "summary": { "zh": "用三代理人辯論流程輔助聰明錢交易分析。", "en": "Uses a three-agent debate flow to support smart-money-concept trading analysis." },
-    "features": { "zh": ["SMC 分析", "多代理人辯論", "交易裁決"], "en": ["SMC analysis", "Multi-agent debate", "Trading judgment"] }
+    "title": {
+      "zh": "SMC Trinity AI",
+      "en": "SMC Trinity AI"
+    },
+    "summary": {
+      "zh": "用三代理人辯論流程輔助聰明錢交易分析。",
+      "en": "Uses a three-agent debate flow to support smart-money-concept trading analysis."
+    },
+    "features": {
+      "zh": [
+        "SMC 分析",
+        "多代理人辯論",
+        "交易裁決"
+      ],
+      "en": [
+        "SMC analysis",
+        "Multi-agent debate",
+        "Trading judgment"
+      ]
+    }
   }
 }
