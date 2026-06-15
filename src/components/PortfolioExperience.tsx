@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { CategoryFilter, Locale, Project } from "@/lib/projects";
 import { filterProjectsByCategory, selectFeaturedProjects } from "@/lib/projects";
 import { CategoryStory } from "./portfolio/CategoryStory";
@@ -20,7 +20,38 @@ export function PortfolioExperience({ projects }: Props) {
   const [locale, setLocale] = useState<Locale>("zh");
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [stats, setStats] = useState<{ pv: number; active: number } | null>(null);
   const t = copy[locale];
+
+  useEffect(() => {
+    let uuid = sessionStorage.getItem("portfolio_user_uuid");
+    if (!uuid) {
+      uuid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      sessionStorage.setItem("portfolio_user_uuid", uuid);
+    }
+
+    const updateStats = async () => {
+      try {
+        const res = await fetch("/api/stats", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ uuid }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setStats({ pv: data.pv, active: data.active });
+        }
+      } catch (err) {
+        console.error("Failed to update stats:", err);
+      }
+    };
+
+    updateStats();
+    const interval = setInterval(updateStats, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   const featuredProjects = useMemo(() => selectFeaturedProjects(projects), [projects]);
   const filteredProjects = useMemo(() => filterProjectsByCategory(projects, activeCategory), [activeCategory, projects]);
@@ -44,7 +75,14 @@ export function PortfolioExperience({ projects }: Props) {
       <footer className="border-t border-zinc-950/10 px-5 py-12 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
           <p className="max-w-2xl text-sm leading-6 text-zinc-600">{t.footer}</p>
-          <p className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">Michael Product Lab</p>
+          <div className="flex flex-col items-start md:items-end gap-2">
+            <p className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">Michael Product Lab</p>
+            {stats && (
+              <p className="font-mono text-[10px] text-zinc-400">
+                {t.statsPv}: {stats.pv.toLocaleString()} • {t.statsActive}: {stats.active.toLocaleString()}
+              </p>
+            )}
+          </div>
         </div>
       </footer>
       <ProjectModal project={selectedProject} locale={locale} copy={t} onClose={() => setSelectedProject(null)} />

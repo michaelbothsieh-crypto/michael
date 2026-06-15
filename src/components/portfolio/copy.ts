@@ -30,6 +30,8 @@ export const copy = {
     noSource: "這是內部或私人作品，所以這裡只展示產品脈絡與截圖。",
     footer:
       "部分作品是內部工具或客戶案例，因此只展示產品截圖與功能摘要。需要看更細的實作，再另外打開就好。",
+    statsPv: "總瀏覽量",
+    statsActive: "線上人數",
   },
   en: {
     nav: ["Featured", "Categories", "All Work"],
@@ -63,6 +65,8 @@ export const copy = {
     noSource: "This is internal or private work, so the portfolio shows product context and screenshots instead of source.",
     footer:
       "Some projects are internal tools or client-facing work, so I show product context and screenshots instead of source links. Deeper implementation details can be opened case by case.",
+    statsPv: "Total Visits",
+    statsActive: "Online Users",
   },
 } as const;
 
