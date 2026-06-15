@@ -7,16 +7,12 @@ export async function POST(req: NextRequest) {
     const url = process.env.KV_REST_API_URL;
     const token = process.env.KV_REST_API_TOKEN;
 
-    // 若未設定環境變數，則提供平滑降級的模擬數據
+    // 若未設定環境變數，直接返回 0，不虛構任何數據
     if (!url || !token) {
       return NextResponse.json({
-        pv: 1342,
-        active: 3,
-        projectPvs: {
-          "personal-bot-gateway": 142,
-          "tw-stock-health-dashboard": 98,
-          "price-altas": 57
-        },
+        pv: 0,
+        active: 0,
+        projectPvs: {},
         fallback: true
       });
     }
@@ -91,14 +87,11 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error("Stats API error:", error);
+    // 發生錯誤時返回 0
     return NextResponse.json({
-      pv: 1342,
-      active: 3,
-      projectPvs: {
-        "personal-bot-gateway": 142,
-        "tw-stock-health-dashboard": 98,
-        "price-altas": 57
-      },
+      pv: 0,
+      active: 0,
+      projectPvs: {},
       fallback: true
     });
   }
