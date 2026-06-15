@@ -225,6 +225,7 @@ export function PortfolioExperience({ projects }: Props) {
             height={960}
             className="h-full w-full object-cover opacity-75 grayscale contrast-125"
             unoptimized={(featuredProjects[0]?.previewPath ?? "/previews/placeholder.svg").endsWith(".svg")}
+            priority
           />
         </div>
         <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
