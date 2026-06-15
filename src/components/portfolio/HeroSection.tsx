@@ -1,11 +1,12 @@
 import Image from "next/image";
-import type { Project } from "@/lib/projects";
+import type { Locale, Project } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
 import { Meta } from "./Meta";
 
 type HeroSectionProps = {
   projectsCount: number;
   featuredProjects: Project[];
+  locale: Locale;
   copy: PortfolioCopy;
 };
 
@@ -13,12 +14,12 @@ function isSvg(path: string) {
   return path.endsWith(".svg");
 }
 
-export function HeroSection({ projectsCount, featuredProjects, copy }: HeroSectionProps) {
+export function HeroSection({ projectsCount, featuredProjects, locale, copy }: HeroSectionProps) {
   const heroPreview = featuredProjects[0]?.previewPath ?? "/previews/placeholder.svg";
 
   return (
     <section id="top" className="relative isolate flex min-h-[92vh] items-end px-5 pb-16 pt-28 sm:px-8 lg:px-12">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_18%,rgba(20,184,166,0.20),transparent_34%),radial-gradient(circle_at_12%_72%,rgba(250,204,21,0.20),transparent_30%),linear-gradient(180deg,#f8fafc,#edf7f2)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_18%,rgba(20,184,166,0.25),transparent_38%),radial-gradient(circle_at_12%_72%,rgba(250,204,21,0.22),transparent_34%),radial-gradient(#e4e4e7_1px,transparent_1px),linear-gradient(180deg,#f8fafc,#edf7f2)] [background-size:100%_100%,100%_100%,24px_24px,100%_100%]" />
       <div className="absolute right-6 top-28 -z-10 hidden h-[48vw] max-h-[620px] w-[34vw] max-w-[480px] overflow-hidden rounded-[8px] border border-zinc-950/10 bg-white shadow-2xl shadow-zinc-950/10 lg:block">
         <Image
           src={heroPreview}
@@ -35,7 +36,21 @@ export function HeroSection({ projectsCount, featuredProjects, copy }: HeroSecti
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.34em] text-teal-700">{copy.eyebrow}</p>
           <h1 className="mt-8 max-w-6xl text-[clamp(3rem,6vw,6.8rem)] font-semibold leading-[0.92] tracking-normal text-zinc-950">
-            {copy.headlineA} {copy.headlineB} {copy.headlineC}
+            {locale === "zh" ? (
+              <>
+                {copy.headlineA}{copy.headlineB}
+                <span className="bg-gradient-to-r from-teal-600 via-cyan-600 to-emerald-500 bg-clip-text text-transparent">
+                  {copy.headlineC}
+                </span>
+              </>
+            ) : (
+              <>
+                {copy.headlineA} {copy.headlineB}{" "}
+                <span className="bg-gradient-to-r from-teal-600 via-cyan-600 to-emerald-500 bg-clip-text text-transparent">
+                  {copy.headlineC}
+                </span>
+              </>
+            )}
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-700">{copy.intro}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
