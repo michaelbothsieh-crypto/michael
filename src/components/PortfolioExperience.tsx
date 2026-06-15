@@ -33,7 +33,6 @@ const copy = {
     stack: "技術",
     openDemo: "Demo",
     openSource: "GitHub",
-    details: "看細節",
     close: "關閉",
     noSource: "這是內部或私人作品，所以這裡只展示產品脈絡與截圖。",
     footer:
@@ -60,7 +59,6 @@ const copy = {
     stack: "Stack",
     openDemo: "Demo",
     openSource: "GitHub",
-    details: "Details",
     close: "Close",
     noSource: "This is internal or private work, so the portfolio shows product context and screenshots instead of source.",
     footer:
