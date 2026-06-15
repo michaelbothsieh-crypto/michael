@@ -334,7 +334,14 @@
         "Bento grid",
         "Supply-chain narrative"
       ]
-    }
+    },
+    "previewPath": "/previews/fehow-web-hero.png",
+    "gallery": [
+      "/previews/fehow-web-hero.png",
+      "/previews/fehow-web-why_us.png",
+      "/previews/fehow-web-timeline.png",
+      "/previews/fehow-web-english.png"
+    ]
   },
   "xiexing-pwa": {
     "category": "Business Sites",
@@ -359,7 +366,14 @@
         "PWA",
         "Business inquiry flow"
       ]
-    }
+    },
+    "previewPath": "/previews/xiexing-pwa-home_hero.png",
+    "gallery": [
+      "/previews/xiexing-pwa-home_hero.png",
+      "/previews/xiexing-pwa-services.png",
+      "/previews/xiexing-pwa-bilingual.png",
+      "/previews/xiexing-pwa-contact.png"
+    ]
   },
   "yellowstone-clinic": {
     "category": "Business Sites",
@@ -384,7 +398,14 @@
         "Service pages",
         "PWA"
       ]
-    }
+    },
+    "previewPath": "/previews/yellowstone-clinic-hero.png",
+    "gallery": [
+      "/previews/yellowstone-clinic-hero.png",
+      "/previews/yellowstone-clinic-team.png",
+      "/previews/yellowstone-clinic-services.png",
+      "/previews/yellowstone-clinic-footer.png"
+    ]
   },
   "insider-watch-bot": {
     "category": "Financial Intelligence",
@@ -409,7 +430,12 @@
         "Early alerts",
         "Share-flow analysis"
       ]
-    }
+    },
+    "previewPath": "/previews/insider-watch-bot-dashboard_1.png",
+    "gallery": [
+      "/previews/insider-watch-bot-dashboard_1.png",
+      "/previews/insider-watch-bot-dashboard_2.png"
+    ]
   },
   "broker-credential-dashboard": {
     "category": "Product Utilities",
@@ -509,7 +535,11 @@
         "HTML export",
         "Attachment handling"
       ]
-    }
+    },
+    "previewPath": "/previews/msg-converter-ui.png",
+    "gallery": [
+      "/previews/msg-converter-ui.png"
+    ]
   },
   "neighbor-profiler": {
     "category": "Data & Research",
@@ -559,7 +589,11 @@
         "Sentiment analysis",
         "Strategy notes"
       ]
-    }
+    },
+    "previewPath": "/previews/financial-news-analysis-ui.png",
+    "gallery": [
+      "/previews/financial-news-analysis-ui.png"
+    ]
   },
   "taiwan-nhi-calculator": {
     "category": "Product Utilities",
@@ -584,7 +618,11 @@
         "Role scenarios",
         "Form utility"
       ]
-    }
+    },
+    "previewPath": "/previews/taiwan-nhi-calculator-preview.png",
+    "gallery": [
+      "/previews/taiwan-nhi-calculator-preview.png"
+    ]
   },
   "Config-Diff-Viewer": {
     "category": "Product Utilities",
@@ -634,7 +672,11 @@
         "Group stats",
         "Expense records"
       ]
-    }
+    },
+    "previewPath": "/previews/team-eats-dashboard.png",
+    "gallery": [
+      "/previews/team-eats-dashboard.png"
+    ]
   },
   "digit_recognition": {
     "category": "Experiments",
@@ -659,7 +701,11 @@
         "Image preprocessing",
         "MLP model"
       ]
-    }
+    },
+    "previewPath": "/previews/digit_recognition-canvas.png",
+    "gallery": [
+      "/previews/digit_recognition-canvas.png"
+    ]
   },
   "FastAPI-project": {
     "category": "Experiments",
