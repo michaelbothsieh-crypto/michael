@@ -16,9 +16,9 @@ export function ProjectModal({ project, locale, copy, onClose }: ProjectModalPro
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/78 p-4 backdrop-blur" role="dialog" aria-modal="true" aria-labelledby="project-title">
-      <div className="max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-[8px] border border-white/12 bg-[#101010] shadow-2xl">
-        <div className="relative aspect-[16/8] overflow-hidden bg-black">
+    <div className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/55 p-4 backdrop-blur" role="dialog" aria-modal="true" aria-labelledby="project-title">
+      <div className="max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-[8px] border border-zinc-950/10 bg-white shadow-2xl">
+        <div className="relative aspect-[16/8] overflow-hidden bg-zinc-100">
           <Image
             src={project.previewPath}
             alt={`${project.title[locale]} preview`}
@@ -27,10 +27,10 @@ export function ProjectModal({ project, locale, copy, onClose }: ProjectModalPro
             className="h-full w-full object-cover opacity-90"
             unoptimized={project.previewPath.endsWith(".svg")}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#101010] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
           <button
             type="button"
-            className="absolute right-4 top-4 rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-cyan-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200"
+            className="absolute right-4 top-4 rounded-full bg-zinc-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
             onClick={onClose}
           >
             {copy.close}
@@ -38,38 +38,76 @@ export function ProjectModal({ project, locale, copy, onClose }: ProjectModalPro
         </div>
         <div className="grid gap-8 p-6 md:grid-cols-[1.2fr_0.8fr] md:p-8">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.24em] text-cyan-200">{categoryLabels[project.category][locale]}</p>
-            <h3 id="project-title" className="mt-4 text-4xl font-semibold text-white">
+            <p className="font-mono text-xs uppercase tracking-[0.24em] text-teal-700">{categoryLabels[project.category][locale]}</p>
+            <h3 id="project-title" className="mt-4 text-4xl font-semibold text-zinc-950">
               {project.title[locale]}
             </h3>
-            <p className="mt-5 text-lg leading-8 text-zinc-300">{project.summary[locale]}</p>
+            <p className="mt-5 text-lg leading-8 text-zinc-700">{project.summary[locale]}</p>
+
+            <section className="mt-8">
+              <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.problem}</h4>
+              <p className="mt-3 text-base leading-7 text-zinc-700">{project.problem[locale]}</p>
+            </section>
+
+            {project.workflow ? (
+              <section className="mt-8">
+                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.workflow}</h4>
+                <p className="mt-3 text-base leading-7 text-zinc-700">{project.workflow[locale]}</p>
+              </section>
+            ) : null}
+
+            {project.commands ? (
+              <section className="mt-8">
+                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.commandOutputs}</h4>
+                <ul className="mt-3 grid gap-2">
+                  {project.commands[locale].map((command) => (
+                    <li key={command} className="rounded-[8px] border border-zinc-950/10 bg-zinc-50 px-4 py-3 font-mono text-xs leading-5 text-zinc-700">
+                      {command}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
             <ul className="mt-6 grid gap-3">
               {project.features[locale].map((feature) => (
-                <li key={feature} className="rounded-[8px] border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-zinc-200">
+                <li key={feature} className="rounded-[8px] border border-zinc-950/10 bg-white px-4 py-3 text-sm text-zinc-700 shadow-sm shadow-zinc-950/5">
                   {feature}
                 </li>
               ))}
             </ul>
           </div>
           <aside className="space-y-6">
-            <div className="grid grid-cols-2 gap-4 rounded-[8px] border border-white/10 bg-white/[0.04] p-4">
+            <div className="grid grid-cols-2 gap-4 rounded-[8px] border border-zinc-950/10 bg-zinc-50 p-4">
               <Meta label={copy.created} value={formatDate(project.createdAt, locale)} />
               <Meta label={copy.updated} value={formatDate(project.updatedAt, locale)} />
               <Meta label={copy.stack} value={project.primaryLanguage ?? "Mixed"} />
               <Meta label="Preview" value={project.previewStatus} />
             </div>
+            {project.gallery.length > 1 ? (
+              <div>
+                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.evidence}</h4>
+                <div className="mt-3 grid gap-3">
+                  {project.gallery.map((image) => (
+                    <div key={image} className="overflow-hidden rounded-[8px] border border-zinc-950/10 bg-zinc-100">
+                      <Image src={image} alt={`${project.title[locale]} output`} width={900} height={900} className="h-auto w-full object-cover" unoptimized={image.endsWith(".svg")} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             <div className="flex flex-wrap gap-3">
               {project.homepageUrl ? (
-                <a href={project.homepageUrl} target="_blank" rel="noreferrer" className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-cyan-100">
+                <a href={project.homepageUrl} target="_blank" rel="noreferrer" className="rounded-full bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-teal-800">
                   {copy.openDemo}
                 </a>
               ) : null}
               {project.publicSourceUrl ? (
-                <a href={project.publicSourceUrl} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                <a href={project.publicSourceUrl} target="_blank" rel="noreferrer" className="rounded-full border border-zinc-950/15 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-50">
                   {copy.openSource}
                 </a>
               ) : (
-                <p className="text-sm leading-6 text-zinc-400">{copy.noSource}</p>
+                <p className="text-sm leading-6 text-zinc-600">{copy.noSource}</p>
               )}
             </div>
           </aside>

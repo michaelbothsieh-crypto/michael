@@ -60,9 +60,9 @@
     "path": "/previews/xiexing-pwa.svg"
   },
   "fehow-web": {
-    "status": "captured",
-    "source": "https://m3-web-mauve.vercel.app",
-    "path": "/previews/fehow-web.png"
+    "status": "fallback",
+    "reason": "http 404",
+    "path": "/previews/fehow-web.svg"
   },
   "Config-Diff-Viewer": {
     "status": "captured",
@@ -135,8 +135,8 @@
     "path": "/previews/digit-recognition.svg"
   },
   "AIA-Training-Viewer": {
-    "status": "captured",
-    "source": "https://aia-training-viewer.vercel.app",
-    "path": "/previews/aia-training-viewer.png"
+    "status": "fallback",
+    "reason": "http 404",
+    "path": "/previews/aia-training-viewer.svg"
   }
 }

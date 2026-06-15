@@ -64,15 +64,46 @@
     "features": {
       "zh": [
         "Telegram 指令中樞",
-        "KOL 每日掃描",
-        "NotebookLM 連動",
-        "LINE/TG gateway"
+        "KOL 每日掃描與簡短報告",
+        "NotebookLM 完整報告連結",
+        "個股/ETF/排行/自選股回覆"
       ],
       "en": [
         "Telegram command hub",
-        "Daily KOL scanning",
-        "NotebookLM handoff",
-        "LINE/TG gateway"
+        "Daily KOL scan with short brief",
+        "NotebookLM full report link",
+        "Stock, ETF, rank, and watchlist replies"
+      ]
+    },
+    "previewPath": "/previews/personal-bot-gateway-kol-report.png",
+    "gallery": [
+      "/previews/personal-bot-gateway-kol-report.png",
+      "/previews/personal-bot-gateway-stock-command.png"
+    ],
+    "problem": {
+      "zh": "每天要追 KOL、Podcast、個股、ETF、Threads 和文章時，資訊入口太分散；這個 bot 把輸入指令、NotebookLM 分析、報告連結和市場資料回覆集中到 Telegram。",
+      "en": "Daily KOL, podcast, stock, ETF, Threads, and article workflows were scattered across tools. This bot centralizes commands, NotebookLM analysis, report links, and market replies inside Telegram."
+    },
+    "workflow": {
+      "zh": "TG 指令或排程觸發 GitHub Actions；內容工作流把網址、影片或 KOL 來源交給 NotebookLM；結果先回 Telegram 簡短結論，再附完整 HTML 報告連結。NotebookLM session 透過 NLM_COOKIE_BASE64 還原 auth.json、cookies.json 和 metadata.json。",
+      "en": "Telegram commands or schedules dispatch GitHub Actions. Content workflows pass URLs, videos, or KOL sources to NotebookLM, then return a short Telegram brief plus a full HTML report link. NotebookLM sessions are restored from NLM_COOKIE_BASE64 into auth.json, cookies.json, and metadata.json."
+    },
+    "commands": {
+      "zh": [
+        "/nlm：輸入網址，回傳 NotebookLM 摘要分析",
+        "/note：產生詳細 HTML 報告連結",
+        "/research：針對主題做深度研究",
+        "/threads：解析 Threads 貼文",
+        "/stock：回傳個股健檢、技術面和產業摘要",
+        "/etf、/activeetf、/rank、/roi、/watchlist：處理 ETF、熱門排行、報酬和自選股"
+      ],
+      "en": [
+        "/nlm: send a URL and receive NotebookLM analysis",
+        "/note: generate a detailed HTML report link",
+        "/research: run deeper topic research",
+        "/threads: parse a Threads post",
+        "/stock: return stock health, technicals, and industry context",
+        "/etf, /activeetf, /rank, /roi, /watchlist: handle ETF, ranking, return, and watchlist workflows"
       ]
     }
   },

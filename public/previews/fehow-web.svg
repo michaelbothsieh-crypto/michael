@@ -14,7 +14,7 @@
   <rect x="96" y="96" width="1248" height="768" rx="42" fill="#ffffff" stroke="#0f172a" stroke-opacity=".10"/>
   <rect x="150" y="160" width="260" height="52" rx="26" fill="#7dd3fc" opacity=".22"/>
   <text x="180" y="194" fill="#0f172a" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="5">TYPESCRIPT</text>
-  <text x="150" y="334" fill="#0f172a" font-family="Arial, sans-serif" font-size="82" font-weight="700">yellowstone-clinic</text>
+  <text x="150" y="334" fill="#0f172a" font-family="Arial, sans-serif" font-size="82" font-weight="700">fehow-web</text>
   <text x="150" y="424" fill="#3f3f46" font-family="Arial, sans-serif" font-size="34">No public product screen available</text>
   <path d="M150 670 C 360 520, 610 760, 860 610 S 1160 470, 1280 610" fill="none" stroke="#7dd3fc" stroke-width="7" opacity=".9"/>
   <circle cx="1190" cy="230" r="58" fill="#7dd3fc" opacity=".7"/>

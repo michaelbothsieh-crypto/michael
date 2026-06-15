@@ -19,11 +19,11 @@ export function ProjectGridSection({ activeCategory, projects, locale, copy, onC
     <section id="projects" className="px-5 pb-28 sm:px-8 md:pb-44 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
-          <h2 className="text-4xl font-semibold text-white md:text-6xl">{copy.allProjects}</h2>
+          <h2 className="text-4xl font-semibold text-zinc-950 md:text-6xl">{copy.allProjects}</h2>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
-              className={`rounded-full border px-4 py-2 text-sm transition ${activeCategory === "All" ? "border-white bg-white text-black" : "border-white/15 text-zinc-300 hover:bg-white/10"}`}
+              className={`rounded-full border px-4 py-2 text-sm transition ${activeCategory === "All" ? "border-zinc-950 bg-zinc-950 text-white" : "border-zinc-950/15 bg-white text-zinc-600 hover:text-zinc-950"}`}
               onClick={() => onCategoryChange("All")}
             >
               {copy.all}
@@ -32,7 +32,7 @@ export function ProjectGridSection({ activeCategory, projects, locale, copy, onC
               <button
                 key={category}
                 type="button"
-                className={`rounded-full border px-4 py-2 text-sm transition ${activeCategory === category ? "border-white bg-white text-black" : "border-white/15 text-zinc-300 hover:bg-white/10"}`}
+                className={`rounded-full border px-4 py-2 text-sm transition ${activeCategory === category ? "border-zinc-950 bg-zinc-950 text-white" : "border-zinc-950/15 bg-white text-zinc-600 hover:text-zinc-950"}`}
                 onClick={() => onCategoryChange(category)}
               >
                 {categoryLabels[category][locale]}

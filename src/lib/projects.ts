@@ -40,6 +40,10 @@ type ProjectOverride = {
   title: LocalizedText;
   summary: LocalizedText;
   features: LocalizedList;
+  problem?: LocalizedText;
+  workflow?: LocalizedText;
+  commands?: LocalizedList;
+  gallery?: string[];
   previewPath?: string;
 };
 
@@ -58,6 +62,10 @@ export type Project = GitHubRepo & {
   title: LocalizedText;
   summary: LocalizedText;
   features: LocalizedList;
+  problem: LocalizedText;
+  workflow?: LocalizedText;
+  commands?: LocalizedList;
+  gallery: string[];
   previewPath: string;
   previewStatus: "captured" | "fallback" | "missing";
   publicSourceUrl: string | null;
@@ -156,11 +164,15 @@ export function getProjects(): Project[] {
         sortWeight: override?.sortWeight ?? 0,
         title: override?.title ?? fallbackTitle(repo),
         summary: override?.summary ?? fallbackSummary(repo),
+        problem: override?.problem ?? override?.summary ?? fallbackSummary(repo),
+        workflow: override?.workflow,
+        commands: override?.commands,
         features: override?.features ?? {
           zh: repo.topics.length ? repo.topics : [categoryLabels[category].zh],
           en: repo.topics.length ? repo.topics : [categoryLabels[category].en],
         },
         previewPath: override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`,
+        gallery: override?.gallery ?? [override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`],
         previewStatus: preview?.status ?? "missing",
         publicSourceUrl: repo.isPrivate ? null : repo.url,
       };
