@@ -22,6 +22,14 @@
         "Trend summaries",
         "Hosted dashboard"
       ]
+    },
+    "challenge": {
+      "zh": "遊戲交易市場物價變動極快且無官方穩定 API，直連抓取易被阻擋。我設計了容錯解析機制與排程重試策略，在數據格式突發變更時自動降級，維持資料擷取的穩定性。",
+      "en": "Game market prices shift rapidly without a stable official API, making scraping brittle. I designed a fault-tolerant parser with an automated retry scheduler to fallback gracefully during schema changes."
+    },
+    "impact": {
+      "zh": "提供即時的遊戲物品價格波動趨勢，幫助玩家做出更具時效性的交易決策。",
+      "en": "Delivers real-time price trend charts to help gamers make time-sensitive trading decisions."
     }
   },
   "warrant-screener-tw": {
@@ -47,6 +55,14 @@
         "Underlying comparison",
         "Live deployment"
       ]
+    },
+    "challenge": {
+      "zh": "權證條款複雜且歷史數據量龐大，在前端進行多維度條件篩選時易造成卡頓。我優化了資料篩選演算法，利用二元搜尋與預解析機制，確保跨標的比較能在 100ms 內完成。",
+      "en": "Filtering historical warrant data with complex terms causes browser lag. I optimized the client-side screening algorithm using binary search and pre-parsing, cutting cross-asset comparison times under 100ms."
+    },
+    "impact": {
+      "zh": "將複雜的台股權證條件整理成直覺的比較工作台，幫助投資人快速找出隱含波動率與槓桿最優的權證。",
+      "en": "Provides a screening workspace that helps investors instantly spot warrants with optimal implied volatility and leverage."
     }
   },
   "personal-bot-gateway": {
@@ -172,6 +188,14 @@
         "AI interpretation",
         "PWA experience"
       ]
+    },
+    "challenge": {
+      "zh": "傳統八字命理排盤規則繁雜且多分支，且 AI 分析結果容易流於空泛。我使用 TypeScript 精準實作了干支與地藏排盤算法，並設計結構化的 Gemini System Instruction 讓 AI 輸出專屬的解盤報告。",
+      "en": "Traditional astrology charting involves complex branch rules, and LLM readings often sound generic. I implemented the complete BaZi calendar logic in TypeScript and used structured Gemini prompts to secure personalized readings."
+    },
+    "impact": {
+      "zh": "將傳統命理排盤與現代 AI 分析融為一體，提供流暢的離線 PWA 行動端體驗。",
+      "en": "Blends traditional astrology with AI analysis, wrapping it in an offline-capable PWA mobile layout."
     }
   },
   "socket-swiss-knife": {
@@ -197,6 +221,14 @@
         "Scheduled tests",
         "Desktop GUI"
       ]
+    },
+    "challenge": {
+      "zh": "金融交易 MTF 協議使用自訂的二進位封包格式，且需要同時維持多個 Socket 連線與 Heartbeat。我利用 Flet (Python) 實作了非同步 Socket 通訊與封包二進位解碼器，解決了連線異常中斷時的佔線與 DDoS 保護問題。",
+      "en": "Broker MTF protocols use custom binary formats, requiring persistent socket connections and heartbeats. I used Flet to build an async connection manager and a packet decoder to solve socket leaks and server lockout issues."
+    },
+    "impact": {
+      "zh": "提供跨平台的桌面 GUI 工具，讓測試人員在 1 分鐘內完成新券商環境的連線與 TC 報價連動測試。",
+      "en": "Enables testing teams to setup, connect, and verify new broker profiles and real-time market data in less than a minute."
     }
   },
   "tw-stock-health-dashboard": {
@@ -580,7 +612,15 @@
     "previewPath": "/previews/msg-converter-ui.png",
     "gallery": [
       "/previews/msg-converter-ui.png"
-    ]
+    ],
+    "challenge": {
+      "zh": "Windows Outlook 產生的 .msg 檔案是複合文件二進位格式 (CFBF)，結構複雜且常含有 nested 物件。我利用本機二進位流解析技術，在不依賴 Outlook 元件的前提下精準提取 HTML 內文與多格式附件。",
+      "en": "Outlook .msg files are binary Compound File Binary Format (CFBF), housing nested attachments. I wrote a parser using low-level binary streams to extract HTML bodies and attachments without Outlook runtime dependencies."
+    },
+    "impact": {
+      "zh": "解決了 Mac 系統無法讀取 MSG 郵件的相容性問題，幾秒內即可在瀏覽器中預覽排版完整的信件。",
+      "en": "Resolves macOS compatibility issues with MSG files, rendering pixel-perfect email previews and attachments in seconds."
+    }
   },
   "neighbor-profiler": {
     "category": "Data & Research",
@@ -605,6 +645,14 @@
         "Street-level analysis",
         "Risk signals"
       ]
+    },
+    "challenge": {
+      "zh": "政府公開的實價登錄與周邊設施資料格式多樣且座標系統不一。我設計了資料庫清洗模組，將 WGS84 與 TWD97 座標進行統一轉換，並利用空間索引快速計算各路段的估值落差與鄰里環境風險。",
+      "en": "Public real estate records use varying formats and geodetic coordinate datums. I built a data pipeline that unifies WGS84 and TWD97 datums and used spatial indexes to analyze price discrepancies and local hazards."
+    },
+    "impact": {
+      "zh": "以數據揭露同路段的估值落差，幫助購屋族避開嫌惡設施與溢價風險。",
+      "en": "Uses local spatial data to highlight price anomalies and environmental hazards, protecting buyers from paying premiums."
     }
   },
   "financial-news-analysis": {
@@ -663,7 +711,15 @@
     "previewPath": "/previews/taiwan-nhi-calculator-preview.png",
     "gallery": [
       "/previews/taiwan-nhi-calculator-preview.png"
-    ]
+    ],
+    "challenge": {
+      "zh": "台灣二代健保補充保費與眷屬負擔計算規則包含多個起扣點與累進費率，規則易變更。我將計算邏輯與費率參數完全解耦，設計了可配置的費率表，確保政策變更時只需微調設定檔。",
+      "en": "Taiwan's NHI calculation rules involve multiple thresholds and progressive brackets. I decoupled the math logic from rate tables, creating a configurable layout to accommodate regulatory shifts easily."
+    },
+    "impact": {
+      "zh": "幫助小規模企業主或自由職業者快速算出補充保費及眷屬扣額，減少人工查表試算時間。",
+      "en": "Helps small business owners and freelancers compute supplemental premiums and net pays in seconds, avoiding manual lookup tables."
+    }
   },
   "Config-Diff-Viewer": {
     "category": "Product Utilities",
@@ -717,7 +773,15 @@
     "previewPath": "/previews/team-eats-dashboard.png",
     "gallery": [
       "/previews/team-eats-dashboard.png"
-    ]
+    ],
+    "challenge": {
+      "zh": "多人訂單統計與分帳涉及複雜的狀態切換（投票中、已收單、付款中）與精確的金流四捨五入計算。我設計了簡單的狀態機來管控揪團生命週期，確保訂單與付款狀態的最終一致性。",
+      "en": "Group orders and bill splitting involve multi-user states and currency rounding logic. I implemented a simple state machine to manage order stages, ensuring data consistency for group costs and tallies."
+    },
+    "impact": {
+      "zh": "將團隊下午茶統計與付款流程自動化，大幅減少發起人核對費用與收款的時間。",
+      "en": "Automates team meal orders and payments, reducing checkout and bookkeeping overhead for organizers."
+    }
   },
   "digit_recognition": {
     "category": "Experiments",
@@ -746,7 +810,15 @@
     "previewPath": "/previews/digit_recognition-canvas.png",
     "gallery": [
       "/previews/digit_recognition-canvas.png"
-    ]
+    ],
+    "challenge": {
+      "zh": "前端 HTML5 Canvas 繪製的影像大小、粗細與對比度不一，直接送入模型辨識率低。我採用 Canvas 即時影像處理，將手寫圖案進行居中、灰階化與 28x28 尺寸歸一化 (Normalization)，使其完美適配卷積模型輸入。",
+      "en": "Handwritten inputs on Canvas vary in size, stroke thickness, and alignment. I processed the canvas data in real-time, applying centering, grayscale conversion, and 28x28 normalization to match the training data layout."
+    },
+    "impact": {
+      "zh": "在瀏覽器中實現低延遲的手寫即時辨識驗證，展示前端前處理與機器學習模型的無縫結合。",
+      "en": "Enables low-latency handwritten digit recognition directly in-browser, illustrating the connection of canvas data and ML inference."
+    }
   },
   "FastAPI-project": {
     "category": "Experiments",
@@ -821,6 +893,14 @@
         "Multi-agent debate",
         "Trading judgment"
       ]
+    },
+    "challenge": {
+      "zh": "金融聰明錢概念 (SMC) 分析規則涉及高度的主觀經驗判斷，單一 AI 容易產生偏差。我設計了三代理人辯論協定，讓分析代理人、反方審查代理人與最終裁判代理人進行多輪辯論，以降低 AI 的幻覺與偏見。",
+      "en": "Smart Money Concepts (SMC) analysis is highly subjective, and single LLM inputs often yield biased trade setups. I built a three-agent debate protocol where an analyst, a critic, and a judge debate to minimize hallucinations."
+    },
+    "impact": {
+      "zh": "自動繪製並審查 SMC 技術結構，提供更客觀、更具邏輯的交易輔助決策。",
+      "en": "Automates the identification and review of SMC market structures, delivering unbiased insights for trading workflows."
     }
   }
 }
