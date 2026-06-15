@@ -4,32 +4,34 @@
     "featured": false,
     "sortWeight": 72,
     "title": {
-      "zh": "POE 價格追蹤器",
-      "en": "POE Price Tracker"
+      "zh": "POE 價格追蹤與 POB 裝備演算器",
+      "en": "POE Price Tracker & POB Gear Parser"
     },
     "summary": {
-      "zh": "追蹤遊戲市場價格變化，讓交易判斷更快更清楚。",
-      "en": "Tracks game-market price shifts so trading decisions are easier to compare."
+      "zh": "整合 POB 角色資料與即時市場物價，進行高精度的裝備價值演算與流派優化決策。",
+      "en": "Integrates POB character configurations with live market data for gear valuation and build optimization."
     },
     "features": {
       "zh": [
-        "價格監控",
-        "趨勢整理",
-        "部署版儀表板"
+        "POB 資料解析",
+        "裝備價值演算",
+        "即時價格監控",
+        "升級性價比分析"
       ],
       "en": [
-        "Price monitoring",
-        "Trend summaries",
-        "Hosted dashboard"
+        "POB build parsing",
+        "Gear valuation engine",
+        "Live price tracking",
+        "Cost-efficiency analysis"
       ]
     },
     "challenge": {
-      "zh": "遊戲交易市場物價變動極快且無官方穩定 API，直連抓取易被阻擋。我設計了容錯解析機制與排程重試策略，在數據格式突發變更時自動降級，維持資料擷取的穩定性。",
-      "en": "Game market prices shift rapidly without a stable official API, making scraping brittle. I designed a fault-tolerant parser with an automated retry scheduler to fallback gracefully during schema changes."
+      "zh": "遊戲內裝備的隨機詞綴組合極為繁複，且 POB 字串採用 Base64 壓縮的 XML 格式。我編寫了高效的 POB 字串非同步解壓與剖析模組，並設計了一套詞綴權重演算引擎，能將角色天賦與裝備屬性同市場即時價格大數據進行關聯比對，克服了非標準化虛擬資產估價的難題。",
+      "en": "Path of Exile gear contains highly randomized affix combinations, and POB data is stored in base64-gzipped XML format. I engineered an asynchronous XML decoder/parser for POB string imports and designed a weight-based affix valuation engine to map character state against raw market data."
     },
     "impact": {
-      "zh": "提供即時的遊戲物品價格波動趨勢，幫助玩家做出更具時效性的交易決策。",
-      "en": "Delivers real-time price trend charts to help gamers make time-sensitive trading decisions."
+      "zh": "玩家只需一鍵貼上 POB，即可精準算出全身配裝的當前市場總值，並獲取最優升級性價比建議，使繁瑣的配裝交易決策縮短至數秒內完成。",
+      "en": "Enables players to import POB strings to calculate total gear market valuation and receive cost-effective upgrade paths, reducing trading decision time to seconds."
     }
   },
   "warrant-screener-tw": {
