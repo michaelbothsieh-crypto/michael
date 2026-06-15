@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960">
+  <rect width="1440" height="960" fill="#050505"/>
+  <circle cx="1060" cy="220" r="340" fill="#67e8f9" opacity=".18"/>
+  <rect x="120" y="132" width="1200" height="696" rx="42" fill="#ffffff" opacity=".06" stroke="#ffffff" stroke-opacity=".16"/>
+  <text x="170" y="492" fill="#fff" font-family="Arial, sans-serif" font-size="92" font-weight="700">Michael</text>
+  <text x="170" y="580" fill="#d4d4d8" font-family="Arial, sans-serif" font-size="34">Product lab preview</text>
+</svg>

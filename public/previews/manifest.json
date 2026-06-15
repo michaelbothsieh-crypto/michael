@@ -1,0 +1,142 @@
+{
+  "poe-price-tracker": {
+    "status": "captured",
+    "source": "https://poe-price-tracker.vercel.app",
+    "path": "/previews/poe-price-tracker.png"
+  },
+  "warrant-screener-tw": {
+    "status": "captured",
+    "source": "https://warrant-screener-tw.vercel.app",
+    "path": "/previews/warrant-screener-tw.png"
+  },
+  "price-altas": {
+    "status": "captured",
+    "source": "https://price-altas-frontend.vercel.app/",
+    "path": "/previews/price-altas.png"
+  },
+  "personal-bot-gateway": {
+    "status": "captured",
+    "source": "https://personal-bot-gateway.vercel.app",
+    "path": "/previews/personal-bot-gateway.png"
+  },
+  "fortune-telling": {
+    "status": "captured",
+    "source": "https://fortune-telling-sigma.vercel.app/",
+    "path": "/previews/fortune-telling.png"
+  },
+  "socket-swiss-knife": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/socket-swiss-knife.svg"
+  },
+  "tw-stock-health-dashboard": {
+    "status": "captured",
+    "source": "https://tw-stock-health-dashboard.vercel.app",
+    "path": "/previews/tw-stock-health-dashboard.png"
+  },
+  "faceless_hunter": {
+    "status": "captured",
+    "source": "https://faceless-hunter.vercel.app/",
+    "path": "/previews/faceless-hunter.png"
+  },
+  "LazyTube-Assistant": {
+    "status": "captured",
+    "source": "https://lazy-tube-assistant.vercel.app",
+    "path": "/previews/lazytube-assistant.png"
+  },
+  "north-volley-guide": {
+    "status": "captured",
+    "source": "https://north-volley-guide.vercel.app",
+    "path": "/previews/north-volley-guide.png"
+  },
+  "golf-strategy-lk-prototype": {
+    "status": "captured",
+    "source": "https://golf-strategy-lk-prototype.vercel.app",
+    "path": "/previews/golf-strategy-lk-prototype.png"
+  },
+  "xiexing-pwa": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/xiexing-pwa.svg"
+  },
+  "fehow-web": {
+    "status": "captured",
+    "source": "https://m3-web-mauve.vercel.app",
+    "path": "/previews/fehow-web.png"
+  },
+  "Config-Diff-Viewer": {
+    "status": "captured",
+    "source": "https://config-diff-viewer.vercel.app",
+    "path": "/previews/config-diff-viewer.png"
+  },
+  "PodScribe": {
+    "status": "captured",
+    "source": "https://podscribe-six.vercel.app",
+    "path": "/previews/podscribe.png"
+  },
+  "insider-watch-bot": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/insider-watch-bot.svg"
+  },
+  "msg-converter": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/msg-converter.svg"
+  },
+  "yellowstone-clinic": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/yellowstone-clinic.svg"
+  },
+  "broker-credential-dashboard": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/broker-credential-dashboard.svg"
+  },
+  "presale-radar": {
+    "status": "captured",
+    "source": "https://presale-radar.vercel.app",
+    "path": "/previews/presale-radar.png"
+  },
+  "neighbor-profiler": {
+    "status": "captured",
+    "source": "https://house-dun-one.vercel.app",
+    "path": "/previews/neighbor-profiler.png"
+  },
+  "financial-news-analysis": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/financial-news-analysis.svg"
+  },
+  "taiwan-nhi-calculator": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/taiwan-nhi-calculator.svg"
+  },
+  "team-eats": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/team-eats.svg"
+  },
+  "smc-trinity-ai": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/smc-trinity-ai.svg"
+  },
+  "FastAPI-project": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/fastapi-project.svg"
+  },
+  "digit_recognition": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/digit-recognition.svg"
+  },
+  "AIA-Training-Viewer": {
+    "status": "captured",
+    "source": "https://aia-training-viewer.vercel.app",
+    "path": "/previews/aia-training-viewer.png"
+  }
+}
