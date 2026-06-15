@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useEffect } from "react";
 import type { Locale, Project } from "@/lib/projects";
 import { categoryLabels } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
@@ -13,11 +14,28 @@ type ProjectModalProps = {
 };
 
 export function ProjectModal({ project, locale, copy, onClose }: ProjectModalProps) {
+  useEffect(() => {
+    if (!project) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose, project]);
+
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/55 p-4 backdrop-blur" role="dialog" aria-modal="true" aria-labelledby="project-title">
-      <div className="max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-[8px] border border-zinc-950/10 bg-white shadow-2xl">
+    <div
+      className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/55 p-4 backdrop-blur"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-title"
+      onClick={onClose}
+    >
+      <div className="max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-[8px] border border-zinc-950/10 bg-white shadow-2xl" onClick={(event) => event.stopPropagation()}>
         <div className="relative aspect-[16/8] overflow-hidden bg-zinc-100">
           <Image
             src={project.previewPath}
