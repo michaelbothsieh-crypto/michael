@@ -4,10 +4,11 @@ import type { PortfolioCopy } from "./copy";
 type PortfolioNavProps = {
   locale: Locale;
   copy: PortfolioCopy;
+  stats: { pv: number; active: number } | null;
   onToggleLocale: () => void;
 };
 
-export function PortfolioNav({ locale, copy, onToggleLocale }: PortfolioNavProps) {
+export function PortfolioNav({ locale, copy, stats, onToggleLocale }: PortfolioNavProps) {
   return (
     <nav className="fixed left-1/2 top-4 z-40 flex w-[calc(100%-2rem)] max-w-5xl -translate-x-1/2 items-center justify-between rounded-full border border-zinc-950/10 bg-white/78 px-4 py-3 shadow-lg shadow-zinc-950/5 backdrop-blur-xl">
       <a href="#top" className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-950">
@@ -24,14 +25,32 @@ export function PortfolioNav({ locale, copy, onToggleLocale }: PortfolioNavProps
           {copy.nav[2]}
         </a>
       </div>
-      <button
-        type="button"
-        className="rounded-full border border-zinc-950/15 px-3 py-1.5 font-mono text-xs text-zinc-950 transition hover:bg-zinc-950 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-600"
-        onClick={onToggleLocale}
-        aria-label="Switch language"
-      >
-        {locale === "zh" ? "EN" : "繁中"}
-      </button>
+      <div className="flex items-center gap-4">
+        {stats && (
+          <div className="flex items-center gap-3 font-mono text-[10px] text-zinc-500">
+            <span className="hidden sm:inline">
+              {copy.statsPv}: {stats.pv.toLocaleString()}
+            </span>
+            <span className="flex items-center gap-1.5 border-l border-zinc-950/10 pl-3 sm:border-l sm:pl-3">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+              </span>
+              <span>
+                {stats.active.toLocaleString()} {locale === "zh" ? "在線" : "Online"}
+              </span>
+            </span>
+          </div>
+        )}
+        <button
+          type="button"
+          className="rounded-full border border-zinc-950/15 px-3 py-1.5 font-mono text-xs text-zinc-950 transition hover:bg-zinc-950 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-600"
+          onClick={onToggleLocale}
+          aria-label="Switch language"
+        >
+          {locale === "zh" ? "EN" : "繁中"}
+        </button>
+      </div>
     </nav>
   );
 }

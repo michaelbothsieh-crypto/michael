@@ -91,7 +91,7 @@ export function PortfolioExperience({ projects }: Props) {
 
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f4f7f5] text-zinc-950">
-      <PortfolioNav locale={locale} copy={t} onToggleLocale={() => setLocale(locale === "zh" ? "en" : "zh")} />
+      <PortfolioNav locale={locale} copy={t} stats={stats} onToggleLocale={() => setLocale(locale === "zh" ? "en" : "zh")} />
       <HeroSection projectsCount={projects.length} featuredProjects={featuredProjects} copy={t} />
       <FeaturedSection projects={featuredProjects} totalProjects={projects.length} locale={locale} copy={t} onOpenProject={handleOpenProject} />
       <CategoryStory copy={t} />
@@ -106,14 +106,7 @@ export function PortfolioExperience({ projects }: Props) {
       <footer className="border-t border-zinc-950/10 px-5 py-12 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
           <p className="max-w-2xl text-sm leading-6 text-zinc-600">{t.footer}</p>
-          <div className="flex flex-col items-start md:items-end gap-2">
-            <p className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">Michael Product Lab</p>
-            {stats && (
-              <p className="font-mono text-[10px] text-zinc-400">
-                {t.statsPv}: {stats.pv.toLocaleString()} • {t.statsActive}: {stats.active.toLocaleString()}
-              </p>
-            )}
-          </div>
+          <p className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">Michael Product Lab</p>
         </div>
       </footer>
       <ProjectModal project={selectedProject} views={selectedProject ? (projectPvs[selectedProject.slug] ?? 0) : 0} locale={locale} copy={t} onClose={() => setSelectedProject(null)} />
