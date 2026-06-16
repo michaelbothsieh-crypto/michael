@@ -156,7 +156,8 @@
         "zh": "提供完整 mock-mode。在不具備外部 Telegram Bot Token 或金融 API Key 的情況下，透過本地 mock server 與假資料亦能在一秒內啟動並測試所有適配器邏輯。",
         "en": "Provides a full mock-mode. Allows launching the entire service and testing adaptor logic locally in 1 second without configure Telegram Bot tokens or market API keys."
       }
-    }
+    },
+    "homepageUrl": "/reports/kol-report-00a6798b.html"
   },
   "price-altas": {
     "category": "Data & Research",

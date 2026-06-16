@@ -47,6 +47,7 @@ type ProjectOverride = {
   commands?: LocalizedList;
   gallery?: string[];
   previewPath?: string;
+  homepageUrl?: string;
   engineeringPillars?: {
     observability?: LocalizedText;
     caching?: LocalizedText;
@@ -189,7 +190,7 @@ export function getProjects(): Project[] {
           zh: repo.topics.length ? repo.topics : [categoryLabels[category].zh],
           en: repo.topics.length ? repo.topics : [categoryLabels[category].en],
         },
-        homepageUrl: (preview?.status === "fallback" && preview?.reason === "http 404") ? "" : repo.homepageUrl,
+        homepageUrl: override?.homepageUrl ?? ((preview?.status === "fallback" && preview?.reason === "http 404") ? "" : repo.homepageUrl),
         previewPath: override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`,
         gallery: override?.gallery ?? [override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`],
         previewStatus: preview?.status ?? "missing",
