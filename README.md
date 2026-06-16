@@ -56,7 +56,7 @@ Four core projects selected to showcase key backgrounds and live execution views
 
 ## All Projects &amp; Tech Matrix
 
-To make it easy for interviewers to evaluate all repositories at a glance, here is a consolidated matrix of all 22 projects, their categories, core stack, integrations, and deployment status:
+Here is a consolidated matrix of all 22 projects, their categories, core stack, integrations, and deployment status for quick reference and comparison:
 
 | Repository (Repo) | Product Line (Category) | Tech Stack | Integrations | Deployment |
 | :--- | :--- | :--- | :--- | :--- |
