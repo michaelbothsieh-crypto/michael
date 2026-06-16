@@ -472,28 +472,28 @@
       "en": "Golf Strategy Prototype"
     },
     "summary": {
-      "zh": "高爾夫策略輔助工具的早期產品原型。",
-      "en": "An early product prototype for golf strategy assistance."
+      "zh": "高爾夫攻略站的第一版產品原型，以老爺關西高爾夫球場作為展示與驗證案例。",
+      "en": "The first product prototype of a golf strategy guide, showcasing Royal Kuan-Hsi Golf Club as a validation case."
     },
     "features": {
       "zh": [
-        "策略原型",
-        "互動介面",
-        "快速驗證"
+        "資料展示",
+        "球道攻略",
+        "靜態原型"
       ],
       "en": [
-        "Strategy prototype",
-        "Interactive UI",
-        "Fast validation"
+        "Data display",
+        "Fairway guide",
+        "Static prototype"
       ]
     },
     "challenge": {
-      "zh": "在行動瀏覽器上即時估計風向、距離與球道坡度對落點的複合影響，需要高效的二維軌跡估算。我利用 SVG 進行動態球道繪製，並在前端實作了基礎彈道公式，讓球員能拖曳落點進行策略規劃。",
-      "en": "Estimating the combined effects of wind, distance, and slope on ball landing spots requires efficient trajectory approximations. I used dynamic SVGs for fairway visualization and built ball-flight logic with interactive target dragging."
+      "zh": "在第一版高爾夫策略原型中，重點是驗證付費攻略站的商業模式與資訊展示。此階段主要彙整老爺關西高爾夫球場的公開資料與 18 洞球道攻略，在前端建立簡潔直觀的展示介面，方便球友快速查閱各洞的配置與攻讀策略。",
+      "en": "For the first version of the golf strategy prototype, the focus was to validate the business model and data presentation. We consolidated public guide data and 18-hole strategy information for the Royal Kuan-Hsi Golf Club, building a clean and simple static interface for golfers to quickly review hole configurations and game plans."
     },
     "impact": {
-      "zh": "成功驗證高爾夫策略輔助系統的可行性，為後續與實體 GPS API 串接的正式版本奠定關鍵架構。",
-      "en": "Validated the feasibility of an interactive strategic overlay, establishing the core client-side architecture for integration with live GPS APIs."
+      "zh": "成功建立高爾夫攻略站的初步產品概念，透過完整的老爺關西球場 18 洞攻略資料展示，完成第一階段的產品可行性與內容驗證。",
+      "en": "Successfully established the initial product concept for the golf guide site, validating content presentation and feasibility through a complete 18-hole strategy showcase of the Royal Kuan-Hsi Golf Club."
     }
   },
   "fehow-web": {
