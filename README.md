@@ -16,6 +16,8 @@ The platform integrates a bot gateway, ETL schedulers, caching layers, and datab
 
 ![AI-Driven Financial & Content Automation Platform](./public/architecture.png)
 
+*Note: This architecture diagram illustrates the integrated ecosystem formed by three independent repositories in this portfolio: `personal-bot-gateway`, `LazyTube-Assistant`, and `tw-stock-health-dashboard`.*
+
 ### Core technical implementation:
 - **Asynchronous tasks & scheduling**: **GitHub Actions** runs cron jobs to trigger Python ETL scripts for YouTube and Fugle/FinMind API scraping. The pipeline decrypts `NLM_COOKIE_BASE64` to restore cookie sessions for uploading media to **NotebookLM**.
 - **Caching & rate limits**: **Upstash Redis** buffers webhook spikes and enforces TTL rules and rate limiting to avoid exceeding third-party API quotas.
@@ -24,128 +26,62 @@ The platform integrates a bot gateway, ETL schedulers, caching layers, and datab
 
 ---
 
-## The Problems This Product Lab Solves
+## Featured Product Spotlights
 
-Writing code is more than stacking tech. Without real-world utility, technical choices matter little. Resumes often list languages and frameworks, but lack product context.
+Four core projects selected to showcase key backgrounds and live execution views:
 
-I created this project to address these gaps:
-- **Translates code into business value**: Every listed project starts with the problem it solves, not just a stack of technologies.
-- **Showcases private repositories securely**: For proprietary work, it highlights the UI flow and system architecture without exposing source code.
-- **Guarantees reliable project presentation**: It uses an automated screenshot pipeline. Even if a project is not publicly hosted or a live demo goes down, the portfolio displays generated previews to ensure constant availability.
+### 1. Personal Bot Gateway (personal-bot-gateway) [AI Automation]
+* **Background**: Tracking daily KOLs, podcasts, news, and Threads posts scattered information across multiple applications. This bot aggregates Telegram commands, NotebookLM analysis, report link dispatch, and stock/ETF checks inside a single Telegram window.
+* **Tech Highlights**: Built with Vercel Serverless (TS) API gateway. Integrates Redis cache to cut paid API costs by 75%, and automates NotebookLM cookie session handoff triggered by GitHub Actions.
+* **Live View**:
+  ![Personal Bot Gateway Preview](./public/previews/personal-bot-gateway-features.jpg)
+
+### 2. Price Atlas (price-altas) [Data & Research]
+* **Background**: Purchasing managers and e-commerce traders waste time manually searching items across multiple international sites (US/JP/TW) and calculating exchange rates, missing shipping overheads and dynamic price gaps.
+* **Tech Highlights**: The FastAPI backend dispatches concurrent async scraping pipelines to Amazon US/JP, Yahoo JP, and Kakaku.com. It converts values to TWD via exchange-rate APIs and streams results using SSE (Server-Sent Events) with user-aborted request optimization. It uses `curl_cffi` to mimic Chrome TLS/JA3 fingerprints to bypass Cloudflare protection.
+* **Live View**:
+  *(Refer to the screenshots inside the web portfolio)*
+
+### 3. Taiwan Stock Health Dashboard (tw-stock-health-dashboard) [Financial Intelligence]
+* **Background**: Gathering index, global indices, and capital risk indicators manually is tedious and delays warnings on market liquidity flushes.
+* **Tech Highlights**: Built an asynchronous ETL pipeline using concurrent Promise.all queries with Redis caching, and modeled crash warning flags.
+
+### 4. Fehow Corporate Site (fehow-web) [Business Sites]
+* **Background**: Electronics supply-chain companies need clean, credible websites to win trust from global buyers.
+* **Tech Highlights**: Created an elegant Bento Grid layout that remains fully responsive using Next.js and CSS Grid. Implemented GSAP ScrollTrigger timelines for scroll-bound animations.
+* **Live View**:
+  ![Fehow Corporate Site Preview](./public/previews/fehow-web-hero.png)
 
 ---
 
-## Product Lines and Key Features
+## All Projects &amp; Tech Matrix
 
-Projects are divided into six categories, aligning with the product lines on the frontend:
+To make it easy for interviewers to evaluate all repositories at a glance, here is a consolidated matrix of all 22 projects, their categories, core stack, integrations, and deployment status:
 
-### 1. Financial Intelligence
-Aggregates and filters market data to reduce search costs and flag risks.
-
-- **Taiwan Stock Health Dashboard (tw-stock-health-dashboard)** [Featured]
-  - **Problem**: Investors waste time gathering daily index, global market, and risk data, making it hard to spot early market crash signals.
-  - **Features**: Automatic market summary, global correlation analysis, market crash warning system, real-time Telegram alerts, and **GitHub Actions scheduling**.
-- **Taiwan Warrant Screener (warrant-screener-tw)**
-  - **Problem**: Warrant terms are complex, and default broker interfaces make cross-asset comparison difficult.
-  - **Features**: Multi-criteria filters, side-by-side asset comparison, and a deployed workspace.
-- **Insider Watch Bot (insider-watch-bot)**
-  - **Problem**: Executive and major shareholder stock transfer announcements are scattered across public sites, making it hard to track insider trading flows.
-  - **Features**: Real-time MOPS monitoring, automatic insider sale alerts, trade trend tracking, and **GitHub Actions automated schedules**.
-- **Financial News Analysis (financial-news-analysis)**
-  - **Problem**: Sifting through thousands of market articles is slow, and subjective bias makes sentiment analysis unreliable.
-  - **Features**: Automatic news ingestion, AI-driven sentiment analysis, strategy briefs, and **Render hosting deployment**.
-- **SMC Trinity AI (smc-trinity-ai)**
-  - **Problem**: Smart Money Concept (SMC) trading analysis is highly subjective and prone to individual bias.
-  - **Features**: Automatic SMC chart analysis, multi-agent AI debates, and objective trade adjudication.
-
-### 2. AI Automation
-Connects information streams with AI tools to handle repetitive manual workflows.
-
-- **Personal Bot Gateway (personal-bot-gateway)** [Featured]
-  - **Problem**: Tracking multiple KOLs, podcasts, news, and Threads posts daily scatters information and prevents synthesis.
-  - **Features**: Unified Telegram control hub, daily KOL scans and briefs, automatic NotebookLM report handoffs, instant stock/ETF health checks, **GitHub Actions workflow integration**, and **Neon Serverless DB database integration**.
-- **LazyTube Assistant (LazyTube-Assistant)** [Featured]
-  - **Problem**: High-value YouTube videos are often long, and manually searching for relevant content is time-consuming.
-  - **Features**: Automated search via YouTube API, NotebookLM content briefs, **GitHub Actions scheduling**, Telegram alerts, and **Neon DB persistence**.
-- **PodScribe (PodScribe)** [Featured]
-  - **Problem**: Podcast takeaways are easily forgotten, and users lack structured transcripts or mind maps for knowledge management.
-  - **Features**: Audio transcription, Gemini analysis, structured summaries, and mind maps.
-- **Faceless Hunter (faceless_hunter)**
-  - **Problem**: Creators lack data on which "faceless" video topics have a higher viral potential on YouTube Shorts.
-  - **Features**: YouTube Shorts data scraping, viral ratio calculation, and niche discovery.
-
-### 3. Product Utilities
-Tools built to solve specific workflow inefficiencies and boost day-to-day productivity.
-
-- **Config Diff Viewer (Config-Diff-Viewer)**
-  - **Problem**: Manually comparing configurations across directories is slow and prone to oversight.
-  - **Features**: Two-directory config comparison, visual diff interface, and security reviews.
-- **Socket Swiss Knife (socket-swiss-knife)**
-  - **Problem**: Financial institutions testing MTF protocols lack simple, cross-platform socket utilities.
-  - **Features**: Multi-broker profile management, scheduled load testing, and a cross-platform desktop GUI.
-- **Team Eats (team-eats)**
-  - **Problem**: Group orders, afternoon tea voting, and expense splitting are messy and time-consuming.
-  - **Features**: Meal voting, group order aggregation, and expense splitting logs.
-- **MSG Converter (msg-converter)**
-  - **Problem**: Windows Outlook `.msg` emails cannot be opened directly on macOS, and layouts often break.
-  - **Features**: Offline MSG parsing, macOS-friendly HTML conversion, and automatic attachment extraction.
-- **Taiwan NHI Calculator (taiwan-nhi-calculator)**
-  - **Problem**: Calculating Taiwan's second-generation National Health Insurance premiums is complex, making it hard to compute net pay.
-  - **Features**: Premium calculation, role-based scenarios, and a clean form interface.
-- **Broker Credential Dashboard (broker-credential-dashboard)**
-  - **Problem**: Managing multiple broker API keys and tracking expiration dates across servers is disorganized.
-  - **Features**: Centralized API credential vault, connection status monitoring, and secure administration.
-
-### 4. Business Sites
-Modern web portals that build credibility and showcase value for business partners.
-
-- **Fehow Corporate Site (fehow-web)** [Featured]
-  - **Problem**: Electronics supply-chain companies need clean, credible websites to win trust from global buyers.
-  - **Features**: Corporate branding, Bento Grid layouts, and supply-chain storytelling.
-- **Xiexing PWA (xiexing-pwa)**
-  - **Problem**: Heavy machinery rental and earthwork services lack mobile exposure, missing out on smartphone traffic.
-  - **Features**: Service and machinery catalog, offline-ready PWA, and direct inquiry routing.
-- **Yellowstone Clinic Site (yellowstone-clinic)**
-  - **Problem**: Rehabilitation clinics need clear service directories so patients can find clinic info and hours easily.
-  - **Features**: Therapy and rehab guides, clinic hours, and mobile PWA support.
-
-### 5. Data & Research
-Scrapes and analyzes market data to surface opportunities and risks.
-
-- **Price Atlas (price-altas)** [Featured]
-  - **Problem**: Purchasing managers and buyers manually compare items across sites, missing exchange-rate shifts and real price gaps.
-  - **Features**: Multi-site web scraping, live exchange rate conversions, price gap analysis, and **Render hosting deployment**.
-- **POE Price Tracker (poe-price-tracker)**
-  - **Problem**: Online game markets experience rapid price shifts, making it hard to trade assets efficiently.
-  - **Features**: Live price monitoring, history trend graphs, web dashboard, and **GitHub Actions CI/CD automation**.
-- **Presale Radar (presale-radar)**
-  - **Problem**: Real estate transaction records are disorganized, making it difficult to spot active areas and new project trends.
-  - **Features**: Public registry aggregation, regional volume mapping, real estate market radars, and **GitHub Actions ETL pipeline**.
-- **Neighbor Profiler (neighbor-profiler)**
-  - **Problem**: Valuations on the same street can vary widely, and local environmental risks are often hidden.
-  - **Features**: Local price gap analysis, neighborhood data mapping, and real estate risk alerts.
-- **AIA Training Viewer (AIA-Training-Viewer)**
-  - **Problem**: Complex AI datasets lack visualization tools, making it hard to inspect and verify training data quality.
-  - **Features**: Dataset visualization, training run logs, and a web explorer.
-
-### 6. Experiments
-Rapid prototypes built to evaluate new technologies and validate market potential.
-
-- **Fortune Telling PWA (fortune-telling)**
-  - **Problem**: Traditional BaZi astrology calculations are complex, and results are hard to understand without expert interpretation.
-  - **Features**: Automated BaZi chart plotting, Gemini AI personalized readings, mobile PWA, and **GitHub Actions automated CI/CD**.
-- **North Volley Guide (north-volley-guide)**
-  - **Problem**: Northern Taiwan volleyball court and club listings are scattered, making it hard to find active locations.
-  - **Features**: Curated venue directories, regional searches, and mobile-friendly layouts.
-- **Golf Strategy Prototype (golf-strategy-lk-prototype)**
-  - **Problem**: Golfers face complex shot decisions on the course and lack tools for strategy simulation.
-  - **Features**: Fairway strategy simulation, interactive course plotting, and quick shot validation.
-- **Digit Recognition (digit_recognition)**
-  - **Problem**: Validating low-latency image preprocessing and machine learning predictions directly in-browser.
-  - **Features**: Interactive canvas input, image scaling, real-time MLP classifier predictions, and **Render hosting deployment**.
-- **FastAPI MCP Lab (FastAPI-project)**
-  - **Problem**: Integrating FastAPI with the Model Context Protocol (MCP) to manage streaming AI interactions.
-  - **Features**: FastAPI MCP implementation, PydanticAI exploration, and streaming chat flows.
+| Repository (Repo) | Product Line (Category) | Tech Stack | Integrations | Deployment |
+| :--- | :--- | :--- | :--- | :--- |
+| [personal-bot-gateway](https://github.com/michaelbothsieh-crypto/personal-bot-gateway) | AI Automation | TypeScript, FastAPI | Telegram/LINE Webhook, Neon DB, Upstash Redis, NotebookLM | [Vercel](https://personal-bot-gateway.vercel.app) (Private) |
+| [LazyTube-Assistant](https://github.com/michaelbothsieh-crypto/LazyTube-Assistant) | AI Automation | Python | GitHub Actions, NotebookLM API, Telegram Bot, Neon DB | [Vercel](https://lazy-tube-assistant.vercel.app) |
+| [tw-stock-health-dashboard](https://github.com/michaelbothsieh-crypto/tw-stock-health-dashboard) | Financial Intelligence | TypeScript, Next.js | GitHub Actions, Upstash Redis, Telegram Bot | [Vercel](https://tw-stock-health-dashboard.vercel.app) |
+| [price-altas](https://github.com/michaelbothsieh-crypto/price-altas) | Data & Research | Python, FastAPI | Amazon/Yahoo APIs, Exchange Rate API, Upstash Redis | [Render](https://price-altas-frontend.vercel.app/) (Private) |
+| [fortune-telling](https://github.com/michaelbothsieh-crypto/fortune-telling) | Experiments | TypeScript, React | Google Gemini AI API, PWA | [GitHub Pages](https://fortune-telling-sigma.vercel.app/) |
+| [fehow-web](https://github.com/michaelbothsieh-crypto/fehow-web) | Business Sites | Next.js, Tailwind | GSAP ScrollTrigger, Bento Grid | [Vercel](https://m3-web-mauve.vercel.app) |
+| [xiexing-pwa](https://github.com/michaelbothsieh-crypto/xiexing-pwa) | Business Sites | TypeScript, Next.js | Service Worker, PWA, Next-Gen Image Pipeline | Vercel (Local Preview) |
+| [yellowstone-clinic](https://github.com/michaelbothsieh-crypto/yellowstone-clinic) | Business Sites | TypeScript, Next.js | PWA, WCAG Accessibility Guidelines | Vercel (Local Preview) |
+| [insider-watch-bot](https://github.com/michaelbothsieh-crypto/insider-watch-bot) | Financial Intelligence | TypeScript | GitHub Actions, MOPS Scraper, Telegram Webhook | [GitHub](https://github.com/michaelbothsieh-crypto/insider-watch-bot) |
+| [msg-converter](https://github.com/michaelbothsieh-crypto/msg-converter) | Product Utilities | HTML5, JavaScript | WebCrypto, OLE2 Binary Parser | GitHub Pages |
+| [financial-news-analysis](https://github.com/michaelbothsieh-crypto/financial-news-analysis) | Financial Intelligence | Streamlit, Python | OpenAI GPT API, Streamlit Cloud | [Render](https://github.com/michaelbothsieh-crypto/financial-news-analysis) (Private) |
+| [taiwan-nhi-calculator](https://github.com/michaelbothsieh-crypto/taiwan-nhi-calculator) | Product Utilities | HTML5, JavaScript | Decimals Math Library, Unit Testing | GitHub Pages (Private) |
+| [team-eats](https://github.com/michaelbothsieh-crypto/team-eats) | Product Utilities | TypeScript, React | WebSocket, LocalStorage, PWA | GitHub Pages (Private) |
+| [socket-swiss-knife](https://github.com/michaelbothsieh-crypto/socket-swiss-knife) | Product Utilities | Python | MTF TCP Socket, Tauri/Electron, GUI | Desktop App (Private) |
+| [warrant-screener-tw](https://github.com/michaelbothsieh-crypto/warrant-screener-tw) | Financial Intelligence | JavaScript, Python | Black-Scholes Greeks Engine, requestAnimationFrame | [Vercel](https://warrant-screener-tw.vercel.app) (Private) |
+| [Config-Diff-Viewer](https://github.com/michaelbothsieh-crypto/Config-Diff-Viewer) | Product Utilities | TypeScript, React | Web Worker, Myer's Diff, Virtual Scroll | [Vercel](https://config-diff-viewer.vercel.app) |
+| [PodScribe](https://github.com/michaelbothsieh-crypto/PodScribe) | AI Automation | TypeScript, Next.js | Gemini AI API, Whisper API, Mermaid Mindmap | [Vercel](https://podscribe-six.vercel.app) |
+| [presale-radar](https://github.com/michaelbothsieh-crypto/presale-radar) | Data & Research | Python, Next.js | Leaflet Map, Pandas ETL Pipeline | [Vercel](https://presale-radar.vercel.app) (Private) |
+| [neighbor-profiler](https://github.com/michaelbothsieh-crypto/neighbor-profiler) | Data & Research | TypeScript, React | JCIC Finance Registry, 3D Radar Charts | [Vercel](https://house-dun-one.vercel.app) (Private) |
+| [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | Experiments | Python, FastAPI | Model Context Protocol (MCP), PydanticAI | Jupyter / Local Run (Private) |
+| [digit_recognition](https://github.com/michaelbothsieh-crypto/digit_recognition) | Experiments | Python, FastAPI | Scikit-learn (MLP), OpenCV, HTML5 Canvas | [Render](https://github.com/michaelbothsieh-crypto/digit_recognition) (Private) |
+| [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | Data & Research | Jupyter, Python | TFEvent Binary Parser, Recharts | [Vercel](https://aia-training-viewer.vercel.app) (Private) |
 
 ---
 

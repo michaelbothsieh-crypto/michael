@@ -16,6 +16,8 @@
 
 ![AI-Driven Financial & Content Automation Platform](./public/architecture.png)
 
+*註：此架構圖展示了作品集之中 `personal-bot-gateway`、`LazyTube-Assistant` 與 `tw-stock-health-dashboard` 這三個獨立 Repository 串接而成的整合生態系。*
+
 ### 技術實作與設計重點：
 - **非同步任務與排程執行**：由 **GitHub Actions** 跑排程觸發 Python ETL，抓取 YouTube API 以及 Fugle/FinMind 的台股報價，接著用 `NLM_COOKIE_BASE64` 仿真 cookie session 將影音上傳到 **NotebookLM** 完成語音轉文字與摘要。
 - **快取與 API 配額限制**：為防止 Webhook 流量暴增或重覆爬取導致 API 額度超支，使用 **Upstash Redis** 作為快取層，實作 TTL 緩衝與 Rate Limiting。
@@ -24,128 +26,62 @@
 
 ---
 
-## 為什麼建立這個 Product Lab？
+## 精選產品亮點 (Featured Product Spotlights)
 
-寫程式不只是堆砌技術。如果沒有實際解決問題，技術就很難發揮商用價值。一般的履歷往往只列出開發工具和框架，卻看不到產品本身的脈絡。
+這裡精選了四個核心專案，並附上開發初衷與實際運行畫面：
 
-我做這個專案是為了改善這些問題：
-- **消除技術與商業間的溝通隔閡**：每一個收錄的專案都從「解決了什麼痛點」出發，而非單純堆砌技術名詞。
-- **平衡程式碼隱私與成果呈現**：對於非公開的私有專案，在不洩漏核心原始碼的前提下，依然能呈現功能架構與實際畫面，提供透明的技術實力佐證。
-- **克服部署失效與展示空窗期**：整合自動化截圖管線。即使專案暫時沒有公開部署，或線上版本失效，也能自動產生預覽圖，確保作品集隨時處於可呈現狀態。
+### 1. Personal Bot Gateway (personal-bot-gateway) [AI 自動化]
+* **設計初衷**：每天追蹤 KOL、Podcast、個股、ETF 等資訊入口太分散，資訊難以系統化整理。這款 Bot 將 TG 指令輸入、NotebookLM 分析、報告連結與市場行情回覆集中在同一個 Telegram 對話框中。
+* **技術亮點**：使用 Vercel Serverless (TS) 實作 API 網關，並利用 Redis 快取降低 75% API 成本，整合 GitHub Actions 觸發與 NotebookLM 仿真 Session 登入。
+* **實際畫面**：
+  ![Personal Bot Gateway Preview](./public/previews/personal-bot-gateway-features.jpg)
+
+### 2. Price Atlas (price-altas) [資料研究]
+* **設計初衷**：採購與跨境商家在比對各國商品價格時，必須開啟多個分頁查詢並手動換算匯率。此工具一鍵併發向台、美、日主流平台查價並自動折算即時匯率。
+* **技術亮點**：後端採用 FastAPI 協同 Python 異步爬蟲，以 SSE (Server-Sent Events) 串流技術即時回傳比價結果。使用 `curl_cffi` 偽裝 Chrome TLS/JA3 指紋以繞過 WAF 防爬限制。
+* **實際畫面**：
+  *(詳見網頁作品集內實物畫面)*
+
+### 3. 台股健康儀表板 (tw-stock-health-dashboard) [金融決策]
+* **設計初衷**：投資人每日需手動收集台股大盤、融資券與海外風險指標，流程繁瑣且不易早期察覺市場籌碼崩盤訊號。
+* **技術亮點**：設計非同步 ETL Pipeline，利用 Promise.all 併發抓取並在 Redis 中進行快取，並透過簡單神經網絡進行崩盤預警因子的加權估算。
+
+### 4. 飛皓科技形象網站 (fehow-web) [企業網站]
+* **設計初衷**：電子供應鏈企業需要具備國際公信力的官方網站，以向海外客戶呈現技術與供應實力。
+* **技術亮點**：採用 Next.js + CSS Grid 打造 Bento Grid 響應式佈局，並優化 GSAP 滾動動畫在行動端的流暢度。
+* **實際畫面**：
+  ![Fehow Corporate Site Preview](./public/previews/fehow-web-hero.png)
 
 ---
 
-## 六大產品線與核心功能
+## 全部專案與技術矩陣 (All Projects &amp; Tech Matrix)
 
-這裡的專案分為六大類，分類與前端畫面的產品線一致：
+為了方便面試官一目瞭然地檢視所有 Repo，以下整理出全部 22 個專案的分類、核心技術、外部服務整合以及部署狀態：
 
-### 1. 金融決策 (Financial Intelligence)
-針對金融市場的繁雜數據，提供即時、自動化的整理與預警，降低資訊收集成本。
-
-- **台股健康儀表板 (tw-stock-health-dashboard)** [精選]
-  - **解決痛點**：投資人每日需手動收集台股大盤、海外指數與各種風險指標，流程繁瑣且不易早期察覺市場崩盤訊號。
-  - **核心功能**：大盤盤後數據自動整理、海外市場連動分析、市場崩盤風險預警、Telegram 警報即時推送、**GitHub Actions 排程自動化**。
-- **台股權證篩選器 (warrant-screener-tw)**
-  - **解決痛點**：權證條款多且繁瑣，一般下單軟體介面不夠直覺，難以快速進行跨標的比較。
-  - **核心功能**：多維度權證數據篩選、跨標的橫向對比、即時部署的篩選工作台。
-- **內部人持股轉讓警報 (insider-watch-bot)**
-  - **解決痛點**：董監事與大股東的股權轉讓申報公告分散在公開資訊觀測站，投資人難以第一時間追蹤籌碼流向。
-  - **核心功能**：公開資訊觀測站 (MOPS) 即時監控、大股東轉讓自動警示、籌碼異動趨勢追蹤、**GitHub Actions 自動化排程**。
-- **財經新聞分析 (financial-news-analysis)**
-  - **解決痛點**：每日財經新聞數量龐大，人工閱讀容易受到情緒主觀干擾，難以快速取得客觀情緒指標。
-  - **核心功能**：多管道新聞自動擷取、AI 情緒指標評估、量化投資策略摘要、**Render 雲端部署**。
-- **SMC Trinity AI (smc-trinity-ai)**
-  - **解決痛點**：金融交易中的「聰明錢概念 (Smart Money Concept)」分析容易受到交易員主觀偏見影響。
-  - **核心功能**：SMC 技術圖表自動分析、多 AI 代理人模擬辯論、交易決策客觀判定。
-
-### 2. AI 自動化 (AI Automation)
-將繁雜的日常資訊流與 AI 工具對接，自動化處理繁瑣的工作流程。
-
-- **Personal Bot Gateway (personal-bot-gateway)** [精選]
-  - **解決痛點**：每天要追蹤多個意見領袖 (KOL)、播客、新聞與 Threads 資訊，資訊入口零散，難以進行系統化整理。
-  - **核心功能**：Telegram 統一控制中樞、KOL 每日內容掃描與摘要、NotebookLM 深度報告自動對接、個股與 ETF 行情及健檢即時查詢、**GitHub Actions 整合**、**Neon Serverless DB 串接**。
-- **LazyTube Assistant (LazyTube-Assistant)** [精選]
-  - **解決痛點**：YouTube 上的高價值影片往往很長，手動觀看與篩選耗費大量時間。
-  - **核心功能**：YouTube API 自動依條件篩選新影片、NotebookLM 自動化內容精華摘要、**GitHub Actions 排程自動運行**、Telegram 自動推送、**Neon 數據庫持久化**。
-- **PodScribe (PodScribe)** [精選]
-  - **解決痛點**：收聽 Podcast 後缺乏文字記錄或結構化筆記，難以回顧與儲存為個人知識庫。
-  - **核心功能**：Podcast 語音檔案自動轉錄、Gemini 智慧內容分析、自動生成結構化摘要與心智圖。
-- **Faceless Hunter (faceless_hunter)**
-  - **解決痛點**：短影音創作者難以快速找出哪些「不露臉」的題材在 YouTube Shorts 上有更高的爆紅機率。
-  - **核心功能**：YouTube Shorts 數據自動抓取、爆紅比例演算法分析、潛力不露臉題材挖掘。
-
-### 3. 工具產品 (Product Utilities)
-解決日常工作與生活中的特定問題，提升效率的實用工具。
-
-- **設定檔差異檢視器 (Config-Diff-Viewer)**
-  - **解決痛點**：在開發與運維過程中，手動比對多個目錄的設定檔費時，且極易漏掉重要差異。
-  - **核心功能**：雙目錄設定檔比對、差異視覺化介面、設定安全性審查。
-- **Socket Swiss Knife (socket-swiss-knife)**
-  - **解決痛點**：金融機構進行 MTF 協議測試時，缺乏簡單易用、跨平台的 Socket 測試工具。
-  - **核心功能**：多交易商配置管理、定時壓力與連線測試、跨平台桌面圖形介面 (GUI)。
-- **Team Eats (team-eats)**
-  - **解決痛點**：團隊聚餐或團購下午茶時，投票、統計與分帳流程混亂，人工計算繁瑣。
-  - **核心功能**：餐點投票與揪團、消費金額自動統計、費用與付款狀態紀錄。
-- **MSG 轉換器 (msg-converter)**
-  - **解決痛點**：Windows Outlook 的 `.msg` 格式信件在 Mac 系統上無法直接開啟，且排版容易錯亂。
-  - **核心功能**：本機 MSG 檔案快速解析、轉換為 Mac 友善的 HTML 格式、自動提取並保存郵件附件。
-- **二代健保試算工具 (taiwan-nhi-calculator)**
-  - **解決痛點**：台灣二代健保補充保費與眷屬保費計算公式複雜，企業或個人難以快速試算實發薪水。
-  - **核心功能**：補充保費與保費級距自動計算、多元身份與情境模擬、簡潔的表單操作介面。
-- **券商憑證儀表板 (broker-credential-dashboard)**
-  - **解決痛點**：多張券商 API 憑證與連線狀態分散，難以統一管理與監控到期時間。
-  - **核心功能**：API 憑證集中管理、到期日與連線狀態監控、安全內部管理介面。
-
-### 4. 企業網站 (Business Sites)
-為合作企業建立的現代化入口網站，展示品牌實力與業務價值。
-
-- **飛皓科技形象網站 (fehow-web)** [精選]
-  - **解決痛點**：電子供應鏈企業需要具備國際公信力的官方網站，以向海外客戶呈現技術與供應實力。
-  - **核心功能**：現代化企業形象設計、Bento Grid 資訊佈局、供應鏈實力圖文敘事。
-- **協興實業 PWA (xiexing-pwa)**
-  - **解決痛點**：傳統重機械租賃與工程服務缺乏線上曝光管道，難以吸引行動裝置用戶。
-  - **核心功能**：工程服務與重機械線上呈現、離線可讀的 PWA 體驗、商務諮詢導流。
-- **黃石健康診所網站 (yellowstone-clinic)**
-  - **解決痛點**：復健與物理治療診所需要清晰的服務介紹，方便病患查詢診所資訊與門診時間。
-  - **核心功能**：物理治療與復健服務介紹、診所交通與營業資訊整理、PWA 行動端支援。
-
-### 5. 資料研究 (Data & Research)
-透過數據爬取與分析，發掘市場機會與潛在風險。
-
-- **Price Atlas (price-altas)** [精選]
-  - **解決痛點**：採購人員或個人買家進行跨平台比價時，需要手動查詢不同網站，且容易忽略匯率變動與實質價差。
-  - **核心功能**：跨平台商品價格自動抓取、即時匯率換算、商品價差分析、**Render 雲端部署**。
-- **POE 價格追蹤器 (poe-price-tracker)**
-  - **解決痛點**：線上遊戲市場交易價格波動劇烈，玩家難以掌握即時物價趨勢以做出最佳交易。
-  - **核心功能**：遊戲物品價格即時監控、歷史價格趨勢統計、網頁版儀表板呈現、**GitHub Actions 自動化建置**。
-- **預售屋雷達 (presale-radar)**
-  - **解決痛點**：預售屋市場實價登錄資訊零散，難以快速掌握目前房市的熱門區域與推案動向。
-  - **核心功能**：實價登錄與推案資料整理、區域市場熱度觀察、房市交易雷達圖、**GitHub Actions ETL 資料管線**。
-- **房地產鄰里分析器 (neighbor-profiler)**
-  - **解決痛點**：房屋買賣時，同路段的估值落差可能極大，且隱蔽的周邊嫌惡設施或環境風險不易被發現。
-  - **核心功能**：路段估值落差揭露、鄰里環境數據分析、房地產潛在風險提示。
-- **AIA Training Viewer (AIA-Training-Viewer)**
-  - **解決痛點**：AI 訓練資料集結構與維度繁多，缺乏好用的可視化工具，難以快速檢視與評估訓練成效。
-  - **核心功能**：模型訓練資料集可視化、訓練過程與成效檢視、友善的網頁瀏覽工具。
-
-### 6. 實驗原型 (Experiments)
-前沿技術的快速實驗與概念驗證，探討商用可行性。
-
-- **天機算命 (fortune-telling)**
-  - **解決痛點**：傳統八字命理排盤複雜，一般人難以理解術語，且缺乏個人化的現代解讀。
-  - **核心功能**：八字命盤自動排盤、Gemini AI 個人化運勢解讀、PWA 行動裝置體驗、**GitHub Actions 自動化 CI/CD**。
-- **北部排球指南 (north-volley-guide)**
-  - **解決痛點**：北部排球場地與球隊資訊零散，球友難以快速找到合適的打球地點。
-  - **核心功能**：北部排球場地詳細整理、依地區與類型快速查找、行動版網頁瀏覽。
-- **Golf Strategy Prototype (golf-strategy-lk-prototype)**
-  - **解決痛點**：高爾夫球手擊球時需要考量多項變因，缺乏能提供擊球策略與球道規劃的輔助工具。
-  - **核心功能**：球道策略模擬原型、互動式球道規劃介面、快速擊球方案驗證。
-- **手寫數字辨識 (digit_recognition)**
-  - **解決痛點**：驗證機器學習模型在網頁端進行即時影像前處理與預測的流暢度。
-  - **核心功能**：網頁畫布即時繪圖輸入、影像灰階化與尺寸調整前處理、MLP 卷積模型即時辨識、**Render 雲端部署**。
-- **FastAPI MCP 學習專案 (FastAPI-project)**
-  - **解決痛點**：如何將 FastAPI 與新一代 AI 代理通訊協定 (Model Context Protocol) 進行串接以實現串流對話。
-  - **核心功能**：FastAPI 與 MCP 協定實作、PydanticAI 框架探索、流暢的 AI 串流對話流程。
+| 專案名稱 (Repo) | 產品線 (Category) | 核心技術 (Tech Stack) | 對外整合服務 (Integrations) | 部署與展示 (Deployment) |
+| :--- | :--- | :--- | :--- | :--- |
+| [personal-bot-gateway](https://github.com/michaelbothsieh-crypto/personal-bot-gateway) | AI 自動化 | TypeScript, FastAPI | Telegram/LINE Webhook, Neon DB, Upstash Redis, NotebookLM | [Vercel](https://personal-bot-gateway.vercel.app) (Private) |
+| [LazyTube-Assistant](https://github.com/michaelbothsieh-crypto/LazyTube-Assistant) | AI 自動化 | Python | GitHub Actions, NotebookLM API, Telegram Bot, Neon DB | [Vercel](https://lazy-tube-assistant.vercel.app) |
+| [tw-stock-health-dashboard](https://github.com/michaelbothsieh-crypto/tw-stock-health-dashboard) | 金融決策 | TypeScript, Next.js | GitHub Actions, Upstash Redis, Telegram Bot | [Vercel](https://tw-stock-health-dashboard.vercel.app) |
+| [price-altas](https://github.com/michaelbothsieh-crypto/price-altas) | 資料研究 | Python, FastAPI | Amazon/Yahoo APIs, Exchange Rate API, Upstash Redis | [Render](https://price-altas-frontend.vercel.app/) (Private) |
+| [fortune-telling](https://github.com/michaelbothsieh-crypto/fortune-telling) | 實驗原型 | TypeScript, React | Google Gemini AI API, PWA | [GitHub Pages](https://fortune-telling-sigma.vercel.app/) |
+| [fehow-web](https://github.com/michaelbothsieh-crypto/fehow-web) | 企業形象 | Next.js, Tailwind | GSAP ScrollTrigger, Bento Grid | [Vercel](https://m3-web-mauve.vercel.app) |
+| [xiexing-pwa](https://github.com/michaelbothsieh-crypto/xiexing-pwa) | 企業形象 | TypeScript, Next.js | Service Worker, PWA, Next-Gen Image Pipeline | Vercel (Local Preview) |
+| [yellowstone-clinic](https://github.com/michaelbothsieh-crypto/yellowstone-clinic) | 企業形象 | TypeScript, Next.js | PWA, WCAG Accessibility Guidelines | Vercel (Local Preview) |
+| [insider-watch-bot](https://github.com/michaelbothsieh-crypto/insider-watch-bot) | 金融決策 | TypeScript | GitHub Actions, MOPS Scraper, Telegram Webhook | [GitHub](https://github.com/michaelbothsieh-crypto/insider-watch-bot) |
+| [msg-converter](https://github.com/michaelbothsieh-crypto/msg-converter) | 工具產品 | HTML5, JavaScript | WebCrypto, OLE2 Binary Parser | GitHub Pages |
+| [financial-news-analysis](https://github.com/michaelbothsieh-crypto/financial-news-analysis) | 金融決策 | Streamlit, Python | OpenAI GPT API, Streamlit Cloud | [Render](https://github.com/michaelbothsieh-crypto/financial-news-analysis) (Private) |
+| [taiwan-nhi-calculator](https://github.com/michaelbothsieh-crypto/taiwan-nhi-calculator) | 工具產品 | HTML5, JavaScript | Decimals Math Library, Unit Testing | GitHub Pages (Private) |
+| [team-eats](https://github.com/michaelbothsieh-crypto/team-eats) | 工具產品 | TypeScript, React | WebSocket, LocalStorage, PWA | GitHub Pages (Private) |
+| [socket-swiss-knife](https://github.com/michaelbothsieh-crypto/socket-swiss-knife) | 工具產品 | Python | MTF TCP Socket, Tauri/Electron, GUI | Desktop App (Private) |
+| [warrant-screener-tw](https://github.com/michaelbothsieh-crypto/warrant-screener-tw) | 金融決策 | JavaScript, Python | Black-Scholes Greeks Engine, requestAnimationFrame | [Vercel](https://warrant-screener-tw.vercel.app) (Private) |
+| [Config-Diff-Viewer](https://github.com/michaelbothsieh-crypto/Config-Diff-Viewer) | 工具產品 | TypeScript, React | Web Worker, Myer's Diff, Virtual Scroll | [Vercel](https://config-diff-viewer.vercel.app) |
+| [PodScribe](https://github.com/michaelbothsieh-crypto/PodScribe) | AI 自動化 | TypeScript, Next.js | Gemini AI API, Whisper API, Mermaid Mindmap | [Vercel](https://podscribe-six.vercel.app) |
+| [presale-radar](https://github.com/michaelbothsieh-crypto/presale-radar) | 資料研究 | Python, Next.js | Leaflet Map, Pandas ETL Pipeline | [Vercel](https://presale-radar.vercel.app) (Private) |
+| [neighbor-profiler](https://github.com/michaelbothsieh-crypto/neighbor-profiler) | 資料研究 | TypeScript, React | JCIC Finance Registry, 3D Radar Charts | [Vercel](https://house-dun-one.vercel.app) (Private) |
+| [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | 實驗原型 | Python, FastAPI | Model Context Protocol (MCP), PydanticAI | Jupyter / Local Run (Private) |
+| [digit_recognition](https://github.com/michaelbothsieh-crypto/digit_recognition) | 實驗原型 | Python, FastAPI | Scikit-learn (MLP), OpenCV, HTML5 Canvas | [Render](https://github.com/michaelbothsieh-crypto/digit_recognition) (Private) |
+| [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | 資料研究 | Jupyter, Python | TFEvent Binary Parser, Recharts | [Vercel](https://aia-training-viewer.vercel.app) (Private) |
 
 ---
 

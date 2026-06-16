@@ -163,26 +163,34 @@
     "featured": true,
     "sortWeight": 96,
     "title": {
-      "zh": "Price Atlas",
-      "en": "Price Atlas"
+      "zh": "Price Atlas - 跨境電商多國商品查價與即時比價系統",
+      "en": "Price Atlas - Cross-Border Multi-Market Price Intelligence System"
     },
     "summary": {
-      "zh": "跨平台查價與比價工具，幫產品採購快速看出價格落差。",
-      "en": "A cross-market price intelligence tool for spotting purchase and listing gaps."
+      "zh": "整合多國主流電商（Amazon US/JP、Yahoo JP、価格.com、台灣電商通路）API 與爬蟲，一鍵完成跨境查價與即時匯率比價。",
+      "en": "Integrates scrapers and APIs for Amazon US/JP, Yahoo JP, Kakaku.com, and Taiwan e-commerce channels, providing one-click cross-border pricing and live currency conversions."
     },
     "features": {
       "zh": [
-        "多平台爬價",
-        "匯率換算",
-        "商品比較",
+        "多國主流平台（台美日）一次性搜尋",
+        "即時匯率轉換 (Exchange Rate API)",
+        "SSE (Server-Sent Events) 串流比價",
         "Render 雲端部署"
       ],
       "en": [
-        "Multi-market scraping",
-        "Exchange-rate handling",
-        "Product comparison",
-        "Render Deployment"
+        "Simultaneous Multi-Market Search (TW/US/JP)",
+        "Live Exchange-Rate API Conversion",
+        "SSE (Server-Sent Events) Streaming Results",
+        "Render Cloud Deployment"
       ]
+    },
+    "problem": {
+      "zh": "採購與代購商家在比對跨國商品價格時，必須開啟多個分頁手動查詢不同網站，再各自進行匯率換算。整個查價流程耗時，且容易漏掉即時匯差與運費成本的計算。",
+      "en": "Purchasing managers and cross-border traders waste time manually searching items across multiple international sites (US/JP/TW) and calculating exchange rates, missing shipping overheads and dynamic price gaps."
+    },
+    "workflow": {
+      "zh": "前端使用 SSE (Server-Sent Events) 發起請求，後端以 FastAPI 協同 Python 異步爬蟲，併發向 Amazon US/JP、Yahoo JP、価格.com 等平台進行抓取，結合實時匯率 API 進行台幣換算，並將結果以串流方式即時回傳前端，支援隨時中止查詢以節省頻寬。",
+      "en": "The UI initiates an SSE connection. The FastAPI backend dispatches concurrent async scraping pipelines to Amazon US/JP, Yahoo JP, and Kakaku.com, calls a live exchange-rate API, converts values to TWD, and streams results instantly back to the client while supporting user-aborted request optimization."
     },
     "challenge": {
       "zh": "日本価格.com 的 HTML 解析需處理 Shift JIS 特殊編碼以防亂碼，且部分電商網站設有反爬蟲限制。我採用 curl_cffi 模擬 Chrome TLS 指紋避開反爬，並在 FastAPI 後端透過併發限制與快取保護付費 API 用量。",
@@ -191,6 +199,24 @@
     "impact": {
       "zh": "提供流暢的 SSE 串流跨境比價，並支援前端即時中止搜尋，大幅節省頻寬與 API 配額。",
       "en": "Delivers real-time cross-border pricing via SSE (Server-Sent Events) with request abort support to minimize bandwidth and API costs."
+    },
+    "engineeringPillars": {
+      "observability": {
+        "zh": "為應對目標網站變更，實作了基於 HTML 標記指紋的爬蟲自癒與容錯機制。一旦特定網站爬取異常，將降級並由備份 API 取代，不影響整體比價結果。",
+        "en": "Implements scraper self-healing with HTML markup fingerprinting. If a target platform breaks, the selector degrades and triggers backup APIs without breaking the rest of the search results."
+      },
+      "caching": {
+        "zh": "利用 Upstash Redis 對多國匯率以及重覆搜尋的熱門商品進行 1 小時快取，確保同款商品在短時間內不重複觸發爬蟲，減少目標網站反爬蟲封鎖風險。",
+        "en": "Uses Upstash Redis to cache currency rates and hot search queries for 1 hour, minimizing target platform hits and preventing IP bans."
+      },
+      "security": {
+        "zh": "後端使用 curl_cffi 進行爬蟲偽裝，動態模擬 Chrome 的 TLS/JA3 指紋，繞過 Cloudflare 與多數電商的防爬機制，並安全封裝所有存取憑證。",
+        "en": "Integrates curl_cffi to match Chrome's TLS/JA3 fingerprint, bypassing Cloudflare WAF and anti-bot obstacles securely while encapsulating API secrets."
+      },
+      "reproducibility": {
+        "zh": "提供完整 mock-mode。本地端不需連線外部網路或設定任何匯率 API Key，即可使用 mocks/products.json 離線模擬多國比價流程。",
+        "en": "Offers a mock-mode. Allows offline local simulation using mocks/products.json without external network dependencies or exchange rate API keys."
+      }
     }
   },
   "fortune-telling": {
