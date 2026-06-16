@@ -10,13 +10,9 @@
 
 ---
 
-## 系統架構與資料流 (System Architecture & Data Flow)
+## 核心技術架構與設計模式 (Core Technical Architecture & Design Patterns)
 
-這套平台將 Bot 閘道器、ETL 排程器、快取與資料庫等多個服務整合為一個自動化流程：
-
-![AI-Driven Financial & Content Automation Platform](./public/architecture.png)
-
-*註：此架構圖展示了本作品集中核心 AI 自動化與金融決策專案（如 `personal-bot-gateway`、`LazyTube-Assistant` 與 `tw-stock-health-dashboard`）所採用的通用系統設計與技術堆疊架構模式。*
+此作品集包含多個獨立的 AI 自動化與金融決策專案，它們各自解決了特定的日常痛點。以下為這些專案所採用的通用核心技術實作與設計重點：
 
 ### 技術實作與設計重點：
 - **非同步任務與排程執行**：由 **GitHub Actions** 跑排程觸發 Python ETL，抓取 YouTube API 以及 Fugle/FinMind 的台股報價，接著用 `NLM_COOKIE_BASE64` 仿真 cookie session 將影音上傳到 **NotebookLM** 完成語音轉文字與摘要。
@@ -32,7 +28,7 @@
 
 ### 1. Personal Bot Gateway (personal-bot-gateway) [AI 自動化]
 * **設計初衷**：每天追蹤 KOL、Podcast、個股、ETF 等資訊入口太分散，資訊難以系統化整理。這款 Bot 將 TG 指令輸入、NotebookLM 分析、報告連結與市場行情回覆集中在同一個 Telegram 對話框中。
-* **技術亮點**：使用 Vercel Serverless (TS) 實作 API 網關，並利用 Redis 快取降低 75% API 成本，整合 GitHub Actions 觸發與 NotebookLM 仿真 Session 登入。
+* **技術亮點**：套用 `LazyTube-Assistant` 的核心語意處理與 NotebookLM 串接邏輯。使用 Vercel Serverless (TS) 實作 API 網關，並利用 Redis 快取降低 75% API 成本，整合 GitHub Actions 觸發與 NotebookLM 仿真 Session 登入。
 * **實際畫面**：
   ![Personal Bot Gateway Preview](./public/previews/personal-bot-gateway-features.jpg)
 

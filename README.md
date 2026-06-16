@@ -10,13 +10,9 @@ I built this lab to help partners and managers quickly understand how I approach
 
 ---
 
-## System Architecture & Data Flow
+## Core Technical Architecture & Design Patterns
 
-The platform integrates a bot gateway, ETL schedulers, caching layers, and databases into a single automated pipeline:
-
-![AI-Driven Financial & Content Automation Platform](./public/architecture.png)
-
-*Note: This architecture diagram illustrates the common system design patterns and technology stacks shared across the featured AI automation and financial repositories in this portfolio.*
+This portfolio features multiple independent AI automation and financial decision tools. Below are the common technical implementations and design patterns shared across these projects:
 
 ### Core technical implementation:
 - **Asynchronous tasks & scheduling**: **GitHub Actions** runs cron jobs to trigger Python ETL scripts for YouTube and Fugle/FinMind API scraping. The pipeline decrypts `NLM_COOKIE_BASE64` to restore cookie sessions for uploading media to **NotebookLM**.
@@ -32,7 +28,7 @@ Four core projects selected to showcase key backgrounds and live execution views
 
 ### 1. Personal Bot Gateway (personal-bot-gateway) [AI Automation]
 * **Background**: Tracking daily KOLs, podcasts, news, and Threads posts scattered information across multiple applications. This bot aggregates Telegram commands, NotebookLM analysis, report link dispatch, and stock/ETF checks inside a single Telegram window.
-* **Tech Highlights**: Built with Vercel Serverless (TS) API gateway. Integrates Redis cache to cut paid API costs by 75%, and automates NotebookLM cookie session handoff triggered by GitHub Actions.
+* **Tech Highlights**: Leverages the core semantic processing and NotebookLM integration engine from `LazyTube-Assistant`. Built with Vercel Serverless (TS) API gateway. Integrates Redis cache to cut paid API costs by 75%, and automates NotebookLM cookie session handoff triggered by GitHub Actions.
 * **Live View**:
   ![Personal Bot Gateway Preview](./public/previews/personal-bot-gateway-features.jpg)
 
