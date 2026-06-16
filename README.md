@@ -65,7 +65,7 @@ Here is a consolidated matrix of all 22 projects, their categories, core stack, 
 | [tw-stock-health-dashboard](https://github.com/michaelbothsieh-crypto/tw-stock-health-dashboard) | Financial Intelligence | TypeScript, Next.js | GitHub Actions, Upstash Redis, Telegram Bot | [Vercel](https://tw-stock-health-dashboard.vercel.app) |
 | [price-altas](https://github.com/michaelbothsieh-crypto/price-altas) | Data & Research | Python, FastAPI | Amazon/Yahoo APIs, Exchange Rate API, Upstash Redis | [Render](https://price-altas-frontend.vercel.app/) (Private) |
 | [fortune-telling](https://github.com/michaelbothsieh-crypto/fortune-telling) | Experiments | TypeScript, React | Google Gemini AI API, PWA | [GitHub Pages](https://fortune-telling-sigma.vercel.app/) |
-| [fehow-web](https://github.com/michaelbothsieh-crypto/fehow-web) | Business Sites | Next.js, Tailwind | GSAP ScrollTrigger, Bento Grid | [Vercel](https://m3-web-mauve.vercel.app) |
+| [fehow-web](https://github.com/michaelbothsieh-crypto/fehow-web) | Business Sites | Next.js, Tailwind | GSAP ScrollTrigger, Bento Grid | Vercel (Local Preview) |
 | [xiexing-pwa](https://github.com/michaelbothsieh-crypto/xiexing-pwa) | Business Sites | TypeScript, Next.js | Service Worker, PWA, Next-Gen Image Pipeline | Vercel (Local Preview) |
 | [yellowstone-clinic](https://github.com/michaelbothsieh-crypto/yellowstone-clinic) | Business Sites | TypeScript, Next.js | PWA, WCAG Accessibility Guidelines | Vercel (Local Preview) |
 | [insider-watch-bot](https://github.com/michaelbothsieh-crypto/insider-watch-bot) | Financial Intelligence | TypeScript | GitHub Actions, MOPS Scraper, Telegram Webhook | [GitHub](https://github.com/michaelbothsieh-crypto/insider-watch-bot) |
@@ -81,7 +81,7 @@ Here is a consolidated matrix of all 22 projects, their categories, core stack, 
 | [neighbor-profiler](https://github.com/michaelbothsieh-crypto/neighbor-profiler) | Data & Research | TypeScript, React | JCIC Finance Registry, 3D Radar Charts | [Vercel](https://house-dun-one.vercel.app) (Private) |
 | [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | Experiments | Python, FastAPI | Model Context Protocol (MCP), PydanticAI | Jupyter / Local Run (Private) |
 | [digit_recognition](https://github.com/michaelbothsieh-crypto/digit_recognition) | Experiments | Python, FastAPI | Scikit-learn (MLP), OpenCV, HTML5 Canvas | [Render](https://github.com/michaelbothsieh-crypto/digit_recognition) (Private) |
-| [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | Data & Research | Jupyter, Python | TFEvent Binary Parser, Recharts | [Vercel](https://aia-training-viewer.vercel.app) (Private) |
+| [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | Data & Research | Jupyter, Python | TFEvent Binary Parser, Recharts | Vercel (Local Preview) (Private) |
 
 ---
 

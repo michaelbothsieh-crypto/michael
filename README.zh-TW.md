@@ -65,7 +65,7 @@
 | [tw-stock-health-dashboard](https://github.com/michaelbothsieh-crypto/tw-stock-health-dashboard) | 金融決策 | TypeScript, Next.js | GitHub Actions, Upstash Redis, Telegram Bot | [Vercel](https://tw-stock-health-dashboard.vercel.app) |
 | [price-altas](https://github.com/michaelbothsieh-crypto/price-altas) | 資料研究 | Python, FastAPI | Amazon/Yahoo APIs, Exchange Rate API, Upstash Redis | [Render](https://price-altas-frontend.vercel.app/) (Private) |
 | [fortune-telling](https://github.com/michaelbothsieh-crypto/fortune-telling) | 實驗原型 | TypeScript, React | Google Gemini AI API, PWA | [GitHub Pages](https://fortune-telling-sigma.vercel.app/) |
-| [fehow-web](https://github.com/michaelbothsieh-crypto/fehow-web) | 企業形象 | Next.js, Tailwind | GSAP ScrollTrigger, Bento Grid | [Vercel](https://m3-web-mauve.vercel.app) |
+| [fehow-web](https://github.com/michaelbothsieh-crypto/fehow-web) | 企業形象 | Next.js, Tailwind | GSAP ScrollTrigger, Bento Grid | Vercel (Local Preview) |
 | [xiexing-pwa](https://github.com/michaelbothsieh-crypto/xiexing-pwa) | 企業形象 | TypeScript, Next.js | Service Worker, PWA, Next-Gen Image Pipeline | Vercel (Local Preview) |
 | [yellowstone-clinic](https://github.com/michaelbothsieh-crypto/yellowstone-clinic) | 企業形象 | TypeScript, Next.js | PWA, WCAG Accessibility Guidelines | Vercel (Local Preview) |
 | [insider-watch-bot](https://github.com/michaelbothsieh-crypto/insider-watch-bot) | 金融決策 | TypeScript | GitHub Actions, MOPS Scraper, Telegram Webhook | [GitHub](https://github.com/michaelbothsieh-crypto/insider-watch-bot) |
@@ -81,7 +81,7 @@
 | [neighbor-profiler](https://github.com/michaelbothsieh-crypto/neighbor-profiler) | 資料研究 | TypeScript, React | JCIC Finance Registry, 3D Radar Charts | [Vercel](https://house-dun-one.vercel.app) (Private) |
 | [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | 實驗原型 | Python, FastAPI | Model Context Protocol (MCP), PydanticAI | Jupyter / Local Run (Private) |
 | [digit_recognition](https://github.com/michaelbothsieh-crypto/digit_recognition) | 實驗原型 | Python, FastAPI | Scikit-learn (MLP), OpenCV, HTML5 Canvas | [Render](https://github.com/michaelbothsieh-crypto/digit_recognition) (Private) |
-| [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | 資料研究 | Jupyter, Python | TFEvent Binary Parser, Recharts | [Vercel](https://aia-training-viewer.vercel.app) (Private) |
+| [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | 資料研究 | Jupyter, Python | TFEvent Binary Parser, Recharts | Vercel (Local Preview) (Private) |
 
 ---
 
