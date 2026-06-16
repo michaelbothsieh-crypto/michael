@@ -3,7 +3,6 @@ import type { Locale, Project } from "@/lib/projects";
 import { categoryLabels } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
 import { formatDate } from "./format";
-import { Meta } from "./Meta";
 
 type ProjectCardProps = {
   project: Project;
@@ -74,8 +73,14 @@ export function ProjectCard({ project, locale, copy, featured = false, onOpen }:
             })}
           </div>
           <div className="mt-auto grid grid-cols-2 gap-4 border-t border-zinc-950/10 pt-4">
-            <Meta label={copy.created} value={formatDate(project.createdAt, locale)} />
-            <Meta label={copy.updated} value={formatDate(project.updatedAt, locale)} />
+            <div>
+              <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.created}</p>
+              <p className="mt-1 font-mono text-xs text-zinc-800">{formatDate(project.createdAt, locale)}</p>
+            </div>
+            <div>
+              <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.updated}</p>
+              <p className="mt-1 font-mono text-xs text-zinc-800">{formatDate(project.updatedAt, locale)}</p>
+            </div>
           </div>
         </div>
       </button>

@@ -4,7 +4,6 @@ import type { Locale, Project } from "@/lib/projects";
 import { categoryLabels } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
 import { formatDate } from "./format";
-import { Meta } from "./Meta";
 
 type ProjectModalProps = {
   project: Project | null;
@@ -161,10 +160,22 @@ export function ProjectModal({ project, views, locale, copy, onClose }: ProjectM
           </div>
           <aside className="space-y-6">
             <div className="grid grid-cols-2 gap-4 rounded-[8px] border border-zinc-950/10 bg-zinc-50 p-4">
-              <Meta label={copy.created} value={formatDate(project.createdAt, locale)} />
-              <Meta label={copy.updated} value={formatDate(project.updatedAt, locale)} />
-              <Meta label={copy.stack} value={project.primaryLanguage ?? "Mixed"} />
-              <Meta label={copy.views} value={views.toLocaleString()} />
+              <div>
+                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.created}</p>
+                <p className="mt-1 font-mono text-xs text-zinc-800">{formatDate(project.createdAt, locale)}</p>
+              </div>
+              <div>
+                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.updated}</p>
+                <p className="mt-1 font-mono text-xs text-zinc-800">{formatDate(project.updatedAt, locale)}</p>
+              </div>
+              <div>
+                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.stack}</p>
+                <p className="mt-1 font-mono text-xs text-zinc-800">{project.primaryLanguage ?? "Mixed"}</p>
+              </div>
+              <div>
+                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.views}</p>
+                <p className="mt-1 font-mono text-xs text-zinc-800">{views.toLocaleString()}</p>
+              </div>
             </div>
             {project.gallery.length > 1 ? (
               <div>

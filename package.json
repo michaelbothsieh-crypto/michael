@@ -7,13 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "projects": "node scripts/project-overrides.mjs",
-    "sync:repos": "node scripts/sync-github-repos.mjs",
-    "sync:previews": "node scripts/capture-previews.mjs",
-    "sync:all": "npm run sync:repos && npm run sync:previews"
+    "sync:repos": "node scripts/sync-github-repos.mjs"
   },
   "dependencies": {
-    "gsap": "^3.15.0",
     "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -25,7 +21,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
-    "playwright": "^1.60.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

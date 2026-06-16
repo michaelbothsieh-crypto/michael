@@ -6,11 +6,7 @@ export function CategoryStory({ copy }: { copy: PortfolioCopy }) {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr]">
         <h2 className="text-4xl font-semibold leading-tight text-zinc-950 md:text-6xl">{copy.categories}</h2>
         <p className="text-2xl leading-relaxed text-zinc-700">
-          {copy.categoryStory.split(" ").map((word, index) => (
-            <span key={`${word}-${index}`} className="reveal-word inline-block pr-2">
-              {word}
-            </span>
-          ))}
+          {copy.categoryStory}
         </p>
       </div>
     </section>

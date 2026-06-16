@@ -10,7 +10,6 @@ import { HeroSection } from "./portfolio/HeroSection";
 import { PortfolioNav } from "./portfolio/PortfolioNav";
 import { ProjectGridSection } from "./portfolio/ProjectGridSection";
 import { ProjectModal } from "./portfolio/ProjectModal";
-import { usePortfolioMotion } from "./portfolio/usePortfolioMotion";
 
 type Props = {
   projects: Project[];
@@ -87,7 +86,6 @@ export function PortfolioExperience({ projects }: Props) {
   const featuredProjects = useMemo(() => selectFeaturedProjects(projects), [projects]);
   const filteredProjects = useMemo(() => filterProjectsByCategory(projects, activeCategory), [activeCategory, projects]);
 
-  usePortfolioMotion();
 
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f4f7f5] text-zinc-950">
