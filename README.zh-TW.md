@@ -16,7 +16,7 @@
 
 ![AI-Driven Financial & Content Automation Platform](./public/architecture.png)
 
-*註：此架構圖展示了作品集之中 `personal-bot-gateway`、`LazyTube-Assistant` 與 `tw-stock-health-dashboard` 這三個獨立 Repository 串接而成的整合生態系。*
+*註：此架構圖展示了本作品集中核心 AI 自動化與金融決策專案（如 `personal-bot-gateway`、`LazyTube-Assistant` 與 `tw-stock-health-dashboard`）所採用的通用系統設計與技術堆疊架構模式。*
 
 ### 技術實作與設計重點：
 - **非同步任務與排程執行**：由 **GitHub Actions** 跑排程觸發 Python ETL，抓取 YouTube API 以及 Fugle/FinMind 的台股報價，接著用 `NLM_COOKIE_BASE64` 仿真 cookie session 將影音上傳到 **NotebookLM** 完成語音轉文字與摘要。

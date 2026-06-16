@@ -16,7 +16,7 @@ The platform integrates a bot gateway, ETL schedulers, caching layers, and datab
 
 ![AI-Driven Financial & Content Automation Platform](./public/architecture.png)
 
-*Note: This architecture diagram illustrates the integrated ecosystem formed by three independent repositories in this portfolio: `personal-bot-gateway`, `LazyTube-Assistant`, and `tw-stock-health-dashboard`.*
+*Note: This architecture diagram illustrates the common system design patterns and technology stacks shared across the featured AI automation and financial repositories in this portfolio.*
 
 ### Core technical implementation:
 - **Asynchronous tasks & scheduling**: **GitHub Actions** runs cron jobs to trigger Python ETL scripts for YouTube and Fugle/FinMind API scraping. The pipeline decrypts `NLM_COOKIE_BASE64` to restore cookie sessions for uploading media to **NotebookLM**.
