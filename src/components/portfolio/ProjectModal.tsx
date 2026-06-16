@@ -82,6 +82,55 @@ export function ProjectModal({ project, views, locale, copy, onClose }: ProjectM
               </section>
             ) : null}
 
+            {project.engineeringPillars ? (
+              <section className="mt-8">
+                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">
+                  {copy.engineeringPillars}
+                </h4>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  {project.engineeringPillars.observability ? (
+                    <div className="rounded-[8px] border border-zinc-950/10 bg-zinc-50/50 p-4">
+                      <h5 className="font-mono text-xs font-semibold text-zinc-950 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                        {copy.pillarObservability}
+                      </h5>
+                      <p className="mt-2 text-xs leading-5 text-zinc-700">{project.engineeringPillars.observability[locale]}</p>
+                    </div>
+                  ) : null}
+
+                  {project.engineeringPillars.caching ? (
+                    <div className="rounded-[8px] border border-zinc-950/10 bg-zinc-50/50 p-4">
+                      <h5 className="font-mono text-xs font-semibold text-zinc-950 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                        {copy.pillarCaching}
+                      </h5>
+                      <p className="mt-2 text-xs leading-5 text-zinc-700">{project.engineeringPillars.caching[locale]}</p>
+                    </div>
+                  ) : null}
+
+                  {project.engineeringPillars.security ? (
+                    <div className="rounded-[8px] border border-zinc-950/10 bg-zinc-50/50 p-4">
+                      <h5 className="font-mono text-xs font-semibold text-zinc-950 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                        {copy.pillarSecurity}
+                      </h5>
+                      <p className="mt-2 text-xs leading-5 text-zinc-700">{project.engineeringPillars.security[locale]}</p>
+                    </div>
+                  ) : null}
+
+                  {project.engineeringPillars.reproducibility ? (
+                    <div className="rounded-[8px] border border-zinc-950/10 bg-zinc-50/50 p-4">
+                      <h5 className="font-mono text-xs font-semibold text-zinc-950 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                        {copy.pillarReproducibility}
+                      </h5>
+                      <p className="mt-2 text-xs leading-5 text-zinc-700">{project.engineeringPillars.reproducibility[locale]}</p>
+                    </div>
+                  ) : null}
+                </div>
+              </section>
+            ) : null}
+
             {project.workflow ? (
               <section className="mt-8">
                 <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.workflow}</h4>

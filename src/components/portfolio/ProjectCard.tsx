@@ -14,6 +14,18 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project, locale, copy, featured = false, onOpen }: ProjectCardProps) {
+  const extServices = project.features[locale]
+    .map((f) => {
+      const lower = f.toLowerCase();
+      if (lower.includes("github actions")) return "GitHub Actions";
+      if (lower.includes("neon")) return "Neon DB";
+      if (lower.includes("render")) return "Render";
+      return null;
+    })
+    .filter(Boolean) as string[];
+  const uniqueExtServices = Array.from(new Set(extServices));
+  const tagsToShow = ([...uniqueExtServices, project.primaryLanguage, ...project.topics].filter(Boolean) as string[]).slice(0, 5);
+
   return (
     <article
       className={`group grid overflow-hidden rounded-[8px] border border-zinc-950/10 bg-white shadow-xl shadow-zinc-950/5 transition duration-500 hover:-translate-y-1 hover:border-teal-600/35 hover:shadow-2xl hover:shadow-zinc-950/10 ${
@@ -45,11 +57,21 @@ export function ProjectCard({ project, locale, copy, featured = false, onOpen }:
             <p className="mt-3 text-sm leading-6 text-zinc-700">{project.problem[locale]}</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {[project.primaryLanguage, ...project.topics].filter(Boolean).slice(0, 4).map((tag) => (
-              <span key={tag} className="rounded-[6px] border border-zinc-950/10 bg-zinc-50 px-2.5 py-1 font-mono text-[0.7rem] text-zinc-600">
-                {tag}
-              </span>
-            ))}
+            {tagsToShow.map((tag) => {
+              const isService = uniqueExtServices.includes(tag);
+              return (
+                <span
+                  key={tag}
+                  className={`rounded-[6px] px-2.5 py-1 font-mono text-[0.7rem] ${
+                    isService
+                      ? "border border-teal-600/25 bg-teal-50/50 text-teal-700 font-medium"
+                      : "border border-zinc-950/10 bg-zinc-50 text-zinc-600"
+                  }`}
+                >
+                  {tag}
+                </span>
+              );
+            })}
           </div>
           <div className="mt-auto grid grid-cols-2 gap-4 border-t border-zinc-950/10 pt-4">
             <Meta label={copy.created} value={formatDate(project.createdAt, locale)} />

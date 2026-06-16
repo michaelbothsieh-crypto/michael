@@ -1,8 +1,26 @@
 # Michael Product Lab
 
+<p align="center">
+  English | <a href="README.zh-TW.md">繁體中文</a>
+</p>
+
 This project curates my public and private GitHub repositories into product cases. It moves beyond raw code lists to focus on the actual problems these tools solve.
 
 I built this lab to help partners and managers quickly understand how I approach product development and system design, especially in finance, AI, and utility tools.
+
+---
+
+## System Architecture & Data Flow
+
+The platform integrates a bot gateway, ETL schedulers, caching layers, and databases into a single automated pipeline:
+
+![AI-Driven Financial & Content Automation Platform](./public/architecture.png)
+
+### Core technical implementation:
+- **Asynchronous tasks & scheduling**: **GitHub Actions** runs cron jobs to trigger Python ETL scripts for YouTube and Fugle/FinMind API scraping. The pipeline decrypts `NLM_COOKIE_BASE64` to restore cookie sessions for uploading media to **NotebookLM**.
+- **Caching & rate limits**: **Upstash Redis** buffers webhook spikes and enforces TTL rules and rate limiting to avoid exceeding third-party API quotas.
+- **Database operations**: **Neon Serverless PostgreSQL** runs with Prisma/Drizzle for schema migrations. The database spins down to zero when idle and supports branching for sandbox testing.
+- **Fail-safe & alerting**: Scrapers validate the HTML structure of targets like MOPS. Any unexpected changes trigger regex fallbacks and dispatch instant error notifications via a **Telegram Webhook**.
 
 ---
 
@@ -26,16 +44,16 @@ Aggregates and filters market data to reduce search costs and flag risks.
 
 - **Taiwan Stock Health Dashboard (tw-stock-health-dashboard)** [Featured]
   - **Problem**: Investors waste time gathering daily index, global market, and risk data, making it hard to spot early market crash signals.
-  - **Features**: Automatic market summary, global correlation analysis, market crash warning system, and real-time Telegram alerts.
+  - **Features**: Automatic market summary, global correlation analysis, market crash warning system, real-time Telegram alerts, and **GitHub Actions scheduling**.
 - **Taiwan Warrant Screener (warrant-screener-tw)**
   - **Problem**: Warrant terms are complex, and default broker interfaces make cross-asset comparison difficult.
   - **Features**: Multi-criteria filters, side-by-side asset comparison, and a deployed workspace.
 - **Insider Watch Bot (insider-watch-bot)**
   - **Problem**: Executive and major shareholder stock transfer announcements are scattered across public sites, making it hard to track insider trading flows.
-  - **Features**: Real-time MOPS monitoring, automatic insider sale alerts, and trade trend tracking.
+  - **Features**: Real-time MOPS monitoring, automatic insider sale alerts, trade trend tracking, and **GitHub Actions automated schedules**.
 - **Financial News Analysis (financial-news-analysis)**
   - **Problem**: Sifting through thousands of market articles is slow, and subjective bias makes sentiment analysis unreliable.
-  - **Features**: Automatic news ingestion, AI-driven sentiment analysis, and strategy briefs.
+  - **Features**: Automatic news ingestion, AI-driven sentiment analysis, strategy briefs, and **Render hosting deployment**.
 - **SMC Trinity AI (smc-trinity-ai)**
   - **Problem**: Smart Money Concept (SMC) trading analysis is highly subjective and prone to individual bias.
   - **Features**: Automatic SMC chart analysis, multi-agent AI debates, and objective trade adjudication.
@@ -45,10 +63,10 @@ Connects information streams with AI tools to handle repetitive manual workflows
 
 - **Personal Bot Gateway (personal-bot-gateway)** [Featured]
   - **Problem**: Tracking multiple KOLs, podcasts, news, and Threads posts daily scatters information and prevents synthesis.
-  - **Features**: Unified Telegram control hub, daily KOL scans and briefs, automatic NotebookLM report handoffs, and instant stock/ETF health checks.
+  - **Features**: Unified Telegram control hub, daily KOL scans and briefs, automatic NotebookLM report handoffs, instant stock/ETF health checks, **GitHub Actions workflow integration**, and **Neon Serverless DB database integration**.
 - **LazyTube Assistant (LazyTube-Assistant)** [Featured]
   - **Problem**: High-value YouTube videos are often long, and manually searching for relevant content is time-consuming.
-  - **Features**: Automated search via YouTube API, NotebookLM content briefs, GitHub Actions scheduling, and Telegram alerts.
+  - **Features**: Automated search via YouTube API, NotebookLM content briefs, **GitHub Actions scheduling**, Telegram alerts, and **Neon DB persistence**.
 - **PodScribe (PodScribe)** [Featured]
   - **Problem**: Podcast takeaways are easily forgotten, and users lack structured transcripts or mind maps for knowledge management.
   - **Features**: Audio transcription, Gemini analysis, structured summaries, and mind maps.
@@ -96,13 +114,13 @@ Scrapes and analyzes market data to surface opportunities and risks.
 
 - **Price Atlas (price-altas)** [Featured]
   - **Problem**: Purchasing managers and buyers manually compare items across sites, missing exchange-rate shifts and real price gaps.
-  - **Features**: Multi-site web scraping, live exchange rate conversions, and price gap analysis.
+  - **Features**: Multi-site web scraping, live exchange rate conversions, price gap analysis, and **Render hosting deployment**.
 - **POE Price Tracker (poe-price-tracker)**
   - **Problem**: Online game markets experience rapid price shifts, making it hard to trade assets efficiently.
-  - **Features**: Live price monitoring, history trend graphs, and a web dashboard.
+  - **Features**: Live price monitoring, history trend graphs, web dashboard, and **GitHub Actions CI/CD automation**.
 - **Presale Radar (presale-radar)**
   - **Problem**: Real estate transaction records are disorganized, making it difficult to spot active areas and new project trends.
-  - **Features**: Public registry aggregation, regional volume mapping, and real estate market radars.
+  - **Features**: Public registry aggregation, regional volume mapping, real estate market radars, and **GitHub Actions ETL pipeline**.
 - **Neighbor Profiler (neighbor-profiler)**
   - **Problem**: Valuations on the same street can vary widely, and local environmental risks are often hidden.
   - **Features**: Local price gap analysis, neighborhood data mapping, and real estate risk alerts.
@@ -115,7 +133,7 @@ Rapid prototypes built to evaluate new technologies and validate market potentia
 
 - **Fortune Telling PWA (fortune-telling)**
   - **Problem**: Traditional BaZi astrology calculations are complex, and results are hard to understand without expert interpretation.
-  - **Features**: Automated BaZi chart plotting, Gemini AI personalized readings, and a mobile PWA.
+  - **Features**: Automated BaZi chart plotting, Gemini AI personalized readings, mobile PWA, and **GitHub Actions automated CI/CD**.
 - **North Volley Guide (north-volley-guide)**
   - **Problem**: Northern Taiwan volleyball court and club listings are scattered, making it hard to find active locations.
   - **Features**: Curated venue directories, regional searches, and mobile-friendly layouts.
@@ -124,7 +142,7 @@ Rapid prototypes built to evaluate new technologies and validate market potentia
   - **Features**: Fairway strategy simulation, interactive course plotting, and quick shot validation.
 - **Digit Recognition (digit_recognition)**
   - **Problem**: Validating low-latency image preprocessing and machine learning predictions directly in-browser.
-  - **Features**: Interactive canvas input, image scaling, and real-time MLP classifier predictions.
+  - **Features**: Interactive canvas input, image scaling, real-time MLP classifier predictions, and **Render hosting deployment**.
 - **FastAPI MCP Lab (FastAPI-project)**
   - **Problem**: Integrating FastAPI with the Model Context Protocol (MCP) to manage streaming AI interactions.
   - **Features**: FastAPI MCP implementation, PydanticAI exploration, and streaming chat flows.

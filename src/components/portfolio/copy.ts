@@ -35,6 +35,11 @@ export const copy = {
     views: "預覽次數",
     challenge: "關鍵突破與技術挑戰",
     impact: "實質成效與指標",
+    engineeringPillars: "工程強健性設計 (Engineering Pillars)",
+    pillarObservability: "觀測與容錯 (Observability)",
+    pillarCaching: "快取與配額 (Caching & Quota)",
+    pillarSecurity: "安全性與認證 (Security)",
+    pillarReproducibility: "可重現性與測試 (Reproducibility)",
   },
   en: {
     nav: ["Featured", "Categories", "All Work"],
@@ -73,6 +78,11 @@ export const copy = {
     views: "Views",
     challenge: "Key Challenge & Breakthrough",
     impact: "Impact & Metrics",
+    engineeringPillars: "Engineering & Robustness Pillars",
+    pillarObservability: "Observability & Fail-safe",
+    pillarCaching: "Caching & API Limits",
+    pillarSecurity: "Security & Webhook Auth",
+    pillarReproducibility: "Reproducibility & Mocking",
   },
 } as const;
 

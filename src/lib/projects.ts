@@ -47,6 +47,12 @@ type ProjectOverride = {
   commands?: LocalizedList;
   gallery?: string[];
   previewPath?: string;
+  engineeringPillars?: {
+    observability?: LocalizedText;
+    caching?: LocalizedText;
+    security?: LocalizedText;
+    reproducibility?: LocalizedText;
+  };
 };
 
 type PreviewEntry = {
@@ -73,6 +79,12 @@ export type Project = GitHubRepo & {
   previewPath: string;
   previewStatus: "captured" | "fallback" | "missing";
   publicSourceUrl: string | null;
+  engineeringPillars?: {
+    observability?: LocalizedText;
+    caching?: LocalizedText;
+    security?: LocalizedText;
+    reproducibility?: LocalizedText;
+  };
 };
 
 export type CategoryFilter = Category | "All";
@@ -181,6 +193,7 @@ export function getProjects(): Project[] {
         gallery: override?.gallery ?? [override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`],
         previewStatus: preview?.status ?? "missing",
         publicSourceUrl: repo.isPrivate ? null : repo.url,
+        engineeringPillars: override?.engineeringPillars,
       };
     })
     .sort((a, b) => {

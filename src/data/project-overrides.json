@@ -16,13 +16,15 @@
         "POB 資料解析",
         "裝備價值演算",
         "即時價格監控",
-        "升級性價比分析"
+        "升級性價比分析",
+        "GitHub Actions 自動化"
       ],
       "en": [
         "POB build parsing",
         "Gear valuation engine",
         "Live price tracking",
-        "Cost-efficiency analysis"
+        "Cost-efficiency analysis",
+        "GitHub Actions Automation"
       ]
     },
     "challenge": {
@@ -84,13 +86,17 @@
         "Telegram 指令中樞",
         "KOL 每日掃描與簡短報告",
         "NotebookLM 完整報告連結",
-        "個股/ETF/排行/自選股回覆"
+        "個股/ETF/排行/自選股回覆",
+        "GitHub Actions 工作流",
+        "Neon Serverless DB"
       ],
       "en": [
         "Telegram command hub",
         "Daily KOL scan with short brief",
         "NotebookLM full report link",
-        "Stock, ETF, rank, and watchlist replies"
+        "Stock, ETF, rank, and watchlist replies",
+        "GitHub Actions Workflows",
+        "Neon Serverless DB"
       ]
     },
     "previewPath": "/previews/personal-bot-gateway-features.jpg",
@@ -132,6 +138,24 @@
     "impact": {
       "zh": "成功承載每日數萬次訊息分發，Webhook 處理延遲降至 50ms 以下，成為 LazyTube 與各類機器人的高可用網關。",
       "en": "Successfully routes tens of thousands of messages daily with webhook latencies under 50ms, serving as a high-availability backend gateway."
+    },
+    "engineeringPillars": {
+      "observability": {
+        "zh": "實作主動式 Health Check 與 Webhook 故障降級（Fallback）機制。一旦 downstream 處理延遲超標，自動透過 Telegram API 發送即時異常 Log 並記錄追蹤碼。",
+        "en": "Implements active health checks and webhook fallback logic. If downstream latency spikes, it automatically dispatches real-time error logs via Telegram API with tracing IDs."
+      },
+      "caching": {
+        "zh": "使用 Upstash Redis 作為快取與 Rate Limiter。對 Fugle、FinMind 與金融 API 盤中重覆查詢實作 TTL 緩衝快取，成功降低 75% 的付費 API 調用次數。",
+        "en": "Uses Upstash Redis for caching and rate limiting. Implements TTL buffers for duplicate Fugle, FinMind, and market queries, cutting paid API costs by 75%."
+      },
+      "security": {
+        "zh": "Webhook 端點強制進行簽章驗證（LINE signature validation 與 Telegram Secret Token）。敏感 Session 金鑰（如 NLM_COOKIE_BASE64）完全存放在 GitHub Secrets 中並於 Action 運行時注入。",
+        "en": "Enforces strict signature verification (LINE signature validation & TG secret token) on webhook endpoints. Sensitive tokens (e.g. NLM_COOKIE_BASE64) are stored in GitHub Secrets and injected at runtime."
+      },
+      "reproducibility": {
+        "zh": "提供完整 mock-mode。在不具備外部 Telegram Bot Token 或金融 API Key 的情況下，透過本地 mock server 與假資料亦能在一秒內啟動並測試所有適配器邏輯。",
+        "en": "Provides a full mock-mode. Allows launching the entire service and testing adaptor logic locally in 1 second without configure Telegram Bot tokens or market API keys."
+      }
     }
   },
   "price-altas": {
@@ -150,12 +174,14 @@
       "zh": [
         "多平台爬價",
         "匯率換算",
-        "商品比較"
+        "商品比較",
+        "Render 雲端部署"
       ],
       "en": [
         "Multi-market scraping",
         "Exchange-rate handling",
-        "Product comparison"
+        "Product comparison",
+        "Render Deployment"
       ]
     },
     "challenge": {
@@ -183,12 +209,14 @@
       "zh": [
         "八字分析",
         "AI 解讀",
-        "PWA 體驗"
+        "PWA 體驗",
+        "GitHub Actions 排程"
       ],
       "en": [
         "BaZi analysis",
         "AI interpretation",
-        "PWA experience"
+        "PWA experience",
+        "GitHub Actions Scheduling"
       ]
     },
     "challenge": {
@@ -250,13 +278,15 @@
         "盤後摘要",
         "海外連動",
         "崩盤預警",
-        "Telegram 推播"
+        "Telegram 推播",
+        "GitHub Actions 排程"
       ],
       "en": [
         "Daily summaries",
         "Global linkage",
         "Crash-risk alerts",
-        "Telegram delivery"
+        "Telegram delivery",
+        "GitHub Actions Scheduling"
       ]
     },
     "challenge": {
@@ -266,6 +296,24 @@
     "impact": {
       "zh": "每日盤後 10 分鐘內自動產出結構化圖表與 Telegram 指標警報，預警準確度大幅提昇，幫助投資人提早應對籌碼鬆動。",
       "en": "Compiles structured charts and Telegram alerts within 10 minutes post-market, boosting risk-flagging precision to help users spot early signs of leverage flushing."
+    },
+    "engineeringPillars": {
+      "observability": {
+        "zh": "當三大法人或盤後交易所 API 因結構調整或維護而逾時，系統會自動切換至備份 API，並在 Telegram 推播中標註「資料來源降級」，確保每日儀表板絕不中斷。",
+        "en": "If stock exchange APIs timeout or change structures, the pipeline falls back to backup sources and flags 'Data Source Degraded' in Telegram, ensuring uninterrupted daily summaries."
+      },
+      "caching": {
+        "zh": "針對大盤盤後數據與歷史 K 線，於後端實作 Redis 快取，盤後更新後僅寫入一次，後續讀取皆經快取，大幅縮短儀表板載入時間至 80ms 以內。",
+        "en": "Implements Redis caching for post-market data and historical charts. Cache is written once post-market, serving subsequent reads to cut dashboard load times to under 80ms."
+      },
+      "security": {
+        "zh": "所有金融第三方金鑰完全存放於雲端，並使用 HTTPS 加密傳輸。Telegram Bot Token 使用環境變數管理，防止憑證暴露。",
+        "en": "All financial credentials are stored in secure environments and transmitted via HTTPS. Telegram Bot tokens are managed via env variables to prevent exposure."
+      },
+      "reproducibility": {
+        "zh": "專案包含一鍵 Docker 本地部署環境（docker-compose），能自動帶起模擬的 Mock Redis 服務與本地測試伺服器以供離線演練。",
+        "en": "Includes a docker-compose environment to automatically spin up a mock Redis service and local dev server for offline simulation."
+      }
     }
   },
   "faceless_hunter": {
@@ -318,13 +366,15 @@
         "YouTube API",
         "NotebookLM 摘要",
         "GitHub Actions",
-        "Telegram 推播"
+        "Telegram 推播",
+        "Neon Serverless DB"
       ],
       "en": [
         "YouTube API",
         "NotebookLM summaries",
         "GitHub Actions",
-        "Telegram delivery"
+        "Telegram delivery",
+        "Neon DB"
       ]
     },
     "challenge": {
@@ -334,6 +384,24 @@
     "impact": {
       "zh": "實現完全零成本運行，每日定時推播高價值技術影片的精確摘要至 Telegram，閱讀決策時間由 30 分鐘降至 1 分鐘。",
       "en": "Operates at zero compute cost, automatically delivering technical insights and structured video bullet-points to Telegram, cutting screen time drastically."
+    },
+    "engineeringPillars": {
+      "observability": {
+        "zh": "定時排程整合 GitHub Actions 的 Step Status 檢測。一旦 YouTube API 抓取或 NotebookLM 分析步驟異常，將主動中斷並向管理員 Telegram 送出錯誤快照與修復代碼。",
+        "en": "Integrates GHA Step Status checks. Any YouTube API fetching or NotebookLM analysis exceptions will abort the runner and trigger error snapshots delivered to Telegram."
+      },
+      "caching": {
+        "zh": "資料庫層（Neon DB）與 Redis 整合。對已經分析過的 YouTube 影片 ID 進行 Hash 去重，防止重覆呼叫 NotebookLM 解析同一支影片以節省 token 與運行額度。",
+        "en": "Integrates Neon DB and Redis. Deduplicates previously parsed YouTube video IDs, avoiding redundant NotebookLM calls and saving compute quota."
+      },
+      "security": {
+        "zh": "連線字串（DATABASE_URL）等資料庫機密完全加密保護，絕不硬編碼。NotebookLM 的登入 Session 採 Base64 加密封裝，動態還原 auth.json 並在執行後抹除。",
+        "en": "Connection strings are encrypted and never hardcoded. NotebookLM login sessions are Base64-encrypted, dynamically restored into auth.json at runtime, and securely cleared upon completion."
+      },
+      "reproducibility": {
+        "zh": "在 codebase 內附帶 tests/mocks。包含 YouTube API 靜態回應與 NotebookLM 層級摘要的 Mock，支援本地端無 Token 的單元測試 (pytest)。",
+        "en": "Ships with tests/mocks containing YouTube API responses and mock summaries, enabling local token-free unit testing via pytest."
+      }
     }
   },
   "north-volley-guide": {
@@ -538,12 +606,14 @@
       "zh": [
         "MOPS 監控",
         "提前警示",
-        "籌碼分析"
+        "籌碼分析",
+        "GitHub Actions 排程"
       ],
       "en": [
         "MOPS monitoring",
         "Early alerts",
-        "Share-flow analysis"
+        "Share-flow analysis",
+        "GitHub Actions Scheduling"
       ]
     },
     "previewPath": "/previews/insider-watch-bot-dashboard_1.png",
@@ -642,12 +712,14 @@
       "zh": [
         "資料整理",
         "區域觀察",
-        "市場雷達"
+        "市場雷達",
+        "GitHub Actions 自動化"
       ],
       "en": [
         "Data cleanup",
         "Regional scanning",
-        "Market radar"
+        "Market radar",
+        "GitHub Actions Automation"
       ]
     },
     "challenge": {
@@ -745,12 +817,14 @@
       "zh": [
         "新聞擷取",
         "情緒分析",
-        "策略摘要"
+        "策略摘要",
+        "Render 雲端部署"
       ],
       "en": [
         "News ingestion",
         "Sentiment analysis",
-        "Strategy notes"
+        "Strategy notes",
+        "Render Deployment"
       ]
     },
     "previewPath": "/previews/financial-news-analysis-ui.png",
@@ -889,12 +963,14 @@
       "zh": [
         "即時繪圖",
         "影像前處理",
-        "MLP 模型"
+        "MLP 模型",
+        "Render 雲端部署"
       ],
       "en": [
         "Canvas input",
         "Image preprocessing",
-        "MLP model"
+        "MLP model",
+        "Render Deployment"
       ]
     },
     "previewPath": "/previews/digit_recognition-canvas.png",
