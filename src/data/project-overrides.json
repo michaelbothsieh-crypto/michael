@@ -78,13 +78,13 @@
       "en": "Personal Bot Gateway"
     },
     "summary": {
-      "zh": "我最常用的 Telegram 驅動工作中樞，整合所有 TG 指令、KOL 每日掃描和 NotebookLM 連動。",
-      "en": "My most-used Telegram-driven operations hub, connecting every TG command with daily KOL scanning and NotebookLM handoff."
+      "zh": "我最常用的 Telegram 驅動工作中樞，整合所有 TG 指令、KOL 每日掃描與 NotebookLM 連動（首頁提供單日簡報範例介紹）。",
+      "en": "My most-used Telegram-driven operations hub, connecting every TG command with daily KOL scanning and NotebookLM handoff (single-day sample brief available on homepage)."
     },
     "features": {
       "zh": [
         "Telegram 指令中樞",
-        "KOL 每日掃描與簡短報告",
+        "KOL 每日掃描與單日範例簡報",
         "NotebookLM 完整報告連結",
         "個股/ETF/排行/自選股回覆",
         "GitHub Actions 工作流",
@@ -92,7 +92,7 @@
       ],
       "en": [
         "Telegram command hub",
-        "Daily KOL scan with short brief",
+        "Daily KOL scan with single-day sample brief",
         "NotebookLM full report link",
         "Stock, ETF, rank, and watchlist replies",
         "GitHub Actions Workflows",
@@ -156,8 +156,7 @@
         "zh": "提供完整 mock-mode。在不具備外部 Telegram Bot Token 或金融 API Key 的情況下，透過本地 mock server 與假資料亦能在一秒內啟動並測試所有適配器邏輯。",
         "en": "Provides a full mock-mode. Allows launching the entire service and testing adaptor logic locally in 1 second without configure Telegram Bot tokens or market API keys."
       }
-    },
-    "homepageUrl": "/reports/kol-report-00a6798b.html"
+    }
   },
   "price-altas": {
     "category": "Data & Research",
