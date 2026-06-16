@@ -661,32 +661,32 @@
     "featured": false,
     "sortWeight": 47,
     "title": {
-      "zh": "券商憑證儀表板",
+      "zh": "券商測試機帳密儀表板",
       "en": "Broker Credential Dashboard"
     },
     "summary": {
-      "zh": "管理券商連線與憑證資訊的內部儀表板。",
-      "en": "An internal dashboard for broker connection and credential operations."
+      "zh": "管理多家券商測試機連線 IP 與測試帳密資訊的單一 PHP 檔案儀表板。",
+      "en": "A single PHP file dashboard to manage broker test account credentials, IPs, and connection status."
     },
     "features": {
       "zh": [
-        "憑證管理",
-        "狀態整理",
-        "內部工具"
+        "帳密管理",
+        "狀態監控",
+        "輕量工具"
       ],
       "en": [
         "Credential management",
-        "Status overview",
-        "Internal tooling"
+        "Status monitoring",
+        "Lightweight tool"
       ]
     },
     "challenge": {
-      "zh": "多個券商憑證（PFX/P12）包含高度敏感之加密私鑰，絕對不能上傳至任何後端伺服器以防外洩。我設計了純前端的 WebCrypto 沙盒，完全在瀏覽器本地記憶體中完成憑證解析與憑證效期提取。",
-      "en": "Broker API credentials contain highly sensitive private keys that must never be transmitted to a backend. I engineered a client-side WebCrypto sandbox to parse certificates and extract expiration details entirely in-browser."
+      "zh": "在協同開發與測試期間，多家券商測試機的帳密、API 存取 IP 及連線狀態資訊繁雜且零散。此工具設計為一個無資料庫依賴的單一 PHP 檔案應用程式，挑戰在於如何在不導入複雜資料庫與框架的前提下，提供開發團隊一個輕量、集中且易於部署的管理介面。",
+      "en": "During collaborative testing, managing test account credentials and API IPs for multiple brokers can be chaotic. The challenge was to create a database-free, single-file PHP application that provides a lightweight, centralized, and easy-to-deploy management interface for developers without database overhead."
     },
     "impact": {
-      "zh": "實現零安全風險的多帳號憑證本地監控，並在憑證過期前 14 天透過瀏覽器 Service Worker 自動發送系統提醒。",
-      "en": "Ensured zero-server risk by inspecting API certificates locally, providing automated alerts 14 days before expiration via Service Worker."
+      "zh": "成功為團隊提供一個開箱即用的測試帳密管理平台，將多券商帳密的維護與查詢時間大幅縮短，避免了手動記錄造成的資訊不同步與混亂。",
+      "en": "Successfully provided developers with an out-of-the-box credential management page, significantly reducing sync and lookup times for broker test environments while avoiding copy-paste configuration errors."
     }
   },
   "PodScribe": {
@@ -1050,32 +1050,32 @@
     "featured": false,
     "sortWeight": 37,
     "title": {
-      "zh": "AIA Training Viewer",
+      "zh": "AI 培訓課程回顧平台",
       "en": "AIA Training Viewer"
     },
     "summary": {
-      "zh": "把訓練資料整理成可瀏覽的展示工具。",
-      "en": "Turns training material into a browsable viewer."
+      "zh": "提供學員快速瀏覽每週 AI 課程投影片、範例程式碼與教學資源的課程回顧平台。",
+      "en": "A course review platform designed for students to quickly browse slides, code examples, and resources of AI training."
     },
     "features": {
       "zh": [
-        "資料檢視",
-        "訓練內容",
-        "快速瀏覽"
+        "課程導航",
+        "資源共享",
+        "精美卡片"
       ],
       "en": [
-        "Data viewing",
-        "Training content",
-        "Fast browsing"
+        "Course navigation",
+        "Resource sharing",
+        "Card layout"
       ]
     },
     "challenge": {
-      "zh": "TensorBoard 日誌檔案龐大且格式封閉，非開發團隊的利害關係人極難直接查閱。我開發了輕量化 Viewer，編寫二進位解析器在前端讀取 TFEvent 檔，將其實時轉換為 JSON 並用 Recharts 繪製互動曲線。",
-      "en": "TensorBoard log binaries are large and difficult to share with non-technical stakeholders. I built a lightweight browser client with a TFEvent binary parser to decode event streams into JSON and plot interactive curves via Recharts."
+      "zh": "在為期數週的 AI 培訓課程中，投影片、範例程式碼與補充資源繁雜且零散，學員在課後難以系統性地回顧與下載。挑戰在於如何建立一個直觀且響應式的靜態總覽網頁，將多天的課程內容依日期卡片式整理，讓學員能零延遲地檢索各週的學習資源。",
+      "en": "Over weeks of intensive AI training, slides, codebase samples, and resources became scattered, making it hard for trainees to review. The challenge was to build an intuitive, responsive static portal that categorizes weeks of training materials into clean daily cards for instant retrieval."
     },
     "impact": {
-      "zh": "讓團隊與客戶無需架設伺服器即可一鍵瀏覽模型訓練進度，降低了 50% 的跨部門溝通成本。",
-      "en": "Enabled clients and team members to review training runs locally via a single static file, improving stakeholder communication speed by 50%."
+      "zh": "成功打造外訓課程的資源總覽平台，讓學員可以一鍵存取投影片與程式碼，大幅提昇了課後複習與知識內化的效率，提供更好的外訓教學體驗。",
+      "en": "Successfully delivered a clean resource portal for AI trainees to access slides and sample code with one click, streamlining post-class reviews and knowledge sharing."
     }
   },
   "smc-trinity-ai": {
