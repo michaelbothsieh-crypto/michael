@@ -58,6 +58,18 @@ const repos = JSON.parse(raw)
   }))
   .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
 
+// 防呆：本帳號一定有私有 repo。若一個都沒抓到，幾乎可確定是 token 權限不足
+// （例如 classic token 缺 `repo` scope、或 fine-grained token 沒給私有 repo 讀取權）。
+// 此時直接中止，避免把含私有專案的清單覆寫成只剩公開 repo 的殘缺版本。
+const privateCount = repos.filter((repo) => repo.isPrivate).length;
+if (privateCount === 0) {
+  console.error(
+    `Aborting: fetched ${repos.length} repos but 0 are private. ` +
+      "The token likely lacks private-repo read access — refusing to overwrite repos.generated.json.",
+  );
+  process.exit(1);
+}
+
 mkdirSync(dataDir, { recursive: true });
 writeFileSync(outputPath, `${JSON.stringify(repos, null, 2)}\n`);
 
