@@ -1,0 +1,47 @@
+name: Sync GitHub repos
+
+# 每日自動掃描所有 GitHub repo，更新 src/data/repos.generated.json
+# （含每個專案的最後更新時間），並在有變動時提交。
+on:
+  schedule:
+    # 每日 UTC 19:00 = 台灣時間 03:00
+    - cron: "0 19 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-repos
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Sync repositories
+        env:
+          # 預設的 GITHUB_TOKEN 無法列出帳號底下的私有 repo，
+          # 需提供具備 repo 讀取權限的 PAT，存於 secrets.REPO_SYNC_TOKEN。
+          GH_TOKEN: ${{ secrets.REPO_SYNC_TOKEN }}
+        run: npm run sync:repos
+
+      - name: Commit changes
+        run: |
+          if [[ -n "$(git status --porcelain src/data/repos.generated.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add src/data/repos.generated.json
+            git commit -m "chore: 每日同步 GitHub repo 與最後更新時間"
+            git push
+          else
+            echo "No changes to repos.generated.json"
+          fi

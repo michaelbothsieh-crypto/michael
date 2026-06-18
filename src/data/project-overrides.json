@@ -1110,5 +1110,97 @@
       "zh": "產出具備高度邏輯推導性的交易決策報告，相較單一 LLM 分析，訊號誤判率降低了 42%。",
       "en": "Generates highly logical decision reports; trading backtests showed a 42% reduction in false-positive breakouts compared to single-agent prompts."
     }
+  },
+  "travel": {
+    "category": "Product Utilities",
+    "featured": false,
+    "sortWeight": 95,
+    "title": {
+      "zh": "旅遊比價引擎",
+      "en": "Travel Price Comparison Engine"
+    },
+    "summary": {
+      "zh": "為台灣出發的旅客整合機票、飯店與套裝行程的一站式比價工具，採「爬蟲優先、API 為輔」的雙軌架構。",
+      "en": "A one-stop search tool for travelers departing Taiwan that aggregates flights, hotels, and tour packages via a scraper-first, limited-API-fallback architecture."
+    },
+    "features": {
+      "zh": [
+        "機票/飯店/行程併行比價",
+        "爬蟲優先零 API 成本",
+        "當日快取 <100ms",
+        "SerpAPI 配額後備",
+        "GitHub Actions 每日暖快取"
+      ],
+      "en": [
+        "Flights / hotels / packages",
+        "Scraper-first, zero API cost",
+        "Day-scoped cache <100ms",
+        "SerpAPI quota fallback",
+        "Daily cache warming"
+      ]
+    },
+    "challenge": {
+      "zh": "旅遊資料源（Google Flights、Booking.com、各旅行社）格式零散且爬蟲易失敗。我設計了「爬蟲優先、限量 API 為輔」的雙軌架構：以 Promise.allSettled 併行抓取機票、飯店與套裝行程，結果寫入 Upstash Redis 做當日快取，爬蟲落空時才觸發具配額保護的 SerpAPI 後備。",
+      "en": "Travel data sources (Google Flights, Booking.com, agencies) are fragmented and scrapers fail unpredictably. I built a dual-track architecture: fetching flights, hotels, and packages concurrently via Promise.allSettled, caching results in Upstash Redis day-scoped, and only triggering a quota-guarded SerpAPI fallback when scraping returns empty."
+    },
+    "impact": {
+      "zh": "相同查詢於同日命中快取可在 100ms 內回傳，且每次搜尋的 API 成本為零；SerpAPI 僅在使用者主動點擊後備時才扣除每日 10 次的配額。",
+      "en": "Same-day repeat queries return from cache in under 100ms at zero per-query API cost, with SerpAPI's 10-calls/day quota only consumed on explicit user fallback."
+    },
+    "engineeringPillars": {
+      "observability": {
+        "zh": "頁面即時顯示當日 SerpAPI 剩餘配額，並在爬蟲落空時才浮出「使用後備 API」按鈕，讓使用者清楚每次查詢的資料來源與成本。",
+        "en": "The page surfaces remaining daily SerpAPI quota in real time and only reveals a 'Use Fallback API' button when scraping returns empty, keeping data source and cost transparent per query."
+      },
+      "caching": {
+        "zh": "以 Upstash Redis KV 做 day-scoped 快取，相同查詢於同日直接命中，並由 GitHub Actions 每日 03:00 UTC 排程暖快取，降低首查延遲。",
+        "en": "Uses Upstash Redis KV for day-scoped caching so identical same-day queries hit instantly, with a GitHub Actions cron warming the cache daily at 03:00 UTC to cut cold-start latency."
+      },
+      "security": {
+        "zh": "SerpAPI 金鑰與快取憑證皆以環境變數管理，爬蟲服務部署於 Render，前端與 API route 部署於 Vercel，三方職責分離。",
+        "en": "SerpAPI keys and cache credentials are managed via environment variables, with the scraper on Render and the frontend/API routes on Vercel for clear separation of concerns."
+      },
+      "reproducibility": {
+        "zh": "Python FastAPI 爬蟲服務隨附 Dockerfile 與 render.yaml，可一鍵重現部署；docs/ 內含系統架構、搜尋流程與部署架構圖。",
+        "en": "The Python FastAPI scraper ships with a Dockerfile and render.yaml for one-click reproducible deploys, and docs/ includes system architecture, search flow, and deployment diagrams."
+      }
+    }
+  },
+  "disposal-board": {
+    "category": "Financial Intelligence",
+    "featured": false,
+    "sortWeight": 89,
+    "title": {
+      "zh": "處置看板",
+      "en": "Disposal Board"
+    },
+    "summary": {
+      "zh": "台股處置股／注意股風險看板，彙整風險股、處置中、即將出關與注意自結清單，並提供風險指標與出關倒數。",
+      "en": "A Taiwan-stock disposal / watch-list risk board that aggregates at-risk, under-disposal, soon-to-clear, and watch-list tickers with risk badges and clearance countdowns."
+    },
+    "features": {
+      "zh": [
+        "四大風險看板",
+        "TWSE/TPEX 真實資料",
+        "出關倒數與未來腳本",
+        "處置日 + 即時報價雙層快取",
+        "Next.js 16 + Tailwind v4"
+      ],
+      "en": [
+        "Four risk boards",
+        "Live TWSE/TPEX data",
+        "Countdown & forecast",
+        "Dual-layer caching",
+        "Next.js 16 + Tailwind v4"
+      ]
+    },
+    "challenge": {
+      "zh": "台股處置／注意股資訊散落於證交所與櫃買中心的公告中，且不支援瀏覽器跨域。我用 Next.js Route Handler 在 server 端併行抓取 TWSE/TPEX OpenAPI 與 Yahoo 報價，透過市場無關的純函式引擎依「處置作業要點」（連 3 次／10 日 6 次／30 日 12 次）計算風險分數、漲跌停價與出關倒數。",
+      "en": "Taiwan disposal/watch-list data is scattered across TWSE and TPEX announcements and blocks browser CORS. I built a Next.js Route Handler that concurrently fetches TWSE/TPEX OpenAPI plus Yahoo quotes server-side, then runs a market-agnostic pure-function engine that applies the official disposal rules (3-in-a-row / 6-in-10 / 12-in-30 days) to compute risk scores, limit prices, and clearance countdowns."
+    },
+    "impact": {
+      "zh": "名單以「處置日」為鍵（台北 18:00 換日）一天只抓一次、即時報價 20 秒新鮮度，達成兩段式秒開；任一資料源失敗皆有降級備援，看板不中斷。",
+      "en": "Lists are cached per 'disposal day' (18:00 Taipei rollover) so they're fetched once daily, while live quotes carry a 20s freshness window — enabling instant two-stage loading with graceful fallback if any source fails."
+    }
   }
 }

@@ -138,5 +138,15 @@
     "status": "fallback",
     "reason": "http 404",
     "path": "/previews/aia-training-viewer.svg"
+  },
+  "travel": {
+    "status": "fallback",
+    "reason": "private repo",
+    "path": "/previews/travel.svg"
+  },
+  "disposal-board": {
+    "status": "fallback",
+    "reason": "private repo",
+    "path": "/previews/disposal-board.svg"
   }
 }
