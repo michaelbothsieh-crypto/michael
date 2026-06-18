@@ -12,10 +12,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://michael-lab.vercel.app";
+const siteTitle = "Michael Product Lab";
+const siteDescription =
+  "A bilingual product portfolio for Michael's AI, automation, finance, data, and business-site projects.";
+
 export const metadata: Metadata = {
-  title: "Michael Product Lab",
-  description:
-    "A bilingual product portfolio for Michael's AI, automation, finance, data, and business-site projects.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    title: siteTitle,
+    description: siteDescription,
+    siteName: siteTitle,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: siteTitle }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({

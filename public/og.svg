@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7faf9"/>
+      <stop offset="1" stop-color="#e6f0ec"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="82%" cy="16%" r="60%">
+      <stop offset="0" stop-color="#14b8a6" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#14b8a6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="0" y="0" width="1200" height="10" fill="#0d9488"/>
+
+  <text x="80" y="150" fill="#0d9488" font-size="22" font-weight="700" letter-spacing="8">PRODUCT LAB</text>
+
+  <text x="78" y="270" fill="#09090b" font-size="92" font-weight="800">Michael Product Lab</text>
+  <text x="80" y="338" fill="#3f3f46" font-size="38" font-weight="600">把點子變成實用工具 · Turning ideas into useful tools</text>
+
+  <text x="80" y="430" fill="#52525b" font-size="27">AI 自動化 · 金融決策 · 資料研究 · 工具產品 · 企業網站</text>
+
+  <!-- category chips -->
+  <g font-size="22" font-weight="700">
+    <rect x="80" y="470" width="190" height="54" rx="27" fill="#0d9488" opacity=".12"/>
+    <text x="175" y="505" fill="#0f766e" text-anchor="middle">30 個案例</text>
+    <rect x="286" y="470" width="240" height="54" rx="27" fill="#0d9488" opacity=".12"/>
+    <text x="406" y="505" fill="#0f766e" text-anchor="middle">公開＋私有作品</text>
+    <rect x="542" y="470" width="270" height="54" rx="27" fill="#0d9488" opacity=".12"/>
+    <text x="677" y="505" fill="#0f766e" text-anchor="middle">每日自動同步</text>
+  </g>
+
+  <text x="80" y="585" fill="#71717a" font-size="22" font-family="monospace">michael-lab.vercel.app</text>
+
+  <circle cx="1050" cy="150" r="92" fill="#0d9488" opacity=".10"/>
+  <circle cx="1050" cy="150" r="58" fill="#0d9488" opacity=".16"/>
+  <path d="M80 360 C 360 320, 620 400, 900 350 S 1120 320, 1130 350" fill="none" stroke="#0d9488" stroke-width="3" opacity=".25"/>
+</svg>

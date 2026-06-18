@@ -204,7 +204,7 @@ export function getProjects(): Project[] {
     });
 }
 
-export function selectFeaturedProjects(projects: Project[], limit = 5) {
+export function selectFeaturedProjects(projects: Project[], limit = 6) {
   return projects.filter((project) => project.featured).slice(0, limit);
 }
 

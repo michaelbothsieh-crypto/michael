@@ -136,7 +136,7 @@
       "en": "Handling high-volume concurrent webhooks from Telegram and LINE causes latency and packet drops due to mismatched message schemas. I implemented a unified Adapter Pattern mapping layer combined with a buffer queue to absorb traffic spikes and ensure zero-loss routing."
     },
     "impact": {
-      "zh": "成功承載每日數萬次訊息分發，Webhook 處理延遲降至 50ms 以下，成為 LazyTube 與各類機器人的高可用網關。",
+      "zh": "成功承載每日數萬次訊息分發，Webhook 處理延遲降至 50ms 以下，成為每日 KOL 簡報與各類機器人的高可用網關。",
       "en": "Successfully routes tens of thousands of messages daily with webhook latencies under 50ms, serving as a high-availability backend gateway."
     },
     "engineeringPillars": {
@@ -375,41 +375,41 @@
       "en": "Analyzed thousands of shorts to extract high-virality faceless templates, enabling creators to replicate engaging formats with minimal production costs."
     }
   },
-  "LazyTube-Assistant": {
+  "kol-daily-brief": {
     "category": "AI Automation",
     "featured": true,
     "sortWeight": 98,
     "title": {
-      "zh": "LazyTube Assistant",
-      "en": "LazyTube Assistant"
+      "zh": "每日 KOL 簡報",
+      "en": "Daily KOL Brief"
     },
     "summary": {
-      "zh": "自動篩選 YouTube 影片，整理摘要後推播到日常工作流。",
-      "en": "Filters YouTube videos, summarizes useful content, and pushes it into a daily workflow."
+      "zh": "每日彙整 KOL 影片重點的展示頁。最初是 YouTube→NotebookLM 摘要引擎的原型，現在主要作為每日 KOL 簡報的呈現頁面，核心引擎已整合進 personal-bot-gateway。",
+      "en": "A page that surfaces the daily KOL video brief. Originally the prototype of a YouTube→NotebookLM summarization engine, it now mainly serves as the display surface for the daily brief — the core engine has since been folded into personal-bot-gateway."
     },
     "features": {
       "zh": [
+        "每日 KOL 簡報展示",
         "YouTube API",
         "NotebookLM 摘要",
-        "GitHub Actions",
-        "Telegram 推播",
+        "GitHub Actions 排程",
         "Neon Serverless DB"
       ],
       "en": [
+        "Daily KOL brief view",
         "YouTube API",
         "NotebookLM summaries",
-        "GitHub Actions",
-        "Telegram delivery",
+        "GitHub Actions schedule",
         "Neon DB"
       ]
     },
     "challenge": {
-      "zh": "YouTube 自動生成的字幕經常缺乏標點且存在大量語音辨識錯誤，直接傳入 LLM 會影響摘要品質。我設計了字幕文本清洗過濾器，自動重構段落結構，並利用 GitHub Actions 實作無伺服器（Serverless）定時排程與 NotebookLM Handoff。",
-      "en": "Auto-generated YouTube transcripts lack punctuation and contain speech-to-text artifacts, degrading summary accuracy. I designed a pre-processing text filter to reconstruct paragraphs and leveraged GitHub Actions for scheduling NotebookLM handoffs."
+      "zh": "YouTube 自動生成的字幕經常缺乏標點且存在大量語音辨識錯誤，直接傳入 LLM 會影響摘要品質。我在這個原型裡設計了字幕文本清洗過濾器，自動重構段落結構，並利用 GitHub Actions 實作無伺服器定時排程與 NotebookLM Handoff——這套流程後來被整合進 personal-bot-gateway 成為它的語意處理核心。",
+      "en": "Auto-generated YouTube transcripts lack punctuation and contain speech-to-text artifacts, degrading summary accuracy. In this prototype I built a transcript-cleaning filter to reconstruct paragraphs and used GitHub Actions for serverless scheduling and NotebookLM handoff — the same pipeline later became the semantic core of personal-bot-gateway."
     },
     "impact": {
-      "zh": "實現完全零成本運行，每日定時推播高價值技術影片的精確摘要至 Telegram，閱讀決策時間由 30 分鐘降至 1 分鐘。",
-      "en": "Operates at zero compute cost, automatically delivering technical insights and structured video bullet-points to Telegram, cutting screen time drastically."
+      "zh": "驗證了零成本、定時產出 KOL 影片摘要的可行性；如今這頁專注於呈現每日 KOL 簡報，而完整的指令與推播能力則由 personal-bot-gateway 承接。",
+      "en": "Proved out a zero-cost, scheduled pipeline for KOL video summaries; today this page focuses on presenting the daily KOL brief, while the full command and delivery experience lives in personal-bot-gateway."
     },
     "engineeringPillars": {
       "observability": {

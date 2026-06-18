@@ -39,10 +39,10 @@
     "source": "https://faceless-hunter.vercel.app/",
     "path": "/previews/faceless-hunter.png"
   },
-  "LazyTube-Assistant": {
+  "kol-daily-brief": {
     "status": "captured",
-    "source": "https://lazy-tube-assistant.vercel.app",
-    "path": "/previews/lazytube-assistant.png"
+    "source": "https://kol-daily-brief.vercel.app",
+    "path": "/previews/kol-daily-brief.png"
   },
   "north-volley-guide": {
     "status": "captured",
@@ -140,13 +140,13 @@
     "path": "/previews/aia-training-viewer.svg"
   },
   "travel": {
-    "status": "fallback",
-    "reason": "private repo",
-    "path": "/previews/travel.svg"
+    "status": "captured",
+    "source": "https://travel-compare-tw.vercel.app",
+    "path": "/previews/travel.png"
   },
   "disposal-board": {
-    "status": "fallback",
-    "reason": "private repo",
-    "path": "/previews/disposal-board.svg"
+    "status": "captured",
+    "source": "https://disposal-board.vercel.app",
+    "path": "/previews/disposal-board.png"
   }
 }

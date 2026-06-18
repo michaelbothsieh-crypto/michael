@@ -28,7 +28,7 @@ export function ProjectCard({ project, locale, copy, featured = false, onOpen }:
   return (
     <article
       className={`group grid overflow-hidden rounded-[8px] border border-zinc-950/10 bg-white shadow-xl shadow-zinc-950/5 transition duration-500 hover:-translate-y-1 hover:border-teal-600/35 hover:shadow-2xl hover:shadow-zinc-950/10 ${
-        featured ? "lg:col-span-4 first:lg:col-span-6 [&:nth-child(2)]:lg:col-span-6" : ""
+        featured ? "lg:col-span-3 first:lg:col-span-6 [&:nth-child(2)]:lg:col-span-6" : ""
       }`}
     >
       <button

@@ -39,10 +39,10 @@
     "source": "https://faceless-hunter.vercel.app/",
     "path": "/previews/faceless-hunter.png"
   },
-  "LazyTube-Assistant": {
+  "kol-daily-brief": {
     "status": "captured",
-    "source": "https://lazy-tube-assistant.vercel.app",
-    "path": "/previews/lazytube-assistant.png"
+    "source": "https://kol-daily-brief.vercel.app",
+    "path": "/previews/kol-daily-brief.png"
   },
   "north-volley-guide": {
     "status": "captured",

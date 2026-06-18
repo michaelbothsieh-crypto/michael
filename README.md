@@ -24,11 +24,11 @@ This portfolio features multiple independent AI automation and financial decisio
 
 ## Featured Product Spotlights
 
-Four core projects selected to showcase key backgrounds and live execution views:
+Core projects selected to showcase key backgrounds and live execution views:
 
 ### 1. Personal Bot Gateway (personal-bot-gateway) [AI Automation]
 * **Background**: Tracking daily KOLs, podcasts, news, and Threads posts scattered information across multiple applications. This bot aggregates Telegram commands, NotebookLM analysis, report link dispatch, and stock/ETF checks inside a single Telegram window.
-* **Tech Highlights**: Leverages the core semantic processing and NotebookLM integration engine from `LazyTube-Assistant`. Built with Vercel Serverless (TS) API gateway. Integrates Redis cache to cut paid API costs by 75%, and automates NotebookLM cookie session handoff triggered by GitHub Actions.
+* **Tech Highlights**: Leverages the core semantic processing and NotebookLM integration engine first prototyped as `kol-daily-brief`. Built with Vercel Serverless (TS) API gateway. Integrates Redis cache to cut paid API costs by 75%, and automates NotebookLM cookie session handoff triggered by GitHub Actions.
 * **Live View**:
   ![Personal Bot Gateway Preview](./public/previews/personal-bot-gateway-features.jpg)
 
@@ -36,13 +36,27 @@ Four core projects selected to showcase key backgrounds and live execution views
 * **Background**: Purchasing managers and e-commerce traders waste time manually searching items across multiple international sites (US/JP/TW) and calculating exchange rates, missing shipping overheads and dynamic price gaps.
 * **Tech Highlights**: The FastAPI backend dispatches concurrent async scraping pipelines to Amazon US/JP, Yahoo JP, and Kakaku.com. It converts values to TWD via exchange-rate APIs and streams results using SSE (Server-Sent Events) with user-aborted request optimization. It uses `curl_cffi` to mimic Chrome TLS/JA3 fingerprints to bypass Cloudflare protection.
 * **Live View**:
-  *(Refer to the screenshots inside the web portfolio)*
+  ![Price Atlas Preview](./public/previews/price-altas.png)
 
 ### 3. Taiwan Stock Health Dashboard (tw-stock-health-dashboard) [Financial Intelligence]
 * **Background**: Gathering index, global indices, and capital risk indicators manually is tedious and delays warnings on market liquidity flushes.
 * **Tech Highlights**: Built an asynchronous ETL pipeline using concurrent Promise.all queries with Redis caching, and modeled crash warning flags.
+* **Live View**:
+  ![Taiwan Stock Health Dashboard Preview](./public/previews/tw-stock-health-dashboard.png)
 
-### 4. Fehow Corporate Site (fehow-web) [Business Sites]
+### 4. Disposal Board (disposal-board) [Financial Intelligence]
+* **Background**: Taiwan disposal / watch-list stock data is scattered across TWSE and TPEX announcements and blocks browser CORS, making per-ticker risk hard to read at a glance.
+* **Tech Highlights**: A Next.js Route Handler concurrently fetches TWSE/TPEX OpenAPI plus Yahoo quotes server-side, then a market-agnostic pure-function engine applies the official disposal rules (3-in-a-row / 6-in-10 / 12-in-30 days) to compute risk scores, limit prices, and clearance countdowns. Lists are cached per "disposal day" (18:00 Taipei rollover); live quotes carry a 20s freshness window.
+* **Live View**:
+  ![Disposal Board Preview](./public/previews/disposal-board.png)
+
+### 5. Travel Price Comparison Engine (travel) [Product Utilities]
+* **Background**: Comparing flights, hotels, and tour packages for trips departing Taiwan means juggling many fragmented sources, and per-query API costs add up fast.
+* **Tech Highlights**: A scraper-first, quota-gated dual-track architecture — flights/hotels/packages are fetched concurrently via `Promise.allSettled`, cached day-scoped in Upstash Redis (<100ms repeat hits), with a SerpAPI fallback (10/day) only triggered on explicit user action. GitHub Actions warms the cache daily.
+* **Live View**:
+  ![Travel Price Comparison Preview](./public/previews/travel.png)
+
+### 6. Fehow Corporate Site (fehow-web) [Business Sites]
 * **Background**: Electronics supply-chain companies need clean, credible websites to win trust from global buyers.
 * **Tech Highlights**: Created an elegant Bento Grid layout that remains fully responsive using Next.js and CSS Grid. Implemented GSAP ScrollTrigger timelines for scroll-bound animations.
 * **Live View**:
@@ -52,32 +66,42 @@ Four core projects selected to showcase key backgrounds and live execution views
 
 ## All Projects &amp; Tech Matrix
 
-Here is a consolidated matrix of all 22 projects, their categories, core stack, integrations, and deployment status for quick reference and comparison:
+<!-- AUTO:projects -->
+A consolidated matrix of all 30 active projects — auto-generated from live GitHub metadata, so it never goes stale.
 
-| Repository (Repo) | Product Line (Category) | Tech Stack | Integrations | Deployment |
+| Project | Category | Stack | Highlights | Links |
 | :--- | :--- | :--- | :--- | :--- |
-| [personal-bot-gateway](https://github.com/michaelbothsieh-crypto/personal-bot-gateway) | AI Automation | TypeScript, FastAPI | Telegram/LINE Webhook, Neon DB, Upstash Redis, NotebookLM | [Vercel](https://personal-bot-gateway.vercel.app) (Private) |
-| [LazyTube-Assistant](https://github.com/michaelbothsieh-crypto/LazyTube-Assistant) | AI Automation | Python | GitHub Actions, NotebookLM API, Telegram Bot, Neon DB | [Vercel](https://lazy-tube-assistant.vercel.app) |
-| [tw-stock-health-dashboard](https://github.com/michaelbothsieh-crypto/tw-stock-health-dashboard) | Financial Intelligence | TypeScript, Next.js | GitHub Actions, Upstash Redis, Telegram Bot | [Vercel](https://tw-stock-health-dashboard.vercel.app) |
-| [price-altas](https://github.com/michaelbothsieh-crypto/price-altas) | Data & Research | Python, FastAPI | Amazon/Yahoo APIs, Exchange Rate API, Upstash Redis | [Render](https://price-altas-frontend.vercel.app/) (Private) |
-| [fortune-telling](https://github.com/michaelbothsieh-crypto/fortune-telling) | Experiments | TypeScript, React | Google Gemini AI API, PWA | [GitHub Pages](https://fortune-telling-sigma.vercel.app/) |
-| [fehow-web](https://github.com/michaelbothsieh-crypto/fehow-web) | Business Sites | Next.js, Tailwind | GSAP ScrollTrigger, Bento Grid | Vercel (Local Preview) |
-| [xiexing-pwa](https://github.com/michaelbothsieh-crypto/xiexing-pwa) | Business Sites | TypeScript, Next.js | Service Worker, PWA, Next-Gen Image Pipeline | Vercel (Local Preview) |
-| [yellowstone-clinic](https://github.com/michaelbothsieh-crypto/yellowstone-clinic) | Business Sites | TypeScript, Next.js | PWA, WCAG Accessibility Guidelines | Vercel (Local Preview) |
-| [insider-watch-bot](https://github.com/michaelbothsieh-crypto/insider-watch-bot) | Financial Intelligence | TypeScript | GitHub Actions, MOPS Scraper, Telegram Webhook | [GitHub](https://github.com/michaelbothsieh-crypto/insider-watch-bot) |
-| [msg-converter](https://github.com/michaelbothsieh-crypto/msg-converter) | Product Utilities | HTML5, JavaScript | WebCrypto, OLE2 Binary Parser | GitHub Pages |
-| [financial-news-analysis](https://github.com/michaelbothsieh-crypto/financial-news-analysis) | Financial Intelligence | Streamlit, Python | OpenAI GPT API, Streamlit Cloud | [Render](https://github.com/michaelbothsieh-crypto/financial-news-analysis) (Private) |
-| [taiwan-nhi-calculator](https://github.com/michaelbothsieh-crypto/taiwan-nhi-calculator) | Product Utilities | HTML5, JavaScript | Decimals Math Library, Unit Testing | GitHub Pages (Private) |
-| [team-eats](https://github.com/michaelbothsieh-crypto/team-eats) | Product Utilities | TypeScript, React | WebSocket, LocalStorage, PWA | GitHub Pages (Private) |
-| [socket-swiss-knife](https://github.com/michaelbothsieh-crypto/socket-swiss-knife) | Product Utilities | Python | MTF TCP Socket, Tauri/Electron, GUI | Desktop App (Private) |
-| [warrant-screener-tw](https://github.com/michaelbothsieh-crypto/warrant-screener-tw) | Financial Intelligence | JavaScript, Python | Black-Scholes Greeks Engine, requestAnimationFrame | [Vercel](https://warrant-screener-tw.vercel.app) (Private) |
-| [Config-Diff-Viewer](https://github.com/michaelbothsieh-crypto/Config-Diff-Viewer) | Product Utilities | TypeScript, React | Web Worker, Myer's Diff, Virtual Scroll | [Vercel](https://config-diff-viewer.vercel.app) |
-| [PodScribe](https://github.com/michaelbothsieh-crypto/PodScribe) | AI Automation | TypeScript, Next.js | Gemini AI API, Whisper API, Mermaid Mindmap | [Vercel](https://podscribe-six.vercel.app) |
-| [presale-radar](https://github.com/michaelbothsieh-crypto/presale-radar) | Data & Research | Python, Next.js | Leaflet Map, Pandas ETL Pipeline | [Vercel](https://presale-radar.vercel.app) (Private) |
-| [neighbor-profiler](https://github.com/michaelbothsieh-crypto/neighbor-profiler) | Data & Research | TypeScript, React | JCIC Finance Registry, 3D Radar Charts | [Vercel](https://house-dun-one.vercel.app) (Private) |
-| [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | Experiments | Python, FastAPI | Model Context Protocol (MCP), PydanticAI | Jupyter / Local Run (Private) |
-| [digit_recognition](https://github.com/michaelbothsieh-crypto/digit_recognition) | Experiments | Python, FastAPI | Scikit-learn (MLP), OpenCV, HTML5 Canvas | [Render](https://github.com/michaelbothsieh-crypto/digit_recognition) (Private) |
-| [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | Data & Research | Jupyter, Python | TFEvent Binary Parser, Recharts | Vercel (Local Preview) (Private) |
+| [personal-bot-gateway](https://github.com/michaelbothsieh-crypto/personal-bot-gateway) | AI Automation | TypeScript | Telegram command hub · Daily KOL scan with single-day sample brief · NotebookLM full report link | [Demo](https://personal-bot-gateway.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/personal-bot-gateway) · 🔒 |
+| [tw-stock-health-dashboard](https://github.com/michaelbothsieh-crypto/tw-stock-health-dashboard) | Financial Intelligence | TypeScript | Daily summaries · Global linkage · Crash-risk alerts | [Demo](https://tw-stock-health-dashboard.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/tw-stock-health-dashboard) |
+| [kol-daily-brief](https://github.com/michaelbothsieh-crypto/kol-daily-brief) | AI Automation | Python | Daily KOL brief view · YouTube API · NotebookLM summaries | [Demo](https://kol-daily-brief.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/kol-daily-brief) |
+| [price-altas](https://github.com/michaelbothsieh-crypto/price-altas) | Data & Research | Python | Simultaneous Multi-Market Search (TW/US/JP) · Live Exchange-Rate API Conversion · SSE (Server-Sent Events) Streaming Results | [Demo](https://price-altas-frontend.vercel.app/) · [GitHub](https://github.com/michaelbothsieh-crypto/price-altas) · 🔒 |
+| [travel](https://github.com/michaelbothsieh-crypto/travel) | Product Utilities | TypeScript | Flights / hotels / packages · Scraper-first, zero API cost · Day-scoped cache <100ms | [Demo](https://travel-compare-tw.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/travel) · 🔒 |
+| [fehow-web](https://github.com/michaelbothsieh-crypto/fehow-web) | Business Sites | TypeScript | Corporate presence · Bento grid · Supply-chain narrative | [Demo](https://m3-web-mauve.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/fehow-web) |
+| [PodScribe](https://github.com/michaelbothsieh-crypto/PodScribe) | AI Automation | TypeScript | Podcast transcription · Gemini analysis · Mind maps | [Demo](https://podscribe-six.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/PodScribe) |
+| [Config-Diff-Viewer](https://github.com/michaelbothsieh-crypto/Config-Diff-Viewer) | Product Utilities | TypeScript | Directory comparison · Visual diffs · Config review | [Demo](https://config-diff-viewer.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/Config-Diff-Viewer) |
+| [disposal-board](https://github.com/michaelbothsieh-crypto/disposal-board) | Financial Intelligence | TypeScript | Four risk boards · Live TWSE/TPEX data · Countdown & forecast | [Demo](https://disposal-board.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/disposal-board) · 🔒 |
+| [warrant-screener-tw](https://github.com/michaelbothsieh-crypto/warrant-screener-tw) | Financial Intelligence | JavaScript | Condition filters · Underlying comparison · Live deployment | [Demo](https://warrant-screener-tw.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/warrant-screener-tw) · 🔒 |
+| [insider-watch-bot](https://github.com/michaelbothsieh-crypto/insider-watch-bot) | Financial Intelligence | TypeScript | MOPS monitoring · Early alerts · Share-flow analysis | [GitHub](https://github.com/michaelbothsieh-crypto/insider-watch-bot) |
+| [poe-price-tracker](https://github.com/michaelbothsieh-crypto/poe-price-tracker) | Data & Research | TypeScript | POB build parsing · Gear valuation engine · Live price tracking | [Demo](https://poe-price-tracker.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/poe-price-tracker) · 🔒 |
+| [presale-radar](https://github.com/michaelbothsieh-crypto/presale-radar) | Data & Research | Python | Data cleanup · Regional scanning · Market radar | [Demo](https://presale-radar.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/presale-radar) · 🔒 |
+| [faceless_hunter](https://github.com/michaelbothsieh-crypto/faceless_hunter) | AI Automation | JavaScript | YouTube analysis · Viral ratio · Niche discovery | [Demo](https://faceless-hunter.vercel.app/) · [GitHub](https://github.com/michaelbothsieh-crypto/faceless_hunter) · 🔒 |
+| [xiexing-pwa](https://github.com/michaelbothsieh-crypto/xiexing-pwa) | Business Sites | TypeScript | Service showcase · PWA · Business inquiry flow | [GitHub](https://github.com/michaelbothsieh-crypto/xiexing-pwa) |
+| [yellowstone-clinic](https://github.com/michaelbothsieh-crypto/yellowstone-clinic) | Business Sites | TypeScript | Clinic information · Service pages · PWA | [GitHub](https://github.com/michaelbothsieh-crypto/yellowstone-clinic) |
+| [neighbor-profiler](https://github.com/michaelbothsieh-crypto/neighbor-profiler) | Data & Research | TypeScript | Valuation gaps · Street-level analysis · Risk signals | [Demo](https://house-dun-one.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/neighbor-profiler) · 🔒 |
+| [socket-swiss-knife](https://github.com/michaelbothsieh-crypto/socket-swiss-knife) | Product Utilities | Python | Broker profiles · Scheduled tests · Desktop GUI | [GitHub](https://github.com/michaelbothsieh-crypto/socket-swiss-knife) · 🔒 |
+| [fortune-telling](https://github.com/michaelbothsieh-crypto/fortune-telling) | Experiments | TypeScript | BaZi analysis · AI interpretation · PWA experience | [Demo](https://fortune-telling-sigma.vercel.app/) · [GitHub](https://github.com/michaelbothsieh-crypto/fortune-telling) |
+| [financial-news-analysis](https://github.com/michaelbothsieh-crypto/financial-news-analysis) | Financial Intelligence | HTML | News ingestion · Sentiment analysis · Strategy notes | [GitHub](https://github.com/michaelbothsieh-crypto/financial-news-analysis) · 🔒 |
+| [smc-trinity-ai](https://github.com/michaelbothsieh-crypto/smc-trinity-ai) | Financial Intelligence | Python | SMC analysis · Multi-agent debate · Trading judgment | [GitHub](https://github.com/michaelbothsieh-crypto/smc-trinity-ai) · 🔒 |
+| [broker-credential-dashboard](https://github.com/michaelbothsieh-crypto/broker-credential-dashboard) | Product Utilities | PHP | Credential management · Status monitoring · Lightweight tool | [GitHub](https://github.com/michaelbothsieh-crypto/broker-credential-dashboard) · 🔒 |
+| [team-eats](https://github.com/michaelbothsieh-crypto/team-eats) | Product Utilities | TypeScript | Voting · Group stats · Expense records | [GitHub](https://github.com/michaelbothsieh-crypto/team-eats) · 🔒 |
+| [msg-converter](https://github.com/michaelbothsieh-crypto/msg-converter) | Product Utilities | HTML | MSG parsing · HTML export · Attachment handling | [GitHub](https://github.com/michaelbothsieh-crypto/msg-converter) |
+| [taiwan-nhi-calculator](https://github.com/michaelbothsieh-crypto/taiwan-nhi-calculator) | Product Utilities | HTML | Premium calculation · Role scenarios · Form utility | [GitHub](https://github.com/michaelbothsieh-crypto/taiwan-nhi-calculator) · 🔒 |
+| [north-volley-guide](https://github.com/michaelbothsieh-crypto/north-volley-guide) | Experiments | TypeScript | Venue notes · Fast lookup · Mobile browsing | [Demo](https://north-volley-guide.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/north-volley-guide) · 🔒 |
+| [golf-strategy-lk-prototype](https://github.com/michaelbothsieh-crypto/golf-strategy-lk-prototype) | Product Utilities | JavaScript | Data display · Fairway guide · Static prototype | [Demo](https://golf-strategy-lk-prototype.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/golf-strategy-lk-prototype) · 🔒 |
+| [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | Data & Research | Jupyter Notebook | Course navigation · Resource sharing · Card layout | [Demo](https://aia-training-viewer.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) · 🔒 |
+| [digit_recognition](https://github.com/michaelbothsieh-crypto/digit_recognition) | Experiments | Python | Canvas input · Image preprocessing · MLP model | [GitHub](https://github.com/michaelbothsieh-crypto/digit_recognition) · 🔒 |
+| [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | Experiments | Jupyter Notebook | FastAPI · PydanticAI · Streaming chat | [GitHub](https://github.com/michaelbothsieh-crypto/FastAPI-project) · 🔒 |
+<!-- /AUTO:projects -->
 
 ---
 
@@ -85,11 +109,17 @@ Here is a consolidated matrix of all 22 projects, their categories, core stack, 
 
 Behind these projects, the portfolio includes engineering automation:
 
-### 1. Automated Preview Pipeline
-- **Solution**: Uses Playwright to detect live URLs and capture screenshots automatically. It flags 404 pages and missing deployments to prevent broken images, generating clean fallbacks when no live URL is available.
+### 1. Daily Repo Sync (GitHub Actions)
+- **Solution**: A scheduled workflow (`.github/workflows/sync-repos.yml`) runs `gh repo list` daily, refreshing `repos.generated.json` with every repository and its latest update time, and commits only when something changed. A safety guard aborts the sync if it fetches zero private repos (a tell-tale sign of an under-scoped token), so a bad credential can never overwrite the list with a public-only subset.
 
-### 2. Static Data Pipeline
-- **Solution**: Uses the GitHub CLI to export metadata into static JSON files during the build phase. This enables static site generation (SSG) with zero runtime API calls, ensuring fast page load times.
+### 2. Auto-generated Project Matrix
+- **Solution**: The same sync step regenerates the "All Projects" table in both READMEs between `AUTO:projects` markers, merging live GitHub metadata with curated categories and highlights. New repos appear automatically — the matrix never goes stale.
 
-### 3. Data Overrides
-- **Solution**: Implements a `project-overrides.json` config layer. This allows curation of titles, categories, feature highlights, and problem descriptions without modifying original GitHub metadata.
+### 3. Static Data Pipeline
+- **Solution**: Repository metadata is exported into static JSON at sync time, enabling static site generation (SSG) with zero runtime API calls and fast page loads.
+
+### 4. Curated Preview Manifest
+- **Solution**: A `preview-manifest.generated.json` maps each repo to a captured live-site screenshot or a clean generated fallback, so the portfolio never shows a broken image even for private or undeployed projects.
+
+### 5. Data Overrides
+- **Solution**: A `project-overrides.json` config layer curates titles, categories, feature highlights, and problem descriptions without modifying original GitHub metadata.
