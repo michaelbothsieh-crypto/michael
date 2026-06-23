@@ -18,7 +18,7 @@ export function ProjectGridSection({ activeCategory, projects, locale, copy, onC
   return (
     <section id="projects" className="px-5 pb-28 sm:px-8 md:pb-44 lg:px-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+        <div className="gsap-reveal mb-8 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <h2 className="text-4xl font-semibold text-zinc-950 md:text-6xl">{copy.allProjects}</h2>
           <div className="flex flex-wrap gap-2">
             <button

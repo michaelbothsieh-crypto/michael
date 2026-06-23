@@ -1,6 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { CategoryFilter, Locale, Project } from "@/lib/projects";
 import { filterProjectsByCategory, selectFeaturedProjects } from "@/lib/projects";
 import { CategoryStory } from "./portfolio/CategoryStory";
@@ -15,18 +18,71 @@ type Props = {
   projects: Project[];
 };
 
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 export function PortfolioExperience({ projects }: Props) {
+  const containerRef = useRef<HTMLElement>(null);
   const [locale, setLocale] = useState<Locale>("zh");
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [stats, setStats] = useState<{ pv: number; active: number } | null>(null);
   const [projectPvs, setProjectPvs] = useState<Record<string, number>>({});
   const t = copy[locale];
+  const featuredProjects = useMemo(() => selectFeaturedProjects(projects), [projects]);
+  const filteredProjects = useMemo(() => filterProjectsByCategory(projects, activeCategory), [activeCategory, projects]);
+
+  // Choreographs first-load and scroll reveals inside this portfolio surface.
+  useGSAP(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      gsap.set(".gsap-reveal, .gsap-project-card, .gsap-hero-preview", {
+        clearProps: "all",
+      });
+      return;
+    }
+
+    gsap.from(".gsap-nav", { y: -8, duration: 0.3, ease: "power3.out" });
+    gsap.from(".gsap-hero-copy > *, .gsap-hero-preview", {
+      y: 14,
+      duration: 0.45,
+      ease: "power3.out",
+      stagger: 0.04,
+    });
+
+    gsap.utils.toArray<HTMLElement>(".gsap-reveal").forEach((element) => {
+      gsap.from(element, {
+        autoAlpha: 0,
+        y: 22,
+        duration: 0.55,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: element,
+          start: "top 82%",
+          once: true,
+        },
+      });
+    });
+
+    ScrollTrigger.batch(".gsap-project-card", {
+      start: "top 86%",
+      once: true,
+      onEnter: (batch) => {
+        gsap.from(batch, {
+          autoAlpha: 0,
+          y: 20,
+          duration: 0.5,
+          ease: "power3.out",
+          stagger: 0.05,
+          overwrite: true,
+        });
+      },
+    });
+  }, { scope: containerRef });
 
   useEffect(() => {
-    let uuid = sessionStorage.getItem("portfolio_user_uuid");
-    if (!uuid) {
-      uuid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    const storedUuid = sessionStorage.getItem("portfolio_user_uuid");
+    const uuid = storedUuid ?? Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    if (!storedUuid) {
       sessionStorage.setItem("portfolio_user_uuid", uuid);
     }
 
@@ -57,7 +113,7 @@ export function PortfolioExperience({ projects }: Props) {
   }, []);
 
   const trackProjectView = async (slug: string) => {
-    let uuid = sessionStorage.getItem("portfolio_user_uuid");
+    const uuid = sessionStorage.getItem("portfolio_user_uuid");
     try {
       const res = await fetch("/api/stats", {
         method: "POST",
@@ -83,12 +139,8 @@ export function PortfolioExperience({ projects }: Props) {
     trackProjectView(project.slug);
   };
 
-  const featuredProjects = useMemo(() => selectFeaturedProjects(projects), [projects]);
-  const filteredProjects = useMemo(() => filterProjectsByCategory(projects, activeCategory), [activeCategory, projects]);
-
-
   return (
-    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f4f7f5] text-zinc-950">
+    <main ref={containerRef} className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f1efe7] text-zinc-950">
       <PortfolioNav locale={locale} copy={t} stats={stats} onToggleLocale={() => setLocale(locale === "zh" ? "en" : "zh")} />
       <HeroSection projectsCount={projects.length} featuredProjects={featuredProjects} locale={locale} copy={t} />
       <FeaturedSection projects={featuredProjects} totalProjects={projects.length} locale={locale} copy={t} onOpenProject={handleOpenProject} />

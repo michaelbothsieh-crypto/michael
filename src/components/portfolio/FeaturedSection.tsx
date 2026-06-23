@@ -14,7 +14,7 @@ export function FeaturedSection({ projects, totalProjects, locale, copy, onOpenP
   return (
     <section id="featured" className="px-5 py-28 sm:px-8 md:py-40 lg:px-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div className="gsap-reveal mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
             <h2 className="text-4xl font-semibold text-zinc-950 md:text-6xl">{copy.featured}</h2>
             <p className="mt-4 max-w-2xl text-zinc-600">{copy.featuredIntro}</p>

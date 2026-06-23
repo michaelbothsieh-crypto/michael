@@ -1,8 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 
+type RedisCommand = [string, ...Array<string | number>];
+
+async function readStatsPayload(req: NextRequest) {
+  try {
+    return await req.json() as {
+      uuid?: string;
+      isNewVisit?: boolean;
+      projectSlug?: string;
+    };
+  } catch {
+    return {};
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { uuid, isNewVisit, projectSlug } = await req.json();
+    const { uuid, isNewVisit, projectSlug } = await readStatsPayload(req);
 
     const url = process.env.KV_REST_API_URL;
     const token = process.env.KV_REST_API_TOKEN;
@@ -19,7 +33,7 @@ export async function POST(req: NextRequest) {
 
     const cleanUuid = (uuid || "anonymous").replace(/[^a-zA-Z0-9-]/g, "");
 
-    const commands: any[][] = [];
+    const commands: RedisCommand[] = [];
 
     // 1. 只有首次訪問才遞增全站 PV
     if (isNewVisit) {

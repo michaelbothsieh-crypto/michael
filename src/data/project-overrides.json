@@ -8,8 +8,8 @@
       "en": "POE Price Tracker & POB Gear Parser"
     },
     "summary": {
-      "zh": "整合 POB 角色資料與即時市場物價，進行高精度的裝備價值演算與流派優化決策。",
-      "en": "Integrates POB character configurations with live market data for gear valuation and build optimization."
+      "zh": "把 POB 角色資料和即時物價接在一起，估算裝備價值與升級順序。",
+      "en": "Connects POB character data with market prices to estimate gear value and upgrade order."
     },
     "features": {
       "zh": [
@@ -28,12 +28,12 @@
       ]
     },
     "challenge": {
-      "zh": "遊戲內裝備的隨機詞綴組合極為繁複，且 POB 字串採用 Base64 壓縮的 XML 格式。我編寫了高效的 POB 字串非同步解壓與剖析模組，並設計了一套詞綴權重演算引擎，能將角色天賦與裝備屬性同市場即時價格大數據進行關聯比對，克服了非標準化虛擬資產估價的難題。",
-      "en": "Path of Exile gear contains highly randomized affix combinations, and POB data is stored in base64-gzipped XML format. I engineered an asynchronous XML decoder/parser for POB string imports and designed a weight-based affix valuation engine to map character state against raw market data."
+      "zh": "POB 字串是 Base64 壓縮後的 XML，裝備詞綴又有大量隨機組合。我寫了解壓和剖析流程，再把角色天賦、裝備屬性和市場價格接起來，讓估價不只看單一詞條。",
+      "en": "POB data is base64-gzipped XML, and gear affixes vary a lot. I built the import parser, then connected character stats, item affixes, and live market prices so valuation does not depend on one isolated stat."
     },
     "impact": {
-      "zh": "玩家只需一鍵貼上 POB，即可精準算出全身配裝的當前市場總值，並獲取最優升級性價比建議，使繁瑣的配裝交易決策縮短至數秒內完成。",
-      "en": "Enables players to import POB strings to calculate total gear market valuation and receive cost-effective upgrade paths, reducing trading decision time to seconds."
+      "zh": "玩家貼上 POB 後，可以看到整套配裝的大致市值，以及哪些裝備先升級比較划算。原本要手動查價的流程，縮到幾秒內完成。",
+      "en": "Players can paste a POB string, see the rough market value of a build, and find which upgrade is worth checking first."
     }
   },
   "warrant-screener-tw": {
@@ -61,12 +61,12 @@
       ]
     },
     "challenge": {
-      "zh": "權證定價模型（Black-Scholes）在前端計算時，需處理繁複的希臘字母（Delta, Gamma, Vega, Theta）即時運算，且台股盤中報價資料流大，容易導致 UI 渲染卡頓。我優化了定價演算法，並引入 debounce 與 requestAnimationFrame 機制，精準限制渲染頻率。",
-      "en": "Evaluating Greek sensitivities (Delta, Gamma, Vega, Theta) via Black-Scholes formulas for real-time options streams triggers heavy browser repaints. I optimized mathematical routines and applied requestAnimationFrame with debouncers to manage layout rendering cycles."
+      "zh": "權證篩選要同時計算 Black-Scholes 和希臘字母，盤中報價一多，前端很容易卡住。我把定價計算和畫面更新分開，用 debounce 與 requestAnimationFrame 控制更新節奏。",
+      "en": "Real-time warrant screening has to calculate Black-Scholes and Greeks while quotes keep changing. I separated pricing work from UI updates, then used debounce and requestAnimationFrame to keep the browser responsive."
     },
     "impact": {
-      "zh": "實現了毫秒級的盤中權證篩選，讓交易員能在一秒內篩選出高性價比的避險標的，篩選決策效率提升 10 倍。",
-      "en": "Delivers millisecond-level options scanning, enabling traders to locate high-leverage hedges within a second, boosting decision efficiency 10-fold."
+      "zh": "盤中篩選可以在一秒內回應，交易員不用在多個條件表之間來回切換，能更快找到適合的避險標的。",
+      "en": "The screener responds within a second during market hours, so traders do not need to jump between multiple condition tables."
     }
   },
   "personal-bot-gateway": {
@@ -78,8 +78,8 @@
       "en": "Personal Bot Gateway"
     },
     "summary": {
-      "zh": "我最常用的 Telegram 驅動工作中樞，整合所有 TG 指令、KOL 每日掃描與 NotebookLM 連動（首頁提供單日簡報範例介紹）。",
-      "en": "My most-used Telegram-driven operations hub, connecting every TG command with daily KOL scanning and NotebookLM handoff (single-day sample brief available on homepage)."
+      "zh": "我每天會用的 Telegram 工作中樞，負責 TG 指令、KOL 掃描和 NotebookLM 報告連動。",
+      "en": "The Telegram operations hub I use every day for commands, KOL scanning, and NotebookLM report handoff."
     },
     "features": {
       "zh": [
@@ -132,29 +132,29 @@
       ]
     },
     "challenge": {
-      "zh": "Telegram 與 LINE API 的 Webhook 請求在高流量時易出現延遲與封包遺失，且兩者 message schema 差異巨大。我設計了一套統一的適配器模式（Adapter Pattern）轉換層，並引入緩衝隊列（Queue）機制來平滑突發流量，確保訊息傳遞的零丟失與低延遲。",
-      "en": "Handling high-volume concurrent webhooks from Telegram and LINE causes latency and packet drops due to mismatched message schemas. I implemented a unified Adapter Pattern mapping layer combined with a buffer queue to absorb traffic spikes and ensure zero-loss routing."
+      "zh": "Telegram 和 LINE 的 webhook 格式差很多，高流量時也會有延遲或重送問題。我做了一層 adapter，把不同訊息格式轉成同一種內部格式，並用 queue 吃掉突發流量。",
+      "en": "Telegram and LINE webhooks use different message shapes, and bursts can cause retries or delays. I added an adapter layer to normalize messages and a queue to absorb traffic spikes."
     },
     "impact": {
-      "zh": "成功承載每日數萬次訊息分發，Webhook 處理延遲降至 50ms 以下，成為每日 KOL 簡報與各類機器人的高可用網關。",
-      "en": "Successfully routes tens of thousands of messages daily with webhook latencies under 50ms, serving as a high-availability backend gateway."
+      "zh": "現在它可以處理每日大量訊息分發，也成為 KOL 簡報和其他 bot 的共用入口。",
+      "en": "It now handles large daily message volume and acts as the shared entry point for the KOL brief and other bots."
     },
     "engineeringPillars": {
       "observability": {
-        "zh": "實作主動式 Health Check 與 Webhook 故障降級（Fallback）機制。一旦 downstream 處理延遲超標，自動透過 Telegram API 發送即時異常 Log 並記錄追蹤碼。",
-        "en": "Implements active health checks and webhook fallback logic. If downstream latency spikes, it automatically dispatches real-time error logs via Telegram API with tracing IDs."
+        "zh": "加入 Health Check 和 webhook fallback。下游處理太慢時，系統會透過 Telegram 送出錯誤紀錄和追蹤碼。",
+        "en": "Adds health checks and webhook fallback. When downstream latency spikes, it sends a Telegram error log with a trace ID."
       },
       "caching": {
-        "zh": "使用 Upstash Redis 作為快取與 Rate Limiter。對 Fugle、FinMind 與金融 API 盤中重覆查詢實作 TTL 緩衝快取，成功降低 75% 的付費 API 調用次數。",
-        "en": "Uses Upstash Redis for caching and rate limiting. Implements TTL buffers for duplicate Fugle, FinMind, and market queries, cutting paid API costs by 75%."
+        "zh": "用 Upstash Redis 做快取和 rate limit。Fugle、FinMind 等金融 API 的盤中重複查詢會先吃 TTL 快取，減少不必要的付費 API 呼叫。",
+        "en": "Uses Upstash Redis for cache and rate limiting. Duplicate Fugle, FinMind, and market queries hit TTL cache first, reducing unnecessary paid API calls."
       },
       "security": {
-        "zh": "Webhook 端點強制進行簽章驗證（LINE signature validation 與 Telegram Secret Token）。敏感 Session 金鑰（如 NLM_COOKIE_BASE64）完全存放在 GitHub Secrets 中並於 Action 運行時注入。",
-        "en": "Enforces strict signature verification (LINE signature validation & TG secret token) on webhook endpoints. Sensitive tokens (e.g. NLM_COOKIE_BASE64) are stored in GitHub Secrets and injected at runtime."
+        "zh": "Webhook 端點會驗 LINE signature 和 Telegram Secret Token。NLM_COOKIE_BASE64 這類 session 金鑰放在 GitHub Secrets，執行時才注入。",
+        "en": "Webhook endpoints verify LINE signatures and Telegram secret tokens. Sensitive values such as NLM_COOKIE_BASE64 stay in GitHub Secrets and are injected at runtime."
       },
       "reproducibility": {
-        "zh": "提供完整 mock-mode。在不具備外部 Telegram Bot Token 或金融 API Key 的情況下，透過本地 mock server 與假資料亦能在一秒內啟動並測試所有適配器邏輯。",
-        "en": "Provides a full mock-mode. Allows launching the entire service and testing adaptor logic locally in 1 second without configure Telegram Bot tokens or market API keys."
+        "zh": "有 mock mode。沒有 Telegram Bot Token 或金融 API Key 時，也能用本地 mock server 和假資料測 adapter 邏輯。",
+        "en": "Includes mock mode, so the adapter flow can run locally without Telegram bot tokens or market API keys."
       }
     }
   },
@@ -163,12 +163,12 @@
     "featured": true,
     "sortWeight": 96,
     "title": {
-      "zh": "Price Atlas - 跨境電商多國商品查價與即時比價系統",
-      "en": "Price Atlas - Cross-Border Multi-Market Price Intelligence System"
+      "zh": "Price Atlas - 跨境商品查價工具",
+      "en": "Price Atlas - Cross-border price lookup"
     },
     "summary": {
-      "zh": "整合多國主流電商（Amazon US/JP、Yahoo JP、価格.com、台灣電商通路）API 與爬蟲，一鍵完成跨境查價與即時匯率比價。",
-      "en": "Integrates scrapers and APIs for Amazon US/JP, Yahoo JP, Kakaku.com, and Taiwan e-commerce channels, providing one-click cross-border pricing and live currency conversions."
+      "zh": "同時查 Amazon US/JP、Yahoo JP、価格.com 和台灣通路，並把價格換算成台幣。",
+      "en": "Searches Amazon US/JP, Yahoo JP, Kakaku.com, and Taiwan shops, then converts results to TWD."
     },
     "features": {
       "zh": [
@@ -185,36 +185,36 @@
       ]
     },
     "problem": {
-      "zh": "採購與代購商家在比對跨國商品價格時，必須開啟多個分頁手動查詢不同網站，再各自進行匯率換算。整個查價流程耗時，且容易漏掉即時匯差與運費成本的計算。",
+      "zh": "採購或代購在查跨國商品時，通常要開很多分頁，再自己換算匯率。流程慢，也容易漏掉匯差和運費。",
       "en": "Purchasing managers and cross-border traders waste time manually searching items across multiple international sites (US/JP/TW) and calculating exchange rates, missing shipping overheads and dynamic price gaps."
     },
     "workflow": {
-      "zh": "前端使用 SSE (Server-Sent Events) 發起請求，後端以 FastAPI 協同 Python 異步爬蟲，併發向 Amazon US/JP、Yahoo JP、価格.com 等平台進行抓取，結合實時匯率 API 進行台幣換算，並將結果以串流方式即時回傳前端，支援隨時中止查詢以節省頻寬。",
-      "en": "The UI initiates an SSE connection. The FastAPI backend dispatches concurrent async scraping pipelines to Amazon US/JP, Yahoo JP, and Kakaku.com, calls a live exchange-rate API, converts values to TWD, and streams results instantly back to the client while supporting user-aborted request optimization."
+      "zh": "前端用 SSE 發起查詢，FastAPI 後端併發抓 Amazon US/JP、Yahoo JP、価格.com 等來源，再接匯率 API 換算台幣。使用者中途取消時，後端也會停止後續查詢。",
+      "en": "The UI opens an SSE connection. The FastAPI backend queries Amazon US/JP, Yahoo JP, and Kakaku.com in parallel, converts prices with an exchange-rate API, and stops work when the user cancels."
     },
     "challenge": {
-      "zh": "日本価格.com 的 HTML 解析需處理 Shift JIS 特殊編碼以防亂碼，且部分電商網站設有反爬蟲限制。我採用 curl_cffi 模擬 Chrome TLS 指紋避開反爬，並在 FastAPI 後端透過併發限制與快取保護付費 API 用量。",
+      "zh": "価格.com 有 Shift JIS 編碼問題，部分電商也會擋一般爬蟲。我用 curl_cffi 模擬 Chrome TLS 指紋，並在後端加上併發限制和快取，避免 API 用量失控。",
       "en": "Scraping Japanese kakaku.com required parsing raw Shift JIS bytes, and retail sites blocked standard headless clients. I used curl_cffi to match Chrome's TLS fingerprint and protected API quotas using Redis cache rules."
     },
     "impact": {
-      "zh": "提供流暢的 SSE 串流跨境比價，並支援前端即時中止搜尋，大幅節省頻寬與 API 配額。",
-      "en": "Delivers real-time cross-border pricing via SSE (Server-Sent Events) with request abort support to minimize bandwidth and API costs."
+      "zh": "查詢結果會邊抓邊回傳，使用者不用等全部來源跑完。取消搜尋時也能少浪費頻寬和 API 配額。",
+      "en": "Results stream back as each source finishes. If the user cancels, the backend avoids more scraping and API calls."
     },
     "engineeringPillars": {
       "observability": {
-        "zh": "為應對目標網站變更，實作了基於 HTML 標記指紋的爬蟲自癒與容錯機制。一旦特定網站爬取異常，將降級並由備份 API 取代，不影響整體比價結果。",
+        "zh": "用 HTML 標記指紋偵測目標網站變更。某個來源解析失敗時，會降級到備援 API，不讓整次比價中斷。",
         "en": "Implements scraper self-healing with HTML markup fingerprinting. If a target platform breaks, the selector degrades and triggers backup APIs without breaking the rest of the search results."
       },
       "caching": {
-        "zh": "利用 Upstash Redis 對多國匯率以及重覆搜尋的熱門商品進行 1 小時快取，確保同款商品在短時間內不重複觸發爬蟲，減少目標網站反爬蟲封鎖風險。",
+        "zh": "匯率和熱門商品查詢會進 Upstash Redis 一小時快取。同一商品短時間內不會一直打到目標網站。",
         "en": "Uses Upstash Redis to cache currency rates and hot search queries for 1 hour, minimizing target platform hits and preventing IP bans."
       },
       "security": {
-        "zh": "後端使用 curl_cffi 進行爬蟲偽裝，動態模擬 Chrome 的 TLS/JA3 指紋，繞過 Cloudflare 與多數電商的防爬機制，並安全封裝所有存取憑證。",
-        "en": "Integrates curl_cffi to match Chrome's TLS/JA3 fingerprint, bypassing Cloudflare WAF and anti-bot obstacles securely while encapsulating API secrets."
+        "zh": "後端用 curl_cffi 模擬 Chrome TLS/JA3 指紋，處理 Cloudflare 和部分電商的防爬限制。相關憑證只留在後端環境變數。",
+        "en": "Uses curl_cffi to match Chrome TLS/JA3 fingerprints for sites that block normal scraper traffic. API secrets stay on the backend."
       },
       "reproducibility": {
-        "zh": "提供完整 mock-mode。本地端不需連線外部網路或設定任何匯率 API Key，即可使用 mocks/products.json 離線模擬多國比價流程。",
+        "zh": "有 mock mode。本地端不用外網或匯率 API Key，也能用 mocks/products.json 跑完整比價流程。",
         "en": "Offers a mock-mode. Allows offline local simulation using mocks/products.json without external network dependencies or exchange rate API keys."
       }
     }
@@ -246,12 +246,12 @@
       ]
     },
     "challenge": {
-      "zh": "八字干支五行演算涉及複雜的農曆太陽曆轉換演算法與節氣交接計算，且 LLM 的回覆容易流於空泛或偏離八字脈絡。我編寫了精確的公農曆與二十四節氣轉換引擎，並設計了約束式 Prompt 模板，強制 AI 遵循古籍學理進行結構化解析。",
-      "en": "Calculating solar-lunar transitions and seasonal energy shifts requires precise astronomical calculations, and LLM text generation is prone to generic advice. I coded a high-precision solar term engine and applied constrained prompting templates to bind the AI to authentic classical text interpretations."
+      "zh": "八字分析要處理公農曆轉換、節氣交界和五行關係，LLM 直接回答時很容易講得很空。我先把命盤資料結構化，再用受限 prompt 讓 Gemini 依照固定欄位分析。",
+      "en": "BaZi analysis needs solar-lunar conversion, solar-term boundaries, and five-element relationships. I structured the chart data first, then used constrained prompts so Gemini answers from fixed fields instead of giving generic advice."
     },
     "impact": {
-      "zh": "提供高準確度的命理五行圖表與千字個性化命理報告，PWA 離線運算速度極快，為用戶帶來兼具趣味與專業的 AI 算命體驗。",
-      "en": "Generates accurate five-element charts and detailed custom readings instantly; the PWA load times are minimal, offering an engaging and authentic experience."
+      "zh": "使用者可以看到五行圖表和一份較完整的命理報告。PWA 可以離線開啟，基本運算不用等伺服器。",
+      "en": "Users get a five-element chart and a longer reading. The PWA can open offline, and basic calculation does not wait on a server."
     }
   },
   "socket-swiss-knife": {
@@ -279,12 +279,12 @@
       ]
     },
     "challenge": {
-      "zh": "MTF 協議 Socket 連線要求極高頻的 heartbeat 維護與精準的 byte payload 解析，且跨平台 GUI（Electron/Tauri）在處理高頻 TCP 資料流時易有記憶體洩漏。我採用高效的 ArrayBuffer 進行二進位流解析，並實作了嚴格的 Connection Pool 與記憶體回收機制。",
+      "zh": "MTF Socket 需要固定 heartbeat，也要正確解析 byte payload。GUI 在長時間接 TCP 資料時容易累積記憶體。我用 ArrayBuffer 處理二進位資料，並補上 connection pool 和釋放流程。",
       "en": "MTF sockets require high-frequency heartbeats and exact binary payload parsing; cross-platform GUI wrappers face memory leaks under continuous TCP streams. I parsed incoming bytes using raw ArrayBuffers and enforced a connection pool recycle mechanism."
     },
     "impact": {
-      "zh": "支援定時高頻壓力測試，在連續運行 72 小時下記憶體佔用穩定低於 80MB，成為交易部門開箱即用的 MTF 測試工具。",
-      "en": "Supports continuous load testing; memory footprint remains under 80MB during 72-hour runs, serving as a reliable utility for QA and trading ops."
+      "zh": "工具可以跑定時連線測試，讓交易部門不用再手動確認各券商環境是否可用。",
+      "en": "It supports scheduled connectivity tests, so trading ops does not need to manually check each broker environment."
     }
   },
   "tw-stock-health-dashboard": {
@@ -316,28 +316,28 @@
       ]
     },
     "challenge": {
-      "zh": "多管道的台股指標（三大法人、融資融券、海外指數連動、技術線型）資料源極其零碎且格式不一。我設計了一套非同步的 ETL pipeline，利用 Promise.all 併發抓取並在 Redis 中進行快取，並透過簡單神經網絡進行崩盤預警因子的加權估算。",
+      "zh": "三大法人、融資融券、海外指數和技術線型都在不同來源，格式也不一樣。我做了一條非同步 ETL pipeline，用 Promise.all 併發抓資料，再把結果快取到 Redis。",
       "en": "Aggregating fragmented stock data sources (institutional flows, leverage ratios, tech indicators, overseas linkages) creates processing bottlenecks. I built an asynchronous ETL pipeline using concurrent Promise.all queries with Redis caching, and modeled crash warning flags."
     },
     "impact": {
-      "zh": "每日盤後 10 分鐘內自動產出結構化圖表與 Telegram 指標警報，預警準確度大幅提昇，幫助投資人提早應對籌碼鬆動。",
-      "en": "Compiles structured charts and Telegram alerts within 10 minutes post-market, boosting risk-flagging precision to help users spot early signs of leverage flushing."
+      "zh": "盤後約 10 分鐘內會產出圖表和 Telegram 指標提醒，方便每天固定檢查籌碼和海外連動。",
+      "en": "About 10 minutes after market close, it sends charts and Telegram alerts for daily leverage and overseas-linkage checks."
     },
     "engineeringPillars": {
       "observability": {
-        "zh": "當三大法人或盤後交易所 API 因結構調整或維護而逾時，系統會自動切換至備份 API，並在 Telegram 推播中標註「資料來源降級」，確保每日儀表板絕不中斷。",
+        "zh": "交易所 API 逾時或格式變動時，系統會切到備援來源，並在 Telegram 推播標註「資料來源降級」。",
         "en": "If stock exchange APIs timeout or change structures, the pipeline falls back to backup sources and flags 'Data Source Degraded' in Telegram, ensuring uninterrupted daily summaries."
       },
       "caching": {
-        "zh": "針對大盤盤後數據與歷史 K 線，於後端實作 Redis 快取，盤後更新後僅寫入一次，後續讀取皆經快取，大幅縮短儀表板載入時間至 80ms 以內。",
+        "zh": "大盤盤後資料和歷史 K 線會寫進 Redis。盤後更新一次後，後續讀取走快取，儀表板載入可壓到 80ms 內。",
         "en": "Implements Redis caching for post-market data and historical charts. Cache is written once post-market, serving subsequent reads to cut dashboard load times to under 80ms."
       },
       "security": {
-        "zh": "所有金融第三方金鑰完全存放於雲端，並使用 HTTPS 加密傳輸。Telegram Bot Token 使用環境變數管理，防止憑證暴露。",
+        "zh": "金融 API key 和 Telegram Bot Token 都走環境變數管理，傳輸只走 HTTPS。",
         "en": "All financial credentials are stored in secure environments and transmitted via HTTPS. Telegram Bot tokens are managed via env variables to prevent exposure."
       },
       "reproducibility": {
-        "zh": "專案包含一鍵 Docker 本地部署環境（docker-compose），能自動帶起模擬的 Mock Redis 服務與本地測試伺服器以供離線演練。",
+        "zh": "專案附 docker-compose，可以在本地帶起 Mock Redis 和測試伺服器，離線也能演練流程。",
         "en": "Includes a docker-compose environment to automatically spin up a mock Redis service and local dev server for offline simulation."
       }
     }
@@ -367,12 +367,12 @@
       ]
     },
     "challenge": {
-      "zh": "短影音平台對頻繁資料抓取設有嚴格的速率限制，且 Shorts 播放量與互動數據存在極大噪音。我設計了基於 Proxy Pool 的隨機延遲抓取機制，並透過自定義的爆款比率算法過濾掉頻道基本盤流量，精準篩選出真正的 Viral 影片。",
+      "zh": "Shorts 的播放量和互動數據噪音很高，平台也會限制頻繁抓取。我用 proxy pool 和隨機延遲降低被擋機率，再用爆紅比例排除頻道本身的基本盤流量。",
       "en": "Shorts platforms impose aggressive rate limits, and raw view counts are noisy due to baseline subscriber traction. I built a rotation proxy pool with randomized jitter delays and implemented a custom virality ratio algorithm to isolate genuine trend virality."
     },
     "impact": {
-      "zh": "成功分析數千支短影音，挖掘出多個高潛力不露臉（Faceless）創作賽道，幫助內容創作者在極低成本下快速複製爆款影片。",
-      "en": "Analyzed thousands of shorts to extract high-virality faceless templates, enabling creators to replicate engaging formats with minimal production costs."
+      "zh": "它分析了數千支短影音，整理出幾個不露臉內容題材，讓創作者先看數據再決定要不要投入製作。",
+      "en": "It analyzes thousands of Shorts and groups promising faceless-content patterns before creators spend time making videos."
     }
   },
   "kol-daily-brief": {
@@ -404,29 +404,29 @@
       ]
     },
     "challenge": {
-      "zh": "YouTube 自動生成的字幕經常缺乏標點且存在大量語音辨識錯誤，直接傳入 LLM 會影響摘要品質。我在這個原型裡設計了字幕文本清洗過濾器，自動重構段落結構，並利用 GitHub Actions 實作無伺服器定時排程與 NotebookLM Handoff——這套流程後來被整合進 personal-bot-gateway 成為它的語意處理核心。",
-      "en": "Auto-generated YouTube transcripts lack punctuation and contain speech-to-text artifacts, degrading summary accuracy. In this prototype I built a transcript-cleaning filter to reconstruct paragraphs and used GitHub Actions for serverless scheduling and NotebookLM handoff — the same pipeline later became the semantic core of personal-bot-gateway."
+      "zh": "YouTube 自動字幕常沒有標點，也會有辨識錯誤，直接丟給 LLM 摘要品質不穩。我在這個原型裡先清洗字幕、重組段落，再用 GitHub Actions 定時跑 NotebookLM handoff。這套流程後來整合進 personal-bot-gateway。",
+      "en": "Auto-generated YouTube transcripts often miss punctuation and contain speech-to-text errors. This prototype cleans the transcript, rebuilds paragraph structure, and uses GitHub Actions for the NotebookLM handoff. The flow later moved into personal-bot-gateway."
     },
     "impact": {
-      "zh": "驗證了零成本、定時產出 KOL 影片摘要的可行性；如今這頁專注於呈現每日 KOL 簡報，而完整的指令與推播能力則由 personal-bot-gateway 承接。",
-      "en": "Proved out a zero-cost, scheduled pipeline for KOL video summaries; today this page focuses on presenting the daily KOL brief, while the full command and delivery experience lives in personal-bot-gateway."
+      "zh": "這個原型驗證了定時產出 KOL 影片摘要的流程。現在這頁主要負責展示每日簡報，指令和推播則交給 personal-bot-gateway。",
+      "en": "This prototype proved the scheduled KOL summary flow. Today the page mainly shows the daily brief, while commands and delivery live in personal-bot-gateway."
     },
     "engineeringPillars": {
       "observability": {
-        "zh": "定時排程整合 GitHub Actions 的 Step Status 檢測。一旦 YouTube API 抓取或 NotebookLM 分析步驟異常，將主動中斷並向管理員 Telegram 送出錯誤快照與修復代碼。",
-        "en": "Integrates GHA Step Status checks. Any YouTube API fetching or NotebookLM analysis exceptions will abort the runner and trigger error snapshots delivered to Telegram."
+        "zh": "GitHub Actions 會檢查每個 step 狀態。YouTube API 或 NotebookLM 分析失敗時，流程會中斷並把錯誤快照送到 Telegram。",
+        "en": "GitHub Actions checks each step. If YouTube fetching or NotebookLM analysis fails, the runner stops and sends an error snapshot to Telegram."
       },
       "caching": {
-        "zh": "資料庫層（Neon DB）與 Redis 整合。對已經分析過的 YouTube 影片 ID 進行 Hash 去重，防止重覆呼叫 NotebookLM 解析同一支影片以節省 token 與運行額度。",
-        "en": "Integrates Neon DB and Redis. Deduplicates previously parsed YouTube video IDs, avoiding redundant NotebookLM calls and saving compute quota."
+        "zh": "Neon DB 和 Redis 會記錄已分析過的 YouTube 影片 ID，避免同一支影片重複送進 NotebookLM。",
+        "en": "Neon DB and Redis track parsed YouTube IDs, so the same video is not sent to NotebookLM again."
       },
       "security": {
-        "zh": "連線字串（DATABASE_URL）等資料庫機密完全加密保護，絕不硬編碼。NotebookLM 的登入 Session 採 Base64 加密封裝，動態還原 auth.json 並在執行後抹除。",
-        "en": "Connection strings are encrypted and never hardcoded. NotebookLM login sessions are Base64-encrypted, dynamically restored into auth.json at runtime, and securely cleared upon completion."
+        "zh": "DATABASE_URL 等機密不寫進程式碼。NotebookLM session 用 Base64 封裝，執行時還原 auth.json，用完後清掉。",
+        "en": "Connection strings are not hardcoded. NotebookLM sessions are restored into auth.json at runtime and cleared after the job finishes."
       },
       "reproducibility": {
-        "zh": "在 codebase 內附帶 tests/mocks。包含 YouTube API 靜態回應與 NotebookLM 層級摘要的 Mock，支援本地端無 Token 的單元測試 (pytest)。",
-        "en": "Ships with tests/mocks containing YouTube API responses and mock summaries, enabling local token-free unit testing via pytest."
+        "zh": "codebase 內有 tests/mocks，包含 YouTube API 回應和 NotebookLM 摘要 mock。本地端沒有 token 也能跑 pytest。",
+        "en": "Includes tests/mocks for YouTube API responses and NotebookLM-style summaries, so pytest can run locally without tokens."
       }
     }
   },
@@ -455,12 +455,12 @@
       ]
     },
     "challenge": {
-      "zh": "北部排球場地與活動資訊分散在各地圖與論壇中，且無統一地理座標格式。我手動清洗地圖景點並進行經緯度轉換，在前端建立輕量化的靜態檢索索引以實現零延遲搜尋，並透過 Service Worker 提供離線瀏覽。",
-      "en": "Volleyball venue data was scattered across local forums with inconsistent geospatial formats. I cleaned the coords and built a lightweight client-side spatial index for instant querying, backed by Service Workers for offline access."
+      "zh": "北部排球場地和活動資訊散在地圖、社團和論壇裡，座標格式也不一致。我整理地點資料、轉成經緯度，並在前端建立靜態索引，讓查詢不必打 API。",
+      "en": "Venue and event data was scattered across maps, groups, and forums with inconsistent coordinates. I cleaned the location data, converted it to coordinates, and built a static client-side index."
     },
     "impact": {
-      "zh": "將北部數十處排球場地整合於單一 PWA，離線首屏載入速度達到毫秒級，成為基層球友必備的口袋工具。",
-      "en": "Consolidated dozens of courts into a mobile PWA, delivering millisecond-level offline load times and serving as a go-to guide for local players."
+      "zh": "它把北部數十個排球場地放進同一個 PWA，離線也能開，適合臨時查場地和活動資訊。",
+      "en": "The PWA puts dozens of northern Taiwan volleyball spots in one place and can still open offline."
     }
   },
   "golf-strategy-lk-prototype": {
@@ -488,12 +488,12 @@
       ]
     },
     "challenge": {
-      "zh": "在第一版高爾夫策略原型中，重點是驗證付費攻略站的商業模式與資訊展示。此階段主要彙整老爺關西高爾夫球場的公開資料與 18 洞球道攻略，在前端建立簡潔直觀的展示介面，方便球友快速查閱各洞的配置與攻讀策略。",
-      "en": "For the first version of the golf strategy prototype, the focus was to validate the business model and data presentation. We consolidated public guide data and 18-hole strategy information for the Royal Kuan-Hsi Golf Club, building a clean and simple static interface for golfers to quickly review hole configurations and game plans."
+      "zh": "這是高爾夫攻略站的第一版，先驗證內容展示和付費攻略是否有機會。原型整理老爺關西球場公開資料與 18 洞攻略，讓球友可以快速查每一洞的配置和打法。",
+      "en": "This first version tests whether a paid golf guide format makes sense. It organizes public Royal Kuan-Hsi data and 18-hole strategy notes into a static interface golfers can scan before a round."
     },
     "impact": {
-      "zh": "成功建立高爾夫攻略站的初步產品概念，透過完整的老爺關西球場 18 洞攻略資料展示，完成第一階段的產品可行性與內容驗證。",
-      "en": "Successfully established the initial product concept for the golf guide site, validating content presentation and feasibility through a complete 18-hole strategy showcase of the Royal Kuan-Hsi Golf Club."
+      "zh": "原型先把 18 洞攻略完整跑通，用來確認內容結構、閱讀順序和後續商業化方向。",
+      "en": "The prototype runs through all 18 holes, which was enough to check the content structure, reading flow, and next product direction."
     }
   },
   "fehow-web": {
@@ -528,12 +528,12 @@
       "/previews/fehow-web-english.png"
     ],
     "challenge": {
-      "zh": "在保持高度設計感（Bento Grid 與暗黑流光）的同時，需在多端極致適配網格排版，且 GSAP 動態滾動 Timeline 容易在低階手機上造成影格丟失（Jank）。我採用 CSS Grid 優化 Bento 結構以減少重繪（Repaint），並針對 GSAP 滾動觸發進行了防抖（Throttling）優化。",
-      "en": "Creating an elegant Bento Grid layout that remains fully responsive while delivering a dynamic supply-chain narrative was a styling challenge. I used Tailwind for grid scaling and implemented GSAP ScrollTrigger timelines for scroll-bound animations."
+      "zh": "這個企業站用了 Bento Grid 和 Framer Motion 動效。重點是讓首頁、產品分類和公司敘事在不同螢幕上都能維持清楚的資訊層次。",
+      "en": "The site uses a Bento Grid and Framer Motion. The main work was keeping the hero, product categories, and company story readable across screen sizes."
     },
     "impact": {
-      "zh": "顯著提升國外客戶對電子供應鏈專業性的第一印象，網站整體跳出率降低了 35%，品牌視覺受到高度評價。",
-      "en": "Significantly enhanced the corporate supply-chain presence for international buyers, reducing bounce rate by 35% while receiving strong visual feedback."
+      "zh": "網站讓公司在海外客戶面前有更乾淨的入口，也更容易拿來作為業務介紹頁。",
+      "en": "The site gives the company a cleaner entry point for overseas buyers and works better as a sales introduction page."
     }
   },
   "xiexing-pwa": {
@@ -568,12 +568,12 @@
       "/previews/xiexing-pwa-contact.png"
     ],
     "challenge": {
-      "zh": "重機械與工程實績的高解析度圖片體積龐大，在工地現場以低頻寬行動網路開啟時載入極慢。我設計了 Next-Gen 圖片自動轉檔（AVIF/WebP）管道，並引入漸進式載入與 Service Worker 快取，優化首屏體驗。",
-      "en": "High-resolution machinery showcase images caused slow load times on weak mobile connections at construction sites. I built a Next-Gen image conversion pipeline (AVIF/WebP) and leveraged progressive loading and caching to optimize LCP."
+      "zh": "重機械和工程實績照片檔案很大，在工地現場用行動網路開會很慢。我把圖片轉成 AVIF/WebP，搭配漸進式載入和 Service Worker 快取。",
+      "en": "Heavy machinery photos were large, and construction-site mobile networks are often slow. I converted images to AVIF/WebP and added progressive loading plus Service Worker caching."
     },
     "impact": {
-      "zh": "首屏最大內容繪製（LCP）時間降至 0.8 秒以內，在工地現場的低網速環境下依然能流暢展示實績，有效提升詢價轉化率。",
-      "en": "Reduced LCP to under 0.8s, enabling smooth site showcase presentation even under poor network conditions, boosting mobile inbound inquiries."
+      "zh": "工程案例照片載入更穩，低網速環境也比較容易順利打開頁面。",
+      "en": "Project photos load more reliably, even on weak mobile connections."
     }
   },
   "yellowstone-clinic": {
@@ -608,12 +608,12 @@
       "/previews/yellowstone-clinic-footer.png"
     ],
     "challenge": {
-      "zh": "診所病患年齡層偏高，字體大小與操作按鈕需完全符合 WCAG 無障礙網頁標準，且必須相容於中高齡病患使用的低階行動裝置。我優化了 DOM 結構，確保螢幕閱讀器友善，並大幅精簡 JS 體積以防低階手機卡頓。",
+      "zh": "診所網站的使用者年齡層偏高，字體、按鈕和閱讀順序都不能太吃操作。我整理 DOM 結構，讓螢幕閱讀器比較好讀，也減少 JS 體積，避免低階手機卡住。",
       "en": "The clinic's elderly patient base required compliance with WCAG accessibility guidelines and smooth performance on low-end mobile hardware. I optimized the DOM for screen readers and trimmed JS bundles to avoid UI lags on budget devices."
     },
     "impact": {
-      "zh": "首屏互動延遲（FID）僅為 15 毫秒，帶給高齡患者極致流暢且無障礙的復健諮詢與預約體驗。",
-      "en": "Achieved a First Input Delay (FID) of just 15ms, providing elderly patients with an accessible, high-speed scheduling and consultation interface."
+      "zh": "病患可以更快找到門診、復健服務和預約資訊，低階手機也比較不容易卡住。",
+      "en": "Patients can get to clinic, rehab, and appointment information faster, with fewer issues on low-end phones."
     }
   },
   "insider-watch-bot": {
@@ -648,12 +648,12 @@
       "/previews/insider-watch-bot-dashboard_2.png"
     ],
     "challenge": {
-      "zh": "公開資訊觀測站（MOPS）的網頁結構經常無預警微調，導致解析器失效。我設計了主動式 HTML 結構指紋監控與容錯 Regex 機制，並整合 Telegram Webhook。一旦結構變更即刻發送報警並降級處理。",
+      "zh": "公開資訊觀測站的頁面結構常微調，解析器很容易失效。我用 HTML 結構指紋監控變更，搭配容錯 regex 和 Telegram webhook 做提醒。",
       "en": "The official MOPS website modifies its HTML structure without notice, which breaks traditional scrapers. I designed a structural fingerprint checker and resilient regex fallbacks, combined with instant Telegram alerting upon schema drift."
     },
     "impact": {
-      "zh": "成功提前 72 小時捕捉到董監事股權轉讓申報，即時推播籌碼預警通知，為交易策略提供領先指標。",
-      "en": "Successfully flagged critical insider stock transfers 72 hours before transactions, providing immediate alerts to enrich quantitative momentum inputs."
+      "zh": "它可以在董監事股權轉讓公告出現時推播提醒，讓我提早看到籌碼異動訊號。",
+      "en": "It pushes insider-transfer notices when they appear, giving an earlier view of ownership movement."
     }
   },
   "broker-credential-dashboard": {
@@ -681,12 +681,12 @@
       ]
     },
     "challenge": {
-      "zh": "在協同開發與測試期間，多家券商測試機的帳密、API 存取 IP 及連線狀態資訊繁雜且零散。此工具設計為一個無資料庫依賴的單一 PHP 檔案應用程式，挑戰在於如何在不導入複雜資料庫與框架的前提下，提供開發團隊一個輕量、集中且易於部署的管理介面。",
-      "en": "During collaborative testing, managing test account credentials and API IPs for multiple brokers can be chaotic. The challenge was to create a database-free, single-file PHP application that provides a lightweight, centralized, and easy-to-deploy management interface for developers without database overhead."
+      "zh": "測試期間常要查多家券商測試機的帳密、IP 和連線狀態。這個工具用單一 PHP 檔案完成，不接資料庫，重點是讓團隊能快速部署和集中查詢。",
+      "en": "During testing, broker credentials, API IPs, and connection status were scattered across notes and messages. This tool keeps them in one database-free PHP page that is easy to deploy."
     },
     "impact": {
-      "zh": "成功為團隊提供一個開箱即用的測試帳密管理平台，將多券商帳密的維護與查詢時間大幅縮短，避免了手動記錄造成的資訊不同步與混亂。",
-      "en": "Successfully provided developers with an out-of-the-box credential management page, significantly reducing sync and lookup times for broker test environments while avoiding copy-paste configuration errors."
+      "zh": "團隊不用再翻文件或聊天紀錄找帳密，維護和查詢時間都縮短，也減少資訊不同步的問題。",
+      "en": "Developers no longer need to search chat history for test credentials, and fewer copy-paste mistakes make it into local configs."
     }
   },
   "PodScribe": {
@@ -714,12 +714,12 @@
       ]
     },
     "challenge": {
-      "zh": "長達數小時的 Podcast 音訊轉譯文本極為龐大，直接呼叫 LLM 容易超出 Context window 且成本高昂。我設計了「滑動窗口分段摘要」與「層級語意聚合」算法，先提取分段主題，再由 GPT/Gemini 進行結構化串聯並自動生成 Mermaid 心智圖。",
-      "en": "Processing hours of transcript text exceeds standard LLM context windows and spikes token costs. I built a sliding-window segment summarizer and structured a hierarchical semantic aggregator to condense topics, outputting mindmaps via Mermaid."
+      "zh": "長 Podcast 轉錄後文字很長，直接丟給 LLM 容易超出 context，也會增加成本。我把內容切成滑動窗口先摘要，再合併主題，最後產出報告和 Mermaid 心智圖。",
+      "en": "Long podcast transcripts exceed normal LLM context windows and increase token cost. I split transcripts into sliding windows, summarize each segment, merge topics, and output a Mermaid mind map."
     },
     "impact": {
-      "zh": "用戶可在 2 分鐘內讀完 2 小時的 Podcast 核心觀點與心智圖，大幅提昇了知識吸收效率。",
-      "en": "Allows users to digest a 2-hour podcast via interactive mindmaps and summaries in under 2 minutes, maximizing knowledge assimilation."
+      "zh": "使用者可以用幾分鐘看完一集長 Podcast 的重點和心智圖，不必重新聽完整音檔。",
+      "en": "Users can review a long podcast through a short summary and mind map instead of replaying the full episode."
     }
   },
   "presale-radar": {
@@ -749,12 +749,12 @@
       ]
     },
     "challenge": {
-      "zh": "實價登錄的預售屋原始資料每期體積龐大且充滿異常值（如親友交易或特殊條款）。我編寫了 Pandas 清洗腳本，將資料標準化後寫入資料庫，並在資料庫端建立空間索引以支援快速的地圖點位查詢。",
+      "zh": "預售屋實價登錄每期資料量很大，也會混進親友交易或特殊條款。我用 Pandas 清洗資料、標準化欄位，再在資料庫建立空間索引，支援地圖查詢。",
       "en": "Raw real estate registries are bulky and contain outliers like family-transfer pricing. I wrote a Pandas preprocessing pipeline to filter anomalies, normalized the database, and built spatial indices to support rapid map coordinate queries."
     },
     "impact": {
-      "zh": "將數十萬筆實價登錄轉換為直觀的「預售屋溢價熱力圖」，幫助使用者迅速洞察重劃區最新成交行情。",
-      "en": "Transformed raw registry spreadsheets into an interactive markup heatmap, helping home buyers identify price premiums across real estate hot zones."
+      "zh": "它把數十萬筆實價登錄整理成預售屋熱區視圖，方便比較重劃區的成交價格和溢價狀況。",
+      "en": "It turns registry data into a presale-housing heatmap for comparing transaction prices and premium zones."
     }
   },
   "msg-converter": {
@@ -786,12 +786,12 @@
       "/previews/msg-converter-ui.png"
     ],
     "challenge": {
-      "zh": "Windows .msg 是基於 OLE2 的複雜二進位格式，且編碼經常為非 Unicode（如 CP950），在 macOS 轉檔極易亂碼。我編寫了解碼器解析 OLE2 結構，並實作了中文字元集編碼自動辨識與附件二進位內嵌優化。",
+      "zh": "Windows .msg 是 OLE2 二進位格式，常混 CP950 之類的非 Unicode 編碼，macOS 轉檔容易亂碼。我寫了解碼器解析 OLE2，並做中文字元集偵測和附件內嵌。",
       "en": "Windows .msg is an OLE2 structured binary containing non-Unicode character sets like CP950, causing decoding failure on macOS. I built a direct OLE2 reader with automated encoding detection and base64 attachment inline embedding."
     },
     "impact": {
-      "zh": "提供 Mac 用戶零失真的 MSG 轉換體驗，解決了跨平台郵件檢視痛點，轉換成功率達 99.9%。",
-      "en": "Provides macOS users with seamless .msg rendering, converting legacy outlook attachments with a 99.9% parse success rate."
+      "zh": "Mac 使用者可以把 .msg 轉成可讀的 HTML，中文和附件都能保留下來。",
+      "en": "macOS users can convert .msg files into readable HTML while keeping Chinese text and attachments."
     }
   },
   "neighbor-profiler": {
@@ -819,12 +819,12 @@
       ]
     },
     "challenge": {
-      "zh": "聯徵中心資料欄位極為複雜，且包含大量非結構化的金融名詞，傳統統計模型難以發現潛在槓桿。我設計了一套多因子評估模型，將路段成交價與區域人均信用槓桿進行關聯性交叉比對，並以 Chart.js 實作 3D 立體雷達圖呈現風險。",
+      "zh": "聯徵資料欄位多，也有不少非結構化金融名詞。我做了多因子評估，把路段成交價和區域信用槓桿放在一起比較，再用 Chart.js 呈現風險分布。",
       "en": "Evaluating property volatility requires parsing raw JCIC financial registry tables and modeling complex credit correlations. I designed a multi-factor risk evaluator connecting local transacted values with regional leverage stats, rendered via dynamic 3D radars."
     },
     "impact": {
-      "zh": "幫助購屋族快速識破「虛胖路段」與高槓桿炒作區域，顯著提昇了置產決策時的風險防禦能力。",
-      "en": "Enables home buyers to spot overpriced streets and high-speculation micro-regions, enhancing financial safety margins before asset acquisition."
+      "zh": "它讓購屋前可以先看路段估值和槓桿風險，避免只看成交價就下判斷。",
+      "en": "Home buyers can compare street-level valuation and leverage risk before making a decision."
     }
   },
   "financial-news-analysis": {
@@ -858,12 +858,12 @@
       "/previews/financial-news-analysis-ui.png"
     ],
     "challenge": {
-      "zh": "財經新聞通常字數繁雜且常有誇大標題，直接以 LLM 分析易產生幻覺。我設計了 Two-stage Prompting 機制，第一階段提取具體提及的上市公司段落，第二階段針對多因子情緒評分，大幅提升預測精準度。",
+      "zh": "財經新聞常有誇大標題，直接讓 LLM 判斷容易失真。我用 two-stage prompting，先抽出實際提到的上市公司段落，再做多因子情緒評分。",
       "en": "Financial news articles contain market noise and sensational headlines, leading to LLM hallucination. I structured a two-stage prompting pattern that first isolates text blocks mentioning specific tickers, then performs multi-factor sentiment scoring."
     },
     "impact": {
-      "zh": "情緒分析準確度顯著提升，且在台股策略回測中，利用 LLM 情緒訊號進行強勢股篩選能顯著降低交易回撤。",
-      "en": "Significantly improved classification precision; strategy backtesting indicated that adding LLM sentiment filters reduced tail drawdowns for momentum portfolios."
+      "zh": "情緒訊號可以拿來輔助強勢股篩選；在回測裡，加入新聞情緒後回撤比單純價格條件低。",
+      "en": "In backtests, adding the news sentiment filter reduced drawdowns compared with price-only momentum conditions."
     }
   },
   "taiwan-nhi-calculator": {
@@ -895,12 +895,12 @@
       "/previews/taiwan-nhi-calculator-preview.png"
     ],
     "challenge": {
-      "zh": "二代健保的計算邏輯極為繁複，涵蓋投保類別（一般、公務員、工會）、眷屬人數上限、級距差額以及扣繳費率微調等邊界條件。我使用防浮點數運算誤差的精確代數函式庫，並設計了覆蓋所有邊界條件的單元測試。",
+      "zh": "二代健保計算牽涉投保類別、眷屬人數上限、級距差額和扣繳費率。為了避免浮點數誤差，我用精確代數處理金額，並補上邊界條件測試。",
       "en": "Taiwan's NHI premium rules feature nested brackets, dependent headcounts, and dynamic calculation rates. I used a high-precision decimal math library to eliminate rounding errors and implemented complete unit test suites covering edge cases."
     },
     "impact": {
-      "zh": "計算準確度高達 100%，解決了人資與受雇員工因健保算法複雜而算錯保費的痛點，已累積數千次精準試算。",
-      "en": "Delivers 100% calculation accuracy, resolving payroll discrepancies and billing disputes for HR administrators and union employees."
+      "zh": "工具已累積數千次試算，適合人資或員工快速確認補充保費與眷屬負擔。",
+      "en": "The tool has handled thousands of calculations and is useful for HR teams or employees checking supplemental premiums."
     }
   },
   "Config-Diff-Viewer": {
@@ -928,12 +928,12 @@
       ]
     },
     "challenge": {
-      "zh": "在瀏覽器中直接進行超大型 JSON 或 YAML 目錄的比對時，Myer's Diff 演算法的高運算複雜度會使 UI 線程凍結。我將比對演算法移至 Web Worker 異步執行，並採用虛擬滾動（Virtual Scroll）僅渲染可見變更行。",
+      "zh": "大型 JSON 或 YAML 直接在主執行緒比對時，畫面很容易凍住。我把 diff 計算移到 Web Worker，並用 virtual scroll 只渲染可見的變更行。",
       "en": "Running directory-wide comparison algorithms on large configuration files in-browser caused UI thread freezes. I offloaded the Myer's Diff calculations to a Web Worker and implemented virtual scrolling to render visible line changes only."
     },
     "impact": {
-      "zh": "提供毫秒級的超大設定檔比對速度，使每次系統上線前的設定稽核流程從 15 分鐘縮短至 10 秒以內。",
-      "en": "Delivers millisecond-level comparisons for large configs, shortening the deployment audit process from 15 minutes to under 10 seconds."
+      "zh": "大型設定檔比對可以在幾秒內完成，上線前的設定稽核不用再手動逐行看。",
+      "en": "Large config comparisons finish in a few seconds, so deployment audits no longer require manual line-by-line review."
     }
   },
   "team-eats": {
@@ -965,12 +965,12 @@
       "/previews/team-eats-dashboard.png"
     ],
     "challenge": {
-      "zh": "在多人協作揪團時，經常出現重覆點餐、拆帳困難與即時更新衝突。我採用了基於 LocalStorage 與簡易 WebSocket 的雙重同步機制，並設計了自動拆帳演算法（優化轉帳路徑以減少收款次數）。",
-      "en": "Group ordering triggers redundant requests, complex bill splitting, and socket sync conflicts. I applied a dual-sync engine via WebSocket and LocalStorage fallback, and implemented a transfer optimization algorithm to minimize transaction steps."
+      "zh": "多人點餐常會重複登記、拆帳麻煩，歷史紀錄也容易散掉。這個版本以 LocalStorage 為主，保留 Firebase 作為可選整合，先把投票、回報與費用紀錄集中到同一個介面。",
+      "en": "Group ordering creates duplicate entries, messy bill records, and scattered history. This version uses LocalStorage by default, keeps Firebase as an optional integration, and puts voting, check-ins, and expense history in one interface."
     },
     "impact": {
-      "zh": "將部門聚餐點單與財務結算時間由 30 分鐘縮短至 2 分鐘，實現自動化拆帳且零運算誤差。",
-      "en": "Reduces team ordering overhead and billing splits from 30 minutes to 2 minutes, ensuring mathematically optimized transaction routing."
+      "zh": "部門聚餐和下午茶紀錄不用再散在聊天訊息裡，後續要查店家、費用或回報狀態會快很多。",
+      "en": "Team meal and drink-order records no longer live only in chat messages, so restaurant history, expense notes, and check-in status are easier to find later."
     }
   },
   "digit_recognition": {
@@ -1004,12 +1004,12 @@
       "/previews/digit_recognition-canvas.png"
     ],
     "challenge": {
-      "zh": "前端 Canvas 繪製的粗細與邊距變動大，直接送入 MLP 神經網路辨識時極易失真。我使用 OpenCV 在後端對上傳圖像進行了精確的質心對齊（Centroid Alignment）、高斯模糊降噪與 28x28 像素歸一化處理。",
+      "zh": "Canvas 手寫輸入的粗細和邊距差很多，直接送進 MLP 容易辨識錯。我在後端用 OpenCV 做質心對齊、降噪和 28x28 正規化。",
       "en": "Handwritten digits drawn on raw HTML5 canvas have varying line weights and margins, leading to neural network misclassification. I used OpenCV to perform centroid alignment, Gaussian noise reduction, and 28x28 normalization before inference."
     },
     "impact": {
-      "zh": "手寫數字辨識率提升至 96.5% 以上，且回傳延遲低於 50 毫秒，實現極速即時辨識體驗。",
-      "en": "Boosted MLP classifier accuracy to over 96.5% with inference latencies under 50ms, achieving a fluid, real-time responsive app experience."
+      "zh": "前處理後辨識穩定很多，畫完數字後可以很快看到結果。",
+      "en": "After preprocessing, recognition is much more stable and results return quickly after drawing."
     }
   },
   "FastAPI-project": {
@@ -1037,12 +1037,12 @@
       ]
     },
     "challenge": {
-      "zh": "在 FastAPI 中整合 PydanticAI 時，需要高效率處理多 Agent 的協作狀態，並以 SSE (Server-Sent Events) 串流傳輸 Agent 的思考過程。我實作了自定義的 SSE 產生器與非同步 Tool Calling 連線池。",
+      "zh": "在 FastAPI 裡接 PydanticAI 時，需要處理多 agent 狀態，也要把過程用 SSE 串流回前端。我寫了自訂 SSE generator 和非同步 tool calling 連線池。",
       "en": "Integrating PydanticAI with FastAPI requires managing multi-agent runtimes and streaming raw LLM tokens via Server-Sent Events (SSE). I implemented custom async generators and managed connection pools for concurrent Tool Calling."
     },
     "impact": {
-      "zh": "成功跑通基於 Model Context Protocol (MCP) 的多智慧體對話原型，為後續複雜 AI 系統奠定穩健的後端範本。",
-      "en": "Created a robust multi-agent prototype powered by MCP, establishing an enterprise-ready template for building fast, asynchronous LLM services."
+      "zh": "這個專案跑通了 MCP 多 agent 對話原型，後續要做更複雜的 AI 後端時，可以直接拿這套結構改。",
+      "en": "This project gets an MCP multi-agent chat prototype running, and the same structure can be reused for more complex AI backends."
     }
   },
   "AIA-Training-Viewer": {
@@ -1054,8 +1054,8 @@
       "en": "AIA Training Viewer"
     },
     "summary": {
-      "zh": "提供學員快速瀏覽每週 AI 課程投影片、範例程式碼與教學資源的課程回顧平台。",
-      "en": "A course review platform designed for students to quickly browse slides, code examples, and resources of AI training."
+      "zh": "讓學員快速找到每週 AI 課程的投影片、範例程式碼和補充資源。",
+      "en": "A course review page where students can find weekly AI training slides, sample code, and extra resources."
     },
     "features": {
       "zh": [
@@ -1070,12 +1070,12 @@
       ]
     },
     "challenge": {
-      "zh": "在為期數週的 AI 培訓課程中，投影片、範例程式碼與補充資源繁雜且零散，學員在課後難以系統性地回顧與下載。挑戰在於如何建立一個直觀且響應式的靜態總覽網頁，將多天的課程內容依日期卡片式整理，讓學員能零延遲地檢索各週的學習資源。",
-      "en": "Over weeks of intensive AI training, slides, codebase samples, and resources became scattered, making it hard for trainees to review. The challenge was to build an intuitive, responsive static portal that categorizes weeks of training materials into clean daily cards for instant retrieval."
+      "zh": "AI 培訓課程跨好幾週，投影片、範例程式碼和補充資源散在不同地方。這個頁面把資料按日期整理成卡片，讓學員課後能直接回來找資源。",
+      "en": "The course ran for several weeks, and slides, sample code, and extra resources ended up scattered. This page groups materials by date so students can find them after class."
     },
     "impact": {
-      "zh": "成功打造外訓課程的資源總覽平台，讓學員可以一鍵存取投影片與程式碼，大幅提昇了課後複習與知識內化的效率，提供更好的外訓教學體驗。",
-      "en": "Successfully delivered a clean resource portal for AI trainees to access slides and sample code with one click, streamlining post-class reviews and knowledge sharing."
+      "zh": "學員可以從同一頁打開投影片和程式碼，課後複習不用再回頭翻訊息或信件。",
+      "en": "Students can open slides and code from one page instead of digging through chat messages or emails."
     }
   },
   "smc-trinity-ai": {
@@ -1103,12 +1103,12 @@
       ]
     },
     "challenge": {
-      "zh": "聰明錢概念（SMC）中的結構轉變（BOS、CHoCH）與訂單塊（Order Block）識別演算法對噪訊極為敏感。我設計了基於多級分形（Fractals）的 K 線特徵過濾器，並實作了三個 AI Agent（牛市、熊市、客觀裁判）的多輪對抗式辯論 Prompt 鏈。",
+      "zh": "SMC 裡的 BOS、CHoCH 和 Order Block 很容易被雜訊影響。我用多級 fractal 過濾 K 線特徵，再讓牛方、熊方和裁判三個 agent 進行多輪辯論。",
       "en": "Spotting Smart Money Concepts (SMC) structure breaks (BOS, CHoCH) is highly error-prone due to candlestick market noise. I developed a multi-level fractal filter to clean price feeds and deployed a multi-agent debate chain (bull/bear/referee) for signal voting."
     },
     "impact": {
-      "zh": "產出具備高度邏輯推導性的交易決策報告，相較單一 LLM 分析，訊號誤判率降低了 42%。",
-      "en": "Generates highly logical decision reports; trading backtests showed a 42% reduction in false-positive breakouts compared to single-agent prompts."
+      "zh": "報告會保留多方推理過程，比單一 LLM 直接給結論更容易檢查訊號是否站得住。",
+      "en": "The report keeps the bull, bear, and referee reasoning visible, making signals easier to review than a single direct LLM answer."
     }
   },
   "travel": {
@@ -1120,8 +1120,8 @@
       "en": "Travel Price Comparison Engine"
     },
     "summary": {
-      "zh": "為台灣出發的旅客整合機票、飯店與套裝行程的一站式比價工具，採「爬蟲優先、API 為輔」的雙軌架構。",
-      "en": "A one-stop search tool for travelers departing Taiwan that aggregates flights, hotels, and tour packages via a scraper-first, limited-API-fallback architecture."
+      "zh": "給台灣出發旅客用的機票、飯店和套裝行程比價工具，預設先跑爬蟲，必要時才用 API 後備。",
+      "en": "A search tool for Taiwan-departure flights, hotels, and tour packages. It tries scrapers first and only uses API fallback when needed."
     },
     "features": {
       "zh": [
@@ -1140,29 +1140,29 @@
       ]
     },
     "challenge": {
-      "zh": "旅遊資料源（Google Flights、Booking.com、各旅行社）格式零散且爬蟲易失敗。我設計了「爬蟲優先、限量 API 為輔」的雙軌架構：以 Promise.allSettled 併行抓取機票、飯店與套裝行程，結果寫入 Upstash Redis 做當日快取，爬蟲落空時才觸發具配額保護的 SerpAPI 後備。",
+      "zh": "Google Flights、Booking.com 和旅行社資料格式不一，爬蟲也可能失敗。我用 Promise.allSettled 併行抓機票、飯店和行程，結果寫入 Upstash Redis 當日快取；爬蟲落空時才讓使用者選 SerpAPI 後備。",
       "en": "Travel data sources (Google Flights, Booking.com, agencies) are fragmented and scrapers fail unpredictably. I built a dual-track architecture: fetching flights, hotels, and packages concurrently via Promise.allSettled, caching results in Upstash Redis day-scoped, and only triggering a quota-guarded SerpAPI fallback when scraping returns empty."
     },
     "impact": {
-      "zh": "相同查詢於同日命中快取可在 100ms 內回傳，且每次搜尋的 API 成本為零；SerpAPI 僅在使用者主動點擊後備時才扣除每日 10 次的配額。",
+      "zh": "同日相同查詢命中快取時，100ms 內可回傳。SerpAPI 只有在使用者主動點後備時才會扣每日 10 次配額。",
       "en": "Same-day repeat queries return from cache in under 100ms at zero per-query API cost, with SerpAPI's 10-calls/day quota only consumed on explicit user fallback."
     },
     "engineeringPillars": {
       "observability": {
-        "zh": "頁面即時顯示當日 SerpAPI 剩餘配額，並在爬蟲落空時才浮出「使用後備 API」按鈕，讓使用者清楚每次查詢的資料來源與成本。",
+        "zh": "頁面會顯示當日 SerpAPI 剩餘配額。只有爬蟲落空時，才出現「使用後備 API」按鈕。",
         "en": "The page surfaces remaining daily SerpAPI quota in real time and only reveals a 'Use Fallback API' button when scraping returns empty, keeping data source and cost transparent per query."
       },
       "caching": {
-        "zh": "以 Upstash Redis KV 做 day-scoped 快取，相同查詢於同日直接命中，並由 GitHub Actions 每日 03:00 UTC 排程暖快取，降低首查延遲。",
+        "zh": "用 Upstash Redis KV 做 day-scoped 快取，同日相同查詢直接命中。GitHub Actions 每天 03:00 UTC 先暖快取。",
         "en": "Uses Upstash Redis KV for day-scoped caching so identical same-day queries hit instantly, with a GitHub Actions cron warming the cache daily at 03:00 UTC to cut cold-start latency."
       },
       "security": {
-        "zh": "SerpAPI 金鑰與快取憑證皆以環境變數管理，爬蟲服務部署於 Render，前端與 API route 部署於 Vercel，三方職責分離。",
+        "zh": "SerpAPI key 和快取憑證都用環境變數。爬蟲服務在 Render，前端與 API route 在 Vercel。",
         "en": "SerpAPI keys and cache credentials are managed via environment variables, with the scraper on Render and the frontend/API routes on Vercel for clear separation of concerns."
       },
       "reproducibility": {
-        "zh": "Python FastAPI 爬蟲服務隨附 Dockerfile 與 render.yaml，可一鍵重現部署；docs/ 內含系統架構、搜尋流程與部署架構圖。",
-        "en": "The Python FastAPI scraper ships with a Dockerfile and render.yaml for one-click reproducible deploys, and docs/ includes system architecture, search flow, and deployment diagrams."
+        "zh": "FastAPI 爬蟲服務附 Dockerfile 和 render.yaml。docs/ 裡有系統架構、搜尋流程和部署圖。",
+      "en": "The FastAPI scraper includes a Dockerfile and render.yaml. docs/ covers the architecture, search flow, and deployment diagrams."
       }
     }
   },
@@ -1175,8 +1175,8 @@
       "en": "Disposal Board"
     },
     "summary": {
-      "zh": "台股處置股／注意股風險看板，彙整風險股、處置中、即將出關與注意自結清單，並提供風險指標與出關倒數。",
-      "en": "A Taiwan-stock disposal / watch-list risk board that aggregates at-risk, under-disposal, soon-to-clear, and watch-list tickers with risk badges and clearance countdowns."
+      "zh": "整理台股處置股、注意股、即將出關和注意自結清單，並顯示風險分數與出關倒數。",
+      "en": "A Taiwan-stock disposal and watch-list board with risk scores, active disposal names, soon-to-clear names, and clearance countdowns."
     },
     "features": {
       "zh": [
@@ -1195,12 +1195,12 @@
       ]
     },
     "challenge": {
-      "zh": "台股處置／注意股資訊散落於證交所與櫃買中心的公告中，且不支援瀏覽器跨域。我用 Next.js Route Handler 在 server 端併行抓取 TWSE/TPEX OpenAPI 與 Yahoo 報價，透過市場無關的純函式引擎依「處置作業要點」（連 3 次／10 日 6 次／30 日 12 次）計算風險分數、漲跌停價與出關倒數。",
+      "zh": "處置和注意股資料散在證交所與櫃買中心公告，瀏覽器也不能直接跨域抓。我用 Next.js Route Handler 在 server 端併行抓 TWSE/TPEX OpenAPI 與 Yahoo 報價，再用純函式計算風險分數、漲跌停價和出關倒數。",
       "en": "Taiwan disposal/watch-list data is scattered across TWSE and TPEX announcements and blocks browser CORS. I built a Next.js Route Handler that concurrently fetches TWSE/TPEX OpenAPI plus Yahoo quotes server-side, then runs a market-agnostic pure-function engine that applies the official disposal rules (3-in-a-row / 6-in-10 / 12-in-30 days) to compute risk scores, limit prices, and clearance countdowns."
     },
     "impact": {
-      "zh": "名單以「處置日」為鍵（台北 18:00 換日）一天只抓一次、即時報價 20 秒新鮮度，達成兩段式秒開；任一資料源失敗皆有降級備援，看板不中斷。",
-      "en": "Lists are cached per 'disposal day' (18:00 Taipei rollover) so they're fetched once daily, while live quotes carry a 20s freshness window — enabling instant two-stage loading with graceful fallback if any source fails."
+      "zh": "名單以處置日為鍵，台北 18:00 換日後才重抓；即時報價保留 20 秒新鮮度。任一資料源失敗時會降級，看板不會整頁掛掉。",
+      "en": "Lists are cached by disposal day, rolling over at 18:00 Taipei time. Live quotes stay fresh for 20 seconds, and source failures fall back instead of taking down the whole board."
     }
   }
 }

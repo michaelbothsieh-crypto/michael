@@ -10,7 +10,8 @@ type PortfolioNavProps = {
 
 export function PortfolioNav({ locale, copy, stats, onToggleLocale }: PortfolioNavProps) {
   return (
-    <nav className="fixed left-1/2 top-4 z-40 flex w-[calc(100%-2rem)] max-w-5xl -translate-x-1/2 items-center justify-between rounded-full border border-zinc-950/10 bg-white/78 px-4 py-3 shadow-lg shadow-zinc-950/5 backdrop-blur-xl">
+    <nav className="gsap-nav fixed inset-x-0 top-0 z-40 border-b border-zinc-950/10 bg-[#f1efe7]/92 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
       <a href="#top" className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-950">
         Michael
       </a>
@@ -33,8 +34,7 @@ export function PortfolioNav({ locale, copy, stats, onToggleLocale }: PortfolioN
             </span>
             <span className="flex items-center gap-1.5 border-l border-zinc-950/10 pl-3 sm:border-l sm:pl-3">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#5d6f4f]"></span>
               </span>
               <span>
                 {stats.active.toLocaleString()} {locale === "zh" ? "在線" : "Online"}
@@ -44,12 +44,13 @@ export function PortfolioNav({ locale, copy, stats, onToggleLocale }: PortfolioN
         )}
         <button
           type="button"
-          className="rounded-full border border-zinc-950/15 px-3 py-1.5 font-mono text-xs text-zinc-950 transition hover:bg-zinc-950 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-600"
+          className="border border-zinc-950/15 px-3 py-1.5 font-mono text-xs text-zinc-950 transition hover:bg-[#1f211b] hover:text-[#f7f4ea] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
           onClick={onToggleLocale}
           aria-label="Switch language"
         >
           {locale === "zh" ? "EN" : "繁中"}
         </button>
+      </div>
       </div>
     </nav>
   );
