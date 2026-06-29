@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { Locale, Project } from "@/lib/projects";
 
 type Props = { projects: Project[]; locale: Locale };
 
-export function ProjectTimeline({ projects, locale }: Props) {
-  const [hovered, setHovered] = useState<string | null>(null);
+type TooltipState = { slug: string; pct: number } | null;
 
-  // Sort by createdAt, skip ones with no valid date
+export function ProjectTimeline({ projects, locale }: Props) {
+  const [tooltip, setTooltip] = useState<TooltipState>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const sorted = [...projects]
     .filter((p) => p.createdAt)
     .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
@@ -20,7 +22,6 @@ export function ProjectTimeline({ projects, locale }: Props) {
   const maxT = times[times.length - 1];
   const span = maxT - minT || 1;
 
-  // Stack projects in the same month so dots don't overlap
   const monthBucket: Record<string, number> = {};
   const stackIndex = sorted.map((p) => {
     const d = new Date(p.createdAt);
@@ -31,7 +32,6 @@ export function ProjectTimeline({ projects, locale }: Props) {
   });
   const maxStack = Math.max(...Object.values(monthBucket)) - 1;
 
-  // Unique months for X-axis labels
   const monthLabels: { label: string; pct: number }[] = [];
   const seen = new Set<string>();
   for (const p of sorted) {
@@ -52,83 +52,73 @@ export function ProjectTimeline({ projects, locale }: Props) {
   const SVG_H = 56 + maxStack * ROW_H;
   const AXIS_Y = SVG_H - 28;
 
+  const hoveredProject = tooltip ? sorted.find((p) => p.slug === tooltip.slug) : null;
+
   return (
     <section className="px-5 sm:px-8 lg:px-12 pb-16 pt-2">
       <div className="mx-auto max-w-7xl">
         <p className="mb-5 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">
           {locale === "zh" ? "專案產出時間軸" : "Project timeline"}
         </p>
-        <div className="relative overflow-x-auto">
+
+        {/* HTML tooltip — 不受 SVG overflow 限制 */}
+        <div ref={containerRef} className="relative overflow-x-auto">
+          {hoveredProject && (
+            <div
+              className="pointer-events-none absolute top-0 z-10"
+              style={{
+                left: `clamp(4px, calc(${tooltip!.pct * 100}% - 80px), calc(100% - 164px))`,
+                transform: "translateY(-8px)",
+              }}
+            >
+              <div className="rounded-md bg-[#1c1f17]/92 px-3 py-1.5 text-center backdrop-blur-sm">
+                <p className="max-w-[156px] truncate text-[10px] font-semibold text-[#f1efe7]">
+                  {hoveredProject.title[locale]}
+                </p>
+                <p className="mt-0.5 text-[8px] text-zinc-400">
+                  {new Date(hoveredProject.createdAt).toLocaleDateString(
+                    locale === "zh" ? "zh-TW" : "en-US",
+                    { year: "numeric", month: "short" }
+                  )}
+                </p>
+              </div>
+            </div>
+          )}
+
           <svg
             viewBox={`0 0 1000 ${SVG_H}`}
             className="w-full min-w-[480px]"
-            style={{ overflow: "visible" }}
           >
-            {/* Axis line */}
             <line x1={0} y1={AXIS_Y} x2={1000} y2={AXIS_Y} stroke="#d4d0c6" strokeWidth="1" />
 
-            {/* Month labels */}
             {monthLabels.map(({ label, pct }) => (
-              <text
-                key={label}
-                x={pct * 980 + 10}
-                y={AXIS_Y + 16}
-                fontSize="9"
-                fill="#a1a1aa"
-                textAnchor="middle"
-              >
+              <text key={label} x={pct * 980 + 10} y={AXIS_Y + 16} fontSize="9" fill="#a1a1aa" textAnchor="middle">
                 {label}
               </text>
             ))}
 
-            {/* Project dots */}
             {sorted.map((p, i) => {
               const pct = (times[i] - minT) / span;
               const cx = pct * 980 + 10;
               const cy = AXIS_Y - DOT_R - stackIndex[i] * ROW_H;
-              const isHovered = hovered === p.slug;
+              const isHovered = tooltip?.slug === p.slug;
 
               return (
                 <g
                   key={p.slug}
-                  onMouseEnter={() => setHovered(p.slug)}
-                  onMouseLeave={() => setHovered(null)}
-                  onClick={() => setHovered((v) => v === p.slug ? null : p.slug)}
+                  onMouseEnter={() => setTooltip({ slug: p.slug, pct })}
+                  onMouseLeave={() => setTooltip(null)}
+                  onClick={() => setTooltip((v) => v?.slug === p.slug ? null : { slug: p.slug, pct })}
                   style={{ cursor: "pointer" }}
                 >
-                  {/* Tick on axis */}
                   <line x1={cx} y1={AXIS_Y} x2={cx} y2={AXIS_Y - 6} stroke="#d4d0c6" strokeWidth="1" />
-
-                  {/* Dot */}
                   <circle
-                    cx={cx}
-                    cy={cy}
+                    cx={cx} cy={cy}
                     r={isHovered ? DOT_R + 2 : DOT_R}
                     fill={isHovered ? "#4f6546" : "#5d6f4f"}
                     opacity={isHovered ? 1 : 0.75}
                     style={{ transition: "r 0.15s, opacity 0.15s" }}
                   />
-
-                  {/* Tooltip — clamped to SVG bounds */}
-                  {isHovered && (() => {
-                    const TW = 160;
-                    const tx = Math.max(4, Math.min(cx - TW / 2, 996 - TW));
-                    const mid = tx + TW / 2;
-                    return (
-                      <g>
-                        <rect x={tx} y={cy - 36} width={TW} height={26} rx={5} fill="#1c1f17" opacity={0.92} />
-                        <text x={mid} y={cy - 19} textAnchor="middle" fontSize="10" fill="#f1efe7" fontWeight="600">
-                          {p.title[locale].length > 22 ? p.title[locale].slice(0, 21) + "…" : p.title[locale]}
-                        </text>
-                        <text x={mid} y={cy - 8} textAnchor="middle" fontSize="8" fill="#a1a1aa">
-                          {new Date(p.createdAt).toLocaleDateString(
-                            locale === "zh" ? "zh-TW" : "en-US",
-                            { year: "numeric", month: "short" }
-                          )}
-                        </text>
-                      </g>
-                    );
-                  })()}
                 </g>
               );
             })}
