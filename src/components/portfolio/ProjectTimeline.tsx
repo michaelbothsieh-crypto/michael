@@ -109,38 +109,26 @@ export function ProjectTimeline({ projects, locale }: Props) {
                     style={{ transition: "r 0.15s, opacity 0.15s" }}
                   />
 
-                  {/* Tooltip */}
-                  {isHovered && (
-                    <g>
-                      <rect
-                        x={cx - 80}
-                        y={cy - 36}
-                        width={160}
-                        height={26}
-                        rx={5}
-                        fill="#1c1f17"
-                        opacity={0.92}
-                      />
-                      <text
-                        x={cx}
-                        y={cy - 19}
-                        textAnchor="middle"
-                        fontSize="10"
-                        fill="#f1efe7"
-                        fontWeight="600"
-                      >
-                        {p.title[locale].length > 22
-                          ? p.title[locale].slice(0, 21) + "…"
-                          : p.title[locale]}
-                      </text>
-                      <text x={cx} y={cy - 8} textAnchor="middle" fontSize="8" fill="#a1a1aa">
-                        {new Date(p.createdAt).toLocaleDateString(
-                          locale === "zh" ? "zh-TW" : "en-US",
-                          { year: "numeric", month: "short" }
-                        )}
-                      </text>
-                    </g>
-                  )}
+                  {/* Tooltip — clamped to SVG bounds */}
+                  {isHovered && (() => {
+                    const TW = 160;
+                    const tx = Math.max(4, Math.min(cx - TW / 2, 996 - TW));
+                    const mid = tx + TW / 2;
+                    return (
+                      <g>
+                        <rect x={tx} y={cy - 36} width={TW} height={26} rx={5} fill="#1c1f17" opacity={0.92} />
+                        <text x={mid} y={cy - 19} textAnchor="middle" fontSize="10" fill="#f1efe7" fontWeight="600">
+                          {p.title[locale].length > 22 ? p.title[locale].slice(0, 21) + "…" : p.title[locale]}
+                        </text>
+                        <text x={mid} y={cy - 8} textAnchor="middle" fontSize="8" fill="#a1a1aa">
+                          {new Date(p.createdAt).toLocaleDateString(
+                            locale === "zh" ? "zh-TW" : "en-US",
+                            { year: "numeric", month: "short" }
+                          )}
+                        </text>
+                      </g>
+                    );
+                  })()}
                 </g>
               );
             })}
