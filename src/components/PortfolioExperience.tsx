@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { CategoryFilter, Locale, Project } from "@/lib/projects";
 import { filterProjectsByCategory, selectFeaturedProjects } from "@/lib/projects";
 import { CategoryStory } from "./portfolio/CategoryStory";
+import { ProjectTimeline } from "./portfolio/ProjectTimeline";
 import { copy } from "./portfolio/copy";
 import { FeaturedSection } from "./portfolio/FeaturedSection";
 import { HeroSection } from "./portfolio/HeroSection";
@@ -23,6 +24,9 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 export function PortfolioExperience({ projects }: Props) {
   const containerRef = useRef<HTMLElement>(null);
   const [locale, setLocale] = useState<Locale>("zh");
+  useEffect(() => {
+    document.documentElement.lang = locale === "zh" ? "zh-Hant" : "en";
+  }, [locale]);
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [stats, setStats] = useState<{ pv: number; active: number } | null>(null);
@@ -49,27 +53,31 @@ export function PortfolioExperience({ projects }: Props) {
       stagger: 0.04,
     });
 
+    // Pre-hide before ScrollTrigger watches — prevents flash (visible → hidden → animate)
+    gsap.set(".gsap-reveal", { autoAlpha: 0, y: 22 });
+    gsap.set(".gsap-project-card", { autoAlpha: 0, y: 20 });
+
     gsap.utils.toArray<HTMLElement>(".gsap-reveal").forEach((element) => {
-      gsap.from(element, {
-        autoAlpha: 0,
-        y: 22,
+      gsap.to(element, {
+        autoAlpha: 1,
+        y: 0,
         duration: 0.55,
         ease: "power3.out",
         scrollTrigger: {
           trigger: element,
-          start: "top 82%",
+          start: "top 92%",
           once: true,
         },
       });
     });
 
     ScrollTrigger.batch(".gsap-project-card", {
-      start: "top 86%",
+      start: "top 96%",
       once: true,
       onEnter: (batch) => {
-        gsap.from(batch, {
-          autoAlpha: 0,
-          y: 20,
+        gsap.to(batch, {
+          autoAlpha: 1,
+          y: 0,
           duration: 0.5,
           ease: "power3.out",
           stagger: 0.05,
@@ -108,8 +116,9 @@ export function PortfolioExperience({ projects }: Props) {
     };
 
     updateStats(true);
-    const interval = setInterval(() => updateStats(false), 30000);
-    return () => clearInterval(interval);
+    const onVisible = () => { if (document.visibilityState === "visible") updateStats(false); };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
   }, []);
 
   const trackProjectView = async (slug: string) => {
@@ -143,6 +152,7 @@ export function PortfolioExperience({ projects }: Props) {
     <main ref={containerRef} className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f1efe7] text-zinc-950">
       <PortfolioNav locale={locale} copy={t} stats={stats} onToggleLocale={() => setLocale(locale === "zh" ? "en" : "zh")} />
       <HeroSection projectsCount={projects.length} featuredProjects={featuredProjects} locale={locale} copy={t} />
+      <ProjectTimeline projects={projects} locale={locale} />
       <FeaturedSection projects={featuredProjects} totalProjects={projects.length} locale={locale} copy={t} onOpenProject={handleOpenProject} />
       <CategoryStory copy={t} />
       <ProjectGridSection

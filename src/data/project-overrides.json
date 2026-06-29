@@ -1162,7 +1162,7 @@
       },
       "reproducibility": {
         "zh": "FastAPI 爬蟲服務附 Dockerfile 和 render.yaml。docs/ 裡有系統架構、搜尋流程和部署圖。",
-      "en": "The FastAPI scraper includes a Dockerfile and render.yaml. docs/ covers the architecture, search flow, and deployment diagrams."
+        "en": "The FastAPI scraper includes a Dockerfile and render.yaml. docs/ covers the architecture, search flow, and deployment diagrams."
       }
     }
   },
@@ -1201,6 +1201,31 @@
     "impact": {
       "zh": "名單以處置日為鍵，台北 18:00 換日後才重抓；即時報價保留 20 秒新鮮度。任一資料源失敗時會降級，看板不會整頁掛掉。",
       "en": "Lists are cached by disposal day, rolling over at 18:00 Taipei time. Live quotes stay fresh for 20 seconds, and source failures fall back instead of taking down the whole board."
+    }
+  },
+  "my-exercises-db": {
+    "category": "Product Utilities",
+    "featured": false,
+    "sortWeight": 55,
+    "title": {
+      "zh": "健身動作資料庫",
+      "en": "Exercise Database"
+    },
+    "summary": {
+      "zh": "個人健身動作資料庫，紀錄與查詢訓練動作、組數與重量。",
+      "en": "A personal exercise database for logging and querying workout movements, sets, and weights."
+    },
+    "features": {
+      "zh": [
+        "動作資料庫",
+        "訓練紀錄",
+        "重量追蹤"
+      ],
+      "en": [
+        "Exercise library",
+        "Workout logging",
+        "Weight tracking"
+      ]
     }
   }
 }

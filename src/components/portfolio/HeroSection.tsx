@@ -58,8 +58,8 @@ export function HeroSection({ projectsCount, featuredProjects, locale, copy }: H
                 <p className="mt-1 font-mono text-sm text-zinc-900">{projectsCount}</p>
               </div>
               <div>
-                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">Featured</p>
-                <p className="mt-1 font-mono text-sm text-zinc-900">{featuredProjects.length}</p>
+                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">Since</p>
+                <p className="mt-1 font-mono text-sm text-zinc-900">2025</p>
               </div>
               <div>
                 <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">Focus</p>

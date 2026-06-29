@@ -1,5 +1,22 @@
 [
   {
+    "name": "my-exercises-db",
+    "nameWithOwner": "michaelbothsieh-crypto/my-exercises-db",
+    "description": "個人健身動作資料庫與訓練紀錄工具",
+    "visibility": "PRIVATE",
+    "isPrivate": true,
+    "createdAt": "2026-06-29T02:25:26Z",
+    "updatedAt": "2026-06-29T03:37:07Z",
+    "primaryLanguage": "HTML",
+    "topics": [],
+    "homepageUrl": "https://my-exercises-db.vercel.app",
+    "url": "https://github.com/michaelbothsieh-crypto/my-exercises-db",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 0,
+    "forkCount": 0
+  },
+  {
     "name": "personal-bot-gateway",
     "nameWithOwner": "michaelbothsieh-crypto/personal-bot-gateway",
     "description": "Independent Telegram and LINE gateway for the daily KOL brief and stock commands",

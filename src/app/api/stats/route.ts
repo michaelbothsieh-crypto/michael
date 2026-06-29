@@ -84,10 +84,15 @@ export async function POST(req: NextRequest) {
     idx++;
     const activeKeys = results[idx]?.result ?? [];
     idx++;
-    const rawProjectPvs = results[idx]?.result ?? {};
+    const rawProjectPvs = results[idx]?.result ?? [];
 
     const projectPvs: Record<string, number> = {};
-    if (rawProjectPvs && typeof rawProjectPvs === "object") {
+    if (Array.isArray(rawProjectPvs)) {
+      // ponytail: HGETALL in Upstash pipeline returns flat array [k,v,k,v,...]
+      for (let i = 0; i < rawProjectPvs.length - 1; i += 2) {
+        projectPvs[rawProjectPvs[i]] = Number(rawProjectPvs[i + 1]);
+      }
+    } else if (rawProjectPvs && typeof rawProjectPvs === "object") {
       Object.entries(rawProjectPvs).forEach(([key, val]) => {
         projectPvs[key] = Number(val);
       });
