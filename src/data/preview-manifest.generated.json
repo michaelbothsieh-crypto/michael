@@ -148,5 +148,9 @@
     "status": "captured",
     "source": "https://disposal-board.vercel.app",
     "path": "/previews/disposal-board.png"
+  },
+  "my-exercises-db": {
+    "status": "captured",
+    "path": "/previews/my-exercises-db.png"
   }
 }
