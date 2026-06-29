@@ -152,7 +152,7 @@ export function PortfolioExperience({ projects }: Props) {
     <main ref={containerRef} className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f1efe7] text-zinc-950">
       <PortfolioNav locale={locale} copy={t} stats={stats} onToggleLocale={() => setLocale(locale === "zh" ? "en" : "zh")} />
       <HeroSection projectsCount={projects.length} featuredProjects={featuredProjects} locale={locale} copy={t} />
-      <ProjectTimeline projects={projects} locale={locale} />
+      <ProjectTimeline projects={projects} locale={locale} onOpen={handleOpenProject} />
       <FeaturedSection projects={featuredProjects} totalProjects={projects.length} locale={locale} copy={t} onOpenProject={handleOpenProject} />
       <CategoryStory copy={t} />
       <ProjectGridSection

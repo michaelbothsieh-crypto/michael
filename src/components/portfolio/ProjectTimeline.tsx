@@ -1,15 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import type { Locale, Project } from "@/lib/projects";
+import { categoryLabels } from "@/lib/projects";
 
-type Props = { projects: Project[]; locale: Locale };
+type Props = { projects: Project[]; locale: Locale; onOpen?: (p: Project) => void };
 
-type TooltipState = { slug: string; pct: number } | null;
-
-export function ProjectTimeline({ projects, locale }: Props) {
-  const [tooltip, setTooltip] = useState<TooltipState>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+export function ProjectTimeline({ projects, locale, onOpen }: Props) {
+  const [active, setActive] = useState<Project | null>(null);
 
   const sorted = [...projects]
     .filter((p) => p.createdAt)
@@ -47,12 +45,10 @@ export function ProjectTimeline({ projects, locale }: Props) {
     }
   }
 
-  const DOT_R = 5;
-  const ROW_H = 18;
-  const SVG_H = 56 + maxStack * ROW_H;
+  const DOT_R = 6;
+  const ROW_H = 20;
+  const SVG_H = 60 + maxStack * ROW_H;
   const AXIS_Y = SVG_H - 28;
-
-  const hoveredProject = tooltip ? sorted.find((p) => p.slug === tooltip.slug) : null;
 
   return (
     <section className="px-5 sm:px-8 lg:px-12 pb-16 pt-2">
@@ -61,34 +57,8 @@ export function ProjectTimeline({ projects, locale }: Props) {
           {locale === "zh" ? "專案產出時間軸" : "Project timeline"}
         </p>
 
-        {/* HTML tooltip — 不受 SVG overflow 限制 */}
-        <div ref={containerRef} className="relative overflow-x-auto">
-          {hoveredProject && (
-            <div
-              className="pointer-events-none absolute top-0 z-10"
-              style={{
-                left: `clamp(4px, calc(${tooltip!.pct * 100}% - 80px), calc(100% - 164px))`,
-                transform: "translateY(-8px)",
-              }}
-            >
-              <div className="rounded-md bg-[#1c1f17]/92 px-3 py-1.5 text-center backdrop-blur-sm">
-                <p className="max-w-[156px] truncate text-[10px] font-semibold text-[#f1efe7]">
-                  {hoveredProject.title[locale]}
-                </p>
-                <p className="mt-0.5 text-[8px] text-zinc-400">
-                  {new Date(hoveredProject.createdAt).toLocaleDateString(
-                    locale === "zh" ? "zh-TW" : "en-US",
-                    { year: "numeric", month: "short" }
-                  )}
-                </p>
-              </div>
-            </div>
-          )}
-
-          <svg
-            viewBox={`0 0 1000 ${SVG_H}`}
-            className="w-full min-w-[480px]"
-          >
+        <div className="overflow-x-auto">
+          <svg viewBox={`0 0 1000 ${SVG_H}`} className="w-full min-w-[480px]">
             <line x1={0} y1={AXIS_Y} x2={1000} y2={AXIS_Y} stroke="#d4d0c6" strokeWidth="1" />
 
             {monthLabels.map(({ label, pct }) => (
@@ -101,28 +71,62 @@ export function ProjectTimeline({ projects, locale }: Props) {
               const pct = (times[i] - minT) / span;
               const cx = pct * 980 + 10;
               const cy = AXIS_Y - DOT_R - stackIndex[i] * ROW_H;
-              const isHovered = tooltip?.slug === p.slug;
+              const isActive = active?.slug === p.slug;
 
               return (
                 <g
                   key={p.slug}
-                  onMouseEnter={() => setTooltip({ slug: p.slug, pct })}
-                  onMouseLeave={() => setTooltip(null)}
-                  onClick={() => setTooltip((v) => v?.slug === p.slug ? null : { slug: p.slug, pct })}
+                  onMouseEnter={() => setActive(p)}
+                  onMouseLeave={() => setActive(null)}
+                  onClick={() => setActive((v) => v?.slug === p.slug ? null : p)}
                   style={{ cursor: "pointer" }}
                 >
-                  <line x1={cx} y1={AXIS_Y} x2={cx} y2={AXIS_Y - 6} stroke="#d4d0c6" strokeWidth="1" />
+                  <circle cx={cx} cy={AXIS_Y} r={2} fill="#d4d0c6" />
+                  <line x1={cx} y1={AXIS_Y - 2} x2={cx} y2={cy + DOT_R + 2} stroke="#d4d0c6" strokeWidth="1" strokeDasharray="2 2" opacity={isActive ? 1 : 0} />
                   <circle
                     cx={cx} cy={cy}
-                    r={isHovered ? DOT_R + 2 : DOT_R}
-                    fill={isHovered ? "#4f6546" : "#5d6f4f"}
-                    opacity={isHovered ? 1 : 0.75}
-                    style={{ transition: "r 0.15s, opacity 0.15s" }}
+                    r={isActive ? DOT_R + 2 : DOT_R}
+                    fill={isActive ? "#4f6546" : "#5d6f4f"}
+                    opacity={isActive ? 1 : 0.7}
+                    style={{ transition: "all 0.15s" }}
                   />
                 </g>
               );
             })}
           </svg>
+        </div>
+
+        {/* Detail card below the chart */}
+        <div className={`mt-4 overflow-hidden transition-all duration-200 ${active ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}`}>
+          {active && (
+            <div className="flex items-start justify-between gap-6 rounded-lg border border-zinc-950/10 bg-white px-6 py-4 shadow-sm">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <span className="font-mono text-[0.6rem] uppercase tracking-widest text-zinc-400">
+                    {categoryLabels[active.category][locale]}
+                  </span>
+                  <span className="text-zinc-300">·</span>
+                  <span className="font-mono text-[0.6rem] text-zinc-400">
+                    {new Date(active.createdAt).toLocaleDateString(
+                      locale === "zh" ? "zh-TW" : "en-US",
+                      { year: "numeric", month: "long" }
+                    )}
+                  </span>
+                </div>
+                <h3 className="text-base font-semibold text-zinc-950 truncate">{active.title[locale]}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-zinc-600 line-clamp-2">{active.summary[locale]}</p>
+              </div>
+              {onOpen && (
+                <button
+                  type="button"
+                  onClick={() => onOpen(active)}
+                  className="shrink-0 self-center border border-zinc-950/15 px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-950 hover:text-white transition-colors"
+                >
+                  {locale === "zh" ? "查看" : "View"}
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>
