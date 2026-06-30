@@ -23,7 +23,7 @@ export function FeaturedSection({ projects, totalProjects, locale, copy, onOpenP
             {totalProjects} {copy.projectsCount}
           </p>
         </div>
-        <div className="featured-grid grid grid-flow-dense grid-cols-1 gap-4 lg:grid-cols-12">
+        <div className="grid grid-flow-dense grid-cols-1 gap-4 lg:grid-cols-12">
           {projects.map((project) => (
             <ProjectCard key={project.name} project={project} locale={locale} copy={copy} featured onOpen={onOpenProject} />
           ))}

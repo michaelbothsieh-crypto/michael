@@ -50,6 +50,8 @@ export function ProjectModal({ project, views, locale, copy, onClose }: ProjectM
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
           <button
             type="button"
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
             className="absolute right-4 top-4 rounded-full bg-zinc-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
             onClick={onClose}
           >
