@@ -190,7 +190,11 @@ export function getProjects(): Project[] {
           zh: repo.topics.length ? repo.topics : [categoryLabels[category].zh],
           en: repo.topics.length ? repo.topics : [categoryLabels[category].en],
         },
-        homepageUrl: override?.homepageUrl ?? ((preview?.status === "fallback" && preview?.reason === "http 404") ? "" : repo.homepageUrl),
+        homepageUrl: (() => {
+          const raw = override?.homepageUrl ?? ((preview?.status === "fallback" && preview?.reason === "http 404") ? "" : repo.homepageUrl);
+          // ponytail: strip vercel.app until custom domains are set; override in project-overrides.json to reinstate
+          return raw?.includes("vercel.app") ? "" : raw;
+        })(),
         previewPath: override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`,
         gallery: override?.gallery ?? [override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`],
         previewStatus: preview?.status ?? "missing",
