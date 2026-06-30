@@ -112,40 +112,53 @@ export function ProjectTimeline({ projects, locale, onOpen }: Props) {
             </svg>
 
             {/* Tooltip — hover-only, pointer-events: none so it never blocks dots */}
-            {hovered && (
-              <div
-                className="absolute z-20 pointer-events-none"
-                style={{
-                  left: `clamp(4px, calc(${hovered.cx / SVG_W * 100}% - 100px), calc(100% - 204px))`,
-                  top: `calc(${hovered.cy / SVG_H * 100}% - 8px)`,
-                  transform: "translateY(-100%)",
-                }}
-              >
-                <div className="w-[200px] rounded-lg bg-[#1c1f17] px-4 py-3 shadow-xl">
-                  <p className="text-[9px] font-mono uppercase tracking-widest text-zinc-400 mb-0.5">
-                    {categoryLabels[hovered.project.category][locale]}
-                    {" · "}
-                    {new Date(hovered.project.createdAt).toLocaleDateString(
-                      locale === "zh" ? "zh-TW" : "en-US",
-                      { year: "numeric", month: "short" }
-                    )}
-                  </p>
-                  <p className="text-sm font-semibold text-[#f1efe7] leading-snug">
-                    {hovered.project.title[locale]}
-                  </p>
-                  {onOpen && (
-                    <p className="mt-1.5 text-[10px] font-mono text-[#7a9e6e]">
-                      {locale === "zh" ? "點擊查看詳情 →" : "Click to view →"}
+            {hovered && (() => {
+              const below = hovered.cy / SVG_H < 0.45;
+              const topPct = `${(hovered.cy + (below ? DOT_R + 2 : -DOT_R - 2)) / SVG_H * 100}%`;
+              return (
+                <div
+                  className="absolute z-20 pointer-events-none"
+                  style={{
+                    left: `clamp(4px, calc(${hovered.cx / SVG_W * 100}% - 100px), calc(100% - 204px))`,
+                    top: topPct,
+                    transform: below ? "translateY(8px)" : "translateY(-100%) translateY(-8px)",
+                  }}
+                >
+                  {!below && (
+                    <div className="w-0 h-0 mx-auto mb-0" style={{
+                      borderLeft: "6px solid transparent",
+                      borderRight: "6px solid transparent",
+                      borderTop: "6px solid #1c1f17",
+                    }} />
+                  )}
+                  <div className="w-[200px] rounded-lg bg-[#1c1f17] px-4 py-3 shadow-xl">
+                    <p className="text-[9px] font-mono uppercase tracking-widest text-zinc-400 mb-0.5">
+                      {categoryLabels[hovered.project.category][locale]}
+                      {" · "}
+                      {new Date(hovered.project.createdAt).toLocaleDateString(
+                        locale === "zh" ? "zh-TW" : "en-US",
+                        { year: "numeric", month: "short" }
+                      )}
                     </p>
+                    <p className="text-sm font-semibold text-[#f1efe7] leading-snug">
+                      {hovered.project.title[locale]}
+                    </p>
+                    {onOpen && (
+                      <p className="mt-1.5 text-[10px] font-mono text-[#7a9e6e]">
+                        {locale === "zh" ? "點擊查看詳情 →" : "Click to view →"}
+                      </p>
+                    )}
+                  </div>
+                  {below && (
+                    <div className="w-0 h-0 mx-auto mt-0" style={{
+                      borderLeft: "6px solid transparent",
+                      borderRight: "6px solid transparent",
+                      borderBottom: "6px solid #1c1f17",
+                    }} />
                   )}
                 </div>
-                <div className="w-0 h-0 mx-auto" style={{
-                  borderLeft: "6px solid transparent",
-                  borderRight: "6px solid transparent",
-                  borderTop: "6px solid #1c1f17",
-                }} />
-              </div>
-            )}
+              );
+            })()}
           </div>
         </div>
       </div>
