@@ -6,7 +6,7 @@
   <a href="https://michael-lab.dev">🔗 michael-lab.dev</a>
 </p>
 
-把我開發的開源與私有專案整理成產品案例，聚焦在每個工具解決的實際問題。完整互動版（含截圖與案例詳情）請前往 [michael-lab.dev](https://michael-lab.dev)。
+開源和私有專案的整理，重點是每個工具實際解決了什麼問題，不是 repo 清單。截圖和案例細節在 [michael-lab.dev](https://michael-lab.dev)。
 
 ---
 
