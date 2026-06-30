@@ -6,7 +6,7 @@
   <a href="https://michael-lab.dev">🔗 michael-lab.dev</a>
 </p>
 
-Product-minded full-stack work across AI, finance, and utility systems — curated from public and private GitHub repositories into product cases. For the full interactive version with screenshots and case details, visit [michael-lab.dev](https://michael-lab.dev).
+Product-minded full-stack work across AI, finance, and utility systems — curated from public and private GitHub repositories into product cases. For the full interactive version with screenshots and case details, visit [michael-lab.dev](https://michael-lab.vercel.app).
 
 ---
 
