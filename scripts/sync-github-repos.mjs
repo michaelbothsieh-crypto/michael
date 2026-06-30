@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
@@ -70,7 +70,6 @@ if (privateCount === 0) {
   process.exit(1);
 }
 
-mkdirSync(dataDir, { recursive: true });
 writeFileSync(outputPath, `${JSON.stringify(repos, null, 2)}\n`);
 
 console.log(`Synced ${repos.length} repositories to ${path.relative(root, outputPath)}`);

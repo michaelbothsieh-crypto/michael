@@ -23,7 +23,9 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function PortfolioExperience({ projects }: Props) {
   const containerRef = useRef<HTMLElement>(null);
-  const [locale, setLocale] = useState<Locale>("zh");
+  const [locale, setLocale] = useState<Locale>(() =>
+    typeof navigator !== "undefined" && navigator.language.startsWith("zh") ? "zh" : "en"
+  );
   useEffect(() => {
     document.documentElement.lang = locale === "zh" ? "zh-Hant" : "en";
   }, [locale]);
