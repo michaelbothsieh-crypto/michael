@@ -34,28 +34,24 @@ export async function POST(req: NextRequest) {
     const cleanUuid = (uuid || "anonymous").replace(/[^a-zA-Z0-9-]/g, "");
 
     const commands: RedisCommand[] = [];
+    // ponytail: ZADD/ZREMRANGEBYSCORE/ZCARD instead of KEYS — KEYS is O(n) and blocks Redis
+    const now = Date.now();
+    const cutoff = now - 60_000;
 
-    // 1. 只有首次訪問才遞增全站 PV
     if (isNewVisit) {
       commands.push(["INCR", "stats:pv"]);
     }
 
-    // 2. 登錄/更新線上狀態
-    commands.push(["SET", `stats:active:${cleanUuid}`, "1", "EX", "60"]);
+    commands.push(["ZADD", "stats:active:zset", String(now), cleanUuid]);
+    commands.push(["ZREMRANGEBYSCORE", "stats:active:zset", "0", String(cutoff)]);
 
-    // 3. 若有傳入 projectSlug，遞增該專案的點閱數
     if (projectSlug) {
       const cleanSlug = projectSlug.replace(/[^a-zA-Z0-9-]/g, "");
       commands.push(["HINCRBY", "stats:projects:pv", cleanSlug, "1"]);
     }
 
-    // 4. 取得總到訪次數
     commands.push(["GET", "stats:pv"]);
-
-    // 5. 取得線上活躍 keys
-    commands.push(["KEYS", "stats:active:*"]);
-
-    // 6. 取得所有專案的點閱量
+    commands.push(["ZCARD", "stats:active:zset"]);
     commands.push(["HGETALL", "stats:projects:pv"]);
 
     const res = await fetch(`${url}/pipeline`, {
@@ -74,15 +70,15 @@ export async function POST(req: NextRequest) {
 
     const results = await res.json();
 
-    // 根據發送的指令順序，動態計算解析索引
     let idx = 0;
     if (isNewVisit) idx++; // INCR stats:pv
-    idx++; // SET stats:active
+    idx++; // ZADD stats:active:zset
+    idx++; // ZREMRANGEBYSCORE stats:active:zset
     if (projectSlug) idx++; // HINCRBY stats:projects:pv
 
     const pv = results[idx]?.result ?? 0;
     idx++;
-    const activeKeys = results[idx]?.result ?? [];
+    const activeCount = results[idx]?.result ?? 1;
     idx++;
     const rawProjectPvs = results[idx]?.result ?? [];
 
@@ -100,7 +96,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       pv: Number(pv),
-      active: Math.max(1, activeKeys.length),
+      active: Math.max(1, Number(activeCount)),
       projectPvs,
       fallback: false
     });

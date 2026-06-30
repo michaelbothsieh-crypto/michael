@@ -130,7 +130,7 @@ export function slugify(value: string) {
 function fallbackCategory(repo: GitHubRepo): Category {
   const text = `${repo.name} ${repo.description} ${repo.topics.join(" ")}`.toLowerCase();
 
-  if (/(stock|warrant|insider|financial|smc|broker)/.test(text)) {
+  if (/(stock|warrant|insider|financial|smc|broker|disposal|punish)/.test(text)) {
     return "Financial Intelligence";
   }
 
@@ -142,7 +142,7 @@ function fallbackCategory(repo: GitHubRepo): Category {
     return "Business Sites";
   }
 
-  if (/(price|radar|data|analysis|viewer|profiler)/.test(text)) {
+  if (/(price|radar|data|analysis|viewer|profiler|travel)/.test(text)) {
     return "Data & Research";
   }
 

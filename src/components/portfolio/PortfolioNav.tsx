@@ -1,23 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import type { Locale } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
 
 type PortfolioNavProps = {
-  locale: Locale;
   copy: PortfolioCopy;
   stats: { pv: number; active: number } | null;
   onToggleLocale: () => void;
 };
 
-export function PortfolioNav({ locale, copy, stats, onToggleLocale }: PortfolioNavProps) {
+export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps) {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "#featured", label: copy.nav[0] },
-    { href: "#categories", label: copy.nav[1] },
-    { href: "#projects", label: copy.nav[2] },
+    { href: "#featured", label: copy.nav.featured },
+    { href: "#categories", label: copy.nav.categories },
+    { href: "#projects", label: copy.nav.all },
   ];
 
   return (
@@ -46,7 +44,7 @@ export function PortfolioNav({ locale, copy, stats, onToggleLocale }: PortfolioN
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#5d6f4f]" />
                 </span>
-                {stats.active.toLocaleString()} {locale === "zh" ? "在線" : "Online"}
+                {stats.active.toLocaleString()} {copy.activeLabel}
               </span>
             </div>
           )}
@@ -57,7 +55,7 @@ export function PortfolioNav({ locale, copy, stats, onToggleLocale }: PortfolioN
             onClick={onToggleLocale}
             aria-label="Switch language"
           >
-            {locale === "zh" ? "EN" : "繁中"}
+            {copy.localeToggle}
           </button>
 
           {/* Hamburger — mobile only */}

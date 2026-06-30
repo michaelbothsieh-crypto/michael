@@ -2,65 +2,11 @@
 
 <p align="center">
   English | <a href="README.zh-TW.md">繁體中文</a>
+  <br/>
+  <a href="https://michael-lab.dev">🔗 michael-lab.dev</a>
 </p>
 
-This project curates my public and private GitHub repositories into product cases. It moves beyond raw code lists to focus on the actual problems these tools solve.
-
-I built this lab to help partners and managers quickly understand how I approach product development and system design, especially in finance, AI, and utility tools.
-
----
-
-## Core Technical Architecture & Design Patterns
-
-This portfolio features multiple independent AI automation and financial decision tools. Below are the common technical implementations and design patterns shared across these projects:
-
-### Core technical implementation:
-- **Asynchronous tasks & scheduling**: **GitHub Actions** runs cron jobs to trigger Python ETL scripts for YouTube and Fugle/FinMind API scraping. The pipeline decrypts `NLM_COOKIE_BASE64` to restore cookie sessions for uploading media to **NotebookLM**.
-- **Caching & rate limits**: **Upstash Redis** buffers webhook spikes and enforces TTL rules and rate limiting to avoid exceeding third-party API quotas.
-- **Database operations**: **Neon Serverless PostgreSQL** runs with Prisma/Drizzle for schema migrations. The database spins down to zero when idle and supports branching for sandbox testing.
-- **Fail-safe & alerting**: Scrapers validate the HTML structure of targets like MOPS. Any unexpected changes trigger regex fallbacks and dispatch instant error notifications via a **Telegram Webhook**.
-
----
-
-## Featured Product Spotlights
-
-Core projects selected to showcase key backgrounds and live execution views:
-
-### 1. Personal Bot Gateway (personal-bot-gateway) [AI Automation]
-* **Background**: Tracking daily KOLs, podcasts, news, and Threads posts scattered information across multiple applications. This bot aggregates Telegram commands, NotebookLM analysis, report link dispatch, and stock/ETF checks inside a single Telegram window.
-* **Tech Highlights**: Leverages the core semantic processing and NotebookLM integration engine first prototyped as `kol-daily-brief`. Built with Vercel Serverless (TS) API gateway. Integrates Redis cache to cut paid API costs by 75%, and automates NotebookLM cookie session handoff triggered by GitHub Actions.
-* **Live View**:
-  ![Personal Bot Gateway Preview](./public/previews/personal-bot-gateway-features.jpg)
-
-### 2. Price Atlas (price-altas) [Data & Research]
-* **Background**: Purchasing managers and e-commerce traders waste time manually searching items across multiple international sites (US/JP/TW) and calculating exchange rates, missing shipping overheads and dynamic price gaps.
-* **Tech Highlights**: The FastAPI backend dispatches concurrent async scraping pipelines to Amazon US/JP, Yahoo JP, and Kakaku.com. It converts values to TWD via exchange-rate APIs and streams results using SSE (Server-Sent Events) with user-aborted request optimization. It uses `curl_cffi` to mimic Chrome TLS/JA3 fingerprints to bypass Cloudflare protection.
-* **Live View**:
-  ![Price Atlas Preview](./public/previews/price-altas.png)
-
-### 3. Taiwan Stock Health Dashboard (tw-stock-health-dashboard) [Financial Intelligence]
-* **Background**: Gathering index, global indices, and capital risk indicators manually is tedious and delays warnings on market liquidity flushes.
-* **Tech Highlights**: Built an asynchronous ETL pipeline using concurrent Promise.all queries with Redis caching, and modeled crash warning flags.
-* **Live View**:
-  ![Taiwan Stock Health Dashboard Preview](./public/previews/tw-stock-health-dashboard.png)
-
-### 4. Disposal Board (disposal-board) [Financial Intelligence]
-* **Background**: Taiwan disposal / watch-list stock data is scattered across TWSE and TPEX announcements and blocks browser CORS, making per-ticker risk hard to read at a glance.
-* **Tech Highlights**: A Next.js Route Handler concurrently fetches TWSE/TPEX OpenAPI plus Yahoo quotes server-side, then a market-agnostic pure-function engine applies the official disposal rules (3-in-a-row / 6-in-10 / 12-in-30 days) to compute risk scores, limit prices, and clearance countdowns. Lists are cached per "disposal day" (18:00 Taipei rollover); live quotes carry a 20s freshness window.
-* **Live View**:
-  ![Disposal Board Preview](./public/previews/disposal-board.png)
-
-### 5. Travel Price Comparison Engine (travel) [Product Utilities]
-* **Background**: Comparing flights, hotels, and tour packages for trips departing Taiwan means juggling many fragmented sources, and per-query API costs add up fast.
-* **Tech Highlights**: A scraper-first, quota-gated dual-track architecture — flights/hotels/packages are fetched concurrently via `Promise.allSettled`, cached day-scoped in Upstash Redis (<100ms repeat hits), with a SerpAPI fallback (10/day) only triggered on explicit user action. GitHub Actions warms the cache daily.
-* **Live View**:
-  ![Travel Price Comparison Preview](./public/previews/travel.png)
-
-### 6. Fehow Corporate Site (fehow-web) [Business Sites]
-* **Background**: Electronics supply-chain companies need clean, credible websites to win trust from global buyers.
-* **Tech Highlights**: Created an elegant Bento Grid layout that remains fully responsive using Next.js and CSS Grid. Implemented GSAP ScrollTrigger timelines for scroll-bound animations.
-* **Live View**:
-  ![Fehow Corporate Site Preview](./public/previews/fehow-web-hero.png)
+Product-minded full-stack work across AI, finance, and utility systems — curated from public and private GitHub repositories into product cases. For the full interactive version with screenshots and case details, visit [michael-lab.dev](https://michael-lab.dev).
 
 ---
 
@@ -102,24 +48,3 @@ A consolidated matrix of all 30 active projects — auto-generated from live Git
 | [digit_recognition](https://github.com/michaelbothsieh-crypto/digit_recognition) | Experiments | Python | Canvas input · Image preprocessing · MLP model | [GitHub](https://github.com/michaelbothsieh-crypto/digit_recognition) · 🔒 |
 | [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | Experiments | Jupyter Notebook | FastAPI · PydanticAI · Streaming chat | [GitHub](https://github.com/michaelbothsieh-crypto/FastAPI-project) · 🔒 |
 <!-- /AUTO:projects -->
-
----
-
-## Infrastructure and Operations
-
-Behind these projects, the portfolio includes engineering automation:
-
-### 1. Daily Repo Sync (GitHub Actions)
-- **Solution**: A scheduled workflow (`.github/workflows/sync-repos.yml`) runs `gh repo list` daily, refreshing `repos.generated.json` with every repository and its latest update time, and commits only when something changed. A safety guard aborts the sync if it fetches zero private repos (a tell-tale sign of an under-scoped token), so a bad credential can never overwrite the list with a public-only subset.
-
-### 2. Auto-generated Project Matrix
-- **Solution**: The same sync step regenerates the "All Projects" table in both READMEs between `AUTO:projects` markers, merging live GitHub metadata with curated categories and highlights. New repos appear automatically — the matrix never goes stale.
-
-### 3. Static Data Pipeline
-- **Solution**: Repository metadata is exported into static JSON at sync time, enabling static site generation (SSG) with zero runtime API calls and fast page loads.
-
-### 4. Curated Preview Manifest
-- **Solution**: A `preview-manifest.generated.json` maps each repo to a captured live-site screenshot or a clean generated fallback, so the portfolio never shows a broken image even for private or undeployed projects.
-
-### 5. Data Overrides
-- **Solution**: A `project-overrides.json` config layer curates titles, categories, feature highlights, and problem descriptions without modifying original GitHub metadata.

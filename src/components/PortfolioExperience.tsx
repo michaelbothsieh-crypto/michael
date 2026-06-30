@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -34,6 +34,10 @@ export function PortfolioExperience({ projects }: Props) {
   const t = copy[locale];
   const featuredProjects = useMemo(() => selectFeaturedProjects(projects), [projects]);
   const filteredProjects = useMemo(() => filterProjectsByCategory(projects, activeCategory), [activeCategory, projects]);
+  const sinceYear = useMemo(() => {
+    const years = projects.map(p => new Date(p.createdAt).getFullYear()).filter(Boolean);
+    return years.length ? Math.min(...years) : new Date().getFullYear();
+  }, [projects]);
 
   // Choreographs first-load and scroll reveals inside this portfolio surface.
   useGSAP(() => {
@@ -87,71 +91,42 @@ export function PortfolioExperience({ projects }: Props) {
     });
   }, { scope: containerRef });
 
-  useEffect(() => {
-    const storedUuid = sessionStorage.getItem("portfolio_user_uuid");
-    const uuid = storedUuid ?? Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    if (!storedUuid) {
-      sessionStorage.setItem("portfolio_user_uuid", uuid);
-    }
-
-    const updateStats = async (isNew = false) => {
-      try {
-        const res = await fetch("/api/stats", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ uuid, isNewVisit: isNew }),
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setStats({ pv: data.pv, active: data.active });
-          if (data.projectPvs) {
-            setProjectPvs(data.projectPvs);
-          }
-        }
-      } catch (err) {
-        console.error("Failed to update stats:", err);
-      }
-    };
-
-    updateStats(true);
-    const onVisible = () => { if (document.visibilityState === "visible") updateStats(false); };
-    document.addEventListener("visibilitychange", onVisible);
-    return () => document.removeEventListener("visibilitychange", onVisible);
-  }, []);
-
-  const trackProjectView = async (slug: string) => {
+  const postStats = useCallback(async (payload: Record<string, unknown>) => {
     const uuid = sessionStorage.getItem("portfolio_user_uuid");
     try {
       const res = await fetch("/api/stats", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ uuid, isNewVisit: false, projectSlug: slug }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uuid, ...payload }),
       });
       if (res.ok) {
         const data = await res.json();
         setStats({ pv: data.pv, active: data.active });
-        if (data.projectPvs) {
-          setProjectPvs(data.projectPvs);
-        }
+        if (data.projectPvs) setProjectPvs(data.projectPvs);
       }
     } catch (err) {
-      console.error("Failed to track project view:", err);
+      console.error("Stats error:", err);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("portfolio_user_uuid");
+    if (!stored) sessionStorage.setItem("portfolio_user_uuid", crypto.randomUUID());
+    postStats({ isNewVisit: true });
+    const onVisible = () => { if (document.visibilityState === "visible") postStats({ isNewVisit: false }); };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  }, [postStats]);
 
   const handleOpenProject = (project: Project) => {
     setSelectedProject(project);
-    trackProjectView(project.slug);
+    postStats({ isNewVisit: false, projectSlug: project.slug });
   };
 
   return (
     <main ref={containerRef} className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f1efe7] text-zinc-950">
-      <PortfolioNav locale={locale} copy={t} stats={stats} onToggleLocale={() => setLocale(locale === "zh" ? "en" : "zh")} />
-      <HeroSection projectsCount={projects.length} featuredProjects={featuredProjects} locale={locale} copy={t} />
+      <PortfolioNav copy={t} stats={stats} onToggleLocale={() => setLocale(locale === "zh" ? "en" : "zh")} />
+      <HeroSection projectsCount={projects.length} featuredProjects={featuredProjects} sinceYear={sinceYear} locale={locale} copy={t} />
       <ProjectTimeline projects={projects} locale={locale} onOpen={handleOpenProject} />
       <FeaturedSection projects={featuredProjects} totalProjects={projects.length} locale={locale} copy={t} onOpenProject={handleOpenProject} />
       <CategoryStory copy={t} />

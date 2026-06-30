@@ -1,10 +1,11 @@
 export const copy = {
   zh: {
-    nav: ["精選", "分類", "全部作品"],
+    nav: { featured: "精選", categories: "分類", all: "全部作品" },
+    activeLabel: "在線",
+    localeToggle: "EN",
     eyebrow: "PUBLIC / PRIVATE WORK INDEX",
-    headlineA: "Michael ",
-    headlineB: "Product ",
-    headlineC: "Lab",
+    headline: "Michael Product",
+    headlineAccent: "Lab",
     intro:
       "產品型全端作品，橫跨 AI、金融與工具系統。重點不是 repo 數量，而是每個工具解決的問題、系統如何串接，以及最後交付出來的畫面。",
     primaryAction: "看精選作品",
@@ -42,11 +43,12 @@ export const copy = {
     pillarReproducibility: "可重現性與測試 (Reproducibility)",
   },
   en: {
-    nav: ["Featured", "Categories", "All Work"],
+    nav: { featured: "Featured", categories: "Categories", all: "All Work" },
+    activeLabel: "Online",
+    localeToggle: "繁中",
     eyebrow: "PUBLIC / PRIVATE WORK INDEX",
-    headlineA: "Michael",
-    headlineB: "Product",
-    headlineC: "Lab",
+    headline: "Michael Product",
+    headlineAccent: "Lab",
     intro:
       "Product-minded full-stack work across AI, finance, and utility systems. The focus is not repository count, but the problem solved, the system behind it, and the shipped result.",
     primaryAction: "View featured",

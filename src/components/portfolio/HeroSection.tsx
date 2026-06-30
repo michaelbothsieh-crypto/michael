@@ -7,6 +7,7 @@ import type { PortfolioCopy } from "./copy";
 type HeroSectionProps = {
   projectsCount: number;
   featuredProjects: Project[];
+  sinceYear: number;
   locale: Locale;
   copy: PortfolioCopy;
 };
@@ -17,7 +18,7 @@ function isSvg(path: string) {
 
 /// HeroSection component for portfolio landing page
 /// Renders the headline, intro paragraph, project statistics, and macOS-style interactive showcase window
-export function HeroSection({ projectsCount, featuredProjects, locale, copy }: HeroSectionProps) {
+export function HeroSection({ projectsCount, featuredProjects, sinceYear, locale, copy }: HeroSectionProps) {
   const heroPreview = featuredProjects[0]?.previewPath ?? "/previews/placeholder.svg";
 
   return (
@@ -32,34 +33,23 @@ export function HeroSection({ projectsCount, featuredProjects, locale, copy }: H
           </div>
 
           <h1 className="mt-7 text-[clamp(2.9rem,6vw,6.2rem)] font-semibold leading-[1.02] tracking-tight text-zinc-950">
-            {locale === "zh" ? (
-              <>
-                {copy.headlineA}{copy.headlineB}
-                <span className="relative inline-block text-[#4f6546] pb-1">
-                  {copy.headlineC}
-                </span>
-              </>
-            ) : (
-              <>
-                {copy.headlineA} {copy.headlineB}{" "}
-                <span className="relative inline-block text-[#4f6546] pb-1">
-                  {copy.headlineC}
-                </span>
-              </>
-            )}
+            {copy.headline}{" "}
+            <span className="relative inline-block text-[#4f6546] pb-1">
+              {copy.headlineAccent}
+            </span>
           </h1>
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
             <p className="max-w-3xl text-lg leading-8 text-zinc-700">{copy.intro}</p>
 
-            <div className="gsap-hero-stats grid grid-cols-3 gap-5 py-2">
+            <div className="grid grid-cols-3 gap-5 py-2">
               <div>
                 <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">Repos</p>
                 <p className="mt-1 font-mono text-sm text-zinc-900">{projectsCount}</p>
               </div>
               <div>
                 <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">Since</p>
-                <p className="mt-1 font-mono text-sm text-zinc-900">2025</p>
+                <p className="mt-1 font-mono text-sm text-zinc-900">{sinceYear}</p>
               </div>
               <div>
                 <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">Focus</p>

@@ -16,11 +16,13 @@ type ProjectModalProps = {
 export function ProjectModal({ project, views, locale, copy, onClose }: ProjectModalProps) {
   useEffect(() => {
     if (!project) return;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, [project]);
 
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
-    }
-
+  useEffect(() => {
+    if (!project) return;
+    const handleKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose, project]);
