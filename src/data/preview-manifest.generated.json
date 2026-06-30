@@ -41,7 +41,6 @@
   },
   "kol-daily-brief": {
     "status": "captured",
-    "source": "https://kol-daily-brief.vercel.app",
     "path": "/previews/kol-daily-brief.png"
   },
   "north-volley-guide": {

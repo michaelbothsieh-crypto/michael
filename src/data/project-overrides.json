@@ -379,6 +379,7 @@
     "category": "AI Automation",
     "featured": true,
     "sortWeight": 98,
+    "homepageUrl": "",
     "title": {
       "zh": "每日 KOL 簡報",
       "en": "Daily KOL Brief"
@@ -1157,8 +1158,8 @@
         "en": "Uses Upstash Redis KV for day-scoped caching so identical same-day queries hit instantly, with a GitHub Actions cron warming the cache daily at 03:00 UTC to cut cold-start latency."
       },
       "security": {
-        "zh": "SerpAPI key 和快取憑證都用環境變數。爬蟲服務在 Render，前端與 API route 在 Vercel。",
-        "en": "SerpAPI keys and cache credentials are managed via environment variables, with the scraper on Render and the frontend/API routes on Vercel for clear separation of concerns."
+        "zh": "SerpAPI key 和快取憑證都用環境變數。爬蟲服務在 Render，前端與 API route 分開部署，確保關注點分離。",
+        "en": "SerpAPI keys and cache credentials are managed via environment variables, with the scraper on Render and the frontend/API routes deployed separately for clear separation of concerns."
       },
       "reproducibility": {
         "zh": "FastAPI 爬蟲服務附 Dockerfile 和 render.yaml。docs/ 裡有系統架構、搜尋流程和部署圖。",

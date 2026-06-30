@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://michael-lab.vercel.app";
+const siteUrl = "https://michael-lab.dev";
 const siteTitle = "Michael Product Lab";
 const siteDescription =
   "A bilingual product portfolio for Michael's AI, automation, finance, data, and business-site projects.";
