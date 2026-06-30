@@ -2,11 +2,9 @@
 
 <p align="center">
   <a href="README.md">English</a> | 繁體中文
-  <br/>
-  <a href="https://michael-lab.dev">🔗 michael-lab.dev</a>
 </p>
 
-開源和私有專案的整理，重點是每個工具實際解決了什麼問題，不是 repo 清單。截圖和案例細節在 [michael-lab.dev](https://michael-lab.dev)。
+開源和私有專案的整理，重點是每個工具實際解決了什麼問題，不是 repo 清單。截圖和案例細節在 [michael-lab.dev](https://michael-lab.vercel.app)。
 
 ---
 
