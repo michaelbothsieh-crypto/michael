@@ -6,7 +6,7 @@
     "visibility": "PRIVATE",
     "isPrivate": true,
     "createdAt": "2026-05-14T03:07:49Z",
-    "updatedAt": "2026-06-30T09:55:25Z",
+    "updatedAt": "2026-07-01T07:49:32Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
     "homepageUrl": "https://personal-bot-gateway.vercel.app",
@@ -15,6 +15,27 @@
     "isFork": false,
     "stargazerCount": 0,
     "forkCount": 0
+  },
+  {
+    "name": "fortune-telling",
+    "nameWithOwner": "michaelbothsieh-crypto/fortune-telling",
+    "description": "天機算命 - 結合傳統八字學理與 Google Gemini AI 的命理分析 PWA 應用。",
+    "visibility": "PUBLIC",
+    "isPrivate": false,
+    "createdAt": "2025-12-09T07:07:34Z",
+    "updatedAt": "2026-07-01T06:48:03Z",
+    "primaryLanguage": "TypeScript",
+    "topics": [
+      "bazi",
+      "chinese-astrology",
+      "fortune-telling"
+    ],
+    "homepageUrl": "https://fortune-telling-sigma.vercel.app/",
+    "url": "https://github.com/michaelbothsieh-crypto/fortune-telling",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 2,
+    "forkCount": 1
   },
   {
     "name": "tw-stock-health-dashboard",
@@ -157,27 +178,6 @@
     "isFork": false,
     "stargazerCount": 0,
     "forkCount": 0
-  },
-  {
-    "name": "fortune-telling",
-    "nameWithOwner": "michaelbothsieh-crypto/fortune-telling",
-    "description": "天機算命 - 結合傳統八字學理與 Google Gemini AI 的命理分析 PWA 應用。",
-    "visibility": "PUBLIC",
-    "isPrivate": false,
-    "createdAt": "2025-12-09T07:07:34Z",
-    "updatedAt": "2026-06-08T07:13:48Z",
-    "primaryLanguage": "TypeScript",
-    "topics": [
-      "bazi",
-      "chinese-astrology",
-      "fortune-telling"
-    ],
-    "homepageUrl": "https://fortune-telling-sigma.vercel.app/",
-    "url": "https://github.com/michaelbothsieh-crypto/fortune-telling",
-    "isArchived": false,
-    "isFork": false,
-    "stargazerCount": 1,
-    "forkCount": 1
   },
   {
     "name": "socket-swiss-knife",
