@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,11 +21,19 @@ type Props = {
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+const emptySubscribe = () => () => {};
+
 export function PortfolioExperience({ projects }: Props) {
   const containerRef = useRef<HTMLElement>(null);
-  const [locale, setLocale] = useState<Locale>(() =>
-    typeof navigator !== "undefined" && navigator.language.startsWith("zh") ? "zh" : "en"
+  // Server renders "en"; browser locale is only known client-side. useSyncExternalStore
+  // with a server snapshot keeps the hydrated tree identical to the server HTML.
+  const detectedLocale = useSyncExternalStore<Locale>(
+    emptySubscribe,
+    () => (navigator.language.startsWith("zh") ? "zh" : "en"),
+    () => "en"
   );
+  const [localeOverride, setLocaleOverride] = useState<Locale | null>(null);
+  const locale = localeOverride ?? detectedLocale;
   useEffect(() => {
     document.documentElement.lang = locale === "zh" ? "zh-Hant" : "en";
   }, [locale]);
@@ -114,6 +122,8 @@ export function PortfolioExperience({ projects }: Props) {
   useEffect(() => {
     const stored = sessionStorage.getItem("portfolio_user_uuid");
     if (!stored) sessionStorage.setItem("portfolio_user_uuid", crypto.randomUUID());
+    // setState happens inside the fetch callback, not synchronously in the effect body
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     postStats({ isNewVisit: true });
     const onVisible = () => { if (document.visibilityState === "visible") postStats({ isNewVisit: false }); };
     document.addEventListener("visibilitychange", onVisible);
@@ -127,7 +137,7 @@ export function PortfolioExperience({ projects }: Props) {
 
   return (
     <main ref={containerRef} className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f1efe7] text-zinc-950">
-      <PortfolioNav copy={t} stats={stats} onToggleLocale={() => setLocale(locale === "zh" ? "en" : "zh")} />
+      <PortfolioNav copy={t} stats={stats} onToggleLocale={() => setLocaleOverride(locale === "zh" ? "en" : "zh")} />
       <HeroSection projectsCount={projects.length} featuredProjects={featuredProjects} sinceYear={sinceYear} locale={locale} copy={t} />
       <ProjectTimeline projects={projects} locale={locale} onOpen={handleOpenProject} />
       <FeaturedSection projects={featuredProjects} totalProjects={projects.length} locale={locale} copy={t} onOpenProject={handleOpenProject} />

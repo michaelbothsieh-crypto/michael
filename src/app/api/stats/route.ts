@@ -50,6 +50,8 @@ export async function POST(req: NextRequest) {
       commands.push(["HINCRBY", "stats:projects:pv", cleanSlug, "1"]);
     }
 
+    // 讀取指令固定接在寫入指令之後，位移由前面累積的指令數決定
+    const readOffset = commands.length;
     commands.push(["GET", "stats:pv"]);
     commands.push(["ZCARD", "stats:active:zset"]);
     commands.push(["HGETALL", "stats:projects:pv"]);
@@ -70,17 +72,9 @@ export async function POST(req: NextRequest) {
 
     const results = await res.json();
 
-    let idx = 0;
-    if (isNewVisit) idx++; // INCR stats:pv
-    idx++; // ZADD stats:active:zset
-    idx++; // ZREMRANGEBYSCORE stats:active:zset
-    if (projectSlug) idx++; // HINCRBY stats:projects:pv
-
-    const pv = results[idx]?.result ?? 0;
-    idx++;
-    const activeCount = results[idx]?.result ?? 1;
-    idx++;
-    const rawProjectPvs = results[idx]?.result ?? [];
+    const pv = results[readOffset]?.result ?? 0;
+    const activeCount = results[readOffset + 1]?.result ?? 1;
+    const rawProjectPvs = results[readOffset + 2]?.result ?? [];
 
     const projectPvs: Record<string, number> = {};
     if (Array.isArray(rawProjectPvs)) {

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import type { Locale, Project } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
+import { isSvg } from "./format";
 
 type HeroSectionProps = {
   projectsCount: number;
@@ -11,10 +12,6 @@ type HeroSectionProps = {
   locale: Locale;
   copy: PortfolioCopy;
 };
-
-function isSvg(path: string) {
-  return path.endsWith(".svg");
-}
 
 /// HeroSection component for portfolio landing page
 /// Renders the headline, intro paragraph, project statistics, and macOS-style interactive showcase window

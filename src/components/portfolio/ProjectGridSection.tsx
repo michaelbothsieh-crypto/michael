@@ -1,9 +1,7 @@
-import type { Category, Locale, Project } from "@/lib/projects";
+import type { CategoryFilter, Locale, Project } from "@/lib/projects";
 import { categories, categoryLabels } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
 import { ProjectCard } from "./ProjectCard";
-
-type CategoryFilter = Category | "All";
 
 type ProjectGridSectionProps = {
   activeCategory: CategoryFilter;
@@ -21,21 +19,14 @@ export function ProjectGridSection({ activeCategory, projects, locale, copy, onC
         <div className="gsap-reveal mb-8 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <h2 className="text-4xl font-semibold text-zinc-950 md:text-6xl">{copy.allProjects}</h2>
           <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              className={`rounded-full border px-4 py-2 text-sm transition ${activeCategory === "All" ? "border-zinc-950 bg-zinc-950 text-white" : "border-zinc-950/15 bg-white text-zinc-600 hover:text-zinc-950"}`}
-              onClick={() => onCategoryChange("All")}
-            >
-              {copy.all}
-            </button>
-            {categories.map((category) => (
+            {(["All", ...categories] as CategoryFilter[]).map((category) => (
               <button
                 key={category}
                 type="button"
                 className={`rounded-full border px-4 py-2 text-sm transition ${activeCategory === category ? "border-zinc-950 bg-zinc-950 text-white" : "border-zinc-950/15 bg-white text-zinc-600 hover:text-zinc-950"}`}
                 onClick={() => onCategoryChange(category)}
               >
-                {categoryLabels[category][locale]}
+                {category === "All" ? copy.all : categoryLabels[category][locale]}
               </button>
             ))}
           </div>

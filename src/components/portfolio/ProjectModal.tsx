@@ -1,9 +1,20 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import type { Locale, Project } from "@/lib/projects";
-import { categoryLabels } from "@/lib/projects";
+import type { Locale, PillarKey, Project } from "@/lib/projects";
+import { categoryLabels, pillarKeys } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
-import { formatDate } from "./format";
+import { formatDate, isSvg } from "./format";
+
+const pillarLabels = {
+  observability: "pillarObservability",
+  caching: "pillarCaching",
+  security: "pillarSecurity",
+  reproducibility: "pillarReproducibility",
+} as const satisfies Record<PillarKey, keyof PortfolioCopy>;
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{children}</h4>;
+}
 
 type ProjectModalProps = {
   project: Project | null;
@@ -45,12 +56,11 @@ export function ProjectModal({ project, views, locale, copy, onClose }: ProjectM
             width={1440}
             height={960}
             className="h-full w-full object-cover opacity-90"
-            unoptimized={project.previewPath.endsWith(".svg")}
+            unoptimized={isSvg(project.previewPath)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
           <button
             type="button"
-            // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
             className="absolute right-4 top-4 rounded-full bg-zinc-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
             onClick={onClose}
@@ -66,84 +76,50 @@ export function ProjectModal({ project, views, locale, copy, onClose }: ProjectM
             </h3>
             <p className="mt-5 text-lg leading-8 text-zinc-700">{project.summary[locale]}</p>
 
-            <section className="mt-8">
-              <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.problem}</h4>
-              <p className="mt-3 text-base leading-7 text-zinc-700">{project.problem[locale]}</p>
-            </section>
-
-            {project.challenge ? (
-              <section className="mt-8">
-                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.challenge}</h4>
-                <p className="mt-3 text-base leading-7 text-zinc-700">{project.challenge[locale]}</p>
-              </section>
-            ) : null}
-
-            {project.impact ? (
-              <section className="mt-8">
-                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.impact}</h4>
-                <p className="mt-3 text-base leading-7 text-zinc-700">{project.impact[locale]}</p>
-              </section>
-            ) : null}
+            {[
+              { label: copy.problem, text: project.problem[locale] },
+              { label: copy.challenge, text: project.challenge?.[locale] },
+              { label: copy.impact, text: project.impact?.[locale] },
+            ].map(({ label, text }) =>
+              text ? (
+                <section key={label} className="mt-8">
+                  <SectionHeading>{label}</SectionHeading>
+                  <p className="mt-3 text-base leading-7 text-zinc-700">{text}</p>
+                </section>
+              ) : null
+            )}
 
             {project.engineeringPillars ? (
               <section className="mt-8">
-                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">
-                  {copy.engineeringPillars}
-                </h4>
+                <SectionHeading>{copy.engineeringPillars}</SectionHeading>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                  {project.engineeringPillars.observability ? (
-                    <div className="rounded-[8px] border border-zinc-950/10 bg-zinc-50/50 p-4">
-                      <h5 className="font-mono text-xs font-semibold text-zinc-950 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
-                        {copy.pillarObservability}
-                      </h5>
-                      <p className="mt-2 text-xs leading-5 text-zinc-700">{project.engineeringPillars.observability[locale]}</p>
-                    </div>
-                  ) : null}
-
-                  {project.engineeringPillars.caching ? (
-                    <div className="rounded-[8px] border border-zinc-950/10 bg-zinc-50/50 p-4">
-                      <h5 className="font-mono text-xs font-semibold text-zinc-950 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
-                        {copy.pillarCaching}
-                      </h5>
-                      <p className="mt-2 text-xs leading-5 text-zinc-700">{project.engineeringPillars.caching[locale]}</p>
-                    </div>
-                  ) : null}
-
-                  {project.engineeringPillars.security ? (
-                    <div className="rounded-[8px] border border-zinc-950/10 bg-zinc-50/50 p-4">
-                      <h5 className="font-mono text-xs font-semibold text-zinc-950 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
-                        {copy.pillarSecurity}
-                      </h5>
-                      <p className="mt-2 text-xs leading-5 text-zinc-700">{project.engineeringPillars.security[locale]}</p>
-                    </div>
-                  ) : null}
-
-                  {project.engineeringPillars.reproducibility ? (
-                    <div className="rounded-[8px] border border-zinc-950/10 bg-zinc-50/50 p-4">
-                      <h5 className="font-mono text-xs font-semibold text-zinc-950 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
-                        {copy.pillarReproducibility}
-                      </h5>
-                      <p className="mt-2 text-xs leading-5 text-zinc-700">{project.engineeringPillars.reproducibility[locale]}</p>
-                    </div>
-                  ) : null}
+                  {pillarKeys.map((key) => {
+                    const pillar = project.engineeringPillars?.[key];
+                    if (!pillar) return null;
+                    return (
+                      <div key={key} className="rounded-[8px] border border-zinc-950/10 bg-zinc-50/50 p-4">
+                        <h5 className="font-mono text-xs font-semibold text-zinc-950 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                          {copy[pillarLabels[key]]}
+                        </h5>
+                        <p className="mt-2 text-xs leading-5 text-zinc-700">{pillar[locale]}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </section>
             ) : null}
 
             {project.workflow ? (
               <section className="mt-8">
-                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.workflow}</h4>
+                <SectionHeading>{copy.workflow}</SectionHeading>
                 <p className="mt-3 text-base leading-7 text-zinc-700">{project.workflow[locale]}</p>
               </section>
             ) : null}
 
             {project.commands ? (
               <section className="mt-8">
-                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.commandOutputs}</h4>
+                <SectionHeading>{copy.commandOutputs}</SectionHeading>
                 <ul className="mt-3 grid gap-2">
                   {project.commands[locale].map((command) => (
                     <li key={command} className="rounded-[8px] border border-zinc-950/10 bg-zinc-50 px-4 py-3 font-mono text-xs leading-5 text-zinc-700">
@@ -164,30 +140,25 @@ export function ProjectModal({ project, views, locale, copy, onClose }: ProjectM
           </div>
           <aside className="space-y-6">
             <div className="grid grid-cols-2 gap-4 rounded-[8px] border border-zinc-950/10 bg-zinc-50 p-4">
-              <div>
-                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.created}</p>
-                <p className="mt-1 font-mono text-xs text-zinc-800">{formatDate(project.createdAt, locale)}</p>
-              </div>
-              <div>
-                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.updated}</p>
-                <p className="mt-1 font-mono text-xs text-zinc-800">{formatDate(project.updatedAt, locale)}</p>
-              </div>
-              <div>
-                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.stack}</p>
-                <p className="mt-1 font-mono text-xs text-zinc-800">{project.primaryLanguage ?? "Mixed"}</p>
-              </div>
-              <div>
-                <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{copy.views}</p>
-                <p className="mt-1 font-mono text-xs text-zinc-800">{views.toLocaleString()}</p>
-              </div>
+              {[
+                { label: copy.created, value: formatDate(project.createdAt, locale) },
+                { label: copy.updated, value: formatDate(project.updatedAt, locale) },
+                { label: copy.stack, value: project.primaryLanguage ?? "Mixed" },
+                { label: copy.views, value: views.toLocaleString() },
+              ].map(({ label, value }) => (
+                <div key={label}>
+                  <p className="text-[0.65rem] uppercase tracking-[0.18em] text-zinc-500">{label}</p>
+                  <p className="mt-1 font-mono text-xs text-zinc-800">{value}</p>
+                </div>
+              ))}
             </div>
             {project.gallery.length > 1 ? (
               <div>
-                <h4 className="font-mono text-xs uppercase tracking-[0.22em] text-teal-700">{copy.evidence}</h4>
+                <SectionHeading>{copy.evidence}</SectionHeading>
                 <div className="mt-3 grid gap-3">
                   {project.gallery.map((image) => (
                     <div key={image} className="overflow-hidden rounded-[8px] border border-zinc-950/10 bg-zinc-100">
-                      <Image src={image} alt={`${project.title[locale]} output`} width={900} height={900} className="h-auto w-full object-cover" unoptimized={image.endsWith(".svg")} />
+                      <Image src={image} alt={`${project.title[locale]} output`} width={900} height={900} className="h-auto w-full object-cover" unoptimized={isSvg(image)} />
                     </div>
                   ))}
                 </div>

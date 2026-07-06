@@ -33,6 +33,10 @@ export type GitHubRepo = {
 type LocalizedText = Record<Locale, string>;
 type LocalizedList = Record<Locale, string[]>;
 
+export const pillarKeys = ["observability", "caching", "security", "reproducibility"] as const;
+export type PillarKey = (typeof pillarKeys)[number];
+export type EngineeringPillars = Partial<Record<PillarKey, LocalizedText>>;
+
 type ProjectOverride = {
   category: Category;
   featured: boolean;
@@ -48,12 +52,7 @@ type ProjectOverride = {
   gallery?: string[];
   previewPath?: string;
   homepageUrl?: string;
-  engineeringPillars?: {
-    observability?: LocalizedText;
-    caching?: LocalizedText;
-    security?: LocalizedText;
-    reproducibility?: LocalizedText;
-  };
+  engineeringPillars?: EngineeringPillars;
 };
 
 type PreviewEntry = {
@@ -80,12 +79,7 @@ export type Project = GitHubRepo & {
   previewPath: string;
   previewStatus: "captured" | "fallback" | "missing";
   publicSourceUrl: string | null;
-  engineeringPillars?: {
-    observability?: LocalizedText;
-    caching?: LocalizedText;
-    security?: LocalizedText;
-    reproducibility?: LocalizedText;
-  };
+  engineeringPillars?: EngineeringPillars;
 };
 
 export type CategoryFilter = Category | "All";
@@ -172,6 +166,8 @@ export function getProjects(): Project[] {
       const preview = previewManifest[repo.name];
       const category = override?.category ?? fallbackCategory(repo);
       const slug = slugify(repo.name);
+      const previewPath = override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`;
+      const summary = override?.summary ?? fallbackSummary(repo);
 
       return {
         ...repo,
@@ -180,8 +176,8 @@ export function getProjects(): Project[] {
         featured: Boolean(override?.featured),
         sortWeight: override?.sortWeight ?? 0,
         title: override?.title ?? fallbackTitle(repo),
-        summary: override?.summary ?? fallbackSummary(repo),
-        problem: override?.problem ?? override?.summary ?? fallbackSummary(repo),
+        summary,
+        problem: override?.problem ?? summary,
         challenge: override?.challenge,
         impact: override?.impact,
         workflow: override?.workflow,
@@ -191,8 +187,8 @@ export function getProjects(): Project[] {
           en: repo.topics.length ? repo.topics : [categoryLabels[category].en],
         },
         homepageUrl: override?.homepageUrl ?? ((preview?.status === "fallback" && preview?.reason === "http 404") ? "" : repo.homepageUrl),
-        previewPath: override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`,
-        gallery: override?.gallery ?? [override?.previewPath ?? preview?.path ?? `/previews/${slug}.svg`],
+        previewPath,
+        gallery: override?.gallery ?? [previewPath],
         previewStatus: preview?.status ?? "missing",
         publicSourceUrl: repo.isPrivate ? null : repo.url,
         engineeringPillars: override?.engineeringPillars,

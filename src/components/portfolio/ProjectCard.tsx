@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { Locale, Project } from "@/lib/projects";
 import { categoryLabels } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
-import { formatDate } from "./format";
+import { formatDate, isSvg } from "./format";
 
 type ProjectCardProps = {
   project: Project;
@@ -12,18 +12,18 @@ type ProjectCardProps = {
   onOpen: (project: Project) => void;
 };
 
+const SERVICE_TAGS: Array<[keyword: string, tag: string]> = [
+  ["github actions", "GitHub Actions"],
+  ["neon", "Neon DB"],
+  ["render", "Render"],
+];
+
 export function ProjectCard({ project, locale, copy, featured = false, onOpen }: ProjectCardProps) {
-  const extServices = project.features[locale]
-    .map((f) => {
-      const lower = f.toLowerCase();
-      if (lower.includes("github actions")) return "GitHub Actions";
-      if (lower.includes("neon")) return "Neon DB";
-      if (lower.includes("render")) return "Render";
-      return null;
-    })
-    .filter(Boolean) as string[];
-  const uniqueExtServices = Array.from(new Set(extServices));
-  const tagsToShow = ([...uniqueExtServices, project.primaryLanguage, ...project.topics].filter(Boolean) as string[]).slice(0, 5);
+  const features = project.features[locale].map((f) => f.toLowerCase());
+  const serviceTags = SERVICE_TAGS
+    .filter(([keyword]) => features.some((f) => f.includes(keyword)))
+    .map(([, tag]) => tag);
+  const tagsToShow = ([...serviceTags, project.primaryLanguage, ...project.topics].filter(Boolean) as string[]).slice(0, 5);
 
   return (
     <article
@@ -43,7 +43,7 @@ export function ProjectCard({ project, locale, copy, featured = false, onOpen }:
             width={1440}
             height={960}
             className="h-full w-full object-cover opacity-90 transition duration-500 ease-out group-hover:scale-[1.025] group-hover:opacity-100"
-            unoptimized={project.previewPath.endsWith(".svg")}
+            unoptimized={isSvg(project.previewPath)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
           <div className="absolute bottom-4 left-4 rounded-[6px] border border-white/40 bg-white/80 px-3 py-1 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-zinc-950 backdrop-blur">
@@ -57,7 +57,7 @@ export function ProjectCard({ project, locale, copy, featured = false, onOpen }:
           </div>
           <div className="flex flex-wrap gap-2">
             {tagsToShow.map((tag) => {
-              const isService = uniqueExtServices.includes(tag);
+              const isService = serviceTags.includes(tag);
               return (
                 <span
                   key={tag}

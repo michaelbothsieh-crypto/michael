@@ -1,20 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { Locale, Project } from "@/lib/projects";
 import { categoryLabels } from "@/lib/projects";
+import { localeTag } from "./format";
 
 type Props = { projects: Project[]; locale: Locale; onOpen?: (p: Project) => void };
 type HoveredDot = { project: Project; cx: number; cy: number };
 
-export function ProjectTimeline({ projects, locale, onOpen }: Props) {
-  const [hovered, setHovered] = useState<HoveredDot | null>(null);
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+function buildLayout(projects: Project[]) {
   const sorted = [...projects]
     .filter((p) => p.createdAt)
     .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-
-  if (sorted.length < 2) return null;
 
   const times = sorted.map((p) => new Date(p.createdAt).getTime());
   const minT = times[0];
@@ -29,7 +28,7 @@ export function ProjectTimeline({ projects, locale, onOpen }: Props) {
     monthBucket[key] = idx + 1;
     return idx;
   });
-  const maxStack = Math.max(...Object.values(monthBucket)) - 1;
+  const maxStack = sorted.length ? Math.max(...Object.values(monthBucket)) - 1 : 0;
 
   const monthLabels: { label: string; pct: number }[] = [];
   const seen = new Set<string>();
@@ -38,13 +37,24 @@ export function ProjectTimeline({ projects, locale, onOpen }: Props) {
     const key = `${d.getFullYear()}-${d.getMonth()}`;
     if (!seen.has(key)) {
       seen.add(key);
-      const names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
       monthLabels.push({
-        label: `${names[d.getMonth()]} '${String(d.getFullYear()).slice(2)}`,
+        label: `${MONTH_NAMES[d.getMonth()]} '${String(d.getFullYear()).slice(2)}`,
         pct: (new Date(d.getFullYear(), d.getMonth(), 1).getTime() - minT) / span,
       });
     }
   }
+
+  return { sorted, times, minT, span, stackIndex, maxStack, monthLabels };
+}
+
+export function ProjectTimeline({ projects, locale, onOpen }: Props) {
+  const [hovered, setHovered] = useState<HoveredDot | null>(null);
+  const { sorted, times, minT, span, stackIndex, maxStack, monthLabels } = useMemo(
+    () => buildLayout(projects),
+    [projects]
+  );
+
+  if (sorted.length < 2) return null;
 
   const DOT_R = 6;
   const ROW_H = 20;
@@ -136,7 +146,7 @@ export function ProjectTimeline({ projects, locale, onOpen }: Props) {
                       {categoryLabels[hovered.project.category][locale]}
                       {" · "}
                       {new Date(hovered.project.createdAt).toLocaleDateString(
-                        locale === "zh" ? "zh-TW" : "en-US",
+                        localeTag(locale),
                         { year: "numeric", month: "short" }
                       )}
                     </p>
