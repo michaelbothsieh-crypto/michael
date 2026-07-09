@@ -13,23 +13,90 @@ function slugify(value) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
-/** README 第一段有意義的文字，當 GitHub description 是空的時候拿來當備援摘要。 */
-function fetchReadmeSummary(nameWithOwner) {
+/** 抓 repo 的 README 全文，沒有就回傳空字串。 */
+function fetchReadme(nameWithOwner) {
   try {
     const b64 = execFileSync(
       "gh",
       ["api", `repos/${nameWithOwner}/readme`, "-q", ".content"],
       { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
     ).trim();
-    const text = Buffer.from(b64, "base64").toString("utf8");
-    const line = text
-      .split("\n")
-      .map((l) => l.replace(/^#+\s*/, "").replace(/[`*_]/g, "").trim())
-      .find((l) => l.length > 8 && !l.startsWith("![") && !l.startsWith("["));
-    return line ?? "";
+    return Buffer.from(b64, "base64").toString("utf8");
   } catch {
     return "";
   }
+}
+
+/** README 第一段有意義的文字，當 GitHub description 是空的時候拿來當備援摘要。 */
+function extractSummary(readme) {
+  const line = readme
+    .split("\n")
+    .map((l) => l.replace(/^#+\s*/, "").replace(/[`*_>]/g, "").trim())
+    .find((l) => l.length > 8 && !l.startsWith("![") && !l.startsWith("["));
+  return line ?? "";
+}
+
+/**
+ * 沒有 GitHub topics 又沒有人工 override 時，從 README 抓出可以當「功能」列表的東西：
+ * 優先抓「## 功能／Features」段落底下的條列，沒有的話退而求其次抓 ### 小標題，
+ * 都沒有就抓文件裡任何條列項目。抓不到就回傳空陣列，讓呼叫端自己 fallback。
+ */
+function extractFeatures(readme) {
+  const lines = readme.split("\n");
+  const bulletText = (line) => line.replace(/^[-*]\s+/, "").replace(/\*\*/g, "").trim();
+
+  const featureSectionStart = lines.findIndex((l) => /^#{1,3}\s*(功能|features?)\b/i.test(l.trim()));
+  if (featureSectionStart !== -1) {
+    const bullets = [];
+    for (let i = featureSectionStart + 1; i < lines.length; i += 1) {
+      const line = lines[i].trim();
+      if (/^#{1,3}\s/.test(line)) break;
+      if (/^[-*]\s+/.test(line)) bullets.push(bulletText(line));
+    }
+    if (bullets.length) return bullets.slice(0, 6);
+  }
+
+  // ### 小標題常常是畫面/功能名稱（例如「看板」「匯總」），但如果是在「安裝／快速開始」
+  // 這類章節底下，通常只是步驟編號，不該當作功能列出。
+  const setupSection = /安裝|快速開始|quick start|setup|installation|開發環境|本機開發|getting started/i;
+  let underSetupSection = false;
+  const headings = [];
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (/^##\s+/.test(line)) {
+      underSetupSection = setupSection.test(line);
+      continue;
+    }
+    if (/^###\s+/.test(line) && !underSetupSection) {
+      const text = line.replace(/^###\s+/, "").replace(/[`*]/g, "").trim();
+      if (!/^\d+[.)]/.test(text)) headings.push(text);
+    }
+  }
+  if (headings.length >= 2) return headings.slice(0, 6);
+
+  // 最後手段：文件裡任何條列項目，跳過安裝章節、程式碼區塊，並濾掉過長的敘述句。
+  let inCodeBlock = false;
+  underSetupSection = false;
+  const bullets = [];
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (/^```/.test(line)) {
+      inCodeBlock = !inCodeBlock;
+      continue;
+    }
+    if (/^##\s+/.test(line)) {
+      underSetupSection = setupSection.test(line);
+      continue;
+    }
+    if (inCodeBlock || underSetupSection) continue;
+    if (/^[-*]\s+/.test(line)) {
+      const text = bulletText(line);
+      if (text.length > 0 && text.length <= 80) bullets.push(text);
+    }
+  }
+  if (bullets.length >= 2) return bullets.slice(0, 6);
+
+  return [];
 }
 
 /** 沒有任何截圖來源時，產生一張佔位 SVG，避免作品集頁面出現破圖。 */
@@ -114,23 +181,28 @@ const raw = execFileSync("gh", [
 const repos = JSON.parse(raw)
   .filter((repo) => !repo.isArchived)
   .filter((repo) => repo.nameWithOwner !== "michaelbothsieh-crypto/michael")
-  .map((repo) => ({
-    name: repo.name,
-    nameWithOwner: repo.nameWithOwner,
-    description: repo.description || fetchReadmeSummary(repo.nameWithOwner),
-    visibility: repo.visibility,
-    isPrivate: Boolean(repo.isPrivate),
-    createdAt: repo.createdAt,
-    updatedAt: repo.updatedAt,
-    primaryLanguage: repo.primaryLanguage?.name ?? null,
-    topics: (repo.repositoryTopics ?? []).map((topic) => topic.name).filter(Boolean),
-    homepageUrl: repo.homepageUrl ?? "",
-    url: repo.url,
-    isArchived: Boolean(repo.isArchived),
-    isFork: Boolean(repo.isFork),
-    stargazerCount: repo.stargazerCount ?? 0,
-    forkCount: repo.forkCount ?? 0,
-  }))
+  .map((repo) => {
+    const topics = (repo.repositoryTopics ?? []).map((topic) => topic.name).filter(Boolean);
+    const readme = repo.description && topics.length ? "" : fetchReadme(repo.nameWithOwner);
+    return {
+      name: repo.name,
+      nameWithOwner: repo.nameWithOwner,
+      description: repo.description || extractSummary(readme),
+      visibility: repo.visibility,
+      isPrivate: Boolean(repo.isPrivate),
+      createdAt: repo.createdAt,
+      updatedAt: repo.updatedAt,
+      primaryLanguage: repo.primaryLanguage?.name ?? null,
+      topics,
+      readmeFeatures: topics.length ? [] : extractFeatures(readme),
+      homepageUrl: repo.homepageUrl ?? "",
+      url: repo.url,
+      isArchived: Boolean(repo.isArchived),
+      isFork: Boolean(repo.isFork),
+      stargazerCount: repo.stargazerCount ?? 0,
+      forkCount: repo.forkCount ?? 0,
+    };
+  })
   .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
 
 // 防呆：本帳號一定有私有 repo。若一個都沒抓到，幾乎可確定是 token 權限不足

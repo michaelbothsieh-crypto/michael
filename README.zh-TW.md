@@ -48,7 +48,7 @@
 | [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | 實驗原型 | Jupyter Notebook | FastAPI · PydanticAI · 串流對話 | [GitHub](https://github.com/michaelbothsieh-crypto/FastAPI-project) · 🔒 |
 | [shorts-video-maker](https://github.com/michaelbothsieh-crypto/shorts-video-maker) | 工具產品 | Python | shorts-video-maker | [GitHub](https://github.com/michaelbothsieh-crypto/shorts-video-maker) · 🔒 |
 | [vendor-quotation-system](https://github.com/michaelbothsieh-crypto/vendor-quotation-system) | 工具產品 | TypeScript | 廠商收費報價管理系統 (Vendor Quotation System) | [Demo](https://vendor-quotation-system.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/vendor-quotation-system) |
-| [spend-it](https://github.com/michaelbothsieh-crypto/spend-it) | 工具產品 | HTML | > 反正錢留著也會貶值。 | [Demo](https://spend-it-hazel.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/spend-it) |
+| [spend-it](https://github.com/michaelbothsieh-crypto/spend-it) | 工具產品 | HTML | 反正錢留著也會貶值。 | [Demo](https://spend-it-hazel.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/spend-it) |
 | [pr-tracker](https://github.com/michaelbothsieh-crypto/pr-tracker) | 工具產品 | TypeScript | PR Tracker | [Demo](https://pr-tracker-pm.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/pr-tracker) · 🔒 |
 | [football-star-salaries](https://github.com/michaelbothsieh-crypto/football-star-salaries) | 工具產品 | HTML | — | [Demo](https://football-star-salaries.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/football-star-salaries) · 🔒 |
 | [health-bank](https://github.com/michaelbothsieh-crypto/health-bank) | 工具產品 | TypeScript | 健康小本本 health-bank | [GitHub](https://github.com/michaelbothsieh-crypto/health-bank) · 🔒 |

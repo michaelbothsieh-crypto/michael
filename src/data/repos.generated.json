@@ -9,6 +9,10 @@
     "updatedAt": "2026-07-09T06:11:42Z",
     "primaryLanguage": "Python",
     "topics": [],
+    "readmeFeatures": [
+      "CapCut's per-word \"zoom out + slow compression + fade\" kinetic text",
+      "Background mood/color-grade matching the song is on the caller: the tool"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/shorts-video-maker",
     "isArchived": false,
@@ -26,6 +30,14 @@
     "updatedAt": "2026-07-09T05:48:08Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "`/nlm`：網址摘要分析。",
+      "`/pic`：產生資訊圖。",
+      "`/note`：產生詳細報告。",
+      "`/slide`：產生 PDF/PPTX 簡報。",
+      "`/research`：深度研究主題。",
+      "`/threads`：解析 Threads 貼文。"
+    ],
     "homepageUrl": "https://personal-bot-gateway.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/personal-bot-gateway",
     "isArchived": false,
@@ -43,6 +55,14 @@
     "updatedAt": "2026-07-09T02:58:22Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "第零步：登入與人員權限 (/login、/users)",
+      "第一步：合作廠商管理 (/vendors)",
+      "第二步：全域費率設定 (/settings)",
+      "第三步：新建報價單 (/quotations/new)",
+      "第四步：歷史報價單管理與列印 PDF (/)",
+      "第五步：版本歷史紀錄展開 (/ 儀表板)"
+    ],
     "homepageUrl": "https://vendor-quotation-system.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/vendor-quotation-system",
     "isArchived": false,
@@ -53,13 +73,20 @@
   {
     "name": "spend-it",
     "nameWithOwner": "michaelbothsieh-crypto/spend-it",
-    "description": "> 反正錢留著也會貶值。",
+    "description": "反正錢留著也會貶值。",
     "visibility": "PUBLIC",
     "isPrivate": false,
     "createdAt": "2026-07-03T04:00:10Z",
     "updatedAt": "2026-07-08T23:10:02Z",
     "primaryLanguage": "HTML",
     "topics": [],
+    "readmeFeatures": [
+      "首頁 — 通膨計數器現場直播",
+      "三題漏斗 — 預算 → 對象 → 心情",
+      "命運轉盤 — 拉霸機過場",
+      "診斷結果 — 商品卡 + 假名人背書",
+      "手機版"
+    ],
     "homepageUrl": "https://spend-it-hazel.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/spend-it",
     "isArchived": false,
@@ -77,6 +104,12 @@
     "updatedAt": "2026-07-08T09:04:38Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "看板",
+      "匯總",
+      "GitHub",
+      "歷史"
+    ],
     "homepageUrl": "https://pr-tracker-pm.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/pr-tracker",
     "isArchived": false,
@@ -94,6 +127,7 @@
     "updatedAt": "2026-07-08T03:13:01Z",
     "primaryLanguage": "HTML",
     "topics": [],
+    "readmeFeatures": [],
     "homepageUrl": "https://football-star-salaries.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/football-star-salaries",
     "isArchived": false,
@@ -111,6 +145,14 @@
     "updatedAt": "2026-07-07T05:54:41Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "上傳：丟「健康存摺醫療類_xxx.JSON」進來就好，重複上傳自動去重，同一人靠遮罩身分證自動歸戶",
+      "就醫：門診（西醫＋中醫）時間軸，展開看診斷、用藥、醫令、費用",
+      "用藥：吃過的藥彙整（次數、天數、哪家開的），可用藥名／成分／健保代碼反查",
+      "檢驗：同項目歷次數值排一起，超出參考值標紅",
+      "報告：檢查報告全文（超音波、心電圖、MRI…）",
+      "疫苗：接種紀錄"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/health-bank",
     "isArchived": false,
@@ -132,6 +174,7 @@
       "chinese-astrology",
       "fortune-telling"
     ],
+    "readmeFeatures": [],
     "homepageUrl": "https://fortune-telling-sigma.vercel.app/",
     "url": "https://github.com/michaelbothsieh-crypto/fortune-telling",
     "isArchived": false,
@@ -149,6 +192,11 @@
     "updatedAt": "2026-06-30T07:26:25Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "📈 8 大評分維度 (Comprehensive Metrics)",
+      "📊 戰術情報中心 (Web Dashboard)",
+      "⚡ Telegram 智能助理 (Mobile Experience)"
+    ],
     "homepageUrl": "https://tw-stock-health-dashboard.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/tw-stock-health-dashboard",
     "isArchived": false,
@@ -166,6 +214,14 @@
     "updatedAt": "2026-06-30T01:19:41Z",
     "primaryLanguage": "HTML",
     "topics": [],
+    "readmeFeatures": [
+      "🌌 Sleek Dark Tech 介面設計 (Taste-Skill)：",
+      "套用高質感暗黑科技風格重新設計，使用深邃的鋅黑與亮黑色調，搭配精細的磨砂玻璃微光邊框與平滑過渡動畫，呈現高端健身 SaaS 工具的質感。",
+      "🌐 全域中英文雙語即時切換：",
+      "畫面最上方設置了平滑滑動的「膠囊切換滑塊」，可即時將整個網頁的部位篩選、器材、目標肌群以及卡片標籤在「繁體中文」與「English」之間切換。",
+      "🔄 動作步驟動態中文翻譯與去 AI 腔優化：",
+      "🔍 中英文雙語關聯搜尋："
+    ],
     "homepageUrl": "https://my-exercises-db.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/my-exercises-db",
     "isArchived": false,
@@ -183,6 +239,10 @@
     "updatedAt": "2026-06-29T06:58:14Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "Vercel 部署",
+      "Render 部署"
+    ],
     "homepageUrl": "https://poe-price-tracker.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/poe-price-tracker",
     "isArchived": false,
@@ -206,6 +266,7 @@
       "telegram-bot-ai-assistant",
       "youtube-api-v3"
     ],
+    "readmeFeatures": [],
     "homepageUrl": "https://kol-daily-brief.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/kol-daily-brief",
     "isArchived": false,
@@ -223,6 +284,12 @@
     "updatedAt": "2026-06-18T09:31:44Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "Scraper-first — zero API cost per query; SerpAPI only activates on user request",
+      "Day-scoped cache — identical queries on the same day hit KV instantly (< 100ms)",
+      "Parallel search — flights, hotels, and packages are fetched concurrently via `Promise.allSettled`",
+      "Quota guard — daily SerpAPI usage displayed on-page to prevent overage"
+    ],
     "homepageUrl": "https://travel-compare-tw.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/travel",
     "isArchived": false,
@@ -240,6 +307,10 @@
     "updatedAt": "2026-06-18T09:24:22Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "資料流與快取",
+      "資料來源（皆為公開免費）"
+    ],
     "homepageUrl": "https://disposal-board.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/disposal-board",
     "isArchived": false,
@@ -257,6 +328,11 @@
     "updatedAt": "2026-06-17T04:06:40Z",
     "primaryLanguage": "JavaScript",
     "topics": [],
+    "readmeFeatures": [
+      "前端即時 Greeks 運算：在前端實作 Black-Scholes 定價模型，盤中即時計算 Delta, Gamma, Vega, Theta 等風險指標。",
+      "UI 渲染優化：為防範盤中報價高頻更新導致瀏覽器卡頓，引入 requestAnimationFrame 與 debounce 機制，降低重繪頻率。",
+      "輕量部署：配置 `vercel.json` 實現 Serverless API 託管。"
+    ],
     "homepageUrl": "https://warrant-screener-tw.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/warrant-screener-tw",
     "isArchived": false,
@@ -274,6 +350,13 @@
     "updatedAt": "2026-06-12T08:58:15Z",
     "primaryLanguage": "Python",
     "topics": [],
+    "readmeFeatures": [
+      "後端",
+      "前端",
+      "平台與基礎設施",
+      "後端",
+      "前端"
+    ],
     "homepageUrl": "https://price-altas-frontend.vercel.app/",
     "url": "https://github.com/michaelbothsieh-crypto/price-altas",
     "isArchived": false,
@@ -291,6 +374,13 @@
     "updatedAt": "2026-06-03T04:33:10Z",
     "primaryLanguage": "Python",
     "topics": [],
+    "readmeFeatures": [
+      "每日定時測試設定",
+      "新增券商",
+      "設定項目說明",
+      "連線要求",
+      "程式關閉"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/socket-swiss-knife",
     "isArchived": false,
@@ -308,6 +398,14 @@
     "updatedAt": "2026-05-19T08:19:42Z",
     "primaryLanguage": "JavaScript",
     "topics": [],
+    "readmeFeatures": [
+      "Channel age under 1 year",
+      "20K to 400K subscribers",
+      "150 videos or fewer",
+      "Searches YouTube channels directly",
+      "Applies the fixed breakout-channel filters automatically",
+      "Ranks results and shows channel links in the UI"
+    ],
     "homepageUrl": "https://faceless-hunter.vercel.app/",
     "url": "https://github.com/michaelbothsieh-crypto/faceless_hunter",
     "isArchived": false,
@@ -325,6 +423,10 @@
     "updatedAt": "2026-05-04T06:15:20Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "Build command: `npm run build`",
+      "Output directory: `dist`"
+    ],
     "homepageUrl": "https://north-volley-guide.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/north-volley-guide",
     "isArchived": false,
@@ -342,6 +444,14 @@
     "updatedAt": "2026-04-30T15:20:04Z",
     "primaryLanguage": "JavaScript",
     "topics": [],
+    "readmeFeatures": [
+      "新竹關西位於北台灣生活圈，台北、桃園、新竹球友都容易理解。",
+      "官方公開 18 洞球道攻略，包含每洞 PAR、碼數、障礙與建議打法。",
+      "官方 115.02 到 115.09 球隊優惠公告列出高爾夫球日、仕女日、平日早球每人 NT$2,940。",
+      "比林口更適合做「真實資料 + AI 每洞分析」原型，因為公開洞資料更完整。",
+      "不做完整會員中心。",
+      "不用假資料填洞攻略。"
+    ],
     "homepageUrl": "https://golf-strategy-lk-prototype.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/golf-strategy-lk-prototype",
     "isArchived": false,
@@ -359,6 +469,10 @@
     "updatedAt": "2026-03-13T08:28:39Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "🚜 專業機具展示",
+      "🌐 雙語介面與響應式設計"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/xiexing-pwa",
     "isArchived": false,
@@ -376,6 +490,11 @@
     "updatedAt": "2026-03-13T08:26:50Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "💎 為什麼選擇飛皓 (Why Choose Us)",
+      "📅 企業發展歷程",
+      "🌍 國際化介面"
+    ],
     "homepageUrl": "https://m3-web-mauve.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/fehow-web",
     "isArchived": false,
@@ -393,6 +512,14 @@
     "updatedAt": "2026-03-13T08:24:04Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "目錄比較：上傳「舊版」和「新版」目錄結構，自動偵測變更。",
+      "視覺化差異：深度整合的差異檢視器，逐行顯示變更內容。",
+      "統計摘要：快速查看有多少檔案被新增、移除或修改。",
+      "響應式介面：使用 Tailwind CSS 打造，介面現代且簡潔。",
+      "框架：React + Vite",
+      "樣式：Tailwind CSS"
+    ],
     "homepageUrl": "https://config-diff-viewer.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/Config-Diff-Viewer",
     "isArchived": false,
@@ -410,6 +537,14 @@
     "updatedAt": "2026-03-13T08:23:20Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "第一步：設定 AI 金鑰",
+      "第二步：搜尋節目",
+      "第三步：開始轉譯",
+      "第四步：獲取洞察",
+      "🧠 Gemini 2.0 Flash/Pro 驅動",
+      "📊 Visual Logic (視覺化邏輯)"
+    ],
     "homepageUrl": "https://podscribe-six.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/PodScribe",
     "isArchived": false,
@@ -427,6 +562,12 @@
     "updatedAt": "2026-03-13T08:21:00Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "📊 超專業 Dashboard",
+      "🤖 Telegram 即時通訊錄",
+      "A. 如何開始監控？",
+      "B. 數據同步策略"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/insider-watch-bot",
     "isArchived": false,
@@ -444,6 +585,11 @@
     "updatedAt": "2026-03-13T08:20:10Z",
     "primaryLanguage": "HTML",
     "topics": [],
+    "readmeFeatures": [
+      "特點",
+      "使用方式",
+      "安裝步驟"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/msg-converter",
     "isArchived": false,
@@ -461,6 +607,11 @@
     "updatedAt": "2026-03-13T08:17:58Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "👨‍⚕️ 專業醫療團隊",
+      "🩺 核心服務項目",
+      "📞 預約與聯絡"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/yellowstone-clinic",
     "isArchived": false,
@@ -478,6 +629,10 @@
     "updatedAt": "2026-02-24T00:13:57Z",
     "primaryLanguage": "PHP",
     "topics": [],
+    "readmeFeatures": [
+      "系統需求",
+      "部署步驟"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/broker-credential-dashboard",
     "isArchived": false,
@@ -495,6 +650,14 @@
     "updatedAt": "2026-02-05T14:48:44Z",
     "primaryLanguage": "Python",
     "topics": [],
+    "readmeFeatures": [
+      "價格熱力圖：自動區分「超值戶 (白)」、「區域價 (深藍)」與「高端戶 (紫)」。",
+      "成交追蹤：顯著標示建案的最近成交日期、總價與單價。",
+      "特殊戶型識別：智慧標記頂樓戶、露台戶等稀有物件。",
+      "Turf.js 演算：自動掃描建案周邊 1,000 公尺內的嫌惡設施或重要機構。",
+      "偵測類別：包含加油站、變電所、殯葬設施、消防局等。",
+      "動態地圖：即時繪製距離圈與設施圖示，並提供風險類型過濾。"
+    ],
     "homepageUrl": "https://presale-radar.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/presale-radar",
     "isArchived": false,
@@ -512,6 +675,14 @@
     "updatedAt": "2026-01-19T00:20:06Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "即時 JCIC 資料分析 - 使用金融聯合徵信中心最新購置住宅貸款統計資訊 (2025Q3)",
+      "估值落差偵測 - 識別市場價格高於銀行鑑估值 20% 以上的過熱路段",
+      "財務槓桿警示 - 標記房價超過平均年收入 20 倍的高風險區域",
+      "互動式資料視覺化 - 散點圖分析市場行情分佈",
+      "自訂資料上傳 - 支援上傳 JCIC CSV 檔案 (Big5 編碼)",
+      "金融聯合徵信中心 (JCIC) - 購置住宅貸款統計資訊"
+    ],
     "homepageUrl": "https://house-dun-one.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/neighbor-profiler",
     "isArchived": false,
@@ -529,6 +700,14 @@
     "updatedAt": "2026-01-19T00:19:48Z",
     "primaryLanguage": "HTML",
     "topics": [],
+    "readmeFeatures": [
+      "🧠 AI 情緒量化指標：",
+      "📊 視覺化儀表板 (Dashboard)：",
+      "📝 結構化策略生成：",
+      "短期觀察重點 (Short-term Watchlist)",
+      "長期投資潛力 (Long-term Potential)",
+      "風險提示 (Risk Warning)"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/financial-news-analysis",
     "isArchived": false,
@@ -546,6 +725,14 @@
     "updatedAt": "2026-01-19T00:19:42Z",
     "primaryLanguage": "HTML",
     "topics": [],
+    "readmeFeatures": [
+      "⚡ 即時試算 (Instant Calculation)：",
+      "👨‍👩‍👧‍👦 智慧眷屬計算：",
+      "🏢 多元身份支援：",
+      "一般受雇員工 (30% 自付)",
+      "公務人員 (30% 自付)",
+      "職業工會會員 (60% 自付)"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/taiwan-nhi-calculator",
     "isArchived": false,
@@ -563,6 +750,11 @@
     "updatedAt": "2026-01-18T14:16:51Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
+    "readmeFeatures": [
+      "🍱 聚餐規劃 (Dinner Planner)",
+      "🧋 下午茶揪團 (Tea Time)",
+      "📊 財務與歷史 (Finance & History)"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/team-eats",
     "isArchived": false,
@@ -580,6 +772,14 @@
     "updatedAt": "2026-01-18T14:05:16Z",
     "primaryLanguage": "Python",
     "topics": [],
+    "readmeFeatures": [
+      "數據來源: 使用 `yfinance` 獲取即時/歷史 K 線數據 (預設 500 根)。",
+      "SMC 指標: 自動識別與標註：",
+      "FVG (Fair Value Gaps): 公允價值缺口 (看漲/看跌)。",
+      "OB (Order Blocks): 訂單塊 (機構進場區)。",
+      "BOS (Break of Structure): 結構破壞 (趨勢延續訊號)。",
+      "視覺化: 使用 Plotly 繪製互動式蠟燭圖。"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/smc-trinity-ai",
     "isArchived": false,
@@ -597,6 +797,14 @@
     "updatedAt": "2026-01-18T14:05:13Z",
     "primaryLanguage": "Jupyter Notebook",
     "topics": [],
+    "readmeFeatures": [
+      "`day12_page5_stream.py`: 非同步串流 (Streaming) 實作，展示如何即時獲取 Agent 回應。",
+      "`day12_page6_history.py`: 對話歷史 (Message History) 管理，讓 Agent 具備上下文記憶。",
+      "`day12_page8_json_storage.py`: 數據持久化，展示如何將對話序列化為 JSON 並儲存。",
+      "`day12_page12_processors.py`: History Processors 應用，包含過濾、Token 控制與自動化總結。",
+      "Backend: FastAPI + SQLite (Async) + Pydantic AI。",
+      "Frontend: 原生 JavaScript (TypeScript 語法) + Marked.js。"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/FastAPI-project",
     "isArchived": false,
@@ -614,6 +822,14 @@
     "updatedAt": "2026-01-18T13:36:06Z",
     "primaryLanguage": "Python",
     "topics": [],
+    "readmeFeatures": [
+      "🎨 互動式手寫板：",
+      "⚡ 輕量級 AI 模型：",
+      "🔧 專業級影像前處理：",
+      "Backend: [FastAPI](https://fastapi.tiangolo.com/) (Python Asynchronous Server)",
+      "ML Core: [Scikit-learn](https://scikit-learn.org/) (Multi-Layer Perceptron)",
+      "Frontend: Vanilla JS + HTML5 Canvas"
+    ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/digit_recognition",
     "isArchived": false,
@@ -631,6 +847,14 @@
     "updatedAt": "2026-01-08T06:39:38Z",
     "primaryLanguage": "Jupyter Notebook",
     "topics": [],
+    "readmeFeatures": [
+      "以精美卡片呈現 12 天課程，包含日期、主題、描述與講師資訊。",
+      "完整收錄從 10/16 開課至 1/8 結業的所有課程講義與範例。",
+      "即時搜尋：Header 新增搜尋框，輸入關鍵字即可即時過濾課程。",
+      "搜尋範圍：支援標題、大綱、描述與標籤 (Tags)。",
+      "標籤導航：點擊卡片上的標籤 (如 `LLM`, `Agent`, `RAG`) 即可快速檢視相關主題。",
+      "智能問答：右下角懸浮按鈕喚醒 Gemini AI 助教。"
+    ],
     "homepageUrl": "https://aia-training-viewer.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer",
     "isArchived": false,

@@ -22,6 +22,7 @@ export type GitHubRepo = {
   updatedAt: string;
   primaryLanguage: string | null;
   topics: string[];
+  readmeFeatures?: string[];
   homepageUrl: string;
   url: string;
   isArchived: boolean;
@@ -183,8 +184,8 @@ export function getProjects(): Project[] {
         workflow: override?.workflow,
         commands: override?.commands,
         features: override?.features ?? {
-          zh: repo.topics.length ? repo.topics : [categoryLabels[category].zh],
-          en: repo.topics.length ? repo.topics : [categoryLabels[category].en],
+          zh: repo.topics.length ? repo.topics : repo.readmeFeatures?.length ? repo.readmeFeatures : [categoryLabels[category].zh],
+          en: repo.topics.length ? repo.topics : repo.readmeFeatures?.length ? repo.readmeFeatures : [categoryLabels[category].en],
         },
         homepageUrl: override?.homepageUrl ?? ((preview?.status === "fallback" && preview?.reason === "http 404") ? "" : repo.homepageUrl),
         previewPath,
