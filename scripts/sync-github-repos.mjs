@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { chromium } from "playwright";
 
 const root = process.cwd();
 const dataDir = path.join(root, "src", "data");
@@ -60,6 +61,24 @@ function writePlaceholderSvg(repo, slug) {
 `;
   writeFileSync(svgPath, svg);
   return `/previews/${slug}.svg`;
+}
+
+/** 真的打開 homepageUrl 截首頁圖，失敗就丟出錯誤讓呼叫端 fallback 成佔位圖。 */
+async function captureScreenshot(browser, repo, slug) {
+  mkdirSync(previewsDir, { recursive: true });
+  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  try {
+    const response = await page.goto(repo.homepageUrl, { waitUntil: "networkidle", timeout: 20000 });
+    if (!response || response.status() >= 400) {
+      throw new Error(`http ${response ? response.status() : "no response"}`);
+    }
+    await page.waitForTimeout(1500);
+    const pngPath = path.join(previewsDir, `${slug}.png`);
+    await page.screenshot({ path: pngPath });
+    return `/previews/${slug}.png`;
+  } finally {
+    await page.close();
+  }
 }
 
 const fields = [
@@ -131,8 +150,8 @@ writeFileSync(outputPath, `${JSON.stringify(repos, null, 2)}\n`);
 console.log(`Synced ${repos.length} repositories to ${path.relative(root, outputPath)}`);
 
 // ---------------------------------------------------------------------------
-// 補齊 preview-manifest：新 repo 若還沒有截圖或人工設定，自動產生佔位圖，
-// 避免作品集頁面在下次收錄前先出現破圖或完全沒有預覽。
+// 補齊 preview-manifest：新 repo 有 homepageUrl 就真的截首頁圖，
+// 沒有網址或截圖失敗就退回佔位卡片，確保永遠不會出現破圖或空白預覽。
 // ---------------------------------------------------------------------------
 
 let previewManifest = {};
@@ -149,24 +168,48 @@ try {
   // 沒有 overrides 也能跑
 }
 
-let addedPlaceholders = 0;
-for (const repo of repos) {
-  if (previewManifest[repo.name] || overridesForPreview[repo.name]?.previewPath) continue;
-  const slug = slugify(repo.name);
-  const svgPath = path.join(previewsDir, `${slug}.svg`);
-  const relativePath = writePlaceholderSvg(repo, slug);
-  if (!existsSync(svgPath)) continue;
-  previewManifest[repo.name] = {
-    status: "fallback",
-    reason: "no capture pipeline yet",
-    path: relativePath,
-  };
-  addedPlaceholders += 1;
+const hasOverridePreview = (repo) => Boolean(overridesForPreview[repo.name]?.previewPath);
+const isCaptured = (repo) => previewManifest[repo.name]?.status === "captured";
+const hasManifestEntry = (repo) => Boolean(previewManifest[repo.name]);
+
+let capturedCount = 0;
+let placeholderCount = 0;
+
+// 有 homepageUrl 但還沒截到真實畫面的（含新 repo、之前失敗過的），每天都值得重試一次。
+const captureCandidates = repos.filter(
+  (repo) => !hasOverridePreview(repo) && repo.homepageUrl && !isCaptured(repo),
+);
+if (captureCandidates.length > 0) {
+  const browser = await chromium.launch();
+  for (const repo of captureCandidates) {
+    const slug = slugify(repo.name);
+    try {
+      const relativePath = await captureScreenshot(browser, repo, slug);
+      previewManifest[repo.name] = { status: "captured", source: repo.homepageUrl, path: relativePath };
+      capturedCount += 1;
+      console.log(`Captured screenshot for ${repo.name}`);
+    } catch (err) {
+      const relativePath = writePlaceholderSvg(repo, slug);
+      previewManifest[repo.name] = { status: "fallback", reason: err.message, path: relativePath };
+      placeholderCount += 1;
+      console.warn(`Falling back to placeholder for ${repo.name}: ${err.message}`);
+    }
+  }
+  await browser.close();
 }
 
-if (addedPlaceholders > 0) {
+// 沒有 homepageUrl 的話沒東西可截，只在完全沒有紀錄的新 repo 補一張佔位卡片，
+// 已經是 fallback 狀態的既有 repo 不重複改寫。
+for (const repo of repos.filter((repo) => !hasOverridePreview(repo) && !repo.homepageUrl && !hasManifestEntry(repo))) {
+  const slug = slugify(repo.name);
+  const relativePath = writePlaceholderSvg(repo, slug);
+  previewManifest[repo.name] = { status: "fallback", reason: "missing homepageUrl", path: relativePath };
+  placeholderCount += 1;
+}
+
+if (capturedCount + placeholderCount > 0) {
   writeFileSync(previewManifestPath, `${JSON.stringify(previewManifest, null, 2)}\n`);
-  console.log(`Added ${addedPlaceholders} placeholder preview(s) for new repos`);
+  console.log(`Preview sync: ${capturedCount} captured, ${placeholderCount} placeholder`);
 }
 
 // ---------------------------------------------------------------------------

@@ -158,24 +158,24 @@
     "path": "/previews/shorts-video-maker.svg"
   },
   "vendor-quotation-system": {
-    "status": "fallback",
-    "reason": "no capture pipeline yet",
-    "path": "/previews/vendor-quotation-system.svg"
+    "status": "captured",
+    "source": "https://vendor-quotation-system.vercel.app",
+    "path": "/previews/vendor-quotation-system.png"
   },
   "spend-it": {
-    "status": "fallback",
-    "reason": "no capture pipeline yet",
-    "path": "/previews/spend-it.svg"
+    "status": "captured",
+    "source": "https://spend-it-hazel.vercel.app",
+    "path": "/previews/spend-it.png"
   },
   "pr-tracker": {
-    "status": "fallback",
-    "reason": "no capture pipeline yet",
-    "path": "/previews/pr-tracker.svg"
+    "status": "captured",
+    "source": "https://pr-tracker-pm.vercel.app",
+    "path": "/previews/pr-tracker.png"
   },
   "football-star-salaries": {
-    "status": "fallback",
-    "reason": "no capture pipeline yet",
-    "path": "/previews/football-star-salaries.svg"
+    "status": "captured",
+    "source": "https://football-star-salaries.vercel.app",
+    "path": "/previews/football-star-salaries.png"
   },
   "health-bank": {
     "status": "fallback",
