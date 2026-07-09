@@ -11,7 +11,7 @@ Product-minded full-stack work across AI, finance, and utility systems — curat
 ## All Projects &amp; Tech Matrix
 
 <!-- AUTO:projects -->
-A consolidated matrix of all 30 active projects — auto-generated from live GitHub metadata, so it never goes stale.
+A consolidated matrix of all 37 active projects — auto-generated from live GitHub metadata, so it never goes stale.
 
 | Project | Category | Stack | Highlights | Links |
 | :--- | :--- | :--- | :--- | :--- |
@@ -34,6 +34,7 @@ A consolidated matrix of all 30 active projects — auto-generated from live Git
 | [neighbor-profiler](https://github.com/michaelbothsieh-crypto/neighbor-profiler) | Data & Research | TypeScript | Valuation gaps · Street-level analysis · Risk signals | [Demo](https://house-dun-one.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/neighbor-profiler) · 🔒 |
 | [socket-swiss-knife](https://github.com/michaelbothsieh-crypto/socket-swiss-knife) | Product Utilities | Python | Broker profiles · Scheduled tests · Desktop GUI | [GitHub](https://github.com/michaelbothsieh-crypto/socket-swiss-knife) · 🔒 |
 | [fortune-telling](https://github.com/michaelbothsieh-crypto/fortune-telling) | Experiments | TypeScript | BaZi analysis · AI interpretation · PWA experience | [Demo](https://fortune-telling-sigma.vercel.app/) · [GitHub](https://github.com/michaelbothsieh-crypto/fortune-telling) |
+| [my-exercises-db](https://github.com/michaelbothsieh-crypto/my-exercises-db) | Product Utilities | HTML | Exercise library · Workout logging · Weight tracking | [Demo](https://my-exercises-db.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/my-exercises-db) · 🔒 |
 | [financial-news-analysis](https://github.com/michaelbothsieh-crypto/financial-news-analysis) | Financial Intelligence | HTML | News ingestion · Sentiment analysis · Strategy notes | [GitHub](https://github.com/michaelbothsieh-crypto/financial-news-analysis) · 🔒 |
 | [smc-trinity-ai](https://github.com/michaelbothsieh-crypto/smc-trinity-ai) | Financial Intelligence | Python | SMC analysis · Multi-agent debate · Trading judgment | [GitHub](https://github.com/michaelbothsieh-crypto/smc-trinity-ai) · 🔒 |
 | [broker-credential-dashboard](https://github.com/michaelbothsieh-crypto/broker-credential-dashboard) | Product Utilities | PHP | Credential management · Status monitoring · Lightweight tool | [GitHub](https://github.com/michaelbothsieh-crypto/broker-credential-dashboard) · 🔒 |
@@ -45,4 +46,10 @@ A consolidated matrix of all 30 active projects — auto-generated from live Git
 | [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | Data & Research | Jupyter Notebook | Course navigation · Resource sharing · Card layout | [Demo](https://aia-training-viewer.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) · 🔒 |
 | [digit_recognition](https://github.com/michaelbothsieh-crypto/digit_recognition) | Experiments | Python | Canvas input · Image preprocessing · MLP model | [GitHub](https://github.com/michaelbothsieh-crypto/digit_recognition) · 🔒 |
 | [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | Experiments | Jupyter Notebook | FastAPI · PydanticAI · Streaming chat | [GitHub](https://github.com/michaelbothsieh-crypto/FastAPI-project) · 🔒 |
+| [shorts-video-maker](https://github.com/michaelbothsieh-crypto/shorts-video-maker) | Product Utilities | Python | shorts-video-maker | [GitHub](https://github.com/michaelbothsieh-crypto/shorts-video-maker) · 🔒 |
+| [vendor-quotation-system](https://github.com/michaelbothsieh-crypto/vendor-quotation-system) | Product Utilities | TypeScript | 廠商收費報價管理系統 (Vendor Quotation System) | [Demo](https://vendor-quotation-system.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/vendor-quotation-system) |
+| [spend-it](https://github.com/michaelbothsieh-crypto/spend-it) | Product Utilities | HTML | > 反正錢留著也會貶值。 | [Demo](https://spend-it-hazel.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/spend-it) |
+| [pr-tracker](https://github.com/michaelbothsieh-crypto/pr-tracker) | Product Utilities | TypeScript | PR Tracker | [Demo](https://pr-tracker-pm.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/pr-tracker) · 🔒 |
+| [football-star-salaries](https://github.com/michaelbothsieh-crypto/football-star-salaries) | Product Utilities | HTML | — | [Demo](https://football-star-salaries.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/football-star-salaries) · 🔒 |
+| [health-bank](https://github.com/michaelbothsieh-crypto/health-bank) | Product Utilities | TypeScript | 健康小本本 health-bank | [GitHub](https://github.com/michaelbothsieh-crypto/health-bank) · 🔒 |
 <!-- /AUTO:projects -->

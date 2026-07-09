@@ -1,10 +1,66 @@
 import { execFileSync } from "node:child_process";
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
 const dataDir = path.join(root, "src", "data");
+const previewsDir = path.join(root, "public", "previews");
 const outputPath = path.join(dataDir, "repos.generated.json");
+const previewManifestPath = path.join(dataDir, "preview-manifest.generated.json");
+
+function slugify(value) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+/** README 第一段有意義的文字，當 GitHub description 是空的時候拿來當備援摘要。 */
+function fetchReadmeSummary(nameWithOwner) {
+  try {
+    const b64 = execFileSync(
+      "gh",
+      ["api", `repos/${nameWithOwner}/readme`, "-q", ".content"],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+    ).trim();
+    const text = Buffer.from(b64, "base64").toString("utf8");
+    const line = text
+      .split("\n")
+      .map((l) => l.replace(/^#+\s*/, "").replace(/[`*_]/g, "").trim())
+      .find((l) => l.length > 8 && !l.startsWith("![") && !l.startsWith("["));
+    return line ?? "";
+  } catch {
+    return "";
+  }
+}
+
+/** 沒有任何截圖來源時，產生一張佔位 SVG，避免作品集頁面出現破圖。 */
+function writePlaceholderSvg(repo, slug) {
+  mkdirSync(previewsDir, { recursive: true });
+  const svgPath = path.join(previewsDir, `${slug}.svg`);
+  const label = repo.primaryLanguage ?? "";
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e9f3ef"/>
+    </linearGradient>
+    <radialGradient id="r" cx="75%" cy="20%" r="70%">
+      <stop offset="0" stop-color="#c4b5fd" stop-opacity=".36"/>
+      <stop offset="1" stop-color="#c4b5fd" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1440" height="960" fill="url(#g)"/>
+  <rect width="1440" height="960" fill="url(#r)"/>
+  <rect x="96" y="96" width="1248" height="768" rx="42" fill="#ffffff" stroke="#0f172a" stroke-opacity=".10"/>
+  ${label ? `<rect x="150" y="160" width="260" height="52" rx="26" fill="#c4b5fd" opacity=".22"/>
+  <text x="180" y="194" fill="#0f172a" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="5">${label.toUpperCase()}</text>` : ""}
+  <text x="150" y="334" fill="#0f172a" font-family="Arial, sans-serif" font-size="72" font-weight="700">${repo.name}</text>
+  <text x="150" y="424" fill="#3f3f46" font-family="Arial, sans-serif" font-size="34">No public product screen available</text>
+  <path d="M150 670 C 360 520, 610 760, 860 610 S 1160 470, 1280 610" fill="none" stroke="#c4b5fd" stroke-width="7" opacity=".9"/>
+  <circle cx="1190" cy="230" r="58" fill="#c4b5fd" opacity=".7"/>
+</svg>
+`;
+  writeFileSync(svgPath, svg);
+  return `/previews/${slug}.svg`;
+}
 
 const fields = [
   "name",
@@ -42,7 +98,7 @@ const repos = JSON.parse(raw)
   .map((repo) => ({
     name: repo.name,
     nameWithOwner: repo.nameWithOwner,
-    description: repo.description ?? "",
+    description: repo.description || fetchReadmeSummary(repo.nameWithOwner),
     visibility: repo.visibility,
     isPrivate: Boolean(repo.isPrivate),
     createdAt: repo.createdAt,
@@ -73,6 +129,45 @@ if (privateCount === 0) {
 writeFileSync(outputPath, `${JSON.stringify(repos, null, 2)}\n`);
 
 console.log(`Synced ${repos.length} repositories to ${path.relative(root, outputPath)}`);
+
+// ---------------------------------------------------------------------------
+// 補齊 preview-manifest：新 repo 若還沒有截圖或人工設定，自動產生佔位圖，
+// 避免作品集頁面在下次收錄前先出現破圖或完全沒有預覽。
+// ---------------------------------------------------------------------------
+
+let previewManifest = {};
+try {
+  previewManifest = JSON.parse(readFileSync(previewManifestPath, "utf8"));
+} catch {
+  // 檔案不存在就從空的開始
+}
+
+let overridesForPreview = {};
+try {
+  overridesForPreview = JSON.parse(readFileSync(path.join(dataDir, "project-overrides.json"), "utf8"));
+} catch {
+  // 沒有 overrides 也能跑
+}
+
+let addedPlaceholders = 0;
+for (const repo of repos) {
+  if (previewManifest[repo.name] || overridesForPreview[repo.name]?.previewPath) continue;
+  const slug = slugify(repo.name);
+  const svgPath = path.join(previewsDir, `${slug}.svg`);
+  const relativePath = writePlaceholderSvg(repo, slug);
+  if (!existsSync(svgPath)) continue;
+  previewManifest[repo.name] = {
+    status: "fallback",
+    reason: "no capture pipeline yet",
+    path: relativePath,
+  };
+  addedPlaceholders += 1;
+}
+
+if (addedPlaceholders > 0) {
+  writeFileSync(previewManifestPath, `${JSON.stringify(previewManifest, null, 2)}\n`);
+  console.log(`Added ${addedPlaceholders} placeholder preview(s) for new repos`);
+}
 
 // ---------------------------------------------------------------------------
 // 自動產生 README 的「全部專案矩陣」區塊。

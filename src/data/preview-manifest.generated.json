@@ -151,5 +151,35 @@
   "my-exercises-db": {
     "status": "captured",
     "path": "/previews/my-exercises-db.png"
+  },
+  "shorts-video-maker": {
+    "status": "fallback",
+    "reason": "no capture pipeline yet",
+    "path": "/previews/shorts-video-maker.svg"
+  },
+  "vendor-quotation-system": {
+    "status": "fallback",
+    "reason": "no capture pipeline yet",
+    "path": "/previews/vendor-quotation-system.svg"
+  },
+  "spend-it": {
+    "status": "fallback",
+    "reason": "no capture pipeline yet",
+    "path": "/previews/spend-it.svg"
+  },
+  "pr-tracker": {
+    "status": "fallback",
+    "reason": "no capture pipeline yet",
+    "path": "/previews/pr-tracker.svg"
+  },
+  "football-star-salaries": {
+    "status": "fallback",
+    "reason": "no capture pipeline yet",
+    "path": "/previews/football-star-salaries.svg"
+  },
+  "health-bank": {
+    "status": "fallback",
+    "reason": "no capture pipeline yet",
+    "path": "/previews/health-bank.svg"
   }
 }

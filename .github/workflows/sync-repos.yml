@@ -39,12 +39,12 @@ jobs:
 
       - name: Commit changes
         run: |
-          if [[ -n "$(git status --porcelain src/data/repos.generated.json)" ]]; then
+          if [[ -n "$(git status --porcelain src/data/repos.generated.json src/data/preview-manifest.generated.json public/previews)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add src/data/repos.generated.json
+            git add src/data/repos.generated.json src/data/preview-manifest.generated.json public/previews
             git commit -m "chore: 每日同步 GitHub repo 與最後更新時間"
             git push
           else
-            echo "No changes to repos.generated.json"
+            echo "No changes to sync"
           fi

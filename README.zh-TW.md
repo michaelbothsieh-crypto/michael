@@ -11,7 +11,7 @@
 ## 全部專案與技術矩陣
 
 <!-- AUTO:projects -->
-以下為全部 30 個進行中專案的矩陣，由 GitHub 即時資料自動產生，不會再過時。
+以下為全部 37 個進行中專案的矩陣，由 GitHub 即時資料自動產生，不會再過時。
 
 | 專案 | 產品線 | 技術 | 亮點 | 連結 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -34,6 +34,7 @@
 | [neighbor-profiler](https://github.com/michaelbothsieh-crypto/neighbor-profiler) | 資料研究 | TypeScript | 估值落差 · 路段分析 · 風險提示 | [Demo](https://house-dun-one.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/neighbor-profiler) · 🔒 |
 | [socket-swiss-knife](https://github.com/michaelbothsieh-crypto/socket-swiss-knife) | 工具產品 | Python | 券商設定 · 定時測試 · 桌面 GUI | [GitHub](https://github.com/michaelbothsieh-crypto/socket-swiss-knife) · 🔒 |
 | [fortune-telling](https://github.com/michaelbothsieh-crypto/fortune-telling) | 實驗原型 | TypeScript | 八字分析 · AI 解讀 · PWA 體驗 | [Demo](https://fortune-telling-sigma.vercel.app/) · [GitHub](https://github.com/michaelbothsieh-crypto/fortune-telling) |
+| [my-exercises-db](https://github.com/michaelbothsieh-crypto/my-exercises-db) | 工具產品 | HTML | 動作資料庫 · 訓練紀錄 · 重量追蹤 | [Demo](https://my-exercises-db.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/my-exercises-db) · 🔒 |
 | [financial-news-analysis](https://github.com/michaelbothsieh-crypto/financial-news-analysis) | 金融決策 | HTML | 新聞擷取 · 情緒分析 · 策略摘要 | [GitHub](https://github.com/michaelbothsieh-crypto/financial-news-analysis) · 🔒 |
 | [smc-trinity-ai](https://github.com/michaelbothsieh-crypto/smc-trinity-ai) | 金融決策 | Python | SMC 分析 · 多代理人辯論 · 交易裁決 | [GitHub](https://github.com/michaelbothsieh-crypto/smc-trinity-ai) · 🔒 |
 | [broker-credential-dashboard](https://github.com/michaelbothsieh-crypto/broker-credential-dashboard) | 工具產品 | PHP | 帳密管理 · 狀態監控 · 輕量工具 | [GitHub](https://github.com/michaelbothsieh-crypto/broker-credential-dashboard) · 🔒 |
@@ -45,4 +46,10 @@
 | [AIA-Training-Viewer](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) | 資料研究 | Jupyter Notebook | 課程導航 · 資源共享 · 精美卡片 | [Demo](https://aia-training-viewer.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/AIA-Training-Viewer) · 🔒 |
 | [digit_recognition](https://github.com/michaelbothsieh-crypto/digit_recognition) | 實驗原型 | Python | 即時繪圖 · 影像前處理 · MLP 模型 | [GitHub](https://github.com/michaelbothsieh-crypto/digit_recognition) · 🔒 |
 | [FastAPI-project](https://github.com/michaelbothsieh-crypto/FastAPI-project) | 實驗原型 | Jupyter Notebook | FastAPI · PydanticAI · 串流對話 | [GitHub](https://github.com/michaelbothsieh-crypto/FastAPI-project) · 🔒 |
+| [shorts-video-maker](https://github.com/michaelbothsieh-crypto/shorts-video-maker) | 工具產品 | Python | shorts-video-maker | [GitHub](https://github.com/michaelbothsieh-crypto/shorts-video-maker) · 🔒 |
+| [vendor-quotation-system](https://github.com/michaelbothsieh-crypto/vendor-quotation-system) | 工具產品 | TypeScript | 廠商收費報價管理系統 (Vendor Quotation System) | [Demo](https://vendor-quotation-system.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/vendor-quotation-system) |
+| [spend-it](https://github.com/michaelbothsieh-crypto/spend-it) | 工具產品 | HTML | > 反正錢留著也會貶值。 | [Demo](https://spend-it-hazel.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/spend-it) |
+| [pr-tracker](https://github.com/michaelbothsieh-crypto/pr-tracker) | 工具產品 | TypeScript | PR Tracker | [Demo](https://pr-tracker-pm.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/pr-tracker) · 🔒 |
+| [football-star-salaries](https://github.com/michaelbothsieh-crypto/football-star-salaries) | 工具產品 | HTML | — | [Demo](https://football-star-salaries.vercel.app) · [GitHub](https://github.com/michaelbothsieh-crypto/football-star-salaries) · 🔒 |
+| [health-bank](https://github.com/michaelbothsieh-crypto/health-bank) | 工具產品 | TypeScript | 健康小本本 health-bank | [GitHub](https://github.com/michaelbothsieh-crypto/health-bank) · 🔒 |
 <!-- /AUTO:projects -->
