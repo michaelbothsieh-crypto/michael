@@ -1,5 +1,29 @@
 [
   {
+    "name": "spend-it",
+    "nameWithOwner": "michaelbothsieh-crypto/spend-it",
+    "description": "反正錢留著也會貶值。",
+    "visibility": "PUBLIC",
+    "isPrivate": false,
+    "createdAt": "2026-07-03T04:00:10Z",
+    "updatedAt": "2026-07-11T22:51:47Z",
+    "primaryLanguage": "HTML",
+    "topics": [],
+    "readmeFeatures": [
+      "首頁 — 通膨計數器現場直播",
+      "三題漏斗 — 預算 → 對象 → 心情",
+      "命運轉盤 — 拉霸機過場",
+      "診斷結果 — 商品卡 + 假名人背書",
+      "手機版"
+    ],
+    "homepageUrl": "https://spend-it-hazel.vercel.app",
+    "url": "https://github.com/michaelbothsieh-crypto/spend-it",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 0,
+    "forkCount": 0
+  },
+  {
     "name": "personal-bot-gateway",
     "nameWithOwner": "michaelbothsieh-crypto/personal-bot-gateway",
     "description": "Independent Telegram and LINE gateway for the daily KOL brief and stock commands",
@@ -19,30 +43,6 @@
     ],
     "homepageUrl": "https://personal-bot-gateway.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/personal-bot-gateway",
-    "isArchived": false,
-    "isFork": false,
-    "stargazerCount": 0,
-    "forkCount": 0
-  },
-  {
-    "name": "spend-it",
-    "nameWithOwner": "michaelbothsieh-crypto/spend-it",
-    "description": "反正錢留著也會貶值。",
-    "visibility": "PUBLIC",
-    "isPrivate": false,
-    "createdAt": "2026-07-03T04:00:10Z",
-    "updatedAt": "2026-07-10T23:00:31Z",
-    "primaryLanguage": "HTML",
-    "topics": [],
-    "readmeFeatures": [
-      "首頁 — 通膨計數器現場直播",
-      "三題漏斗 — 預算 → 對象 → 心情",
-      "命運轉盤 — 拉霸機過場",
-      "診斷結果 — 商品卡 + 假名人背書",
-      "手機版"
-    ],
-    "homepageUrl": "https://spend-it-hazel.vercel.app",
-    "url": "https://github.com/michaelbothsieh-crypto/spend-it",
     "isArchived": false,
     "isFork": false,
     "stargazerCount": 0,
