@@ -181,5 +181,10 @@
     "status": "fallback",
     "reason": "no capture pipeline yet",
     "path": "/previews/health-bank.svg"
+  },
+  "claude-skills": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/claude-skills.svg"
   }
 }
