@@ -2,20 +2,20 @@
   {
     "name": "health-bank",
     "nameWithOwner": "michaelbothsieh-crypto/health-bank",
-    "description": "你的 AI 家醫 health-bank",
+    "description": "Health Bank",
     "visibility": "PRIVATE",
     "isPrivate": true,
     "createdAt": "2026-07-06T01:34:54Z",
-    "updatedAt": "2026-07-16T08:27:44Z",
+    "updatedAt": "2026-07-16T09:36:13Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
     "readmeFeatures": [
-      "官方 App 顯示近年的申報紀錄；持續匯入後，這裡能保留更長期的趨勢——單筆是資料，曲線才看得出方向",
-      "換醫院看新醫生，印一頁小抄，整理匯入期間內的健保申報用藥",
-      "看不懂的英文報告、紅字數值，直接用白話問 AI",
-      "全家的存摺都丟進來，一站管理爸媽和小孩",
-      "疫苗進度（小孩）：接種紀錄自動對照疾管署公費時程，缺哪劑、第幾劑該打了直接標出來，逾期的同步出現在首頁訊號",
-      "公費健檢／癌篩（大人）：依年齡、性別與本地紀錄提示可能到期的成人健檢、癌篩與洗牙；需要家族史、吸菸史等條件的項目只提醒確認資格，不宣稱一定免費"
+      "健康存摺有很多申報資料，卻不容易看出長期變化",
+      "家人的就醫、用藥、檢驗與居家量測散在不同地方",
+      "換醫師或陪家人看診時，很難快速交代重要資訊",
+      "想請 AI 協助解讀，又不希望整份原始資料直接上傳",
+      "家庭健康時間軸：同一人的不同下載版本會自動歸戶、去重，家庭成員也能分開管理",
+      "身體訊號：從本地紀錄整理檢驗趨勢、用藥跨度、可能的處方空窗與篩檢提醒，每項都能回到原始紀錄核對"
     ],
     "homepageUrl": "",
     "url": "https://github.com/michaelbothsieh-crypto/health-bank",
