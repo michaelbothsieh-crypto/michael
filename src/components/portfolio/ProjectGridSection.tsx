@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import type { ProjectSortOrder } from "@/lib/project-sort";
 import type { CategoryFilter, Locale, ProjectSummary } from "@/lib/projects";
 import { categories, categoryLabels } from "@/lib/projects";
@@ -14,10 +17,23 @@ type ProjectGridSectionProps = {
   copy: PortfolioCopy;
   onCategoryChange: (category: CategoryFilter) => void;
   onSortChange: (sort: ProjectSortOrder) => void;
-  onShowMore: () => void;
+  onLoadMore: () => void;
 };
 
-export function ProjectGridSection({ activeCategory, activeSort, projects, totalProjects, hasMore, locale, copy, onCategoryChange, onSortChange, onShowMore }: ProjectGridSectionProps) {
+export function ProjectGridSection({ activeCategory, activeSort, projects, totalProjects, hasMore, locale, copy, onCategoryChange, onSortChange, onLoadMore }: ProjectGridSectionProps) {
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!hasMore || !loadMoreRef.current) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) onLoadMore();
+    }, { rootMargin: "400px 0px" });
+
+    observer.observe(loadMoreRef.current);
+    return () => observer.disconnect();
+  }, [hasMore, onLoadMore, projects.length]);
+
   return (
     <section id="projects" className="px-5 pb-28 sm:px-8 md:pb-44 lg:px-12">
       <div className="mx-auto max-w-7xl">
@@ -52,7 +68,7 @@ export function ProjectGridSection({ activeCategory, activeSort, projects, total
         </div>
         {projects.length ? (
           <>
-            <p className="mb-4 font-mono text-xs text-zinc-500">
+            <p aria-live="polite" className="mb-4 font-mono text-xs text-zinc-500">
               {copy.showing} {projects.length} {copy.of} {totalProjects}
             </p>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -60,17 +76,7 @@ export function ProjectGridSection({ activeCategory, activeSort, projects, total
                 <ProjectCard key={project.name} project={project} locale={locale} copy={copy} />
               ))}
             </div>
-            {hasMore ? (
-              <div className="mt-10 flex justify-center">
-                <button
-                  type="button"
-                  onClick={onShowMore}
-                  className="border border-zinc-950/15 bg-white px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:border-zinc-950/30 hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
-                >
-                  {copy.showMore}
-                </button>
-              </div>
-            ) : null}
+            {hasMore ? <div ref={loadMoreRef} aria-hidden="true" className="h-px" /> : null}
           </>
         ) : (
           <p role="status" className="border border-zinc-950/10 bg-white px-6 py-12 text-center text-zinc-600">{copy.noProjects}</p>
