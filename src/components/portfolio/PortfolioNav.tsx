@@ -14,21 +14,21 @@ export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps)
 
   const links = [
     { href: "#featured", label: copy.nav.featured },
-    { href: "#categories", label: copy.nav.categories },
     { href: "#projects", label: copy.nav.all },
+    { href: "https://github.com/michaelbothsieh-crypto", label: copy.nav.github, external: true },
   ];
 
   return (
     <nav className="portfolio-enter fixed inset-x-0 top-0 z-40 border-b border-zinc-950/10 bg-[#f1efe7]/92 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
-        <a href="#top" className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-950">
+      <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
+        <a href="#top" className="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.24em] text-zinc-950">
           Michael
         </a>
 
         {/* Desktop links */}
         <div className="hidden items-center gap-6 text-sm text-zinc-600 md:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-zinc-950 transition-colors">
+            <a key={l.href} href={l.href} target={l.external ? "_blank" : undefined} rel={l.external ? "noreferrer" : undefined} className="inline-flex min-h-11 items-center hover:text-zinc-950 transition-colors">
               {l.label}
             </a>
           ))}
@@ -51,7 +51,7 @@ export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps)
 
           <button
             type="button"
-            className="border border-zinc-950/15 px-3 py-1.5 font-mono text-xs text-zinc-950 transition hover:bg-[#1f211b] hover:text-[#f7f4ea] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
+            className="min-h-11 border border-zinc-950/15 px-3 py-2 font-mono text-xs text-zinc-950 transition hover:bg-[#1f211b] hover:text-[#f7f4ea] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
             onClick={onToggleLocale}
             aria-label="Switch language"
           >
@@ -61,7 +61,7 @@ export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps)
           {/* Hamburger — mobile only */}
           <button
             type="button"
-            className="flex h-8 w-8 flex-col items-center justify-center gap-1.5 md:hidden focus:outline-none"
+            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -82,7 +82,9 @@ export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps)
             <a
               key={l.href}
               href={l.href}
-              className="py-3 text-sm text-zinc-700 hover:text-zinc-950 border-b border-zinc-950/5 last:border-0"
+              target={l.external ? "_blank" : undefined}
+              rel={l.external ? "noreferrer" : undefined}
+              className="flex min-h-11 items-center py-3 text-sm text-zinc-700 hover:text-zinc-950 border-b border-zinc-950/5 last:border-0"
               onClick={() => setOpen(false)}
             >
               {l.label}

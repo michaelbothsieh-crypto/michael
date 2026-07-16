@@ -5,8 +5,6 @@ import { sortProjectsByTime } from "@/lib/project-sort";
 import type { ProjectSortOrder } from "@/lib/project-sort";
 import type { CategoryFilter, Locale, ProjectSummary } from "@/lib/projects";
 import { filterProjectsByCategory, selectFeaturedProjects } from "@/lib/projects";
-import { CategoryStory } from "./portfolio/CategoryStory";
-import { ProjectTimeline } from "./portfolio/ProjectTimeline";
 import { copy } from "./portfolio/copy";
 import { FeaturedSection } from "./portfolio/FeaturedSection";
 import { HeroSection } from "./portfolio/HeroSection";
@@ -38,7 +36,7 @@ export function PortfolioExperience({ projects }: Props) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [stats, setStats] = useState<{ pv: number; active: number } | null>(null);
   const t = copy[locale];
-  const featuredProjects = useMemo(() => selectFeaturedProjects(projects), [projects]);
+  const featuredProjects = useMemo(() => selectFeaturedProjects(projects, 3), [projects]);
   const filteredProjects = useMemo(
     () => sortProjectsByTime(filterProjectsByCategory(projects, activeCategory), activeSort),
     [activeCategory, activeSort, projects]
@@ -94,10 +92,8 @@ export function PortfolioExperience({ projects }: Props) {
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f1efe7] text-zinc-950">
       <PortfolioNav copy={t} stats={stats} onToggleLocale={() => setLocaleOverride(locale === "zh" ? "en" : "zh")} />
-      <HeroSection projectsCount={projects.length} featuredProjects={featuredProjects} sinceYear={sinceYear} locale={locale} copy={t} />
-      <ProjectTimeline projects={projects} locale={locale} />
+      <HeroSection projectsCount={projects.length} sinceYear={sinceYear} locale={locale} copy={t} />
       <FeaturedSection projects={featuredProjects} locale={locale} copy={t} />
-      <CategoryStory copy={t} />
       <ProjectGridSection
         activeCategory={activeCategory}
         activeSort={activeSort}
@@ -110,10 +106,23 @@ export function PortfolioExperience({ projects }: Props) {
         onSortChange={handleSortChange}
         onLoadMore={handleLoadMore}
       />
-      <footer className="border-t border-zinc-950/10 px-5 py-12 sm:px-8 lg:px-12">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
-          <p className="max-w-2xl text-sm leading-6 text-zinc-600">{t.footer}</p>
-          <p className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">Michael Product Lab</p>
+      <footer className="bg-zinc-950 px-5 py-20 text-white sm:px-8 md:py-28 lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
+          <div>
+            <p className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-[#aeba9f]">Michael Product Lab</p>
+            <h2 className="mt-6 max-w-4xl text-4xl font-semibold leading-tight tracking-[-0.04em] md:text-6xl">{t.footerTitle}</h2>
+          </div>
+          <div className="border-t border-white/20 pt-6">
+            <p className="text-sm leading-6 text-zinc-400">{t.footer}</p>
+            <a
+              href="https://github.com/michaelbothsieh-crypto"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-8 flex min-h-11 items-center justify-between border border-white/30 px-5 py-3 text-sm font-semibold transition-colors hover:bg-white hover:text-zinc-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              {t.footerAction}<span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
       </footer>
     </main>
