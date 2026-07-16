@@ -7,7 +7,7 @@ Make the portfolio faster to scan, lighter to load, and easier to share without 
 ## Chosen approach
 
 - Rank the strongest eight projects by the existing `sortWeight`, but require a non-empty `homepageUrl`.
-- Keep all projects available while rendering twelve at a time. Category and time sorting remain client-side because the dataset is small and already local.
+- Keep all projects available while rendering twelve at a time, then reveal the next batch with a native intersection observer as the visitor scrolls. Category and time sorting remain client-side because the dataset is small and already local.
 - Offer three time orders: recently updated (default), newest created, and oldest created.
 - Replace GSAP scroll choreography with one small CSS reveal animation and remove both GSAP packages.
 - Move rich project details from the homepage modal to statically generated `/projects/[slug]` pages. Cards become normal links, which reduces homepage client data and makes cases shareable and indexable.
@@ -31,7 +31,7 @@ Make the portfolio faster to scan, lighter to load, and easier to share without 
 ## Verification
 
 - Assert strongest projects all have demo URLs and sorting is deterministic.
-- Verify category + time sort + show-more behavior in Playwright.
+- Verify category + time sort + automatic scroll loading in Playwright.
 - Verify every project route builds, has metadata, and appears in the sitemap.
 - Keyboard-check cards and detail navigation at 320px, 768px, 1024px, and 1440px.
 - Compare production LCP/CLS and initial JavaScript transfer against the existing baseline.

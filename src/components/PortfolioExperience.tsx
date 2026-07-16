@@ -87,6 +87,10 @@ export function PortfolioExperience({ projects }: Props) {
     setVisibleCount(PAGE_SIZE);
   };
 
+  const handleLoadMore = useCallback(() => {
+    setVisibleCount((count) => Math.min(count + PAGE_SIZE, filteredProjects.length));
+  }, [filteredProjects.length]);
+
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f1efe7] text-zinc-950">
       <PortfolioNav copy={t} stats={stats} onToggleLocale={() => setLocaleOverride(locale === "zh" ? "en" : "zh")} />
@@ -104,7 +108,7 @@ export function PortfolioExperience({ projects }: Props) {
         copy={t}
         onCategoryChange={handleCategoryChange}
         onSortChange={handleSortChange}
-        onShowMore={() => setVisibleCount((count) => count + PAGE_SIZE)}
+        onLoadMore={handleLoadMore}
       />
       <footer className="border-t border-zinc-950/10 px-5 py-12 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
