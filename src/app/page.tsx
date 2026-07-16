@@ -1,8 +1,8 @@
 import { PortfolioExperience } from "@/components/PortfolioExperience";
-import { getProjects } from "@/lib/projects";
+import { getProjects, toProjectSummary } from "@/lib/projects";
 
 export default function Home() {
-  const projects = getProjects();
+  const projects = getProjects().map(toProjectSummary);
 
   return <PortfolioExperience projects={projects} />;
 }

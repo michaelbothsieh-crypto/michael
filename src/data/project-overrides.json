@@ -1050,6 +1050,7 @@
     "category": "Data & Research",
     "featured": false,
     "sortWeight": 37,
+    "homepageUrl": "",
     "title": {
       "zh": "AI 培訓課程回顧平台",
       "en": "AIA Training Viewer"
