@@ -12,14 +12,14 @@ export function HeroSection({ projectsCount, sinceYear, locale, copy }: HeroSect
   return (
     <section id="top" className="border-b border-zinc-950/15 px-5 pb-20 pt-32 sm:px-8 md:pb-28 lg:px-12 lg:pt-40">
       <div className="mx-auto max-w-7xl">
-        <p className="portfolio-enter font-mono text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#4f6546]">
+        <p className="portfolio-enter font-mono text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
           {copy.eyebrow}
         </p>
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1.55fr)_minmax(280px,0.45fr)] lg:items-end">
-          <h1 className="portfolio-enter max-w-5xl text-[clamp(3.25rem,7.4vw,7.5rem)] font-semibold leading-[0.93] tracking-[-0.055em] text-zinc-950">
+          <h1 className="portfolio-enter max-w-5xl text-[clamp(2.75rem,5.8vw,6rem)] font-semibold leading-[0.96] tracking-[-0.045em] text-zinc-950">
             {copy.headline}<br />
-            <span className="text-[#4f6546]">{copy.headlineAccent}</span>
+            <span className="text-[var(--accent)]">{copy.headlineAccent}</span>
           </h1>
 
           <div className="portfolio-enter border-t border-zinc-950/20 pt-6">
@@ -27,7 +27,7 @@ export function HeroSection({ projectsCount, sinceYear, locale, copy }: HeroSect
             <div className="mt-8 flex flex-col gap-3">
               <a
                 href="#featured"
-                className="flex min-h-11 items-center justify-between bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#4f6546] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f] focus-visible:ring-offset-2"
+                className="flex min-h-11 items-center justify-between bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               >
                 {copy.primaryAction}<span aria-hidden="true">↓</span>
               </a>
@@ -35,7 +35,7 @@ export function HeroSection({ projectsCount, sinceYear, locale, copy }: HeroSect
                 href="https://github.com/michaelbothsieh-crypto"
                 target="_blank"
                 rel="noreferrer"
-                className="flex min-h-11 items-center justify-between border border-zinc-950/20 px-5 py-3 text-sm font-semibold text-zinc-950 transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
+                className="flex min-h-11 items-center justify-between border border-zinc-950/20 px-5 py-3 text-sm font-semibold text-zinc-950 transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
               >
                 {copy.secondaryAction}<span aria-hidden="true">↗</span>
               </a>

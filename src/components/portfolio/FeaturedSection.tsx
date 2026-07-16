@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Locale, ProjectSummary } from "@/lib/projects";
 import { categoryLabels } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
@@ -9,9 +8,10 @@ type FeaturedSectionProps = {
   projects: ProjectSummary[];
   locale: Locale;
   copy: PortfolioCopy;
+  onProjectSelect: (project: ProjectSummary) => void;
 };
 
-export function FeaturedSection({ projects, locale, copy }: FeaturedSectionProps) {
+export function FeaturedSection({ projects, locale, copy, onProjectSelect }: FeaturedSectionProps) {
   return (
     <section id="featured" className="px-5 py-24 sm:px-8 md:py-36 lg:px-12">
       <div className="mx-auto max-w-7xl">
@@ -38,29 +38,29 @@ export function FeaturedSection({ projects, locale, copy }: FeaturedSectionProps
                   ))}
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    prefetch={false}
-                    className="inline-flex min-h-11 items-center border border-zinc-950 bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#4f6546] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
+                  <button
+                    type="button"
+                    onClick={() => onProjectSelect(project)}
+                    className="inline-flex min-h-11 items-center border border-zinc-950 bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
                   >
                     {copy.caseStudy}&nbsp; →
-                  </Link>
+                  </button>
                   <a
                     href={project.homepageUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex min-h-11 items-center border border-zinc-950/20 px-5 py-3 text-sm font-semibold text-zinc-950 transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
+                    className="inline-flex min-h-11 items-center border border-zinc-950/20 px-5 py-3 text-sm font-semibold text-zinc-950 transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
                   >
                     {copy.liveDemo}&nbsp; ↗
                   </a>
                 </div>
               </div>
 
-              <Link
-                href={`/projects/${project.slug}`}
-                prefetch={false}
+              <button
+                type="button"
+                onClick={() => onProjectSelect(project)}
                 aria-label={`${copy.caseStudy}: ${project.title[locale]}`}
-                className={`group relative aspect-[16/10] overflow-hidden bg-zinc-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f] lg:col-span-7 lg:row-start-1 ${index % 2 ? "lg:col-start-1" : "lg:col-start-6"}`}
+                className={`group relative aspect-[16/10] overflow-hidden bg-zinc-950 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] lg:col-span-7 lg:row-start-1 ${index % 2 ? "lg:col-start-1" : "lg:col-start-6"}`}
               >
                 <Image
                   src={project.previewPath}
@@ -70,10 +70,10 @@ export function FeaturedSection({ projects, locale, copy }: FeaturedSectionProps
                   className="object-cover opacity-95 transition duration-500 ease-out group-hover:scale-[1.015] group-hover:opacity-100"
                   unoptimized={isSvg(project.previewPath)}
                 />
-                <span className="absolute bottom-4 right-4 bg-[#f1efe7] px-3 py-2 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-zinc-950">
+                <span className="absolute bottom-4 right-4 bg-[var(--background)] px-3 py-2 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-zinc-950">
                   {locale === "zh" ? "可開啟 Demo" : "Live demo available"}
                 </span>
-              </Link>
+              </button>
             </article>
           ))}
         </div>

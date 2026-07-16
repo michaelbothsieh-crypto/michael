@@ -23,3 +23,9 @@ Make the portfolio feel curated rather than templated. A visitor should understa
 - Confirm exactly three featured cases and that each has a working Demo link.
 - Confirm archive sorting, filtering, and automatic loading still work.
 - Check 320px, 768px, 1024px, and 1440px layouts, keyboard focus, console output, TypeScript, lint, and production build.
+
+## Visual refinement
+
+- Reduce the hero headline so the positioning statement no longer dominates the full viewport.
+- Give archive rows a small optimized preview and a two-line summary without returning to the old card wall.
+- Replace the beige and olive palette with cool paper, ink, and muted blue tokens shared by the homepage and detail pages.
