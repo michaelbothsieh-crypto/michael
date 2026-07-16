@@ -35,8 +35,8 @@ export function ProjectDetailExperience({ project }: { project: Project }) {
   }, [locale]);
 
   return (
-    <main className="min-h-screen bg-[#f1efe7] text-zinc-950">
-      <header className="border-b border-zinc-950/10 bg-[#f1efe7]/95 px-5 py-4 sm:px-8 lg:px-12">
+    <main className="min-h-screen bg-[var(--background)] text-zinc-950">
+      <header className="border-b border-zinc-950/10 bg-[var(--background)] px-5 py-4 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <Link href="/#projects" className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-700 hover:text-zinc-950">
             ← {t.backToPortfolio}
@@ -45,7 +45,7 @@ export function ProjectDetailExperience({ project }: { project: Project }) {
             type="button"
             onClick={() => setLocaleOverride(locale === "zh" ? "en" : "zh")}
             aria-label="Switch language"
-            className="border border-zinc-950/15 px-3 py-1.5 font-mono text-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
+            className="border border-zinc-950/15 px-3 py-1.5 font-mono text-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
           >
             {t.localeToggle}
           </button>

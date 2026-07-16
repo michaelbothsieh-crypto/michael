@@ -19,7 +19,7 @@ export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps)
   ];
 
   return (
-    <nav className="portfolio-enter fixed inset-x-0 top-0 z-40 border-b border-zinc-950/10 bg-[#f1efe7]/92 backdrop-blur">
+    <nav className="portfolio-enter fixed inset-x-0 top-0 z-40 border-b border-zinc-950/10 bg-[var(--background)]/95 backdrop-blur">
       <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
         <a href="#top" className="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.24em] text-zinc-950">
           Michael
@@ -42,7 +42,7 @@ export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps)
               </span>
               <span className="flex items-center gap-1.5 border-l border-zinc-950/10 pl-3">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#5d6f4f]" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--accent)]" />
                 </span>
                 {stats.active.toLocaleString()} {copy.activeLabel}
               </span>
@@ -51,7 +51,7 @@ export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps)
 
           <button
             type="button"
-            className="min-h-11 border border-zinc-950/15 px-3 py-2 font-mono text-xs text-zinc-950 transition hover:bg-[#1f211b] hover:text-[#f7f4ea] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
+            className="min-h-11 border border-zinc-950/15 px-3 py-2 font-mono text-xs text-zinc-950 transition hover:bg-zinc-950 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
             onClick={onToggleLocale}
             aria-label="Switch language"
           >
@@ -61,7 +61,7 @@ export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps)
           {/* Hamburger — mobile only */}
           <button
             type="button"
-            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
+            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}

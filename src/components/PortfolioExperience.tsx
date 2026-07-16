@@ -9,6 +9,7 @@ import { copy } from "./portfolio/copy";
 import { FeaturedSection } from "./portfolio/FeaturedSection";
 import { HeroSection } from "./portfolio/HeroSection";
 import { PortfolioNav } from "./portfolio/PortfolioNav";
+import { ProjectDialog } from "./portfolio/ProjectDialog";
 import { ProjectGridSection } from "./portfolio/ProjectGridSection";
 
 type Props = {
@@ -34,6 +35,7 @@ export function PortfolioExperience({ projects }: Props) {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("All");
   const [activeSort, setActiveSort] = useState<ProjectSortOrder>("updated-desc");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [selectedProject, setSelectedProject] = useState<ProjectSummary | null>(null);
   const [stats, setStats] = useState<{ pv: number; active: number } | null>(null);
   const t = copy[locale];
   const featuredProjects = useMemo(() => selectFeaturedProjects(projects, 3), [projects]);
@@ -90,10 +92,10 @@ export function PortfolioExperience({ projects }: Props) {
   }, [filteredProjects.length]);
 
   return (
-    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f1efe7] text-zinc-950">
+    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[var(--background)] text-[var(--foreground)]">
       <PortfolioNav copy={t} stats={stats} onToggleLocale={() => setLocaleOverride(locale === "zh" ? "en" : "zh")} />
       <HeroSection projectsCount={projects.length} sinceYear={sinceYear} locale={locale} copy={t} />
-      <FeaturedSection projects={featuredProjects} locale={locale} copy={t} />
+      <FeaturedSection projects={featuredProjects} locale={locale} copy={t} onProjectSelect={setSelectedProject} />
       <ProjectGridSection
         activeCategory={activeCategory}
         activeSort={activeSort}
@@ -105,11 +107,13 @@ export function PortfolioExperience({ projects }: Props) {
         onCategoryChange={handleCategoryChange}
         onSortChange={handleSortChange}
         onLoadMore={handleLoadMore}
+        onProjectSelect={setSelectedProject}
       />
+      {selectedProject ? <ProjectDialog project={selectedProject} locale={locale} copy={t} onClose={() => setSelectedProject(null)} /> : null}
       <footer className="bg-zinc-950 px-5 py-20 text-white sm:px-8 md:py-28 lg:px-12">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
           <div>
-            <p className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-[#aeba9f]">Michael Product Lab</p>
+            <p className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-[#9eb0ff]">Michael Product Lab</p>
             <h2 className="mt-6 max-w-4xl text-4xl font-semibold leading-tight tracking-[-0.04em] md:text-6xl">{t.footerTitle}</h2>
           </div>
           <div className="border-t border-white/20 pt-6">
