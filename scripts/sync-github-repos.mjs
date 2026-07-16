@@ -180,7 +180,7 @@ const raw = execFileSync("gh", [
 
 const repos = JSON.parse(raw)
   .filter((repo) => !repo.isArchived)
-  .filter((repo) => repo.nameWithOwner !== "michaelbothsieh-crypto/michael")
+  .filter((repo) => !["michaelbothsieh-crypto/michael", "michaelbothsieh-crypto/claude-skills"].includes(repo.nameWithOwner))
   .map((repo) => {
     const topics = (repo.repositoryTopics ?? []).map((topic) => topic.name).filter(Boolean);
     const readme = repo.description && topics.length ? "" : fetchReadme(repo.nameWithOwner);

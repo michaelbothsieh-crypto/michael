@@ -25,9 +25,9 @@
     "path": "/previews/fortune-telling.png"
   },
   "socket-swiss-knife": {
-    "status": "fallback",
-    "reason": "missing homepageUrl",
-    "path": "/previews/socket-swiss-knife.svg"
+    "status": "captured",
+    "source": "local project interface plan",
+    "path": "/previews/socket-swiss-knife.png"
   },
   "tw-stock-health-dashboard": {
     "status": "captured",
@@ -89,9 +89,9 @@
     "path": "/previews/yellowstone-clinic.svg"
   },
   "broker-credential-dashboard": {
-    "status": "fallback",
-    "reason": "missing homepageUrl",
-    "path": "/previews/broker-credential-dashboard.svg"
+    "status": "captured",
+    "source": "local project runtime",
+    "path": "/previews/broker-credential-dashboard.png"
   },
   "presale-radar": {
     "status": "captured",
@@ -119,14 +119,14 @@
     "path": "/previews/team-eats.svg"
   },
   "smc-trinity-ai": {
-    "status": "fallback",
-    "reason": "missing homepageUrl",
-    "path": "/previews/smc-trinity-ai.svg"
+    "status": "captured",
+    "source": "local project runtime",
+    "path": "/previews/smc-trinity-ai.png"
   },
   "FastAPI-project": {
-    "status": "fallback",
-    "reason": "missing homepageUrl",
-    "path": "/previews/fastapi-project.svg"
+    "status": "captured",
+    "source": "local project runtime",
+    "path": "/previews/fastapi-project.png"
   },
   "digit_recognition": {
     "status": "fallback",
@@ -134,9 +134,9 @@
     "path": "/previews/digit-recognition.svg"
   },
   "AIA-Training-Viewer": {
-    "status": "fallback",
-    "reason": "http 404",
-    "path": "/previews/aia-training-viewer.svg"
+    "status": "captured",
+    "source": "local project runtime",
+    "path": "/previews/aia-training-viewer.png"
   },
   "travel": {
     "status": "captured",
@@ -153,9 +153,9 @@
     "path": "/previews/my-exercises-db.png"
   },
   "shorts-video-maker": {
-    "status": "fallback",
-    "reason": "no capture pipeline yet",
-    "path": "/previews/shorts-video-maker.svg"
+    "status": "captured",
+    "source": "project output contact sheet",
+    "path": "/previews/shorts-video-maker.jpg"
   },
   "vendor-quotation-system": {
     "status": "captured",
@@ -178,8 +178,8 @@
     "path": "/previews/football-star-salaries.png"
   },
   "health-bank": {
-    "status": "fallback",
-    "reason": "no capture pipeline yet",
-    "path": "/previews/health-bank.svg"
+    "status": "captured",
+    "source": "project documentation screenshot",
+    "path": "/previews/health-bank.png"
   }
 }
