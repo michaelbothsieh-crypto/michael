@@ -2,27 +2,32 @@
   "poe-price-tracker": {
     "status": "captured",
     "source": "https://poe-price-tracker.vercel.app",
-    "path": "/previews/poe-price-tracker.png"
+    "path": "/previews/poe-price-tracker.png",
+    "demoStatus": "healthy"
   },
   "warrant-screener-tw": {
     "status": "captured",
     "source": "https://warrant-screener-tw.vercel.app",
-    "path": "/previews/warrant-screener-tw.png"
+    "path": "/previews/warrant-screener-tw.png",
+    "demoStatus": "healthy"
   },
   "price-altas": {
     "status": "captured",
     "source": "https://price-altas-frontend.vercel.app/",
-    "path": "/previews/price-altas.png"
+    "path": "/previews/price-altas.png",
+    "demoStatus": "healthy"
   },
   "personal-bot-gateway": {
     "status": "captured",
     "source": "https://personal-bot-gateway.vercel.app",
-    "path": "/previews/personal-bot-gateway.png"
+    "path": "/previews/personal-bot-gateway.png",
+    "demoStatus": "healthy"
   },
   "fortune-telling": {
     "status": "captured",
     "source": "https://fortune-telling-sigma.vercel.app/",
-    "path": "/previews/fortune-telling.png"
+    "path": "/previews/fortune-telling.png",
+    "demoStatus": "healthy"
   },
   "socket-swiss-knife": {
     "status": "captured",
@@ -32,12 +37,14 @@
   "tw-stock-health-dashboard": {
     "status": "captured",
     "source": "https://tw-stock-health-dashboard.vercel.app",
-    "path": "/previews/tw-stock-health-dashboard.png"
+    "path": "/previews/tw-stock-health-dashboard.png",
+    "demoStatus": "healthy"
   },
   "faceless_hunter": {
     "status": "captured",
     "source": "https://faceless-hunter.vercel.app/",
-    "path": "/previews/faceless-hunter.png"
+    "path": "/previews/faceless-hunter.png",
+    "demoStatus": "healthy"
   },
   "kol-daily-brief": {
     "status": "captured",
@@ -46,12 +53,14 @@
   "north-volley-guide": {
     "status": "captured",
     "source": "https://north-volley-guide.vercel.app",
-    "path": "/previews/north-volley-guide.png"
+    "path": "/previews/north-volley-guide.png",
+    "demoStatus": "healthy"
   },
   "golf-strategy-lk-prototype": {
     "status": "captured",
     "source": "https://golf-strategy-lk-prototype.vercel.app",
-    "path": "/previews/golf-strategy-lk-prototype.png"
+    "path": "/previews/golf-strategy-lk-prototype.png",
+    "demoStatus": "healthy"
   },
   "xiexing-pwa": {
     "status": "fallback",
@@ -61,17 +70,21 @@
   "fehow-web": {
     "status": "fallback",
     "reason": "http 404",
-    "path": "/previews/fehow-web.svg"
+    "path": "/previews/fehow-web.svg",
+    "demoStatus": "unhealthy",
+    "demoReason": "http 404"
   },
   "Config-Diff-Viewer": {
     "status": "captured",
     "source": "https://config-diff-viewer.vercel.app",
-    "path": "/previews/config-diff-viewer.png"
+    "path": "/previews/config-diff-viewer.png",
+    "demoStatus": "healthy"
   },
   "PodScribe": {
     "status": "captured",
     "source": "https://podscribe-six.vercel.app",
-    "path": "/previews/podscribe.png"
+    "path": "/previews/podscribe.png",
+    "demoStatus": "healthy"
   },
   "insider-watch-bot": {
     "status": "fallback",
@@ -96,12 +109,14 @@
   "presale-radar": {
     "status": "captured",
     "source": "https://presale-radar.vercel.app",
-    "path": "/previews/presale-radar.png"
+    "path": "/previews/presale-radar.png",
+    "demoStatus": "healthy"
   },
   "neighbor-profiler": {
     "status": "captured",
     "source": "https://house-dun-one.vercel.app",
-    "path": "/previews/neighbor-profiler.png"
+    "path": "/previews/neighbor-profiler.png",
+    "demoStatus": "healthy"
   },
   "financial-news-analysis": {
     "status": "fallback",
@@ -141,16 +156,19 @@
   "travel": {
     "status": "captured",
     "source": "https://travel-compare-tw.vercel.app",
-    "path": "/previews/travel.png"
+    "path": "/previews/travel.png",
+    "demoStatus": "healthy"
   },
   "disposal-board": {
     "status": "captured",
     "source": "https://disposal-board.vercel.app",
-    "path": "/previews/disposal-board.png"
+    "path": "/previews/disposal-board.png",
+    "demoStatus": "healthy"
   },
   "my-exercises-db": {
     "status": "captured",
-    "path": "/previews/my-exercises-db.png"
+    "path": "/previews/my-exercises-db.png",
+    "demoStatus": "healthy"
   },
   "shorts-video-maker": {
     "status": "captured",
@@ -160,22 +178,26 @@
   "vendor-quotation-system": {
     "status": "captured",
     "source": "https://vendor-quotation-system.vercel.app",
-    "path": "/previews/vendor-quotation-system.png"
+    "path": "/previews/vendor-quotation-system.png",
+    "demoStatus": "healthy"
   },
   "spend-it": {
     "status": "captured",
     "source": "https://spend-it-hazel.vercel.app",
-    "path": "/previews/spend-it.png"
+    "path": "/previews/spend-it.png",
+    "demoStatus": "healthy"
   },
   "pr-tracker": {
     "status": "captured",
     "source": "https://pr-tracker-pm.vercel.app",
-    "path": "/previews/pr-tracker.png"
+    "path": "/previews/pr-tracker.png",
+    "demoStatus": "healthy"
   },
   "football-star-salaries": {
     "status": "captured",
     "source": "https://football-star-salaries.vercel.app",
-    "path": "/previews/football-star-salaries.png"
+    "path": "/previews/football-star-salaries.png",
+    "demoStatus": "healthy"
   },
   "health-bank": {
     "status": "captured",

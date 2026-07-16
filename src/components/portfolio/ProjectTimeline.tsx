@@ -1,16 +1,16 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Locale, Project } from "@/lib/projects";
+import type { Locale, ProjectSummary } from "@/lib/projects";
 import { categoryLabels } from "@/lib/projects";
 import { localeTag } from "./format";
 
-type Props = { projects: Project[]; locale: Locale; onOpen?: (p: Project) => void };
-type HoveredDot = { project: Project; cx: number; cy: number };
+type Props = { projects: ProjectSummary[]; locale: Locale };
+type HoveredDot = { project: ProjectSummary; cx: number; cy: number };
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-function buildLayout(projects: Project[]) {
+function buildLayout(projects: ProjectSummary[]) {
   const sorted = [...projects]
     .filter((p) => p.createdAt)
     .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
@@ -47,7 +47,7 @@ function buildLayout(projects: Project[]) {
   return { sorted, times, minT, span, stackIndex, maxStack, monthLabels };
 }
 
-export function ProjectTimeline({ projects, locale, onOpen }: Props) {
+export function ProjectTimeline({ projects, locale }: Props) {
   const [hovered, setHovered] = useState<HoveredDot | null>(null);
   const { sorted, times, minT, span, stackIndex, maxStack, monthLabels } = useMemo(
     () => buildLayout(projects),
@@ -95,10 +95,8 @@ export function ProjectTimeline({ projects, locale, onOpen }: Props) {
                 return (
                   <g
                     key={p.slug}
-                    style={{ cursor: onOpen ? "pointer" : "default" }}
                     onMouseEnter={() => setHovered({ project: p, cx, cy })}
                     onMouseLeave={() => setHovered(null)}
-                    onClick={() => onOpen?.(p)}
                   >
                     {/* larger invisible hit area */}
                     <circle cx={cx} cy={cy} r={DOT_R + 8} fill="transparent" />
@@ -153,11 +151,6 @@ export function ProjectTimeline({ projects, locale, onOpen }: Props) {
                     <p className="text-sm font-semibold text-[#f1efe7] leading-snug">
                       {hovered.project.title[locale]}
                     </p>
-                    {onOpen && (
-                      <p className="mt-1.5 text-[10px] font-mono text-[#7a9e6e]">
-                        {locale === "zh" ? "點擊查看詳情 →" : "Click to view →"}
-                      </p>
-                    )}
                   </div>
                   {below && (
                     <div className="w-0 h-0 mx-auto mt-0" style={{

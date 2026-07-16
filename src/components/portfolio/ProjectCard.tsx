@@ -1,15 +1,15 @@
 import Image from "next/image";
-import type { Locale, Project } from "@/lib/projects";
+import Link from "next/link";
+import type { Locale, ProjectSummary } from "@/lib/projects";
 import { categoryLabels } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
 import { formatDate, isSvg } from "./format";
 
 type ProjectCardProps = {
-  project: Project;
+  project: ProjectSummary;
   locale: Locale;
   copy: PortfolioCopy;
   featured?: boolean;
-  onOpen: (project: Project) => void;
 };
 
 const SERVICE_TAGS: Array<[keyword: string, tag: string]> = [
@@ -18,7 +18,7 @@ const SERVICE_TAGS: Array<[keyword: string, tag: string]> = [
   ["render", "Render"],
 ];
 
-export function ProjectCard({ project, locale, copy, featured = false, onOpen }: ProjectCardProps) {
+export function ProjectCard({ project, locale, copy, featured = false }: ProjectCardProps) {
   const features = project.features[locale].map((f) => f.toLowerCase());
   const serviceTags = SERVICE_TAGS
     .filter(([keyword]) => features.some((f) => f.includes(keyword)))
@@ -27,14 +27,14 @@ export function ProjectCard({ project, locale, copy, featured = false, onOpen }:
 
   return (
     <article
-      className={`gsap-project-card group grid overflow-hidden rounded-[8px] border border-zinc-950/10 bg-white shadow-sm shadow-zinc-950/5 transition duration-300 hover:-translate-y-0.5 hover:border-zinc-950/20 hover:shadow-md hover:shadow-zinc-950/10 ${
+      className={`portfolio-enter group grid overflow-hidden rounded-[8px] border border-zinc-950/10 bg-white shadow-sm shadow-zinc-950/5 transition duration-300 hover:-translate-y-0.5 hover:border-zinc-950/20 hover:shadow-md hover:shadow-zinc-950/10 ${
         featured ? "lg:col-span-3 first:lg:col-span-6 [&:nth-child(2)]:lg:col-span-6" : ""
       }`}
     >
-      <button
-        type="button"
+      <Link
+        href={`/projects/${project.slug}`}
+        prefetch={false}
         className="flex h-full flex-col text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5d6f4f]"
-        onClick={() => onOpen(project)}
       >
         <div className="motion-image relative aspect-[16/10] w-full overflow-hidden bg-zinc-950">
           <Image
@@ -53,7 +53,7 @@ export function ProjectCard({ project, locale, copy, featured = false, onOpen }:
         <div className="flex flex-1 flex-col gap-5 p-5">
           <div>
             <h3 className="text-xl font-semibold leading-tight text-zinc-950">{project.title[locale]}</h3>
-            <p className="mt-3 text-sm leading-6 text-zinc-700">{project.problem[locale]}</p>
+            <p className="mt-3 text-sm leading-6 text-zinc-700">{project.summary[locale]}</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {tagsToShow.map((tag) => {
@@ -83,7 +83,7 @@ export function ProjectCard({ project, locale, copy, featured = false, onOpen }:
             </div>
           </div>
         </div>
-      </button>
+      </Link>
     </article>
   );
 }

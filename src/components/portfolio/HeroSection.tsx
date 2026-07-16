@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import type { Locale, Project } from "@/lib/projects";
+import type { Locale, ProjectSummary } from "@/lib/projects";
 import type { PortfolioCopy } from "./copy";
 import { isSvg } from "./format";
 
 type HeroSectionProps = {
   projectsCount: number;
-  featuredProjects: Project[];
+  featuredProjects: ProjectSummary[];
   sinceYear: number;
   locale: Locale;
   copy: PortfolioCopy;
@@ -21,7 +21,7 @@ export function HeroSection({ projectsCount, featuredProjects, sinceYear, locale
   return (
     <section id="top" className="relative isolate bg-[#f1efe7] px-5 pb-20 pt-32 sm:px-8 lg:px-12">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-14">
-        <div className="gsap-hero-copy max-w-5xl">
+        <div className="portfolio-enter max-w-5xl">
           <div className="inline-flex items-center gap-2 border border-zinc-950/12 bg-white/70 px-3 py-1 font-mono text-[10px] font-semibold tracking-wider text-zinc-700">
             <span className="flex h-2 w-2 relative">
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#5d6f4f]"></span>
@@ -74,7 +74,7 @@ export function HeroSection({ projectsCount, featuredProjects, sinceYear, locale
           </div>
         </div>
 
-        <div className="gsap-hero-preview grid overflow-hidden border border-zinc-950/10 bg-white shadow-sm lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]">
+        <div className="portfolio-enter grid overflow-hidden border border-zinc-950/10 bg-white shadow-sm lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]">
           <div className="relative aspect-[16/10] min-h-[320px] bg-zinc-950 lg:aspect-auto">
             <Image
               src={heroPreview}
@@ -84,6 +84,7 @@ export function HeroSection({ projectsCount, featuredProjects, sinceYear, locale
               className="object-cover opacity-95 contrast-[1.03]"
               unoptimized={isSvg(heroPreview)}
               loading="eager"
+              fetchPriority="high"
             />
           </div>
           <div className="flex flex-col justify-between gap-10 p-6 sm:p-8">

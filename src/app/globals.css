@@ -25,3 +25,20 @@ html {
   background: #c8d5bd;
   color: #181713;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .portfolio-enter {
+    animation: portfolio-enter 0.45s ease-out both;
+  }
+}
+
+@keyframes portfolio-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

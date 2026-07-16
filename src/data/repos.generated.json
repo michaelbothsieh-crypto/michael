@@ -1,5 +1,30 @@
 [
   {
+    "name": "health-bank",
+    "nameWithOwner": "michaelbothsieh-crypto/health-bank",
+    "description": "你的 AI 家醫 health-bank",
+    "visibility": "PRIVATE",
+    "isPrivate": true,
+    "createdAt": "2026-07-06T01:34:54Z",
+    "updatedAt": "2026-07-16T08:04:26Z",
+    "primaryLanguage": "TypeScript",
+    "topics": [],
+    "readmeFeatures": [
+      "官方 App 顯示近年的申報紀錄；持續匯入後，這裡能保留更長期的趨勢——單筆是資料，曲線才看得出方向",
+      "換醫院看新醫生，印一頁小抄，整理匯入期間內的健保申報用藥",
+      "看不懂的英文報告、紅字數值，直接用白話問 AI",
+      "全家的存摺都丟進來，一站管理爸媽和小孩",
+      "疫苗進度（小孩）：接種紀錄自動對照疾管署公費時程，缺哪劑、第幾劑該打了直接標出來，逾期的同步出現在首頁訊號",
+      "公費健檢／癌篩（大人）：依年齡、性別與本地紀錄提示可能到期的成人健檢、癌篩與洗牙；需要家族史、吸菸史等條件的項目只提醒確認資格，不宣稱一定免費"
+    ],
+    "homepageUrl": "",
+    "url": "https://github.com/michaelbothsieh-crypto/health-bank",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 0,
+    "forkCount": 0
+  },
+  {
     "name": "football-star-salaries",
     "nameWithOwner": "michaelbothsieh-crypto/football-star-salaries",
     "description": "頂級足球球星薪資、轉會與球隊結構視覺化，整合世界盃比分、新聞快報與即時彈幕。",
@@ -44,31 +69,6 @@
     ],
     "homepageUrl": "https://personal-bot-gateway.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/personal-bot-gateway",
-    "isArchived": false,
-    "isFork": false,
-    "stargazerCount": 0,
-    "forkCount": 0
-  },
-  {
-    "name": "health-bank",
-    "nameWithOwner": "michaelbothsieh-crypto/health-bank",
-    "description": "你的 AI 家醫 health-bank",
-    "visibility": "PRIVATE",
-    "isPrivate": true,
-    "createdAt": "2026-07-06T01:34:54Z",
-    "updatedAt": "2026-07-16T05:33:59Z",
-    "primaryLanguage": "TypeScript",
-    "topics": [],
-    "readmeFeatures": [
-      "官方 App 給你三年份的流水帳，這裡給你十年的趨勢線——血糖 105 → 126 → 135，單筆是資料，曲線才是警訊",
-      "換醫院看新醫生，印一頁小抄，30 秒讓醫生看懂你的完整用藥史",
-      "看不懂的英文報告、紅字數值，直接用白話問 AI",
-      "全家的存摺都丟進來，一站管理爸媽和小孩",
-      "疫苗進度（小孩）：接種紀錄自動對照疾管署公費時程，缺哪劑、第幾劑該打了直接標出來，逾期的同步出現在首頁訊號",
-      "全家一眼：成員兩人以上時，首頁一張卡看完全家——誰有幾個要留意的訊號、誰在變好、最近就醫日，點名字就切換"
-    ],
-    "homepageUrl": "",
-    "url": "https://github.com/michaelbothsieh-crypto/health-bank",
     "isArchived": false,
     "isFork": false,
     "stargazerCount": 0,

@@ -19,7 +19,7 @@ export function PortfolioNav({ copy, stats, onToggleLocale }: PortfolioNavProps)
   ];
 
   return (
-    <nav className="gsap-nav fixed inset-x-0 top-0 z-40 border-b border-zinc-950/10 bg-[#f1efe7]/92 backdrop-blur">
+    <nav className="portfolio-enter fixed inset-x-0 top-0 z-40 border-b border-zinc-950/10 bg-[#f1efe7]/92 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
         <a href="#top" className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-950">
           Michael

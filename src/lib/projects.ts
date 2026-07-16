@@ -1,6 +1,7 @@
 import previewManifestJson from "@/data/preview-manifest.generated.json";
 import overridesJson from "@/data/project-overrides.json";
 import reposJson from "@/data/repos.generated.json";
+import { selectStrongestProjects } from "./project-sort";
 
 export type Locale = "zh" | "en";
 
@@ -61,6 +62,8 @@ type PreviewEntry = {
   source?: string;
   reason?: string;
   path: string;
+  demoStatus?: "healthy" | "unhealthy";
+  demoReason?: string;
 };
 
 export type Project = GitHubRepo & {
@@ -82,6 +85,23 @@ export type Project = GitHubRepo & {
   publicSourceUrl: string | null;
   engineeringPillars?: EngineeringPillars;
 };
+
+export type ProjectSummary = Pick<
+  Project,
+  | "name"
+  | "slug"
+  | "category"
+  | "sortWeight"
+  | "title"
+  | "summary"
+  | "features"
+  | "createdAt"
+  | "updatedAt"
+  | "primaryLanguage"
+  | "topics"
+  | "homepageUrl"
+  | "previewPath"
+>;
 
 export type CategoryFilter = Category | "All";
 
@@ -187,7 +207,7 @@ export function getProjects(): Project[] {
           zh: repo.topics.length ? repo.topics : repo.readmeFeatures?.length ? repo.readmeFeatures : [categoryLabels[category].zh],
           en: repo.topics.length ? repo.topics : repo.readmeFeatures?.length ? repo.readmeFeatures : [categoryLabels[category].en],
         },
-        homepageUrl: override?.homepageUrl ?? ((preview?.status === "fallback" && preview?.reason === "http 404") ? "" : repo.homepageUrl),
+        homepageUrl: override?.homepageUrl ?? (preview?.demoStatus === "unhealthy" || (preview?.status === "fallback" && preview?.reason?.startsWith("http ")) ? "" : repo.homepageUrl),
         previewPath,
         gallery: override?.gallery ?? [previewPath],
         previewStatus: preview?.status ?? "missing",
@@ -201,11 +221,20 @@ export function getProjects(): Project[] {
     });
 }
 
-export function selectFeaturedProjects(projects: Project[], limit = 6) {
-  return projects.filter((project) => project.featured).slice(0, limit);
+export function getProjectBySlug(slug: string) {
+  return getProjects().find((project) => project.slug === slug);
 }
 
-export function filterProjectsByCategory(projects: Project[], activeCategory: CategoryFilter) {
+export function toProjectSummary(project: Project): ProjectSummary {
+  const { name, slug, category, sortWeight, title, summary, features, createdAt, updatedAt, primaryLanguage, topics, homepageUrl, previewPath } = project;
+  return { name, slug, category, sortWeight, title, summary, features, createdAt, updatedAt, primaryLanguage, topics, homepageUrl, previewPath };
+}
+
+export function selectFeaturedProjects<T extends ProjectSummary>(projects: T[], limit = 8) {
+  return selectStrongestProjects(projects, limit);
+}
+
+export function filterProjectsByCategory<T extends Pick<Project, "category">>(projects: T[], activeCategory: CategoryFilter) {
   if (activeCategory === "All") return projects;
   return projects.filter((project) => project.category === activeCategory);
 }

@@ -140,9 +140,21 @@ async function captureScreenshot(browser, repo, slug) {
       throw new Error(`http ${response ? response.status() : "no response"}`);
     }
     await page.waitForTimeout(1500);
-    const pngPath = path.join(previewsDir, `${slug}.png`);
-    await page.screenshot({ path: pngPath });
-    return `/previews/${slug}.png`;
+    const imagePath = path.join(previewsDir, `${slug}.jpg`);
+    await page.screenshot({ path: imagePath, type: "jpeg", quality: 82 });
+    return `/previews/${slug}.jpg`;
+  } finally {
+    await page.close();
+  }
+}
+
+async function checkDemo(browser, url) {
+  const page = await browser.newPage();
+  try {
+    const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
+    if (!response || response.status() >= 400) throw new Error(`http ${response ? response.status() : "no response"}`);
+    const finalUrl = new URL(page.url());
+    if (finalUrl.hostname === "vercel.com" && finalUrl.pathname.startsWith("/login")) throw new Error("authentication wall");
   } finally {
     await page.close();
   }
@@ -246,12 +258,17 @@ const hasManifestEntry = (repo) => Boolean(previewManifest[repo.name]);
 
 let capturedCount = 0;
 let placeholderCount = 0;
+let manifestChanged = false;
 
 // 有 homepageUrl 但還沒截到真實畫面的（含新 repo、之前失敗過的），每天都值得重試一次。
 const captureCandidates = repos.filter(
   (repo) => !hasOverridePreview(repo) && repo.homepageUrl && !isCaptured(repo),
 );
-if (captureCandidates.length > 0) {
+const demoCandidates = repos
+  .map((repo) => ({ repo, url: Object.hasOwn(overridesForPreview[repo.name] ?? {}, "homepageUrl") ? overridesForPreview[repo.name].homepageUrl : repo.homepageUrl }))
+  .filter(({ url }) => Boolean(url));
+
+if (captureCandidates.length > 0 || demoCandidates.length > 0) {
   const browser = await chromium.launch();
   for (const repo of captureCandidates) {
     const slug = slugify(repo.name);
@@ -259,12 +276,34 @@ if (captureCandidates.length > 0) {
       const relativePath = await captureScreenshot(browser, repo, slug);
       previewManifest[repo.name] = { status: "captured", source: repo.homepageUrl, path: relativePath };
       capturedCount += 1;
+      manifestChanged = true;
       console.log(`Captured screenshot for ${repo.name}`);
     } catch (err) {
       const relativePath = writePlaceholderSvg(repo, slug);
       previewManifest[repo.name] = { status: "fallback", reason: err.message, path: relativePath };
       placeholderCount += 1;
+      manifestChanged = true;
       console.warn(`Falling back to placeholder for ${repo.name}: ${err.message}`);
+    }
+  }
+
+  for (const { repo, url } of demoCandidates) {
+    const entry = previewManifest[repo.name];
+    if (!entry) continue;
+    try {
+      await checkDemo(browser, url);
+      if (entry.demoStatus !== "healthy" || entry.demoReason) {
+        const nextEntry = { ...entry, demoStatus: "healthy" };
+        delete nextEntry.demoReason;
+        previewManifest[repo.name] = nextEntry;
+        manifestChanged = true;
+      }
+    } catch (err) {
+      if (entry.demoStatus !== "unhealthy" || entry.demoReason !== err.message) {
+        previewManifest[repo.name] = { ...entry, demoStatus: "unhealthy", demoReason: err.message };
+        manifestChanged = true;
+      }
+      console.warn(`Demo unavailable for ${repo.name}: ${err.message}`);
     }
   }
   await browser.close();
@@ -277,9 +316,10 @@ for (const repo of repos.filter((repo) => !hasOverridePreview(repo) && !repo.hom
   const relativePath = writePlaceholderSvg(repo, slug);
   previewManifest[repo.name] = { status: "fallback", reason: "missing homepageUrl", path: relativePath };
   placeholderCount += 1;
+  manifestChanged = true;
 }
 
-if (capturedCount + placeholderCount > 0) {
+if (manifestChanged) {
   writeFileSync(previewManifestPath, `${JSON.stringify(previewManifest, null, 2)}\n`);
   console.log(`Preview sync: ${capturedCount} captured, ${placeholderCount} placeholder`);
 }
@@ -365,8 +405,14 @@ function buildMatrix(lang) {
       ? features.slice(0, 3).join(" · ")
       : repo.description || "—";
 
+    const preview = previewManifest[repo.name];
+    const homepageUrl = Object.hasOwn(ov ?? {}, "homepageUrl")
+      ? ov.homepageUrl
+      : preview?.demoStatus === "unhealthy" || (preview?.status === "fallback" && preview?.reason?.startsWith("http "))
+        ? ""
+        : repo.homepageUrl;
     const links = [];
-    if (repo.homepageUrl) links.push(`[${t.demo}](${repo.homepageUrl})`);
+    if (homepageUrl) links.push(`[${t.demo}](${homepageUrl})`);
     links.push(`[${t.code}](${repo.url})`);
     if (repo.isPrivate) links.push("🔒");
 
