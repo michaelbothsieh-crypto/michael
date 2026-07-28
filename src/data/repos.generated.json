@@ -1,36 +1,12 @@
 [
   {
-    "name": "spend-it",
-    "nameWithOwner": "michaelbothsieh-crypto/spend-it",
-    "description": "反正錢留著也會貶值。",
-    "visibility": "PUBLIC",
-    "isPrivate": false,
-    "createdAt": "2026-07-03T04:00:10Z",
-    "updatedAt": "2026-07-26T22:59:34Z",
-    "primaryLanguage": "HTML",
-    "topics": [],
-    "readmeFeatures": [
-      "首頁 — 通膨計數器現場直播",
-      "三題漏斗 — 預算 → 對象 → 心情",
-      "命運轉盤 — 拉霸機過場",
-      "診斷結果 — 商品卡 + 假名人背書",
-      "手機版"
-    ],
-    "homepageUrl": "https://spend-it-hazel.vercel.app",
-    "url": "https://github.com/michaelbothsieh-crypto/spend-it",
-    "isArchived": false,
-    "isFork": false,
-    "stargazerCount": 0,
-    "forkCount": 0
-  },
-  {
     "name": "personal-bot-gateway",
     "nameWithOwner": "michaelbothsieh-crypto/personal-bot-gateway",
     "description": "Independent Telegram and LINE gateway for the daily KOL brief and stock commands",
     "visibility": "PRIVATE",
     "isPrivate": true,
     "createdAt": "2026-05-14T03:07:49Z",
-    "updatedAt": "2026-07-22T09:34:32Z",
+    "updatedAt": "2026-07-28T09:35:32Z",
     "primaryLanguage": "TypeScript",
     "topics": [],
     "readmeFeatures": [
@@ -43,6 +19,54 @@
     ],
     "homepageUrl": "https://personal-bot-gateway.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/personal-bot-gateway",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 0,
+    "forkCount": 0
+  },
+  {
+    "name": "kol-daily-brief",
+    "nameWithOwner": "michaelbothsieh-crypto/kol-daily-brief",
+    "description": "每日 KOL 影片簡報展示頁 — YouTube→NotebookLM 摘要引擎原型（核心已整合進 personal-bot-gateway）",
+    "visibility": "PUBLIC",
+    "isPrivate": false,
+    "createdAt": "2026-03-05T08:57:50Z",
+    "updatedAt": "2026-07-28T09:27:03Z",
+    "primaryLanguage": "Python",
+    "topics": [
+      "ai-summary",
+      "github-actions",
+      "notebooklm",
+      "telegram-bot-ai-assistant",
+      "youtube-api-v3"
+    ],
+    "readmeFeatures": [],
+    "homepageUrl": "https://kol-daily-brief.vercel.app",
+    "url": "https://github.com/michaelbothsieh-crypto/kol-daily-brief",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 1,
+    "forkCount": 0
+  },
+  {
+    "name": "spend-it",
+    "nameWithOwner": "michaelbothsieh-crypto/spend-it",
+    "description": "反正錢留著也會貶值。",
+    "visibility": "PUBLIC",
+    "isPrivate": false,
+    "createdAt": "2026-07-03T04:00:10Z",
+    "updatedAt": "2026-07-27T23:03:55Z",
+    "primaryLanguage": "HTML",
+    "topics": [],
+    "readmeFeatures": [
+      "首頁 — 通膨計數器現場直播",
+      "三題漏斗 — 預算 → 對象 → 心情",
+      "命運轉盤 — 拉霸機過場",
+      "診斷結果 — 商品卡 + 假名人背書",
+      "手機版"
+    ],
+    "homepageUrl": "https://spend-it-hazel.vercel.app",
+    "url": "https://github.com/michaelbothsieh-crypto/spend-it",
     "isArchived": false,
     "isFork": false,
     "stargazerCount": 0,
@@ -255,30 +279,6 @@
     "isArchived": false,
     "isFork": false,
     "stargazerCount": 0,
-    "forkCount": 0
-  },
-  {
-    "name": "kol-daily-brief",
-    "nameWithOwner": "michaelbothsieh-crypto/kol-daily-brief",
-    "description": "每日 KOL 影片簡報展示頁 — YouTube→NotebookLM 摘要引擎原型（核心已整合進 personal-bot-gateway）",
-    "visibility": "PUBLIC",
-    "isPrivate": false,
-    "createdAt": "2026-03-05T08:57:50Z",
-    "updatedAt": "2026-06-18T10:13:01Z",
-    "primaryLanguage": "Python",
-    "topics": [
-      "ai-summary",
-      "github-actions",
-      "notebooklm",
-      "telegram-bot-ai-assistant",
-      "youtube-api-v3"
-    ],
-    "readmeFeatures": [],
-    "homepageUrl": "https://kol-daily-brief.vercel.app",
-    "url": "https://github.com/michaelbothsieh-crypto/kol-daily-brief",
-    "isArchived": false,
-    "isFork": false,
-    "stargazerCount": 1,
     "forkCount": 0
   },
   {
