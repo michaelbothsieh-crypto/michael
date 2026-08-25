@@ -1,12 +1,30 @@
 [
   {
+    "name": "test-issue-dashboard",
+    "nameWithOwner": "michaelbothsieh-crypto/test-issue-dashboard",
+    "description": "本機唯讀的測試問題統整台：整合多份 SharePoint Excel，對照 GitHub issue/PR 判斷交付狀態",
+    "visibility": "PRIVATE",
+    "isPrivate": true,
+    "createdAt": "2026-08-25T06:12:23Z",
+    "updatedAt": "2026-08-25T06:12:24Z",
+    "primaryLanguage": null,
+    "topics": [],
+    "readmeFeatures": [],
+    "homepageUrl": "",
+    "url": "https://github.com/michaelbothsieh-crypto/test-issue-dashboard",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 0,
+    "forkCount": 0
+  },
+  {
     "name": "spend-it",
     "nameWithOwner": "michaelbothsieh-crypto/spend-it",
     "description": "反正錢留著也會貶值。",
     "visibility": "PUBLIC",
     "isPrivate": false,
     "createdAt": "2026-07-03T04:00:10Z",
-    "updatedAt": "2026-08-23T22:23:50Z",
+    "updatedAt": "2026-08-24T22:28:02Z",
     "primaryLanguage": "HTML",
     "topics": [],
     "readmeFeatures": [

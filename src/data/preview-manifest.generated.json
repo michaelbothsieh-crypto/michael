@@ -203,5 +203,10 @@
     "status": "captured",
     "source": "project documentation screenshot",
     "path": "/previews/health-bank.png"
+  },
+  "test-issue-dashboard": {
+    "status": "fallback",
+    "reason": "missing homepageUrl",
+    "path": "/previews/test-issue-dashboard.svg"
   }
 }
