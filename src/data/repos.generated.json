@@ -1,12 +1,34 @@
 [
   {
+    "name": "fortune-telling",
+    "nameWithOwner": "michaelbothsieh-crypto/fortune-telling",
+    "description": "天機算命 - 結合傳統八字學理與 Google Gemini AI 的命理分析 PWA 應用。",
+    "visibility": "PUBLIC",
+    "isPrivate": false,
+    "createdAt": "2025-12-09T07:07:34Z",
+    "updatedAt": "2026-09-01T18:52:54Z",
+    "primaryLanguage": "TypeScript",
+    "topics": [
+      "bazi",
+      "chinese-astrology",
+      "fortune-telling"
+    ],
+    "readmeFeatures": [],
+    "homepageUrl": "https://fortune-telling-sigma.vercel.app/",
+    "url": "https://github.com/michaelbothsieh-crypto/fortune-telling",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 3,
+    "forkCount": 1
+  },
+  {
     "name": "spend-it",
     "nameWithOwner": "michaelbothsieh-crypto/spend-it",
     "description": "反正錢留著也會貶值。",
     "visibility": "PUBLIC",
     "isPrivate": false,
     "createdAt": "2026-07-03T04:00:10Z",
-    "updatedAt": "2026-08-31T00:16:05Z",
+    "updatedAt": "2026-09-01T01:02:52Z",
     "primaryLanguage": "HTML",
     "topics": [],
     "readmeFeatures": [
@@ -233,28 +255,6 @@
     "isFork": false,
     "stargazerCount": 0,
     "forkCount": 0
-  },
-  {
-    "name": "fortune-telling",
-    "nameWithOwner": "michaelbothsieh-crypto/fortune-telling",
-    "description": "天機算命 - 結合傳統八字學理與 Google Gemini AI 的命理分析 PWA 應用。",
-    "visibility": "PUBLIC",
-    "isPrivate": false,
-    "createdAt": "2025-12-09T07:07:34Z",
-    "updatedAt": "2026-07-01T06:48:03Z",
-    "primaryLanguage": "TypeScript",
-    "topics": [
-      "bazi",
-      "chinese-astrology",
-      "fortune-telling"
-    ],
-    "readmeFeatures": [],
-    "homepageUrl": "https://fortune-telling-sigma.vercel.app/",
-    "url": "https://github.com/michaelbothsieh-crypto/fortune-telling",
-    "isArchived": false,
-    "isFork": false,
-    "stargazerCount": 2,
-    "forkCount": 1
   },
   {
     "name": "tw-stock-health-dashboard",
