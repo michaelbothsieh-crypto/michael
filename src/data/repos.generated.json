@@ -1,5 +1,29 @@
 [
   {
+    "name": "spend-it",
+    "nameWithOwner": "michaelbothsieh-crypto/spend-it",
+    "description": "反正錢留著也會貶值。",
+    "visibility": "PUBLIC",
+    "isPrivate": false,
+    "createdAt": "2026-07-03T04:00:10Z",
+    "updatedAt": "2026-09-01T23:51:23Z",
+    "primaryLanguage": "HTML",
+    "topics": [],
+    "readmeFeatures": [
+      "首頁 — 通膨計數器現場直播",
+      "三題漏斗 — 預算 → 對象 → 心情",
+      "命運轉盤 — 拉霸機過場",
+      "診斷結果 — 商品卡 + 假名人背書",
+      "手機版"
+    ],
+    "homepageUrl": "https://spend-it-hazel.vercel.app",
+    "url": "https://github.com/michaelbothsieh-crypto/spend-it",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 0,
+    "forkCount": 0
+  },
+  {
     "name": "fortune-telling",
     "nameWithOwner": "michaelbothsieh-crypto/fortune-telling",
     "description": "天機算命 - 結合傳統八字學理與 Google Gemini AI 的命理分析 PWA 應用。",
@@ -20,30 +44,6 @@
     "isFork": false,
     "stargazerCount": 3,
     "forkCount": 1
-  },
-  {
-    "name": "spend-it",
-    "nameWithOwner": "michaelbothsieh-crypto/spend-it",
-    "description": "反正錢留著也會貶值。",
-    "visibility": "PUBLIC",
-    "isPrivate": false,
-    "createdAt": "2026-07-03T04:00:10Z",
-    "updatedAt": "2026-09-01T01:02:52Z",
-    "primaryLanguage": "HTML",
-    "topics": [],
-    "readmeFeatures": [
-      "首頁 — 通膨計數器現場直播",
-      "三題漏斗 — 預算 → 對象 → 心情",
-      "命運轉盤 — 拉霸機過場",
-      "診斷結果 — 商品卡 + 假名人背書",
-      "手機版"
-    ],
-    "homepageUrl": "https://spend-it-hazel.vercel.app",
-    "url": "https://github.com/michaelbothsieh-crypto/spend-it",
-    "isArchived": false,
-    "isFork": false,
-    "stargazerCount": 0,
-    "forkCount": 0
   },
   {
     "name": "test-issue-dashboard",
