@@ -1,5 +1,29 @@
 [
   {
+    "name": "spend-it",
+    "nameWithOwner": "michaelbothsieh-crypto/spend-it",
+    "description": "反正錢留著也會貶值。",
+    "visibility": "PUBLIC",
+    "isPrivate": false,
+    "createdAt": "2026-07-03T04:00:10Z",
+    "updatedAt": "2026-09-27T00:19:32Z",
+    "primaryLanguage": "HTML",
+    "topics": [],
+    "readmeFeatures": [
+      "首頁 — 通膨計數器現場直播",
+      "三題漏斗 — 預算 → 對象 → 心情",
+      "命運轉盤 — 拉霸機過場",
+      "診斷結果 — 商品卡 + 假名人背書",
+      "手機版"
+    ],
+    "homepageUrl": "https://spend-it-hazel.vercel.app",
+    "url": "https://github.com/michaelbothsieh-crypto/spend-it",
+    "isArchived": false,
+    "isFork": false,
+    "stargazerCount": 0,
+    "forkCount": 0
+  },
+  {
     "name": "tw-stock-health-dashboard",
     "nameWithOwner": "michaelbothsieh-crypto/tw-stock-health-dashboard",
     "description": "以 AI 驅動的台股決策儀表板，整合 Telegram 推播、每日盤後摘要、海外連動分析與崩盤早期預警。",
@@ -66,30 +90,6 @@
     ],
     "homepageUrl": "https://vendor-quotation-system.vercel.app",
     "url": "https://github.com/michaelbothsieh-crypto/vendor-quotation-system",
-    "isArchived": false,
-    "isFork": false,
-    "stargazerCount": 0,
-    "forkCount": 0
-  },
-  {
-    "name": "spend-it",
-    "nameWithOwner": "michaelbothsieh-crypto/spend-it",
-    "description": "反正錢留著也會貶值。",
-    "visibility": "PUBLIC",
-    "isPrivate": false,
-    "createdAt": "2026-07-03T04:00:10Z",
-    "updatedAt": "2026-09-26T00:24:44Z",
-    "primaryLanguage": "HTML",
-    "topics": [],
-    "readmeFeatures": [
-      "首頁 — 通膨計數器現場直播",
-      "三題漏斗 — 預算 → 對象 → 心情",
-      "命運轉盤 — 拉霸機過場",
-      "診斷結果 — 商品卡 + 假名人背書",
-      "手機版"
-    ],
-    "homepageUrl": "https://spend-it-hazel.vercel.app",
-    "url": "https://github.com/michaelbothsieh-crypto/spend-it",
     "isArchived": false,
     "isFork": false,
     "stargazerCount": 0,
